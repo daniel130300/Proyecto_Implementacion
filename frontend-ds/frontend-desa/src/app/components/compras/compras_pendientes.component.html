@@ -1,0 +1,638 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-top">
+	<header>
+		<div class="tituloEncabezado">
+			<h1>Variedades K&D</h1>
+		</div>
+	</header>
+	
+	<div class="contedorPrincipal">
+        <main>
+			<nav class="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="http://localhost:4200/menu">Inicio</a></li>
+					<li><a>Compras</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
+							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
+							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
+						</ul>
+					</li>
+					<li><a>Ventas</a>
+						<ul>
+							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
+							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
+							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						</ul>
+					</li>
+					<li><a>Clientes</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
+						</ul>
+					</li>
+					<li><a>Proveedores</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
+						</ul>
+					</li>
+					<li><a>Empleados</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
+						</ul>
+					</li>
+					<li><a>Inventario</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
+						</ul>
+					</li>
+					<li><a>Devoluciones Sobre Venta</a>
+						<ul>
+							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</main>
+		<div class="contenedorTitulo">
+			<h2>| Compras Pendientes</h2>
+		</div>
+        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+
+        <div class="contenedorInformativo2">
+            <div class = "c container-fluid mt-3 pl-3"> 
+                <form>
+
+                    <table class="tablaModificar table table-dark">
+    
+                        <thead>
+                            <tr>  
+                                <th>ID Compra</th>
+                                <th>Fecha de la Orden</th>
+                                <th>Nombre Proveedor</th>
+                                <th>Estatus Compra</th>
+                                <th></th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor = "let c of listado_compras_pendientes">
+                            <td>{{c.Id_compra}}</td>
+                            <td>{{c.Fecha_orden | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{c.Nombre_compania}}</td>
+                            <td>{{c.Descripcion_estatus}}</td>
+                            <td>
+                                <Button  (click)="pasarDatosCompra(c)" class="btn btn-primary">Seleccionar</Button>
+                            </td>
+                        </tr>
+    
+                        </tbody>
+                    </table>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="contenedorInformativo">
+            <div class="mov container-md">
+                <p></p>
+                <form ngNativeValidate #form>
+                    <p></p>
+                    <label>ID Compra: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)]="Id_Compra"
+                        [ngModelOptions]="{standalone:true}"
+                        disabled
+                    >
+                    <p></p>
+
+                    <div class="form-group col-sm-5">
+                        <label class="ml-1 mr-2 col-form-label">Visualizar productos: </label>
+                        <button 
+                            class="tamaño btn btn-primary form-group"
+                            data-toggle = "modal"
+                            data-target = "#exampleModal"
+                            (click)="get_productos_compra(Id_Compra)"
+                        >Mostrar</button>
+                        
+                    </div>
+
+                    <p></p>
+
+                    <div class="separacionInfo nada container-md">
+                        
+                        <label>Estatus: </label>
+                        <select
+                            class = "tamañoInput form-control input"
+                            [(ngModel)] = "Estatus"
+                            [ngModelOptions] = "{standalone:true}"
+                            required="true"
+                        >
+                        <option value="">Seleccione un estatus </option>
+                        <option *ngFor = "let estatus of listado_estatus"
+                        [value]="estatus.Id_estatus">{{estatus.Descripcion_estatus}}</option>
+                        </select>
+
+                        <p></p>
+                        
+                        <button (click)="guardarCambios()" class="tamañoBoton btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+       
+
+        <div class="contenedorInformativo3">
+            <div class="mov container-md">
+                <form>
+
+                    <p></p>
+
+                    <label>Subtotal: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "subtotal"
+                        [ngModelOptions] = "{standalone:true}"
+                        disabled
+                    >
+
+                    <p></p>
+
+                    <label>ISV: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "isv"
+                        [ngModelOptions] = "{standalone:true}"
+                        disabled
+                    >
+                    
+                    <p></p>
+
+                    <label>Gastos adicionales: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)]="Gastos"
+                        [ngModelOptions]="{standalone:true}"
+                        disabled
+                    >
+
+                    <p></p>
+                    
+                    <label>Total: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "total"
+                        [ngModelOptions] = "{standalone:true}"
+                        disabled
+                    >
+                    
+                    <p></p>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="entreLinea"></div>
+        <style>
+            .entreLinea{
+                margin-top: 26px;
+            }
+        </style>
+	</div>
+</body>
+
+
+<!-------------ventana modal 1------------------->
+<div class="melvin modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Productos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="table-responsive">
+                        <table class = "table table-dark">
+
+                            <thead>
+                                <tr>
+                                    <th>Código Compra</th>  
+                                    <th>Código Producto</th>
+                                    <th>Descripcion</th>
+                                    <th>Talla</th>
+                                    <th>Color</th>
+                                    <th>Modelo</th>
+                                    <th>Marca</th>
+                                    <th>Subcategoria</th>
+                                    <th>Categoria</th>
+                                    <th>Precio Compra</th>
+                                    <th>Cantidad Ordenada</th>
+                                    <th>Cantidad Recibida</th>
+                                    <th>Cantidad Rechazada</th>
+                                    <th></th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor = "let pro of listado_productos_compra">
+                                    <td>{{pro.Id_compra}}</td>
+                                    <td>{{pro.Id_producto}}</td>
+                                    <td>{{pro.Descripcion_producto}}</td>
+                                    <td>{{pro.Talla}}</td>
+                                    <td>{{pro.Color}}</td>
+                                    <td>{{pro.Descripcion_modelo}}</td>
+                                    <td>{{pro.Nombre_marca}}</td>
+                                    <td>{{pro.Descripcion_subcategoria}}</td>
+                                    <td>{{pro.Descripcion_categoria}}</td> 
+                                    <td>{{pro.Precio_compra}}</td>
+                                    <td>{{pro.Cantidad_ordenada}}</td>
+                                    <td>{{pro.Cantidad_recibida}}</td>
+                                    <td>{{pro.Cantidad_rechazada}}</td>
+                                    <td>
+                                        <button class = "btn btn-primary btn-sm " 
+                                            width = 74px
+                                            data-toggle = "modal"
+                                            data-target = "#exampleModal1"
+                                            (click) = "pasarDatosDetalleCompra(pro)"
+                                            data-dismiss="modal">Actualizar</button>
+                                    </td> 
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-------------ventana modal 2------------------->
+<div class="melvin modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cantidades</h5>
+                <button (click)="get_productos_compra(Id_Compra)" data-toggle = "modal" data-target = "#exampleModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+
+            <div class="alo modal-body">
+                <form>
+                    
+                    <label>Codigo Compra: </label>
+                    <input type = "number" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)]="Detalle_compra.Id_compra"
+                        [ngModelOptions]="{standalone:true}" 
+                        maxlength="3"
+                        disabled
+                    >
+
+                    <p></p>
+
+                    <label>Codigo Producto: </label>
+                    <input type = "number" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)]="Detalle_compra.Id_producto"
+                        [ngModelOptions]="{standalone:true}" 
+                        maxlength="3"
+                        disabled
+                    >
+                    
+                    <p></p>
+
+                    <label>Cantidad Ordenada: </label>
+                    <input type = "number" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)]="Detalle_compra.Cantidad_ordenada"
+                        [ngModelOptions]="{standalone:true}" 
+                        maxlength="3"
+                        disabled
+                    >
+                    
+                    <p></p>
+
+                    <label>Cantidad Recibida: </label>
+                    <input type = "number" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)]="Detalle_compra.Cantidad_recibida"
+                        [ngModelOptions]="{standalone:true}" 
+                        maxlength="3"
+                        required="true"
+                    >
+                    
+                    <p></p>
+
+                    <label>Cantidad Rechazada: </label>
+                    <input type = "number" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)]="Detalle_compra.Cantidad_rechazada"
+                        [ngModelOptions]="{standalone:true}" 
+                        maxlength="3"
+                        required="true"
+                    >
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button (click)="get_productos_compra(Id_Compra)" data-toggle = "modal" data-target = "#exampleModal"  type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button (click)="update_detalle_compra()"type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<style>
+    *{
+        block-size: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+	body{
+        font-family: 'Roboto', sans-serif;
+		
+	}
+
+	header{
+		color: #fff;
+		background: #03759D;
+		height: 70px;
+        margin-top: -20px;
+        z-index: 100;
+	}
+
+	.tituloEncabezado{
+		margin-right: 74%;
+	}
+
+	.tituloEncabezado h1{
+		padding: 10px;
+		padding-left: 0.60em;
+		margin: 0.4em 1px;
+  		text-shadow: 2.1em 0.1em 0.04em #333;
+  		text-shadow: 0.1em 0.1em 0.2em black;
+	}
+
+	main{
+        width: 250px;
+        height: 600px;
+        background: #333;
+        color: #fff;
+        position: absolute;
+		outline: 1px solid #2a2a2a;
+		z-index: 100;
+	}
+
+	main h2{
+		text-align: center;
+		margin: 0;
+		padding: 14px;
+		background: #2a2a2a;
+		font-size: 1.1em;
+	}
+
+
+	.menu ul{
+		list-style: none;
+		outline: 1px solid #2a2a2a;
+	}
+
+	.menu ul ul{
+		display: none;
+		background: #1a1a1a;
+
+	}
+
+	.menu a{
+		display: block;
+		padding: 14px 20px;
+		color: #fff;
+		text-decoration: none;
+		outline: 1px solid #2a2a2a;
+		transition-property: border;
+		transition-duration: 0.20s;
+	}
+
+	.menu a:hover{
+		background: #444;
+		border-left: 5px solid #eee;
+	}
+
+	.menu ul li:hover ul{
+		display: block;
+
+	}
+
+	.contedorPrincipal{
+		width: 100%;
+		height: 600px;
+		margin-top: 10px;
+		background:  #E9E9E9;
+		margin-top: 0px;
+		overflow: scroll;
+	}
+
+	.contenedorTitulo{
+		width: 75%;
+		max-width: 1050px;
+		height: 60px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #C71717;
+		border-radius: 4px;
+	}
+
+	.contenedorTitulo h2{
+		padding-left: 0.60em;
+		margin: 0.1em 1px;
+		color: #fff;
+		padding: 10px;
+		box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+	}
+
+	.contenedorInformativo{
+		width: 75%;
+		max-width: 1050px;
+		height: 180px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+
+    }
+
+    .contenedorInformativo2{
+        width: 75%;
+		max-width: 1050px;
+		height: 400px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: scroll;
+    }
+
+
+    .contenedorInformativo3{
+        width: 75%;
+		max-width: 1050px;
+		height: 320px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+    }
+
+    .mov{
+        margin-left: 18px;
+        margin-top: 12px;
+    }
+
+    .nada{
+        margin-left: 0px;
+        margin-top: -12px;
+    }
+
+    body p{
+        margin-top: 15px;
+    }
+    .melvin{
+        margin-top: 100px;
+        margin-left: 300px;
+        overflow: scroll;
+    }
+
+    .tamañoInput{
+        width: 312px;
+    }
+
+    .separacionInfo0{
+        margin-top: -100px;
+    }
+
+    .separacionInfo{
+        margin-left: 400px;
+        margin-top: -116px;
+    }
+
+    .separacionInfo2{
+        margin-left: 675px;
+        margin-top: -384px;
+    }
+
+    .tamañoBoton{
+        width: 180px;
+        height: 40px;
+        margin-top: 20px;
+    }
+    .tamaño{
+        width: 150px;
+    }
+
+    .alo{
+        margin-left: 230px;
+    }
+
+    .merlon{
+        text-align: center;
+    }
+
+    
+</style>
+
+<style>
+    @media (max-width: 480px){
+
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+            height: 700px;
+        }
+
+        main{
+            width: 100%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 330px;
+            
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo3{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+        }
+        .separacionInfo{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+
+        .separacionInfo2{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+        .tamañoInput{
+            width: 414px;
+        }
+
+        .tamañoBoton{
+            width: 414px;
+        }
+
+        .tamaño{
+            width: 414px;
+        }
+
+    }
+</style>

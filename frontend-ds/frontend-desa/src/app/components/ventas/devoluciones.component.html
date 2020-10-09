@@ -1,0 +1,574 @@
+
+<!-- Aqui codificara Marcela-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-top">
+	<header>
+		<div class="tituloEncabezado">
+			<h1>Variedades K&D</h1>
+		</div>
+	</header>
+	
+	<div class="contedorPrincipal">
+		<main>
+			<nav class="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="http://localhost:4200/menu">Inicio</a></li>
+					<li><a>Compras</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
+							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
+							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
+						</ul>
+					</li>
+					<li><a>Ventas</a>
+						<ul>
+							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
+							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
+							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						</ul>
+					</li>
+					<li><a>Clientes</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
+						</ul>
+					</li>
+					<li><a>Proveedores</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
+						</ul>
+					</li>
+					<li><a>Empleados</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
+						</ul>
+					</li>
+					<li><a>Inventario</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
+						</ul>
+					</li>
+					<li><a>Devoluciones Sobre Venta</a>
+						<ul>
+							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</main>
+		<div class="contenedorTitulo">
+			<h2>| Devoluciones Venta</h2>
+		</div>
+        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+
+        <div class="contenedorInformativo">
+		    <!--  AQUI EMPIEZA EL CAMBIO -->		 
+			<form class="form-incline">
+				<div class= "form-inline">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
+
+				</div>
+		    </form>
+        </div>
+        
+        <div class="contenedorInformativo2">
+            <div class="">
+                <table class="tablaModificar table table-dark">
+                    <thead>
+                        <tr>  
+                            <th>Id Venta</th>
+                            <th>Fecha Venta</th>
+                            <th>Nombre Compañia</th>
+                            <th>Nombre Contacto</th>
+                            <th>SubTotal</th>
+                            <th>ISV</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor = "let ve of listado_ventas |filter:term">
+                        <td>{{ve.Id_venta}}</td>
+                        <td>{{ve.Fecha_venta | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{ve.Nombre_compania}}</td>
+                        <td>{{ve.Nombre_contacto}}</td>
+                        <td>{{ve.Subtotal}}</td>
+                        <td>{{ve.Impuesto}}</td>
+                        <td>{{ve.Total}}</td>
+                        <td>
+                            <button type = "button" class = "btn btn-primary btn-sm " 
+                            width = 74px
+                            (click) = "pasarDatosVenta(ve)">Seleccionar
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+
+        
+        <div class="contenedorInformativo3">
+             <!--Primera Columna -->
+            <div class="mov container-md">
+			<div class="separacionInfo0 nada container-md">
+                
+                <form>
+					<label>Fecha venta: </label>
+					<input type = "text"
+					class = "tamañoInput form-control"
+					[(ngModel)] = "Devoluciones.Fecha_Venta"
+					[ngModelOptions] = "{standalone:true}"
+					readonly = "true"
+					> 
+                </form>
+
+                <p></p>
+
+                <form>
+					<label>ID venta: </label>
+					<input type = "text"
+                    class = "tamañoInput form-control"
+                    [(ngModel)] = "Id_venta"
+                    [ngModelOptions] = "{standalone:true}"
+                    readonly = "true"
+                    > 
+                </form>
+
+                <p></p>
+
+                <form>
+					<label>Visualizar producto: </label>
+					<div class="boton input-group">
+                        <button class ="btn btn-primary form-group col-sm-3"
+                        data-toggle="modal"
+                        data-target="#ProductosModal"
+                        (click) = "get_devoluciones_productos(Id_venta)"
+                        >Mostrar</button>
+                    </div>
+                </form>
+            </div>
+
+            </div>
+            <!--Primera Columna -->
+
+
+            <!--Segunda Columna -->
+			<div class="separacionInfo nada container-md">
+
+                <form>
+					<label>Cod producto: </label>
+                    <input type = "text"
+                    class = "tamañoInput form-control"
+                    [(ngModel)] = "Productos.Id_producto"
+                    [ngModelOptions] = "{standalone:true}"
+                    readonly = "true"
+                    > 
+                </form>
+
+                <p></p>
+
+                <form>
+					<label>Nombre producto: </label>
+                    <input type = "text"
+                    class = "tamañoInput form-control"
+                    [(ngModel)] = "Productos.Nombre_producto"
+                    [ngModelOptions] = "{standalone:true}"
+                    readonly = "true"
+                    > 
+                </form>
+
+                <p></p>
+
+                <form>
+                    <label class="ml-1 mr-2 col-form-label">Información adicional: </label>
+                    <div class="">
+                        <textarea id="informacion_producto" 
+                        name="informacion_producto" 
+                        class = "tamañoInput form-control"
+                        rows="5" 
+                        cols="100" 
+                        readonly = "true"
+                        [(ngModel)] = "Productos.Informacion_adicional_producto"
+                        >
+                        </textarea>
+                </div>
+                 </form>
+                
+            </div>
+            <!--Segunda Columna -->
+            
+            <!--Tercera Columna -->
+            <div class="separacionInfo2 nada container-md">
+
+                <form>
+                    <label>Cantidad devuelta: </label>
+                    <input type = "text"
+                    class = "tamañoInput form-control"
+                    [(ngModel)] = "Productos.Cantidad_devuelta"
+                    [ngModelOptions] = "{standalone:true}"
+                    > 
+                </form>
+                
+                <p></p>
+
+                <form>
+                    <div class="">
+                        <button (click)="AgregarDevolucion()" class="boton btn btn-primary form-group col-sm-3">Registrar venta</button>
+                    </div>
+                    
+                </form>
+
+                <p></p>
+                
+            </div>
+            <!--Tercera Columna -->
+
+        </div>
+        
+
+        <div class="entreLinea"></div>
+        <style>
+            .entreLinea{
+                margin-top: 50px;
+            }
+        </style>
+    </div>
+    
+</body>
+
+
+<div class="modal fade melvin" id="ProductosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Seleccionar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>  
+                                    <th>Cod Producto</th>
+                                    <th>Subcategoria</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Talla</th>
+                                    <th>Color</th>
+                                    <th>Precio referencial venta</th>
+                                    <th>Cantidad Vendida</th>
+                                    <th>Cantidad Devuelta</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor = "let produ of listado_productos">
+                                <td>{{produ.Id_producto}}</td>
+                                <td>{{produ.Descripcion_subcategoria}}</td>
+                                <td>{{produ.Nombre_marca}}</td>
+                                <td>{{produ.Descripcion_modelo}}</td>
+                                <td>{{produ.Talla}}</td>
+                                <td>{{produ.Color}}</td>
+                                <td>{{produ.Precio_referencial_venta}}</td>
+                                <td>{{produ.Cantidad_vendida}}</td>
+                                <td>{{produ.Cantidad_devuelta}}</td>
+                                <td>
+                                <button type = "button" class = "btn btn-primary btn-sm " 
+                                            width = 74px
+                                            (click) = "pasarDatosProducto(produ)">Seleccionar
+                                </button>
+                            </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    *{
+        block-size: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+	body{
+        font-family: 'Roboto', sans-serif;
+        background:  #E9E9E9;
+	}
+
+	header{
+		color: #fff;
+		background: #03759D;
+		height: 80px;
+        margin-top: -20px;
+        z-index: 100;
+	}
+
+	.tituloEncabezado{
+		margin-right: 74%;
+	}
+
+	.tituloEncabezado h1{
+		padding: 10px;
+		padding-left: 0.60em;
+		margin: 0.4em 1px;
+  		text-shadow: 2.1em 0.1em 0.04em #333;
+  		text-shadow: 0.1em 0.1em 0.2em black;
+	}
+
+	main{
+        width: 250px;
+        height: 600px;
+        background: #333;
+        color: #fff;
+        position: absolute;
+		outline: 1px solid #2a2a2a;
+		z-index: 100;
+	}
+
+	main h2{
+		text-align: center;
+		margin: 0;
+		padding: 14px;
+		background: #2a2a2a;
+		font-size: 1.1em;
+	}
+
+
+	.menu ul{
+		list-style: none;
+		outline: 1px solid #2a2a2a;
+	}
+
+	.menu ul ul{
+		display: none;
+		background: #1a1a1a;
+
+	}
+
+	.menu a{
+		display: block;
+		padding: 14px 20px;
+		color: #fff;
+		text-decoration: none;
+		outline: 1px solid #2a2a2a;
+		transition-property: border;
+		transition-duration: 0.20s;
+	}
+
+	.menu a:hover{
+		background: #444;
+		border-left: 5px solid #eee;
+	}
+
+	.menu ul li:hover ul{
+		display: block;
+
+	}
+
+	.contedorPrincipal{
+		width: 100%;
+		height: 600px;
+		margin-top: 10px;
+		background:  #E9E9E9;
+		margin-top: 0px;
+		overflow: scroll;
+	}
+
+	.contenedorTitulo{
+		width: 75%;
+		max-width: 1050px;
+		height: 60px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #C71717;
+		border-radius: 4px;
+	}
+
+	.contenedorTitulo h2{
+		padding-left: 0.60em;
+		margin: 0.1em 1px;
+		color: #fff;
+		padding: 10px;
+		box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+	}
+
+	.contenedorInformativo{
+		width: 75%;
+		max-width: 1050px;
+		height: 80px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+
+    }
+
+    .contenedorInformativo2{
+        width: 75%;
+		max-width: 1050px;
+		height: 500px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: scroll;
+    }
+
+    .contenedorInformativo3{
+        width: 75%;
+		max-width: 1050px;
+		height: 400px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow:hidden;
+    }
+
+
+    .nada{
+        margin-left: 18px;
+    }
+
+    body p{
+        margin-top: 15px;
+    }
+    .melvin{
+        margin-top: 100px;
+        margin-left: 320px;
+        overflow: scroll;
+    }
+
+    .tamañoInput{
+        width: 300px;
+    }
+
+    .tamañoInputBuscador{
+        width: 600px;
+        margin-top: 18px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .separacionInfo0{
+        margin-top: 18px;
+        margin-left: 30px;
+    }
+
+    .separacionInfo{
+        margin-left: 360px;
+        margin-top: -204px;
+    
+    }
+
+    .separacionInfo2{
+        margin-left: 700px;
+        margin-top: -299px;
+    }
+
+    .separacionInfo2 .boton{
+        height: 30px;
+        width: 100px;
+    }
+
+    .tamañoBoton{
+        width: 180px;
+        height: 40px;
+        margin-top: 20px;
+    }
+</style>
+
+
+<style>
+    @media (min-width: 400px) and (max-width: 600px){
+
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+        }
+
+        main{
+            width: 100%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 85px;
+            
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 300px;
+        }
+
+        .contenedorInformativo3{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 700px;
+        }
+
+        .separacionInfo{
+            margin-left: 18px;
+            margin-top: 10px;
+        }
+
+        .separacionInfo2{
+            margin-left: 18px;
+            margin-top: 10px;
+        }
+
+        .tamañoInput{
+            width: 414px;
+        }
+
+        .tamañoBoton{
+            width: 414px;
+        }
+
+        .boton{
+            width: 420px;
+        }
+
+
+    }
+</style>

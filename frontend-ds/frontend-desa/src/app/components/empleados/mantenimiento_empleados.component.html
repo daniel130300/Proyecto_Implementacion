@@ -1,0 +1,739 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-top">
+	<header>
+		<div class="tituloEncabezado">
+			<h1>Variedades K&D</h1>
+		</div>
+	</header>
+	
+	<div class="contedorPrincipal">
+        <main>
+			<nav class="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="http://localhost:4200/menu">Inicio</a></li>
+					<li><a>Compras</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
+							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
+							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
+						</ul>
+					</li>
+					<li><a>Ventas</a>
+						<ul>
+							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
+							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
+							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						</ul>
+					</li>
+					<li><a>Clientes</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
+						</ul>
+					</li>
+					<li><a>Proveedores</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
+						</ul>
+					</li>
+					<li><a>Empleados</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
+						</ul>
+					</li>
+					<li><a>Inventario</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
+						</ul>
+					</li>
+					<li><a>Devoluciones Sobre Venta</a>
+						<ul>
+							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</main>
+		<div class="contenedorTitulo">
+			<h2>| Mantenimiento Empleados</h2>
+        </div>
+        
+        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+        <div class="contenedorInformativo">
+            
+            <form ngNativeValidate #form>
+
+                <div class="mov container-md">
+                
+                    <p></p>
+                        <label>Identidad: </label>
+                        <input type = "text"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Identidad"
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "13"
+                            minlength = "13"
+                            pattern = "^[0-9]+$"
+                            required = "true"
+                        >
+                        <p></p>
+                        <label>Nombre: </label>
+                        <input type = "text"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Nombre"
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "100"
+                            required = "true"
+                        >
+                        <p></p>
+                        <label>Apellido: </label>
+                        <input type = "text"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Apellido"
+                            
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "100"
+                            required = "true"
+                        >
+                        <p></p>
+                        <label>Teléfono: </label>
+                        <input type = "tel"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Telefono"
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "20"
+                            required = "true"
+                            pattern = "^[0-9]+$"
+                        >
+                        
+                </div>
+                    
+                <div class="separacionInfo nada container-md">
+
+                        <p></p>
+                        <label>Correo electrónico: </label>
+                        <input type = "email"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Email"
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "150"
+                            required = "true"
+                            pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+                        >
+
+                        <p></p>
+                        <label>Dirección: </label>
+                        <input type = "text"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Direccion"
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "300"
+                            required = "true"
+                        >
+                        <p></p>
+                        <label>Salario: </label>
+                        <input type = "number"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Salario"
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "8"
+                            pattern = "^[0-9]+$"
+                        >
+                        <p></p>
+                        <label>Nombre de usuario: </label>
+                        <input type = "text"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.LoginID"
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "50"
+                            required = "true"
+                        >
+
+                </div>
+
+                <div class="separacionInfo2 nada container-md">
+
+                        <p></p>
+                        <label>Contraseña: </label>
+                        <input type = "password"
+                            onmouseover = "this.type = 'text'"
+                            onmouseout = "this.type = 'password'"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Contrasenia"
+                            [ngModelOptions] = "{standalone:true}"
+                            maxlength = "150"
+                            minlength = "8"
+                            required = "true"
+                        >
+                        <p></p>
+                        <label>Fecha de nacimiento: </label>
+                        <input type = "date"
+                            onkeydown = "return false"
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Empleado.Fecha_nacimiento"
+                            [ngModelOptions] = "{standalone:true}"
+                            required = "true"
+                        >
+
+                        <p></p>
+                        <label>Puesto: </label>
+                        <select
+                            class = "tamañoInput form-control input"
+                            [(ngModel)] = "Empleado.Id_puesto"
+                            [ngModelOptions] = "{standalone:true}"
+                            required = "true"
+                            
+                        >
+                        <option value="">Seleccione un puesto</option>
+                        <option *ngFor="let puesto of listado_puestos"
+                        [value]="puesto.Id_puesto">{{puesto.Descripcion_puesto}}</option>
+                        </select>
+                        
+                        <p></p>
+                        <button (click)="form.checkValidity ? insertar_empleado() : null" class="tamañoBoton btn btn-primary">Guardar registro</button>
+                    
+                </div>
+            </form>
+        </div>
+        
+        <div class="contenedorInformativo2">
+            <div class="nada container-md">
+
+                <p></p>
+                <table class = "table table-dark table-responsive">
+            
+                    <thead>
+                        <tr>
+            
+                            <th>Identidad</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Teléfono</th>
+                            <th>Correo</th>
+                            <th>Dirección</th>
+                            <th>Salario</th>
+                            <th>Login ID</th>
+                            <th>Fecha nacimiento</th>
+                            <th>Fecha contratación</th>
+                            <th>Fecha despido</th>
+                            <th>Estado</th>
+                            <th>Puesto</th>
+                            <th></th>
+                            <th></th>
+            
+                        </tr>
+                    </thead>
+            
+                    <tbody>
+                        <tr *ngFor = "let e of listado_empleados">
+            
+                            <td>{{e.Identidad}}</td>
+                            <td>{{e.Nombre}}</td>
+                            <td>{{e.Apellido}}</td>
+                            <td>{{e.Telefono}}</td>
+                            <td>{{e.Email}}</td>
+                            <td>{{e.Direccion}}</td>
+                            <td>{{e.Salario}}</td>
+                            <td>{{e.LoginID}}</td>
+                            <td>{{e.Fecha_nacimiento | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{e.Fecha_contratacion | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{e.Fecha_despido | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{e.Descripcion_estatus}}</td>
+                            <td>{{e.Descripcion_puesto}}</td>
+            
+                            <td>
+                                <button type = "button" class = "btn btn-primary btn-sm " 
+                                    width = 74px
+                                    data-toggle = "modal"
+                                    data-target = "#exampleModal"
+                                    (click) = "pasarDatosEmpleado(e)">Editar
+                                </button>
+                            </td>
+            
+                        </tr>
+                    </tbody>
+            
+                </table>
+
+            </div>
+        </div>
+
+        <!-- <div class="entreLinea"></div>
+            <style>
+                .entreLinea{
+                    margin-top: 26px;
+                }
+            </style>
+        </div> -->
+        
+	</div>
+</body>
+
+<div class="modal fade melvin" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="exampleModalLabel">Editar Empleado</h5>
+
+                <button (click)="limpiar_empleado()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                <form ngNativeValidate #form>
+                    
+                    <label>Identidad: </label>
+                    <input type = "text"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Identidad"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "13"
+                        minlength = "13"
+                        pattern = "^[0-9]+$"
+                        required = "true"
+                    >
+
+                    <label>Nombre: </label>
+                    <input type = "text"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Nombre"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "100"
+                        required = "true"
+                    >
+
+                    <label>Apellido: </label>
+                    <input type = "text"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Apellido"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "100"
+                        required = "true"
+                    >
+
+                    <label>Teléfono: </label>
+                    <input type = "text"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Telefono"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "20"
+                        required = "true"
+                        pattern = "^[0-9]+$"
+                    >
+
+                    <label>Correo electrónico: </label>
+                    <input type = "text"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Email"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "150"
+                        required = "true"
+                        pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+                    >
+
+                    <label>Dirección: </label>
+                    <input type = "text"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Direccion"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "300"
+                        required = "true"
+                    >
+
+                    <label>Salario: </label>
+                    <input type = "text"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Salario"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "8"
+                        pattern = "^[0-9]+$"
+                    >
+
+                    <label>Nombre de usuario: </label>
+                    <input type = "text"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.LoginID"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "50"
+                        required = "true"
+                    >
+
+                    <label>Fecha de nacimiento: </label>
+                    <input type = "date"
+                        class = "form-control"
+                        onkeydown = "return false"
+                        [(ngModel)] = "Empleado.Fecha_nacimiento"
+                        [ngModelOptions] = "{standalone:true}"
+                        required = "true"
+                    >
+
+                    <label>Fecha de contratación: </label>
+                    <input type = "date"
+                        onkeydown = "return false"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Fecha_contratacion"
+                        [ngModelOptions] = "{standalone:true}"
+                        readonly = "true"
+                        required = "true"
+                    >
+
+                    <label>Fecha de despido: </label>
+                    <input type = "date"
+                        onkeydown = "return false"
+                        class = "form-control"
+                        [(ngModel)] = "Empleado.Fecha_despido"
+                        [ngModelOptions] = "{standalone:true}"
+                        required = "true"
+                    >
+
+                    <label>Estado: </label>
+                    <select
+                        class = "form-control input"
+                        [(ngModel)] = "Empleado.Id_estatus"
+                        [ngModelOptions] = "{standalone:true}"
+                        required = "true"
+                    >
+                    <option value="">Seleccione un estado</option>
+                    <option *ngFor="let estado of listado_estatus"
+                    [value]="estado.Id_estatus">{{estado.Descripcion_estatus}}</option>
+                    </select>
+
+                    <label>Puesto: </label>
+                    <select
+                        class = "form-control input"
+                        [(ngModel)] = "Empleado.Id_puesto"
+                        [ngModelOptions] = "{standalone:true}"
+                        required = "true"
+                    >
+                    <option value="">Seleccione un puesto</option>
+                    <option *ngFor="let puesto of listado_puestos"
+                    [value]="puesto.Id_puesto">{{puesto.Descripcion_puesto}}</option>
+                    </select>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+
+                <button (click)="limpiar_empleado()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                <button (click)="form.checkValidity() ? update_empleado(Empleado.Id_empleado) : null" type="button" class="btn btn-primary">Guardar</button>
+                
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!----------------TODO EL CSS------------------------------>
+<style>
+    *{
+        block-size: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+	body{
+        font-family: 'Roboto', sans-serif;
+		
+	}
+
+	header{
+		color: #fff;
+		background: #03759D;
+		height: 70px;
+        margin-top: -20px;
+        z-index: 100;
+	}
+
+	.tituloEncabezado{
+		margin-right: 74%;
+	}
+
+	.tituloEncabezado h1{
+		padding: 10px;
+		padding-left: 0.60em;
+		margin: 0.4em 1px;
+  		text-shadow: 2.1em 0.1em 0.04em #333;
+  		text-shadow: 0.1em 0.1em 0.2em black;
+	}
+
+	main{
+        width: 250px;
+        height: 600px;
+        background: #333;
+        color: #fff;
+        position: absolute;
+		outline: 1px solid #2a2a2a;
+		z-index: 100;
+	}
+
+	main h2{
+		text-align: center;
+		margin: 0;
+		padding: 14px;
+		background: #2a2a2a;
+		font-size: 1.1em;
+	}
+
+
+	.menu ul{
+		list-style: none;
+		outline: 1px solid #2a2a2a;
+	}
+
+	.menu ul ul{
+		display: none;
+		background: #1a1a1a;
+
+	}
+
+	.menu a{
+		display: block;
+		padding: 14px 20px;
+		color: #fff;
+		text-decoration: none;
+		outline: 1px solid #2a2a2a;
+		transition-property: border;
+		transition-duration: 0.20s;
+	}
+
+	.menu a:hover{
+		background: #444;
+		border-left: 5px solid #eee;
+	}
+
+	.menu ul li:hover ul{
+		display: block;
+
+	}
+
+	.contedorPrincipal{
+		width: 100%;
+		height: 600px;
+		margin-top: 10px;
+		background:  #E9E9E9;
+		margin-top: 0px;
+		overflow: scroll;
+	}
+
+	.contenedorTitulo{
+		width: 75%;
+		max-width: 1050px;
+		height: 60px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #C71717;
+		border-radius: 4px;
+	}
+
+	.contenedorTitulo h2{
+		padding-left: 0.60em;
+		margin: 0.1em 1px;
+		color: #fff;
+		padding: 10px;
+		box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+	}
+
+	.contenedorInformativo{
+		width: 75%;
+		max-width: 1050px;
+		height: 350px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+
+    }
+
+    .contenedorInformativo2{
+        width: 75%;
+		max-width: 1050px;
+		height: 450px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: scroll;
+    }
+
+    .mov{
+        margin-left: 18px;
+        margin-top: 12px;
+    }
+
+    .nada{
+        margin-left: 0px;
+        margin-top: -12px;
+    }
+
+    body p{
+        margin-top: 15px;
+    }
+    .melvin{
+        margin-left: 500px;
+        overflow: scroll;
+    }
+
+    .tamañoInput{
+        width: 300px;
+    }
+
+    .separacionInfo0{
+        margin-top: -100px;
+    }
+
+    .separacionInfo{
+        margin-left: 340px;
+        margin-top: -308px;
+    }
+
+    .separacionInfo2{
+        margin-left: 675px;
+        margin-top: -308px;
+    }
+
+    .tamañoBoton{
+        width: 180px;
+        height: 40px;
+        margin-top: 20px;
+    }
+</style>
+
+<style>
+    @media (max-width: 480px){
+
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+            height: 700px;
+        }
+
+        main{
+            width: 100%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 1200px;
+            
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 550px;
+        }
+
+        .separacionInfo{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+
+        .separacionInfo2{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+        .tamañoInput{
+            width: 414px;
+        }
+
+        .tamañoBoton{
+            width: 414px;
+        }
+
+    }
+
+    @media (min-width: 600px) and (max-width: 600px){
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+            height: 700px;
+        }
+
+        main{
+            width: 100%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 570px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 570px;
+            height: 1200px;
+            
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 570px;
+        }
+
+        .separacionInfo{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+
+        .separacionInfo2{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+        .tamañoInput{
+            width: 530px;
+        }
+
+        .tamañoBoton{
+            width: 530px;
+        }
+    }
+</style>

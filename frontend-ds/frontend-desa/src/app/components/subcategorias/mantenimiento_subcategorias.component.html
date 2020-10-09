@@ -1,0 +1,108 @@
+<div class = "container-md"> 
+    <h1 class = "text-primary">Listado de Subcategorías</h1>
+    <p class = "text-muted">Realice la inserción y actualización de subcategorias</p> 
+    <form>
+        <label>Nombre de la Subcategoria: </label>
+        <input type = "text" 
+               class = "form-control"
+               [(ngModel)] = "Subcategorias.Descripcion_subcategoria"
+               [ngModelOptions] = "{standalone:true}"
+        > 
+
+        <label>Categoría: </label>
+        <select
+            class = "form-control input"
+            [(ngModel)] = "Subcategorias.Id_categoria"
+            [ngModelOptions] = "{standalone:true}"
+        >
+        <option value="">Seleccione una categoría </option>
+        <option *ngFor = "let categoria of listado_categorias"
+        [value]="categoria.Id_categoria">{{categoria.Descripcion_categoria}}</option>
+        </select>
+
+        <p>
+        </p>
+
+        <button (click)="insertar_subcategorias()" class="btn btn-primary">Guardar Registro</button>
+
+        <p>    
+        </p>
+
+        <button (click)="volverpro()" class="btn btn-primary">Regresar</button>
+        
+        <p>    
+        </p>
+
+    </form>
+
+    <p>
+    </p>
+
+    <table class = "table table-dark">
+
+        <thead>
+            <tr>  
+                <th>Descripción Subcategoría</th>
+                <th>Categoría</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor = "let s of listado_subcategorias">
+            <td>{{s.Descripcion_subcategoria}}</td>
+            <td>{{s.Descripcion_categoria}}</td>
+            <td>
+                <button type = "button" class = "btn btn-primary btn-sm " 
+                width = 74px
+                data-toggle = "modal"
+                data-target = "#exampleModal"
+                (click) = "pasarDatosSubcategorias(s)">Editar</button>
+            </td> 
+
+           
+        </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar subcategoria</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <form>
+
+                <label>Nombre de la subcategoría: </label>
+                <input type = "text" 
+                    class = "form-control"
+                    [(ngModel)] = "Subcategorias.Descripcion_subcategoria"
+                    [ngModelOptions] = "{standalone:true}"
+                > 
+
+                <label>Categoría: </label>
+                <select
+                    class = "form-control input"
+                    [(ngModel)] = "Subcategorias.Id_categoria"
+                    [ngModelOptions] = "{standalone:true}"
+                >
+                <option value="">Seleccione una categoría </option>
+                <option *ngFor = "let categoria of listado_categorias"
+                [value]="categoria.Id_categoria">{{categoria.Descripcion_categoria}}</option>
+                </select>
+                
+
+            </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button (click)="update_subcategorias(Subcategorias.Id_subcategoria)"type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,732 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-top">
+	<header>
+		<div class="tituloEncabezado">
+			<h1>Variedades K&D</h1>
+		</div>
+	</header>
+	
+	<div class="contedorPrincipal">
+        <main>
+			<nav class="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="http://localhost:4200/menu">Inicio</a></li>
+					<li><a>Compras</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
+							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
+							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
+						</ul>
+					</li>
+					<li><a>Ventas</a>
+						<ul>
+							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
+							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
+							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						</ul>
+					</li>
+					<li><a>Clientes</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
+						</ul>
+					</li>
+					<li><a>Proveedores</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
+						</ul>
+					</li>
+					<li><a>Empleados</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
+						</ul>
+					</li>
+					<li><a>Inventario</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
+						</ul>
+					</li>
+					<li><a>Devoluciones Sobre Venta</a>
+						<ul>
+							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</main>
+        <div class="contenedorTitulo">
+			<h2>| Nueva Venta Plus</h2>
+		</div>
+        <div class="contenedorInformativo">
+            
+            <div class = "c container-fluid mt-3 pl-3"> 
+                <form  [formGroup]="formVentas">
+                    <div class="row">
+                        <div class="mover form-group col-sm-5">
+                           
+                            <div class="Espacios"></div>
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Tipo de cliente: </label>
+                                <div class="">
+                                    <select
+                                        class="form-control input"
+                                        [(ngModel)]="Id_tipo_cliente"
+                                        [ngModelOptions]="{standalone: true}">
+                                        <option value="">Seleccione un tipo de cliente</option>
+                                        <option *ngFor="let g of listado_tipo_cliente"
+                                        [value]="g.Id_tipo_cliente">{{g.Descripcion_cliente}}</option>   
+                                    </select>    
+                                </div>
+                            </div>
+                            <div class="Espacios"></div>
+                            <div class="form-group col-sm-5">
+                                <label class="ml-1 mr-2 col-form-label">Cod cliente: </label>
+                                <div class="input-group">
+                                    <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Clientes.Id_cliente"
+                                    [ngModelOptions]="{standalone: true}"
+                                    readonly = "true"
+                                    > 
+                                    <button class="btn btn-primary form-group col-sm-2"
+                                    data-toggle="modal"
+                                    data-target="#exampleModal"
+                                    (click)="get_clientes(Id_tipo_cliente)"
+                                    >+</button>
+                                </div>
+                            </div>
+                            <div class="Espacios"></div>
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Nombre cliente: </label>
+                                <div class="">
+                                    <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Clientes.Nombre_cliente"
+                                    [ngModelOptions]="{standalone: true}"
+                                    readonly = "true"
+                                    > 
+                                </div>
+                            </div>
+                            <div class="Espacios"></div>
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Tipo de pago: </label>
+                                <div class="">
+                                    <select
+                                    (change)="HabilitarPlazosPago($event.target.value)"
+                                    class="form-control input"
+                                    [(ngModel)]="Id_tipo_pago"
+                                    formControlName = "tipoPago"
+                                    >
+                                    <option value="">Seleccione un tipo de pago</option>
+                                    <option *ngFor="let pago of listado_tipos_pago"
+                                    [value]="pago.Id_tipo_pago">{{pago.Descripcion_tipo_pago}}</option>   
+                                </select>    
+                                </div>
+                            </div>
+                            <div class="Espacios"></div>
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Plazos de pago: </label>
+                                <div class="">
+                                    <select
+                                    class="form-control input"
+                                    [(ngModel)]="Id_plazo"
+                                    formControlName = "plazosPago">
+                                    <option value="">Seleccione un plazo de pago</option>
+                                    <option *ngFor="let plazo of listado_plazos_pago"
+                                    [value]="plazo.Id_plazo">{{plazo.Descripcion_plazo}}</option>   
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+            
+                        <div class="mover form-group col-sm-5">
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Tipo de venta: </label>
+                                <select
+                                    class="form-control input"
+                                    [(ngModel)]="Id_estado_envio"
+                                    [ngModelOptions]="{standalone: true}">
+                                    <option value="">Seleccione un tipo de venta</option>
+                                    <option *ngFor="let envio of listado_estados_envio"
+                                    [value]="envio.Id_estatus">{{envio.Descripcion_estatus}}</option>
+                                </select>   
+                            </div>
+                            <div class="Espacios"></div>
+            
+                            <div class="form-group col-sm-5">
+                                <label class="ml-1 mr-2 col-form-label">Cod producto: </label>
+                                <div class="input-group">
+                                    <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Productos.Id_producto"
+                                    [ngModelOptions]="{standalone: true}"
+                                    readonly = "true"
+                                    > 
+                                    <button class ="btn btn-primary form-group col-sm-2"
+                                    data-toggle="modal"
+                                    data-target="#ProductosModal"
+                                    (click) = "get_productos()"
+                                    >+</button>
+                                </div>
+                            </div>
+                            <div class="Espacios"></div>
+            
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Nombre producto: </label>
+                                <div class="">
+                                    <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Productos.Nombre_producto"
+                                    [ngModelOptions]="{standalone: true}"
+                                    readonly = "true"
+                                    > 
+                                </div>
+                            </div>
+                            <div class="Espacios"></div>
+            
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Información adicional: </label>
+                                <div class="">
+                                    <textarea id="informacion_producto" 
+                                    name="informacion_producto" 
+                                    class = "form-control"
+                                    rows="5" 
+                                    cols="100" 
+                                    readonly = "true"
+                                    [(ngModel)] = "Productos.Informacion_adicional_producto"
+                                    [ngModelOptions]="{standalone: true}"
+                                    >
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="Espacios"></div>
+                            
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Precio referencial de venta </label>
+                                <div class="">
+                                    <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Productos.Precio_referencial_venta"
+                                    [ngModelOptions]="{standalone: true}"
+                                    readonly = "true"
+                                    > 
+                                </div>
+                            </div>
+
+                            <div class="Espacios"></div>
+                            <div class="form-group col-sm-12">
+                                <label class="ml-1 mr-2 col-form-label">Cantidad: </label>
+                                <div class="">
+                                    
+                                    <input type = "text" 
+                                        class = "form-control"
+                                        [(ngModel)] = "Productos.Cantidad"
+                                        [ngModelOptions]="{standalone: true}"
+                                    >
+                                </div>
+                            </div>
+
+                            
+                            <div class="Espacios"></div>
+                            <div class="form-group col-sm-12">    
+                                <button type = "button" class = "btn btn-primary form-group col-sm-4" 
+                                        width = 74px
+                                        (click) = "AgregarProductoVenta(Productos)"
+                                >Agregar producto</button>
+                            </div>
+                        </div>
+        
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="contenedorInformativo2">
+            <div class = "c container-fluid mt-3 pl-3"> 
+                <form>
+                    <div class="">
+                        <div class="">
+                            <div class="">
+                                <table class="tablaModificar table table-dark">
+                                    <thead>
+                                        <tr>  
+                                            <th>Cod Producto</th>
+                                            <th>Nombre Producto</th>
+                                            <th>Informacion Adicional</th>
+                                            <th>Precio Referencial Venta</th>
+                                            <th>Cantidad</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor = "let produc of listado_productos_agregados">
+                                        <td>{{produc.Id_producto}}</td>
+                                        <td>{{produc.Nombre_producto}}</td>
+                                        <td>{{produc.Informacion_adicional_producto}}</td>
+                                        <td>{{produc.Precio_referencial_venta}}</td>
+                                        <td>{{produc.Cantidad}}</td>
+                                        <td>
+                                            <button (click)="EliminarProductoVenta(produc.Id_producto)" class="btn btn-primary mb-3">Eliminar</button>
+                                       </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>    
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="contenedorInformativo3">
+            <form>
+                <div class="row">
+                    <div class="mover form-group col-sm-5">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group row col">   
+                                    <label class="c col-sm-2 col-form-label ">Subtotal: </label>
+                                    <div class="col-sm-7">
+                                        <input type = "text" 
+                                            class = "c espaciosHorizontales form-control"
+                                            [(ngModel)] = "subtotal"
+                                            [ngModelOptions] = "{standalone:true}"
+                                            readonly = "true"
+                                        >
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group row col">   
+                                    <label class="c col-sm-2 col-form-label ">Descuento: </label>
+                                    <div class="col-sm-7">
+                                        <input type = "text" 
+                                            class = "c espaciosHorizontales form-control"
+                                            [(ngModel)] = "descuento_calculado"
+                                            [ngModelOptions] = "{standalone:true}"
+                                            readonly = "true"
+                                        >
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group row col">   
+                                    <label class="c col-sm-2 col-form-label ">ISV: </label>
+                                    <div class="col-sm-7">
+                                        <input type = "text" 
+                                            class = "c espaciosHorizontales form-control"
+                                            [(ngModel)] = "isv"
+                                            [ngModelOptions] = "{standalone:true}"
+                                            readonly = "true"
+                                        >
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group row col">   
+                                    <label class="c col-sm-2 col-form-label ">Total: </label>
+                                    <div class="col-sm-7">
+                                        <input type = "text" 
+                                            class = "c espaciosHorizontales form-control"
+                                            [(ngModel)] = "total"
+                                            [ngModelOptions] = "{standalone:true}"
+                                            readonly = "true"
+                                        >
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <div class="text-center">
+                                <button class="boton btn btn-primary form-group col-sm-12" (click)="insertar_venta_plus()"
+                                >Registrar venta</button>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="entreLinea"></div>
+        <style>
+            .entreLinea{
+                margin-top: 130px;
+            }
+        </style>
+	</div>
+    
+</body>
+
+<div class="modal fade melvin" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Seleccionar Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>  
+                                    <th>Nombre compañía</th>
+                                    <th>Nombre del contacto</th>
+                                    <th>Apellido del contacto</th>
+                                    <th>Telefono del contacto</th>
+                                    <th>Correo del contacto</th>
+                                    <th>Direccion</th>
+                                    <th>Ciudad</th>
+                                    <th>Departamento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor = "let cli of listado_clientes">
+                                <td>{{cli.Nombre_compania}}</td>
+                                <td>{{cli.Nombre_contacto}}</td>
+                                <td>{{cli.Apellido_contacto}}</td>
+                                <td>{{cli.Telefono_contacto}}</td>
+                                <td>{{cli.Email_contacto}}</td>
+                                <td>{{cli.Direccion}}</td>
+                                <td>{{cli.Nombre_ciudad}}</td>
+                                <td>{{cli.Nombre_departamento}}</td>
+                                <td> 
+                                    <button type = "button" class = "btn btn-primary btn-sm " 
+                                    width = 74px
+                                    (click) = "pasarDatosCliente(cli)">Seleccionar</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade melvin" id="ProductosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Seleccionar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>  
+                                    <th>Cod Producto</th>
+                                    <th>Subcategoria</th>
+                                    <th>Marca</th>
+                                    <th>Modelo</th>
+                                    <th>Talla</th>
+                                    <th>Color</th>
+                                    <th>Precio referencial venta</th>
+                                    <th>Cantidad disponible</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor = "let produ of listado_productos">
+                                <td>{{produ.Id_producto}}</td>
+                                <td>{{produ.Descripcion_subcategoria}}</td>
+                                <td>{{produ.Nombre_marca}}</td>
+                                <td>{{produ.Descripcion_modelo}}</td>
+                                <td>{{produ.Talla}}</td>
+                                <td>{{produ.Color}}</td>
+                                <td>{{produ.Precio_referencial_venta}}</td>
+                                <td>{{produ.Stock}}</td>
+
+                                <td>
+                                    <button type = "button" class = "btn btn-primary btn-sm " 
+                                            width = 74px
+                                            (click) = "pasarDatosProducto(produ)">Seleccionar
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!----------------TODO EL CSS------------------------------>
+<style>
+    *{
+        block-size: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+	body{
+        font-family: 'Roboto', sans-serif;
+        background:  #E9E9E9;
+		
+	}
+
+	header{
+		color: #fff;
+		background: #03759D;
+		height: 70px;
+        margin-top: -20px;
+        z-index: 100;
+	}
+
+	.tituloEncabezado{
+		margin-right: 74%;
+	}
+
+	.tituloEncabezado h1{
+		padding: 10px;
+		padding-left: 0.60em;
+		margin: 0.4em 1px;
+  		text-shadow: 2.1em 0.1em 0.04em #333;
+  		text-shadow: 0.1em 0.1em 0.2em black;
+	}
+
+	main{
+        width: 250px;
+        height: 630px;
+        background: #333;
+        color: #fff;
+        position: absolute;
+		outline: 1px solid #2a2a2a;
+		z-index: 100;
+	}
+
+	main h2{
+		text-align: center;
+		margin: 0;
+		padding: 14px;
+		background: #2a2a2a;
+		font-size: 1.1em;
+	}
+
+
+	.menu ul{
+		list-style: none;
+		outline: 1px solid #2a2a2a;
+	}
+
+	.menu ul ul{
+		display: none;
+		background: #1a1a1a;
+
+	}
+
+	.menu a{
+		display: block;
+		padding: 14px 20px;
+		color: #fff;
+		text-decoration: none;
+		outline: 1px solid #2a2a2a;
+		transition-property: border;
+		transition-duration: 0.20s;
+	}
+
+	.menu a:hover{
+		background: #444;
+		border-left: 5px solid #eee;
+	}
+
+	.menu ul li:hover ul{
+		display: block;
+
+	}
+
+	.contedorPrincipal{
+		width: 100%;
+		height: 700px;
+		margin-top: 10px;
+		background:  #E9E9E9;
+		margin-top: 0px;
+		overflow: scroll;
+	}
+
+	.contenedorTitulo{
+		width: 75%;
+		max-width: 1050px;
+		height: 60px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #C71717;
+		border-radius: 4px;
+	}
+
+	.contenedorTitulo h2{
+		padding-left: 0.60em;
+		margin: 0.1em 1px;
+		color: #fff;
+		padding: 10px;
+		box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+	}
+
+	.contenedorInformativo{
+		width: 75%;
+		max-width: 1250px;
+		height: 600px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+    }
+
+    .contenedorInformativo2{
+		width: 75%;
+		max-width: 1050px;
+		height: 320px;
+		margin-left: 295px;
+		margin-top: 52px;
+		background: #fff;
+		overflow: scroll;
+    }
+
+    .mover{
+        margin-left: 30px;
+        margin-top: 30px;
+    }
+
+    .Espacios{
+        margin-top: 10px;
+    }
+
+    .espaciosHorizontales{
+        margin-left: 50px;
+    }
+
+    .boton{
+        
+        
+        margin-top: 32px;
+
+    }
+
+    .tablaModificar{
+        table-layout: fixed;
+        width: 97%;
+    }
+
+    .contenedorInformativo3{
+        width: 75%;
+		max-width: 1050px;
+		height: 290px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+    }
+
+    .melvin{
+        margin-left: 400px;
+        margin-top: 180px;
+    }
+
+    .c{
+        margin-top: 5px;
+    }
+</style>
+
+<style>
+    @media (min-width: 400px) and (max-width: 600px){
+
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+        }
+
+        main{
+            width: 99%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 1030px;
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo3{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 420px;
+        }
+
+        .c{
+            margin-left: -18px;
+        }
+
+        .com{
+            margin-left: -18px;
+            width: 420px;
+        }
+
+        .entreLinea{
+            margin-top: 300px;
+        }
+
+        .boton{
+            margin-left: -30px;
+        }
+
+    }
+</style>

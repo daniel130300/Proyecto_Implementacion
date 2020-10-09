@@ -1,0 +1,88 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+}
+
+body{
+	overflow: hidden;
+}
+
+/*barra del header para titulo y usuario*/
+header{
+	color: #fff;
+	background: #03759D;
+	height: 60px;
+	overflow: hidden;
+}
+
+header h1{
+	padding-left: 0.60em;
+  	margin: 0.4em 1px;
+  	text-shadow: 2.1em 0.1em 0.04em #333;
+  	text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+
+/*parte menu main*/
+main{
+	width: 250px;
+	height: 600px;
+	background: #333;
+	color: #fff;
+	position: absolute;
+	outline: 1px solid #2a2a2a;
+}
+
+main h2{
+	text-align: center;
+	margin: 0;
+	padding: 14px;
+	background: #2a2a2a;
+	font-size: 1.1em;
+}
+
+
+.menu ul{
+	list-style: none;
+	outline: 1px solid #2a2a2a;
+}
+
+.menu ul ul{
+	display: none;
+	background: #1a1a1a;
+
+}
+
+.menu a{
+	display: block;
+	padding: 14px 20px;
+	color: #fff;
+	text-decoration: none;
+	outline: 1px solid #2a2a2a;
+	transition-property: border;
+	transition-duration: 0.20s;
+}
+
+.menu a:hover{
+	background: #444;
+	border-left: 5px solid #eee;
+}
+
+.menu ul li:hover ul{
+	display: block;
+
+}
+
+
+.contedorPrincipal{
+	width: 100%;
+	height: 600px;
+	margin-top: 10px;
+	background:  #E9E9E9;
+	overflow: hidden;
+	margin-top: 0px;
+}
+
+

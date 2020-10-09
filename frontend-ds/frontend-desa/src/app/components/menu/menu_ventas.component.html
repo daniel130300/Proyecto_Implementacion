@@ -1,0 +1,339 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-top">
+	<header>
+		<div class="tituloEncabezado">
+			<h1>Variedades K&D</h1>
+		</div>
+	</header>
+	<div class="contedorPrincipal">
+		<main>
+			<nav class="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="http://localhost:4200/menu">Inicio</a></li>
+					<li><a>Compras</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
+							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
+							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
+						</ul>
+					</li>
+					<li><a>Ventas</a>
+						<ul>
+							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
+							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
+							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						</ul>
+					</li>
+					<li><a>Clientes</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
+						</ul>
+					</li>
+					<li><a>Proveedores</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
+						</ul>
+					</li>
+					<li><a>Empleados</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
+						</ul>
+					</li>
+					<li><a>Inventario</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
+						</ul>
+					</li>
+					<li><a>Devoluciones Sobre Venta</a>
+						<ul>
+							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</main>
+		<div class="contenedorTitulo">
+			<h2>| Opciones</h2>
+		</div>
+		<div class="contenedorInformativo">
+			<p></p>
+			<div class="contenedorTarjetas moverTarjetaSection1">
+				<div class="tarjeta"  href="http://localhost:4200/nueva_venta_normal">
+                    <img src="../../../assets/img/cliente.png">
+					<a href="http://localhost:4200/nueva_venta_normal">Venta Normal</a>
+				</div>
+			</div>
+			<div class="contenedorTarjetas moverTarjetaSection2">
+				<div class="tarjeta">
+					<img src="../../../assets/img/clientesPlus.png">
+					<a href="http://localhost:4200/nueva_venta_plus">Venta Plus</a>
+				</div>
+			</div>
+			
+		</div>
+		<div class="entreLinea"></div>
+        <style>
+            .entreLinea{
+                margin-top: 26px;
+            }
+        </style>
+	</div>
+	
+</body>
+
+
+
+<style>
+	body{
+		font-family: 'Roboto', sans-serif;
+	}
+
+	header{
+		color: #fff;
+		background: #03759D;
+		height: 90px;
+		margin-top: -20px;
+	}
+
+	.tituloEncabezado{
+		margin-right: 74%;
+	}
+
+	.tituloEncabezado h1{
+		padding: 10px;
+		padding-left: 0.60em;
+		margin: 0.4em 1px;
+		margin-bottom: 4px;
+  		text-shadow: 2.1em 0.1em 0.04em #333;
+  		text-shadow: 0.1em 0.1em 0.2em black;
+	}
+
+	main{
+	width: 250px;
+	height: 600px;
+	background: #333;
+	color: #fff;
+	position: absolute;
+	outline: 1px solid #2a2a2a;
+	}
+
+	main h2{
+		text-align: center;
+		margin: 0;
+		padding: 14px;
+		background: #2a2a2a;
+		font-size: 1.1em;
+	}
+
+
+	.menu ul{
+		list-style: none;
+		outline: 1px solid #2a2a2a;
+	}
+
+	.menu ul ul{
+		display: none;
+		background: #1a1a1a;
+
+	}
+
+	.menu a{
+		display: block;
+		padding: 14px 20px;
+		color: #fff;
+		text-decoration: none;
+		outline: 1px solid #2a2a2a;
+		transition-property: border;
+		transition-duration: 0.20s;
+	}
+
+	.menu a:hover{
+		background: #444;
+		border-left: 5px solid #eee;
+	}
+
+	.menu ul li:hover ul{
+		display: block;
+
+	}
+
+	.contedorPrincipal{
+		width: 100%;
+		height: 600px;
+		margin-top: 10px;
+		background:  #E9E9E9;
+		overflow: hidden;
+		margin-top: 0px;
+	}
+
+	.contenedorTitulo{
+		width: 75%;
+		max-width: 1050px;
+		height: 60px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #C71717;
+		border-radius: 4px;
+	}
+
+	.contenedorTitulo h2{
+		padding-left: 0.60em;
+		margin: 0.1em 1px;
+		color: #fff;
+		padding: 10px;
+		box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+	}
+
+	.contenedorInformativo{
+		width: 75%;
+		max-width: 1050px;
+		height: 250px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+
+	}
+
+
+	.contenedorTarjetas{
+		width: 500px;
+		max-width: 920px;
+		height: 200px;
+		display: flex;
+		justify-content: center;
+		margin: auto;
+		margin-top: 20px;
+		background: white;
+	}
+
+	.contenedorTarjetas .tarjeta{
+		width: 190px;
+		height: 170px;
+		border-radius: 8px;
+		box-shadow: 0 2px 2px(0,0,0,0.2);
+		overflow: hidden;
+		margin: 5px;
+		text-align: center;
+		transition: all 0.25s;
+		background-color: white;
+		border: solid 0.05px;
+		margin-top: 30px;
+	}
+
+	.contenedorTarjetas .tarjeta:hover{
+		transform: translateY(-15px);
+		box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+	}
+
+	.contenedorTarjetas .tarjeta a{
+		font-weight: 500;
+		text-decoration: none;
+		color: black;
+	}
+
+	.contenedorTarjetas .tarjeta img{
+		width: 160px;
+		height: 140px;
+	}
+
+	.moverTarjetaSection1{
+		margin-left: 30px;
+		margin-top: 10px;
+	}
+
+	.moverTarjetaSection2{
+		margin-top: -200px;
+		margin-left: 432px;
+	}
+
+
+</style>
+
+
+
+<style>
+    @media (max-width: 480px){
+
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+            height: 700px;
+        }
+
+        main{
+            width: 100%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 820px;
+            
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo3{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+        }
+        .separacionInfo{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+
+        .separacionInfo2{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+        .moverTarjetaSection1{
+			margin-left: 0px;
+			margin-top: 0px;
+		}
+
+		.moverTarjetaSection2{
+			margin-top: 18px;
+			margin-left: 0px;
+		}
+
+		.contenedorTarjetas{
+			width: 450px;
+		}
+
+		.contenedorInformativo{
+			height: 720px;
+		}
+
+    }
+</style>

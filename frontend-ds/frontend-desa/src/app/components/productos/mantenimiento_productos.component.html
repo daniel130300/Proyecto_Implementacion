@@ -1,0 +1,1266 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-top">
+	<header>
+		<div class="tituloEncabezado">
+			<h1>Variedades K&D</h1>
+		</div>
+	</header>
+	
+	<div class="contedorPrincipal">
+        <main>
+			<nav class="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="http://localhost:4200/menu">Inicio</a></li>
+					<li><a>Compras</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
+							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
+							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
+						</ul>
+					</li>
+					<li><a>Ventas</a>
+						<ul>
+							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
+							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
+							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						</ul>
+					</li>
+					<li><a>Clientes</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
+						</ul>
+					</li>
+					<li><a>Proveedores</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
+						</ul>
+					</li>
+					<li><a>Empleados</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
+						</ul>
+					</li>
+					<li><a>Inventario</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
+						</ul>
+					</li>
+					<li><a>Devoluciones Sobre Venta</a>
+						<ul>
+							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</main>
+		<div class="contenedorTitulo">
+			<h2>| Mantenimiento Producto</h2>
+		</div>
+        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+        <div class="contenedorInformativo">
+            <form ngNativeValidate #form>
+            <div class ="separacionInfo0 container-fluid mt-3 pl-5">
+                
+                    <p></p>
+                    <div class="form-group col-sm-5">
+                        <label class="ml-1 mr-2 col-form-label">Categoria: </label>
+                        <div class="input-group">
+                            <select
+                                class = "tamaño form-control col-sm-8"
+                                [(ngModel)] = "Id_categoria"
+                                [ngModelOptions] = "{standalone:true}"
+                                (change)="get_subcategoria_filtrado(Id_categoria)"
+                                required="true"
+                            >
+                            <option value="">Seleccione una categoria </option>
+                            <option *ngFor = "let categ of listado_categorias"
+                                    [value]="categ.Id_categoria">{{categ.Descripcion_categoria}}
+                            </option>
+                            </select>
+
+                            <button class="tamaño btn btn-primary form-group col-sm-1"
+                                type = "button"
+                                width = 74px
+                                (click) = "redirigir_categorias()"
+                            >+</button>
+                            </div>
+                    </div>
+
+                    <p></p>
+
+                    <div class="form-group col-sm-5">
+                        <label class="ml-1 mr-2 col-form-label">Subcategoria: </label>
+                        <div class="input-group">
+                            <select
+                                class = "tamaño form-control col-sm-8"
+                                [(ngModel)] = "Id_subcategoria"
+                                [ngModelOptions] = "{standalone:true}"
+                                required="true"
+                            >
+                            <option value="">Seleccione una subcategoria </option>
+                            <option *ngFor = "let subcateg of listado_subcategorias"
+                                    [value]="subcateg.Id_subcategoria">{{subcateg.Descripcion_subcategoria}}
+                            </option>
+                            </select>
+
+                            <button class="tamaño btn btn-primary form-group col-sm-1"
+                                type = "button"
+                                width = 74px
+                                (click) = "redirigir_subcategorias()"
+                            >+</button>
+                            </div>
+                    </div>
+
+                    <p></p>
+
+                    <div class="form-group col-sm-5">
+                        <label class="ml-1 mr-2 col-form-label">Marca: </label>
+                        <div class="input-group">
+                            <select
+                                class = "tamaño form-control col-sm-8"
+                                [(ngModel)] = "Id_marca"
+                                [ngModelOptions] = "{standalone:true}"
+                                (change)="get_modelo_filtrado()"
+                                required="true"
+                            >
+                            <option value="">Seleccione una marca </option>
+                            <option *ngFor = "let marca of listado_marcas"
+                                    [value]="marca.Id_marca">{{marca.Nombre_marca}}
+                            </option>
+                            </select>
+
+                            <button class="tamaño btn btn-primary form-group col-sm-1"
+                                type = "button"
+                                width = 74px
+                                (click) = "redirigir_marcas()"
+                            >+</button>
+                            </div>
+                    </div>
+           
+                    <p></p>
+
+                    <div class="form-group col-sm-5">
+                        <label class="ml-1 mr-2 col-form-label">Modelo: </label>
+                        <div class="input-group">
+                            <select
+                                class = "tamaño form-control col-sm-8"
+                                [(ngModel)] = "Producto.Id_modelo"
+                                [ngModelOptions] = "{standalone:true}"
+                                (change)="get_modelo_filtrado()"
+                                required="true"
+                            >
+                            <option value="">Seleccione un modelo </option>
+                            <option *ngFor = "let modelo of listado_modelos"
+                                    [value]="modelo.Id_modelo">{{modelo.Descripcion_modelo}}
+                            </option>
+                            </select>
+
+                            <button class="tamaño btn btn-primary form-group col-sm-1"
+                                type = "button"
+                                width = 74px
+                                (click) = "redirigir_modelos()"
+                            >+</button>
+                            </div>
+                    </div>
+
+                    <div class="form-group col-sm-5">
+                        <label class="ml-1 mr-2 col-form-label">Proveedor: </label>
+                        <div class="input-group">
+                            <select
+                                class = "tamaño form-control col-sm-8"
+                                [(ngModel)] = "prove.Id_proveedor"
+                                [ngModelOptions] = "{standalone:true}"
+                                required="true"
+                            >
+                            <option value="">Seleccione un proveedor</option>
+                            <option *ngFor = "let prove of listado_proveedores"
+                                    [value]="prove.Id_proveedor">{{prove.Nombre_compania}}
+                            </option>
+                            </select>
+
+                            <button class="tamaño btn btn-primary form-group col-sm-1"
+                                type = "button"
+                                width = 74px
+                                (click) = "redirigir_proveedores()"
+                            >+</button>
+                            </div>
+                    </div>
+                    
+                    <p></p>
+
+                    <label>Descripcion: </label>
+                    <div class="col-sm-8">
+                        <input type = "text" 
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Producto.Descripcion_producto"
+                            [ngModelOptions] = "{standalone:true}"
+                            required="true"
+                            pattern="^(?:\p{L}\p{M}*|[\-])*$"
+                            > 
+                    </div>
+                    <p></p>
+            </div>
+
+            <div class = "separacionInfo nada container-md">
+
+                <label>Talla: </label>
+                <div class="col-sm-8">
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Producto.Talla"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength="40"
+                        min="1"
+                        pattern="^[0-9]+$"
+                        required="true"
+                    >
+                </div>
+
+                <p></p>
+
+                <label>Color: </label>
+                <div class="col-sm-8">
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Producto.Color"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength="50"
+                        pattern="^[a-zA-Z]+$"
+                        required="true"
+                    >
+                </div>
+
+                <p></p>
+
+                <label>Stock: </label>
+                <div class="col-sm-8">
+                    <input type = "text" 
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Producto.Stock"
+                            [ngModelOptions] = "{standalone:true}"
+                            pattern="^[0-9]+$"
+                            required="true"
+                    >
+                </div>
+
+                <p></p>
+
+                <label>Precio Referencial Venta: </label>
+                <div class="col-sm-8">
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Producto.Precio_referencial_venta"
+                        [ngModelOptions] = "{standalone:true}"
+                        pattern="^[0-9]+$"
+                        required="true"
+                    >
+                </div>
+
+                <p></p>
+
+                <label>Precio Referencial Compra: </label>
+                <div class="col-sm-8">
+                    <input type = "text" 
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Producto.Precio_referencial_compra"
+                            [ngModelOptions] = "{standalone:true}"
+                            pattern="^[0-9]+$"
+                            required="true"
+                    > 
+                </div>
+
+                <p></p>
+
+                <label>Punto de Reorden: </label>
+                <div class="col-sm-8">
+                    <input type = "text" 
+                            class = "tamañoInput form-control"
+                            [(ngModel)] = "Producto.Punto_reorden"
+                            [ngModelOptions] = "{standalone:true}"
+                            pattern="^[0-9]+$"
+                            required="true"
+                    >
+                </div>
+
+                <p></p>
+
+                <button (click)="form.checkValidity ? insertar_producto() : null" (click) = "form.checkValidity ? insertar_producto_proveedor() : null" class="btn btn-primary">Guardar Producto</button>
+
+                
+            </div>
+        </form> 
+        </div>
+    
+        <div class="contenedorInformativo2">
+            <table class = "table-sm table-dark">
+
+                <thead>
+                    <tr>  
+                        <th>ID Producto</th>
+                        <th>Descripcion</th>
+                        <th>Talla</th>
+                        <th>Color</th>
+                        <th>Stock</th>
+                        <th>Precio Referencial Venta</th>
+                        <th>Precio Referencial Compra</th>
+                        <th>Punto de Reorden</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Subcategoria</th>
+                        <th>Categoria</th>
+                        <th>Proveedor</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let pro of listado_productos">
+                        <td>{{pro.Id_producto}}</td>
+                        <td>{{pro.Descripcion_producto}}</td>
+                        <td>{{pro.Talla}}</td>
+                        <td>{{pro.Color}}</td>
+                        <td>{{pro.Stock}}</td>
+                        <td>{{pro.Precio_referencial_venta}}</td>
+                        <td>{{pro.Precio_referencial_compra}}</td>
+                        <td>{{pro.Punto_reorden}}</td>
+                        <td>{{pro.Descripcion_modelo}}</td>
+                        <td>{{pro.Nombre_marca}}</td>
+                        <td>{{pro.Descripcion_subcategoria}}</td>
+                        <td>{{pro.Descripcion_categoria}}</td> 
+                        <td>{{pro.Nombre_compania}}</td>
+                        <td>
+                            <button class = "btn btn-primary btn-sm " 
+                            width = 74px
+                            data-toggle = "modal"
+                            data-target = "#editModal"
+                            (click) = "pasarDatosProducto(pro)">Editar</button>
+                        </td> 
+    
+                        <td>
+                            <button (click) = "delete_producto(pro.Id_producto)"
+                                class = "btn btn-danger btn-sm">Eliminar
+                            </button>
+                        </td> 
+                    </tr>
+                </tbody>
+                </table>
+        </div>
+        <div class="entreLinea"></div>
+        <style>
+            .entreLinea{
+                margin-top: 26px;
+            }
+        </style>
+	</div>
+</body>
+
+<div class="melvin modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="tituloModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+            </div>
+            <div class="modal-body">
+                <form ngNativeValidate #form>
+                    <label>Descripcion: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Producto.Descripcion_producto"
+                        [ngModelOptions] = "{standalone:true}"
+                        pattern="^(?:\p{L}\p{M}*|[\-])*$"
+                        required="true"
+                    > 
+
+                    <label>Talla: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Producto.Talla"
+                        [ngModelOptions] = "{standalone:true}"
+                        pattern="^[0-9]+$"
+                        required="true"
+                    > 
+
+                    <label>Color: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Producto.Color"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength="50"
+                        pattern="^[a-zA-Z]+$"
+                        required="true"
+                        
+                    >    
+
+                    <label>Stock: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Producto.Stock"
+                        [ngModelOptions] = "{standalone:true}"
+                        pattern="^[0-9]+$"
+                        required="true"
+                    > 
+
+                    <label>Precio Referencial Venta: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Producto.Precio_referencial_venta"
+                        [ngModelOptions] = "{standalone:true}"
+                        pattern="^[0-9]+$"
+                        required="true"
+                    > 
+
+                    <label>Precio Referencial Compra: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Producto.Precio_referencial_compra"
+                        [ngModelOptions] = "{standalone:true}"
+                        pattern="^[0-9]+$"
+                        required="true"
+                    > 
+
+                    <label>Punto de Reorden: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Producto.Punto_reorden"
+                        [ngModelOptions] = "{standalone:true}"
+                        pattern="^[0-9]+$"
+                        required="true"
+                    >
+
+                    <label>Categoria: </label>
+                    <select
+                        class = "form-control input"
+                        [(ngModel)] = "Id_categoria"
+                        [ngModelOptions] = "{standalone:true}"
+                        (change)="get_subcategoria_filtrado(Id_categoria)"
+                        required="true"
+    
+                    >
+                    <option value="">Seleccione una categoria </option>
+                    <option *ngFor = "let categ of listado_categorias"
+                    [value]="categ.Id_categoria">{{categ.Descripcion_categoria}}</option>
+                    </select>
+               
+
+                    <label>Subcategoria: </label>
+                    <select
+                        class = "form-control input"
+                        [(ngModel)] = "Id_subcategoria"
+                        [ngModelOptions] = "{standalone:true}"
+                        required="true"
+                    >
+                   <option value="" >Seleccione una subcategoria </option>
+                    <option *ngFor = "let subcateg of listado_subcategorias"
+                    [value]="subcateg.Id_subcategoria">{{subcateg.Descripcion_subcategoria}}</option>
+
+                    </select>
+
+
+                    <label>Marca: </label>
+                    <select
+                    class = "form-control input"
+                    [(ngModel)] = "Id_marca"
+                    [ngModelOptions] = "{standalone:true}"
+                    required="true"
+                    (change)="get_modelo_filtrado()"
+    
+                    
+                    >
+                    <option value="">Seleccione una marca </option>
+                    <option *ngFor = "let marca of listado_marcas"
+                    [value]="marca.Id_marca">{{marca.Nombre_marca}}</option>
+                    </select>
+
+                    <label>Modelo: </label>
+                    <select
+                        class = "form-control input"
+                        [(ngModel)] = "Producto.Id_modelo"
+                        [ngModelOptions] = "{standalone:true}"
+                        required="true"
+                    >
+                    <option value="">Seleccione un modelo </option>
+                    <option *ngFor = "let modelo of listado_modelos"
+                     [value]="modelo.Id_modelo">{{modelo.Descripcion_modelo}}</option>
+                    </select>
+                    
+                    <label>Proveedor: </label>
+                    <select
+                    class = "form-control input"
+                    [(ngModel)] = "prove.Id_proveedor"
+                    [ngModelOptions] = "{standalone:true}"
+                    required="true"
+                
+                >
+                <option value="">Seleccione un Proveedor </option>
+                <option *ngFor = "let prove of listado_proveedores"
+                [value]="prove.Id_proveedor">{{prove.Nombre_compania}}</option>
+                </select>
+        
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click) = "limpiaralv()">Cerrar</button>
+                <button (click) = "form.checkValidity() ? update_producto(Producto.Id_producto) : null" (click) = "form.checkValidity() ? update_productos_proveedores() : null" type="button" class="btn btn-primary btn-sm">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!----------------TODO EL CSS------------------------------>
+<style>
+    *{
+        block-size: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+	body{
+        font-family: 'Roboto', sans-serif;
+		
+	}
+
+	header{
+		color: #fff;
+		background: #03759D;
+		height: 70px;
+        margin-top: -20px;
+        z-index: 100;
+	}
+
+	.tituloEncabezado{
+		margin-right: 74%;
+	}
+
+	.tituloEncabezado h1{
+		padding: 10px;
+		padding-left: 0.60em;
+		margin: 0.4em 1px;
+  		text-shadow: 2.1em 0.1em 0.04em #333;
+  		text-shadow: 0.1em 0.1em 0.2em black;
+	}
+
+	main{
+        width: 250px;
+        height: 600px;
+        background: #333;
+        color: #fff;
+        position: absolute;
+		outline: 1px solid #2a2a2a;
+		z-index: 100;
+	}
+
+	main h2{
+		text-align: center;
+		margin: 0;
+		padding: 14px;
+		background: #2a2a2a;
+		font-size: 1.1em;
+	}
+
+
+	.menu ul{
+		list-style: none;
+		outline: 1px solid #2a2a2a;
+	}
+
+	.menu ul ul{
+		display: none;
+		background: #1a1a1a;
+
+	}
+
+	.menu a{
+		display: block;
+		padding: 14px 20px;
+		color: #fff;
+		text-decoration: none;
+		outline: 1px solid #2a2a2a;
+		transition-property: border;
+		transition-duration: 0.20s;
+	}
+
+	.menu a:hover{
+		background: #444;
+		border-left: 5px solid #eee;
+	}
+
+	.menu ul li:hover ul{
+		display: block;
+
+	}
+
+	.contedorPrincipal{
+		width: 100%;
+		height: 600px;
+		margin-top: 10px;
+		background:  #E9E9E9;
+		margin-top: 0px;
+		overflow: scroll;
+	}
+
+	.contenedorTitulo{
+		width: 75%;
+		max-width: 1050px;
+		height: 60px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #C71717;
+		border-radius: 4px;
+	}
+
+	.contenedorTitulo h2{
+		padding-left: 0.60em;
+		margin: 0.1em 1px;
+		color: #fff;
+		padding: 10px;
+		box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+	}
+
+	.contenedorInformativo{
+		width: 75%;
+		max-width: 1050px;
+		height: 520px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+
+    }
+
+    .contenedorInformativo2{
+        width: 75%;
+		max-width: 1050px;
+		height: 450px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: scroll;
+    }
+
+    .mov{
+        margin-left: 18px;
+        margin-top: 12px;
+    }
+
+    .nada{
+        margin-left: 0px;
+        margin-top: -12px;
+    }
+
+    body p{
+        margin-top: 10px;
+    }
+    .melvin{
+        margin-left: 500px;
+        overflow: scroll;
+    }
+
+    .tamañoInput{
+        width: 300px;
+    }
+
+
+    .separacionInfo{
+        margin-left: 440px;
+        margin-top: -422px;
+        
+    }
+
+    .separacionInfo2{
+        margin-left: 675px;
+        margin-top: -384px;
+    }
+
+    .tamañoBoton{
+        width: 180px;
+        height: 40px;
+        margin-top: 20px;
+    }
+</style>
+
+
+
+
+<style>
+    @media (max-width: 480px){
+
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+            height: 700px;
+        }
+
+        main{
+            width: 100%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 900px;
+            
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .separacionInfo0{
+            margin-left: -27px;
+        }
+
+        .separacionInfo{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+
+        .separacionInfo2{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+        .tamañoInput{
+            width: 414px;
+        }
+
+        .tamañoBoton{
+            width: 414px;
+        }
+
+    }
+
+    @media (min-width: 600px) and (max-width: 600px){
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+            height: 700px;
+        }
+
+        main{
+            width: 100%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 570px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 570px;
+            height: 900px;
+            
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 570px;
+        }
+
+        .separacionInfo{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+        .separacionInfo0{
+            margin-left: -27px;
+        }
+        
+        .separacionInfo2{
+            margin-left: 18px;
+            margin-top: 20px;
+        }
+
+        .tamañoInput{
+            width: 530px;
+        }
+
+        .tamañoBoton{
+            width: 530px;
+        }
+    }
+</style>
+
+
+
+<!-- 
+<div class = "container-fluid mt-3 pl-5"> 
+    <h1 class = "text-primary">Listado de Productos</h1>
+    <p class = "text-muted">Realice la inserción, actualización y eliminación de proveedores</p> 
+    <form ngNativeValidate #form>
+        <div class="row">
+            <div class= "col-sm-4">
+
+<div class="form-group row col">
+    <label class="col-sm-4 col-form-label">Categoria: </label>
+        <div class="col-sm-7">
+            <select
+                class = "form-control input"
+                [(ngModel)] = "Id_categoria"
+                [ngModelOptions] = "{standalone:true}"
+                (change)="get_subcategoria_filtrado(Id_categoria)"
+                required="true"
+
+            >
+            <option value="">Seleccione una categoria </option>
+            <option *ngFor = "let categ of listado_categorias"
+            [value]="categ.Id_categoria">{{categ.Descripcion_categoria}}
+            
+        </option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary form-group col-sm-1"
+            (click)="redirigir_categorias()"
+            >+</button>
+</div>
+
+<div class="form-group row col">
+    <label class="col-sm-4 col-form-label">Subcategoria: </label>
+        <div class="col-sm-7">
+            <select
+                class = "form-control input"
+                [(ngModel)] = "Id_subcategoria"
+                [ngModelOptions] = "{standalone:true}"
+                required="true"
+                
+            >
+            <option value="" >Seleccione una subcategoria </option>
+            <option *ngFor = "let subcateg of listado_subcategorias"
+            [value]="subcateg.Id_subcategoria">{{subcateg.Descripcion_subcategoria}}</option>
+            
+            </select>
+        </div>
+
+        <button class="btn btn-primary form-group col-sm-1"
+            (click)="redirigir_subcategorias()"
+            >+</button>
+</div>
+
+<div class="form-group row col">
+    <label class="col-sm-4 col-form-label">Marca: </label>
+        <div class="col-sm-7">
+            <select
+                class = "form-control input"
+                [(ngModel)] = "Id_marca"
+                [ngModelOptions] = "{standalone:true}"
+                required="true"
+                (change)="get_modelo_filtrado()"
+
+                
+            >
+            <option value="">Seleccione una marca </option>
+            <option *ngFor = "let marca of listado_marcas"
+            [value]="marca.Id_marca">{{marca.Nombre_marca}}</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary form-group col-sm-1"
+        (click)="redirigir_marcas()"
+        >+</button>
+</div>
+
+<div class="form-group row col">
+    <label class="col-sm-4 col-form-label">Modelo: </label>
+        <div class="col-sm-7">
+            <select
+                class = "form-control input"
+                [(ngModel)] = "Producto.Id_modelo"
+                [ngModelOptions] = "{standalone:true}"
+                required="true"
+            >
+            <option value="">Seleccione un modelo </option>
+            <option *ngFor = "let modelo of listado_modelos"
+            [value]="modelo.Id_modelo">{{modelo.Descripcion_modelo}}</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary form-group col-sm-1"
+            (click)="redirigir_modelos()"
+            >+</button>
+</div>
+<div class="form-group row col">
+    <label class="col-sm-4 col-form-label">Proveedor: </label>
+        <div class="col-sm-7">
+            <select
+                class = "form-control input"
+                [(ngModel)] = "prove.Id_proveedor"
+                [ngModelOptions] = "{standalone:true}"
+                required="true"
+            
+            >
+            <option value="">Seleccione un Proveedor </option>
+            <option *ngFor = "let prove of listado_proveedores"
+            [value]="prove.Id_proveedor">{{prove.Nombre_compania}}</option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary form-group col-sm-1"
+            (click)="redirigir_proveedores()"
+            >+</button>
+</div>
+
+                <div class="form-group row col">
+                    <label class="col-sm-4 col-form-labell">Descripcion: </label>
+                        <div class="col-sm-8">
+                            <input type = "text" 
+                                class = "form-control"
+                                [(ngModel)] = "Producto.Descripcion_producto"
+                                [ngModelOptions] = "{standalone:true}"
+                                required="true"
+                                pattern="^(?:\p{L}\p{M}*|[\-])*$"
+                            > 
+                        </div>
+                </div>
+                  
+                <div class="form-group row col">
+                    <label class="col-sm-4 col-form-label">Talla: </label>
+                        <div class="col-sm-8">
+                            <input type = "text" 
+                                class = "form-control"
+                                [(ngModel)] = "Producto.Talla"
+                                [ngModelOptions] = "{standalone:true}"
+                                maxlength="40"
+                                min="1"
+                                pattern="^[0-9]+$"
+                                required="true"
+                            >
+                        </div>
+                </div> 
+
+                <div class="form-group row col">
+                    <label class="col-sm-4 col-form-label">Color: </label>
+                        <div class="col-sm-8">
+                            <input type = "text" 
+                                class = "form-control"
+                                [(ngModel)] = "Producto.Color"
+                                [ngModelOptions] = "{standalone:true}"
+                                maxlength="50"
+                                pattern="^[a-zA-Z]+$"
+                                required="true"
+
+                            >
+                        </div>
+                </div>    
+
+                <div class="form-group row col">
+                    <label class="col-sm-4 col-form-label">Stock: </label>
+                        <div class="col-sm-8">
+                            <input type = "text" 
+                                class = "form-control"
+                                [(ngModel)] = "Producto.Stock"
+                                [ngModelOptions] = "{standalone:true}"
+                                pattern="^[0-9]+$"
+                                required="true"
+                            >
+                        </div>
+                </div> 
+
+                <div class="form-group row col">
+                    <label class="col-sm-4 col-form-label">Precio Referencial Venta: </label>
+                        <div class="col-sm-8">
+                            <input type = "text" 
+                                class = "form-control"
+                                [(ngModel)] = "Producto.Precio_referencial_venta"
+                                [ngModelOptions] = "{standalone:true}"
+
+                                pattern="^[0-9]+$"
+                                required="true"
+                            >
+                        </div>
+                </div>  
+
+                <div class="form-group row col">
+                    <label class="col-sm-4 col-form-label">Precio Referencial Compra: </label>
+                        <div class="col-sm-8">
+                            <input type = "text" 
+                                class = "form-control"
+                                [(ngModel)] = "Producto.Precio_referencial_compra"
+                                [ngModelOptions] = "{standalone:true}"
+                                pattern="^[0-9]+$"
+                                required="true"
+                            > 
+                    </div>
+                </div>
+
+                <div class="form-group row col">
+                    <label class="col-sm-4 col-form-label">Punto de Reorden: </label>
+                        <div class="col-sm-8">
+                            <input type = "text" 
+                                class = "form-control"
+                                [(ngModel)] = "Producto.Punto_reorden"
+                                [ngModelOptions] = "{standalone:true}"
+                                pattern="^[0-9]+$"
+                                required="true"
+                            >
+                        </div>
+                </div>
+
+                
+       
+                <p>
+                </p>
+
+                <button (click)="form.checkValidity() ? insertar_producto() : null" (click) = "form.checkValidity() ? insertar_producto_proveedor() : null" class="btn btn-primary">Guardar Producto</button>
+
+
+            </div>
+  
+            <p>
+            </p>
+            <div class="col-md-8">
+
+            <table class = "table table-dark table-responsive table-sm">
+
+            <thead>
+                <tr>  
+                    <th>ID Producto</th>
+                    <th>Descripcion</th>
+                    <th>Talla</th>
+                    <th>Color</th>
+                    <th>Stock</th>
+                    <th>Precio Referencial Venta</th>
+                    <th>Precio Referencial Compra</th>
+                    <th>Punto de Reorden</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Subcategoria</th>
+                    <th>Categoria</th>
+                    <th>Proveedor</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let pro of listado_productos">
+                    <td>{{pro.Id_producto}}</td>
+                    <td>{{pro.Descripcion_producto}}</td>
+                    <td>{{pro.Talla}}</td>
+                    <td>{{pro.Color}}</td>
+                    <td>{{pro.Stock}}</td>
+                    <td>{{pro.Precio_referencial_venta}}</td>
+                    <td>{{pro.Precio_referencial_compra}}</td>
+                    <td>{{pro.Punto_reorden}}</td>
+                    <td>{{pro.Descripcion_modelo}}</td>
+                    <td>{{pro.Nombre_marca}}</td>
+                    <td>{{pro.Descripcion_subcategoria}}</td>
+                    <td>{{pro.Descripcion_categoria}}</td> 
+                    <td>{{pro.Nombre_compania}}</td>
+                    <td>
+                        <button class = "btn btn-primary btn-sm " 
+                        width = 74px
+                        data-toggle = "modal"
+                        data-target = "#editModal"
+                        (click) = "pasarDatosProducto(pro)" (click)="pasarproveedor(pro.Nombre_compania)" 
+                        >Editar</button>
+                    </td> 
+
+                    <td>
+                        <button (click) = "delete_producto(pro.Id_producto)"
+                            class = "btn btn-danger btn-sm">Eliminar
+                        </button>
+                    </td> 
+                </tr>
+            </tbody>
+            </table>
+
+            <p>
+
+            </p>
+            
+
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="tituloModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="text-info" id="tituloModalLabel">Modificar Proveedor</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form ngNativeValidate #form>
+                                <label>Descripcion: </label>
+                                <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Producto.Descripcion_producto"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    pattern="^(?:\p{L}\p{M}*|[\-])*$"
+                                    required="true"
+                                > 
+
+                                <label>Talla: </label>
+                                <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Producto.Talla"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    pattern="^[0-9]+$"
+                                    required="true"
+                                > 
+
+                                <label>Color: </label>
+                                <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Producto.Color"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    maxlength="50"
+                                    pattern="^[a-zA-Z]+$"
+                                    required="true"
+                                    
+                                >    
+
+                                <label>Stock: </label>
+                                <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Producto.Stock"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    pattern="^[0-9]+$"
+                                    required="true"
+                                > 
+
+                                <label>Precio Referencial Venta: </label>
+                                <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Producto.Precio_referencial_venta"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    pattern="^[0-9]+$"
+                                    required="true"
+                                > 
+
+                                <label>Precio Referencial Compra: </label>
+                                <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Producto.Precio_referencial_compra"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    pattern="^[0-9]+$"
+                                    required="true"
+                                > 
+
+                                <label>Punto de Reorden: </label>
+                                <input type = "text" 
+                                    class = "form-control"
+                                    [(ngModel)] = "Producto.Punto_reorden"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    pattern="^[0-9]+$"
+                                    required="true"
+                                >
+
+                                <label>Categoria: </label>
+                                <select
+                                    class = "form-control input"
+                                    [(ngModel)] = "Id_categoria"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    (change)="get_subcategoria_filtrado(Id_categoria)"
+                                    required="true"
+                
+                                >
+                                <option value="">Seleccione una categoria </option>
+                                <option *ngFor = "let categ of listado_categorias"
+                                [value]="categ.Id_categoria">{{categ.Descripcion_categoria}}</option>
+                                </select>
+                           
+
+                                <label>Subcategoria: </label>
+                                <select
+                                    class = "form-control input"
+                                    [(ngModel)] = "Id_subcategoria"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    required="true"
+                                >
+                               <option value="" >Seleccione una subcategoria </option>
+                                <option *ngFor = "let subcateg of listado_subcategorias"
+                                [value]="subcateg.Id_subcategoria">{{subcateg.Descripcion_subcategoria}}</option>
+            
+                                </select>
+
+
+                                <label>Marca: </label>
+                                <select
+                                class = "form-control input"
+                                [(ngModel)] = "Id_marca"
+                                [ngModelOptions] = "{standalone:true}"
+                                required="true"
+                                (change)="get_modelo_filtrado()"
+                
+                                
+                                >
+                                <option value="">Seleccione una marca </option>
+                                <option *ngFor = "let marca of listado_marcas"
+                                [value]="marca.Id_marca">{{marca.Nombre_marca}}</option>
+                                </select>
+
+                                <label>Modelo: </label>
+                                <select
+                                    class = "form-control input"
+                                    [(ngModel)] = "Producto.Id_modelo"
+                                    [ngModelOptions] = "{standalone:true}"
+                                    required="true"
+                                >
+                                <option value="">Seleccione un modelo </option>
+                                <option *ngFor = "let modelo of listado_modelos"
+                                 [value]="modelo.Id_modelo">{{modelo.Descripcion_modelo}}</option>
+                                </select>
+                                
+                                <label>Proveedor: </label>
+                                <select
+                                class = "form-control input"
+                                [(ngModel)] = "prove.Id_proveedor"
+                                [ngModelOptions] = "{standalone:true}"
+                                required="true"
+                            
+                            >
+                            <option value="">Seleccione un Proveedor </option>
+                            <option *ngFor = "let prove of listado_proveedores"
+                            [value]="prove.Id_proveedor">{{prove.Nombre_compania}}</option>
+                            </select>
+                    
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click) = "limpiaralv()">Cerrar</button>
+                            <button (click) = "form.checkValidity() ? update_producto(Producto.Id_producto) : null" (click) = "form.checkValidity() ? update_productos_proveedores() : null" type="button" class="btn btn-primary btn-sm">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+
+-->

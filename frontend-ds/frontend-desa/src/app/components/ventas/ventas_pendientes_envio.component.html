@@ -1,0 +1,448 @@
+<!-- Aqui codificara Marcela-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-top">
+	<header>
+		<div class="tituloEncabezado">
+			<h1>Variedades K&D</h1>
+		</div>
+	</header>
+	
+	<div class="contedorPrincipal">
+        <main>
+			<nav class="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="http://localhost:4200/menu">Inicio</a></li>
+					<li><a>Compras</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
+							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
+							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
+						</ul>
+					</li>
+					<li><a>Ventas</a>
+						<ul>
+							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
+							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
+							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						</ul>
+					</li>
+					<li><a>Clientes</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
+						</ul>
+					</li>
+					<li><a>Proveedores</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
+						</ul>
+					</li>
+					<li><a>Empleados</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
+						</ul>
+					</li>
+					<li><a>Inventario</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
+						</ul>
+					</li>
+					<li><a>Devoluciones Sobre Venta</a>
+						<ul>
+							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</main>
+		<div class="contenedorTitulo">
+			<h2>| Ventas Pendientes De Envio</h2>
+		</div>
+        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+        
+      
+        <div class="contenedorInformativo">
+		    <!--  AQUI EMPIEZA EL CAMBIO -->		 
+			<form class="form-incline">
+				<div class= "form-inline">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
+				</div>
+		    </form>
+        </div>
+
+        <div class="contenedorInformativo2">
+            <div class="">
+                <table class = "table table-dark">
+               
+                    <thead>
+                        <tr>
+        
+                            <th>ID Ventas</th>
+                            <th>Fecha Venta</th>
+                            <th>Subtotal</th>
+                            <th>Descuento</th>
+                            <th>ISV</th>
+                            <th>Total</th>
+                            <th>Nombre Compañía</th>
+                            <th>Departamento</th>
+                            <th>Ciudad</th>
+                            <th>Dirección</th>
+                            <th>Nombre Contacto</th>
+                            <th>Apellido Contacto</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Estado</th>
+                            <th></th>
+                            <th></th>
+        
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor = "let vpe of listado_ventas_pendientes_envio |filter:term">
+        
+                            <td>{{vpe.Id_venta}}</td>
+                            <td>{{vpe.Fecha_venta | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{vpe.Descuento}}</td>
+                            <td>{{vpe.Subtotal}}</td>
+                            <td>{{vpe.Isv}}</td>
+                            <td>{{vpe.Total}}</td>
+                            <td>{{vpe.Nombre_compania}}</td>
+                            <td>{{vpe.Nombre_departamento}}</td>
+                            <td>{{vpe.Nombre_ciudad}}</td>
+                            <td>{{vpe.Direccion}}</td>
+                            <td>{{vpe.Nombre_contacto}}</td>
+                            <td>{{vpe.Apellido_contacto}}</td>
+                            <td>{{vpe.Telefono_contacto}}</td>
+                            <td>{{vpe.Email_contacto}}</td>
+                            <td>{{vpe.Descripcion_estatus}}</td>
+                            <td style="text-align:center">
+                                <!--<input type="radio" name="seleccion" (click)="pasarDatosPendientes(vpe)"> -->
+                                <button (click)="pasarDatosPendientes(vpe)" type="button" class="btn btn-primary btn-m">Seleccionar </button>
+						    </td>
+                        </tr>
+                    </tbody>
+        
+                </table>
+            </div>
+        </div>
+
+        <div class="contenedorInformativo3">
+            <div class="separacionInfo0 nada container-md">
+                <form>
+                    <label>Fecha de envio: </label>
+                    <input type = "date" 
+                        class = "tamañoInput  form-control"
+						min= "{{yesterday | date:'yyyy-MM-dd'}}"
+						[(ngModel)] = "modifica.Fecha_envio"
+                        [ngModelOptions] = "{standalone:true}"
+                    >
+                </form>
+            </div>
+            <div class="separacionInfo nada container-md">
+                <form>
+                    <label>Fecha de entrega: </label>
+                    <input type = "date" 
+                        class = "tamañoInput form-control"
+                        min="modifica.Fecha_envio"
+                        [(ngModel)] = "modifica.Fecha_entrega"
+                        [ngModelOptions] = "{standalone:true}"
+                    >
+                </form>
+            </div>
+            <div class="separacionInfo2 nada container-md">
+                <form>
+                    <div class="">
+                        <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="boton btn btn-primary btn-m">Finalizar </button>
+                    </div>
+                    
+                </form>
+            </div>
+            
+            
+        </div>
+        
+        <div class="entreLinea"></div>
+        <style>
+            .entreLinea{
+                margin-top: 26px;
+            }
+        </style>
+	</div>
+</body>
+
+
+<style>
+    *{
+        block-size: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+	body{
+        font-family: 'Roboto', sans-serif;
+        background:  #E9E9E9;
+	}
+
+	header{
+		color: #fff;
+		background: #03759D;
+		height: 80px;
+        margin-top: -20px;
+        z-index: 100;
+	}
+
+	.tituloEncabezado{
+		margin-right: 74%;
+	}
+
+	.tituloEncabezado h1{
+		padding: 10px;
+		padding-left: 0.60em;
+		margin: 0.4em 1px;
+  		text-shadow: 2.1em 0.1em 0.04em #333;
+  		text-shadow: 0.1em 0.1em 0.2em black;
+	}
+
+	main{
+        width: 250px;
+        height: 600px;
+        background: #333;
+        color: #fff;
+        position: absolute;
+		outline: 1px solid #2a2a2a;
+		z-index: 100;
+	}
+
+	main h2{
+		text-align: center;
+		margin: 0;
+		padding: 14px;
+		background: #2a2a2a;
+		font-size: 1.1em;
+	}
+
+
+	.menu ul{
+		list-style: none;
+		outline: 1px solid #2a2a2a;
+	}
+
+	.menu ul ul{
+		display: none;
+		background: #1a1a1a;
+
+	}
+
+	.menu a{
+		display: block;
+		padding: 14px 20px;
+		color: #fff;
+		text-decoration: none;
+		outline: 1px solid #2a2a2a;
+		transition-property: border;
+		transition-duration: 0.20s;
+	}
+
+	.menu a:hover{
+		background: #444;
+		border-left: 5px solid #eee;
+	}
+
+	.menu ul li:hover ul{
+		display: block;
+
+	}
+
+	.contedorPrincipal{
+		width: 100%;
+		height: 600px;
+		margin-top: 10px;
+		background:  #E9E9E9;
+		margin-top: 0px;
+		overflow: scroll;
+	}
+
+	.contenedorTitulo{
+		width: 75%;
+		max-width: 1050px;
+		height: 60px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #C71717;
+		border-radius: 4px;
+	}
+
+	.contenedorTitulo h2{
+		padding-left: 0.60em;
+		margin: 0.1em 1px;
+		color: #fff;
+		padding: 10px;
+		box-shadow: 0 12px 16px rgba(0,0,0,0.2);
+	}
+
+	.contenedorInformativo{
+		width: 75%;
+		max-width: 1050px;
+		height: 80px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+
+    }
+
+    .contenedorInformativo2{
+        width: 75%;
+		max-width: 1050px;
+		height: 450px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: scroll;
+    }
+
+    .contenedorInformativo3{
+        width: 75%;
+		max-width: 1050px;
+		height: 110px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow:hidden;
+    }
+
+    .nada{
+        margin-left: 18px;
+    }
+
+    body p{
+        margin-top: 15px;
+    }
+    .melvin{
+        margin-left: 500px;
+        overflow: scroll;
+    }
+
+    .tamañoInput{
+        width: 300px;
+    }
+
+    .tamañoInputBuscador{
+        width: 600px;
+        margin-top: 18px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .separacionInfo0{
+        margin-top: 18px;
+        margin-left: 18px;
+    }
+
+    .separacionInfo{
+        margin-left: 360px;
+        margin-top: -62px;
+    
+    }
+
+    .separacionInfo2{
+        margin-left: 750px;
+        margin-top: -30px;
+    }
+
+    .separacionInfo2 .boton{
+        height: 30px;
+        width: 100px;
+    }
+
+    .tamañoBoton{
+        width: 180px;
+        height: 40px;
+        margin-top: 20px;
+    }
+</style>
+
+
+<style>
+    @media (min-width: 400px) and (max-width: 600px){
+
+        .tituloEncabezado{
+            width: 100%;
+            text-align: center;
+        }
+
+        .contedorPrincipal{
+            overflow-y: scroll;
+        }
+
+        main{
+            width: 100%;
+            text-align: center;
+            height: 580px;
+            z-index: none;
+            position: relative;
+        }
+
+        
+
+
+        .contenedorTitulo{
+            margin-top: 40px;
+            margin-left: 18px;
+            width: 450px;
+        }
+
+        .contenedorInformativo{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 85px;
+            
+        }
+
+        .contenedorInformativo2{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 300px;
+        }
+
+        .contenedorInformativo3{
+            margin-top: 18px;
+            margin-left: 18px;
+            width: 450px;
+            height: 265px;
+        }
+
+        .separacionInfo{
+            margin-left: 18px;
+            margin-top: 10px;
+        }
+
+
+
+        .separacionInfo2{
+            margin-left: 18px;
+            margin-top: 10px;
+        }
+
+        .tamañoInput{
+            width: 414px;
+        }
+
+        .tamañoBoton{
+            width: 414px;
+        }
+
+
+    }
+</style>
