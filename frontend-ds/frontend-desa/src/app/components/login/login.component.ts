@@ -60,7 +60,7 @@ export class GetLoginComponent {
                     try{
                         if (response){
                             this.service.set_session(response);
-                            this.router.navigateByUrl('/menu');
+                            this.router.navigateByUrl('/cajas');
                             this.service.set_usuariologueado(this.loading_data.LoginID);
 
                         }else{

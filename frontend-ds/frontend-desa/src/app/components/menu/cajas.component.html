@@ -1,4 +1,10 @@
-<body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body class="fixed-top">
 	<header>
 		<div class="tituloEncabezado">
 			<h1>Variedades K&D</h1>
@@ -6,60 +12,106 @@
 		</div>
 		
 	</header>
-	<main>
-		<nav class="menu">
-			<h2>Menu</h2>
-			<ul>
-				<li><a href="http://localhost:4200/cajas">Inicio</a></li>
-				<li><a>Compras</a>
-					<ul>
-						<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
-						<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
-						<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
-					</ul>
-				</li>
-				<li><a>Ventas</a>
-					<ul>
-						<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
-						<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
-						<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
-						<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
-						<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
-					</ul>
-				</li>
-				<li><a>Clientes</a>
-					<ul>
-						<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
-					</ul>
-				</li>
-				<li><a>Proveedores</a>
-					<ul>
-						<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
-					</ul>
-				</li>
-				<li><a>Empleados</a>
-					<ul>
-						<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
-					</ul>
-				</li>
-				<li><a>Inventario</a>
-					<ul>
-						<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
-						<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
-					</ul>
-				</li>
-				<li><a>Devoluciones Sobre Venta</a>
-					<ul>
-						<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
-					</ul>
-				</li>
+	<div class="contedorPrincipal">
+		<main>
+			<nav class="menu">
+				<h2>Menu</h2>
+				<ul>
+					<li><a href="http://localhost:4200/menu">Inicio</a></li>
+					<li><a>Compras</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
+							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
+							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
+						</ul>
+					</li>
+					<li><a>Ventas</a>
+						<ul>
+							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
+							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
+							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						</ul>
+					</li>
+					<li><a>Clientes</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
+						</ul>
+					</li>
+					<li><a>Proveedores</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
+						</ul>
+					</li>
+					<li><a>Empleados</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
+						</ul>
+					</li>
+					<li><a>Inventario</a>
+						<ul>
+							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
+						</ul>
+					</li>
+					<li><a>Devoluciones Sobre Venta</a>
+						<ul>
+							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
+						</ul>
+					</li>
 
-				<li class="">
-					<a class="nav-link" (click)="salir()">Cerrar Sesión</a>
-				</li>
-			</ul>
-		</nav>
-	</main>
+					<li class="">
+						<a class="nav-link" (click)="salir()">Cerrar Sesión</a>
+					</li>
+	
+				</ul>
+			</nav>
+		</main>
+		<div class="contenedorTitulo">
+			<h2>| Opciones</h2>
+		</div>
+		<div class="contenedorInformativo">
+			<p></p>
+			<div class="contenedorTarjetas moverTarjetaSection1">
+				<div class="tarjeta">
+					<img src="../../../assets/img/compra.png">
+					<a href="">Compras</a>
+				</div>
+				<div class="tarjeta">
+					<img src="../../../assets/img/venta.png">
+					<a href="">Ventas</a>
+				</div>
+			</div>
+			<div class="contenedorTarjetas moverTarjetaSection2">
+				<div class="tarjeta">
+					<img src="../../../assets/img/inventario.png">
+					<a href="">Inventario</a>
+				</div>
+				<div class="tarjeta">
+					<img src="../../../assets/img/cliente.png">
+					<a href="">Clientes</a>
+				</div>
+			</div>
+			<div class="contenedorTarjetas">
+				<div class="tarjeta">
+					<img src="../../../assets/img/empleado.jpg">
+					<a href="">Empleados</a>
+				</div>
+				<div class="tarjeta">
+					<img src="../../../assets/img/prove.png">
+					<a href="">Proveedores</a>
+				</div>
+			</div>
+		</div>
+		<div class="entreLinea"></div>
+        <style>
+            .entreLinea{
+                margin-top: 26px;
+            }
+        </style>
+	</div>
+	
 </body>
 
 
