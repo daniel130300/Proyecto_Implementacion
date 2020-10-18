@@ -58,26 +58,36 @@ export class GetVentaNormalComponent
     
     //Funcion para insertar la venta normal
     insertar_venta_normal(){
-        var response;
-        this.service.insertar_venta_normal(this.VentasNormal).subscribe(
-            data=>response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
-                    console.log(this.VentasNormal);
-                    this.pasarDatosDetalleVenta();
-                    this.VentasNormal = {
-                        Fecha_venta: "",
-                        Identidad: "",
-                        ISV: 0.15,
-                        Id_estado_envio:10,
-                        Id_estado_pago:5,
-                        Id_tipo_pago:1,
+        if(this.listado_productos_agregados.length == 0){
+            swal.fire({
+                title: "No ha ingresado ningún producto a la compra, por favor hágalo para poder enviar la compra.",
+                icon: 'error'
+            });
+        }
+        else
+        {
+            var response;
+            this.service.insertar_venta_normal(this.VentasNormal).subscribe(
+                data=>response = data,
+                err => {
+                    console.log("Error al consultar servicio"); 
+                },
+                ()=>{
+                        console.log(this.VentasNormal);
+                        this.pasarDatosDetalleVenta();
+                        this.VentasNormal = {
+                            Fecha_venta: "",
+                            Identidad: "",
+                            ISV: 0.15,
+                            Id_estado_envio:10,
+                            Id_estado_pago:5,
+                            Id_tipo_pago:1,
+                    }
+                
                 }
-               
-            }
-        );
+            );
+        }
+
     }
   
     //************************************************************ */
@@ -120,7 +130,7 @@ export class GetVentaNormalComponent
             Nombre_producto: producto.Descripcion_producto,
             Precio_referencial_venta: producto.Precio_referencial_venta,
             Informacion_adicional_producto: "Talla: " + producto.Talla + ", Color: " + producto.Color + ", Modelo: " + producto.Descripcion_modelo + ", Marca: " + producto.Nombre_marca + ", Subcategoria: " + producto.Descripcion_subcategoria, 
-            Cantidad: producto.Cantidad,
+            Cantidad: "",
             Stock: producto.Stock
         }
     }
@@ -128,21 +138,46 @@ export class GetVentaNormalComponent
 
     AgregarProductoVenta()
     {
-        if (this.Productos.Cantidad < this.Productos.Stock)
+        if(this.Productos.Id_producto == "")
         {
-            this.listado_productos_agregados.unshift(this.Productos);
-            console.log(this.listado_productos_agregados); 
-            this.calculos();
-            this.restar_producto_inventario_venta();
-            this.LimpiarInputsProductos();
+            swal.fire({
+                title: "No ha seleccionado ningún producto.",
+                icon: 'error'
+            });
         }
         else
         {
-            swal.fire({
-                icon: 'error',
-                title:"No hay suficiente unidades en el inventario"
-              })
+            
+            if(this.Productos.Cantidad == "")
+            {
+                swal.fire({
+                    title: "No ha ingresado ninguna cantidad, por favor hágalo para poder agregar.",
+                    icon: 'error'
+                });
+            }
+            else
+            {
+                if (this.Productos.Cantidad < this.Productos.Stock)
+                {
+                    this.listado_productos_agregados.unshift(this.Productos);
+                    console.log(this.listado_productos_agregados); 
+                    this.calculos();
+                    this.restar_producto_inventario_venta();
+                    this.LimpiarInputsProductos();
+                }
+                else
+                {
+                    swal.fire({
+                        icon: 'error',
+                        title:"No hay suficiente unidades en el inventario"
+                    })
+                }
+            }
+            
+
         }
+
+
     }
    /* AgregarProductoVenta()
     {
@@ -185,6 +220,8 @@ export class GetVentaNormalComponent
     calculos()
     {
         this.subtotal = 0;
+        this.isv = 0;
+        this.total = 0;
         console.log(this.listado_productos_agregados);
         for(var i = 0; i < this.listado_productos_agregados.length; i++) {
             this.subtotal += this.listado_productos_agregados[i].Cantidad * this.listado_productos_agregados[i].Precio_referencial_venta;

@@ -1450,22 +1450,21 @@ router.post('/login', (req, res, next) =>{
 		Contrasenia: req.body.Contrasenia
 	};
 	const get_token = (user) => {
-		var query = "SELECT LoginID, Contrasenia FROM empleados WHERE LoginID = ?"
+		var query = "SELECT LoginID, Contrasenia, Id_puesto FROM empleados WHERE LoginID = ?"
 		con.query(query, [user.LoginID], (err, result, fields) => {
-			if (err || result.lenght == 0){
-				/*console.log(user.Contrasenia, result[0].Contrasenia);*/
-				console.log(err);
+			if (err || result.length == 0){
 				res.status(400).json({message: "Usuario o Contraseña Incorrectos"});
 			} else {
-				/*console.log(user.Contrasenia, result[1].Contrasenia);*/
 				bcrypt.compare(user.Contrasenia, result[0].Contrasenia, (error, isMatch) => {
 					if (isMatch){
 						var token = jwt.sign({userID: result[0].LoginID}, secret_key);
-						res.status(200).json({token});
+						var roles = result[0].Id_puesto;
+						res.status(200).json({roles, token});
+					
 					}else if(error){
 						res.status(400).json(error);
 					}else {
-						res.status(400).json({message: "Usuario o Contraña Incorrectos"});
+						res.status(400).json({message: "Usuario o Contraseña Incorrectos"});
 					}
 				});
 			}
@@ -1473,6 +1472,7 @@ router.post('/login', (req, res, next) =>{
 	}
 	get_token(user);
 });	
+
 
 /*---------------------------------MANTENIMIENTO TIPOS DE PAGO----------------------------------*/
 

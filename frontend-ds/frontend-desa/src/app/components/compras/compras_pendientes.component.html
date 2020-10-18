@@ -5,63 +5,11 @@
 </head>
 
 <body class="fixed-top">
-	<header>
-		<div class="tituloEncabezado">
-			<h1>Variedades K&D</h1>
-		</div>
-	</header>
-	
+
+    <menu></menu>
+
 	<div class="contedorPrincipal">
-        <main>
-			<nav class="menu">
-				<h2>Menu</h2>
-				<ul>
-					<li><a href="http://localhost:4200/menu">Inicio</a></li>
-					<li><a>Compras</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
-							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
-							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
-						</ul>
-					</li>
-					<li><a>Ventas</a>
-						<ul>
-							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
-							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
-							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
-							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
-							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
-						</ul>
-					</li>
-					<li><a>Clientes</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
-						</ul>
-					</li>
-					<li><a>Proveedores</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
-						</ul>
-					</li>
-					<li><a>Empleados</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
-						</ul>
-					</li>
-					<li><a>Inventario</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
-							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
-						</ul>
-					</li>
-					<li><a>Devoluciones Sobre Venta</a>
-						<ul>
-							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-		</main>
+   
 		<div class="contenedorTitulo">
 			<h2>| Compras Pendientes</h2>
 		</div>
@@ -299,7 +247,7 @@
 
 
             <div class="alo modal-body">
-                <form>
+                <form oncopy="return false" onpaste="return false">
                     
                     <label>Codigo Compra: </label>
                     <input type = "number" 
@@ -335,22 +283,26 @@
                     <p></p>
 
                     <label>Cantidad Recibida: </label>
-                    <input type = "number" 
+                    <input type = "text" 
                         class = "tamañoInput form-control"
                         [(ngModel)]="Detalle_compra.Cantidad_recibida"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
+                        minlength="1"
+                        pattern="^[+]?([1-9]+(?:[0-9]*)+)$"
                         required="true"
                     >
                     
                     <p></p>
 
                     <label>Cantidad Rechazada: </label>
-                    <input type = "number" 
+                    <input type = "text" 
                         class = "tamañoInput form-control"
                         [(ngModel)]="Detalle_compra.Cantidad_rechazada"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
+                        minlength="1"
+                        pattern="^[+]?([1-9]+(?:[0-9]*)+)$"
                         required="true"
                     >
 

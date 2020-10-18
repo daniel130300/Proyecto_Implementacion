@@ -5,26 +5,23 @@ import {Router} from '@angular/router'
 
 
 @Component({
-    selector: 'menu',
-    templateUrl: './menu.component.html',
+    selector: 'cajas',
+    templateUrl: './cajas.component.html',
     styleUrls: ['./pandora.component.css', './containerIndex.component.css'],
     
 })
 
-export class GetMenuComponent { 
+export class GetCajasComponent { 
 
-    public LoginID:any;
-    public Rol:any;
+    public LoginID:any[];
     constructor(public service:AppService, private router:Router) {
         this.LoginID = [];
-        this.Rol = [];
     }
     ngOnInit(){
-        console.log(this.service.get_session());
+        //console.log(this.service.get_session());
         //console.log(this.service.get_usuariologueado());
         this.LoginID = this.service.get_usuariologueado();
-        this.Rol = this.service.get_rol_usuario();
-        console.log(this.Rol);
+        //console.log(this.LoginID);
     }
     salir(){
         this.service.reset_session();

@@ -6,178 +6,102 @@
 </head>
 
 <body class="fixed-top">
-	<header>
-		<div class="tituloEncabezado">
-			<h1>Variedades K&D</h1>
-		</div>
-	</header>
+
+    <menu></menu>
 	
 	<div class="contedorPrincipal">
-        <main>
-			<nav class="menu">
-				<h2>Menu</h2>
-				<ul>
-					<li><a href="http://localhost:4200/menu">Inicio</a></li>
-					<li><a>Compras</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
-							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
-							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
-						</ul>
-					</li>
-					<li><a>Ventas</a>
-						<ul>
-							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
-							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
-							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
-							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
-							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
-						</ul>
-					</li>
-					<li><a>Clientes</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
-						</ul>
-					</li>
-					<li><a>Proveedores</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
-						</ul>
-					</li>
-					<li><a>Empleados</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
-						</ul>
-					</li>
-					<li><a>Inventario</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
-							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
-						</ul>
-					</li>
-					<li><a>Devoluciones Sobre Venta</a>
-						<ul>
-							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-		</main>
+        
         <div class="contenedorTitulo">
 			<h2>| Nueva Venta Normal</h2>
 		</div>
         <div class="contenedorInformativo">
             
-            <div class = "c container-fluid mt-3 pl-3"> 
-                <form>
-                    <div class="row">
+            <form ngNativeValidate #form oncopy="return false" onpaste="return false">
 
-                        <div class="mover form-group col-sm-5"> 
-                           
-                                  <div class="Espacios"></div>
-                                  <div class="form-group col-sm-12">
-                                      <label class="ml-1 mr-2 col-form-label">Identidad: </label>
-                                      <div class="">
-                                          <input type = "text" 
-                                          class = "form-control"
-                                          [(ngModel)] = "VentasNormal.Identidad"
-                                          [ngModelOptions] = "{standalone:true}"
-                                          > 
-                                      </div>
-                                  </div>
-      
-                                  <div class="form-group col-sm-5">
-                                      <label class="ml-1 mr-2 col-form-label">Cod producto: </label>
-                                      <div class="input-group">
-                                          <input type = "text" 
-                                          class = "form-control"
-                                          [(ngModel)] = "Productos.Id_producto"
-                                          [ngModelOptions] = "{standalone:true}"
-                                          readonly = "true"
-                                          > 
-                                          <button class ="btn btn-primary form-group col-sm-2"
-                                          data-toggle="modal"
-                                          data-target="#ProductosModal"
-                                          (click) = "get_productos()"
-                                          >+</button>
-                                      </div>
-                                  </div>
-                                  <div class="Espacios"></div>
-                  
-                                  <div class="form-group col-sm-12">
-                                      <label class="ml-1 mr-2 col-form-label">Nombre producto: </label>
-                                      <div class="">
-                                          <input type = "text" 
-                                          class = "form-control"
-                                          [(ngModel)] = "Productos.Nombre_producto"
-                                          [ngModelOptions] = "{standalone:true}"
-                                          readonly = "true"
-                                          > 
-                                      </div>
-                                  </div>
-                                  <div class="Espacios"></div>
-                  
-                                  <div class="form-group col-sm-12">
-                                      <label class="ml-1 mr-2 col-form-label">Información adicional: </label>
-                                      <div class="">
-                                          <textarea id="informacion_producto" 
-                                          name="informacion_producto" 
-                                          class = "form-control"
-                                          rows="5" 
-                                          cols="100" 
-                                          readonly = "true"
-                                          [(ngModel)] = "Productos.Informacion_adicional_producto"
-                                          >
-                                          </textarea>
-                                      </div>
-                                  </div>
-      
-                              </div>
-
-                        <div class="mover form-group col-sm-5">
-                           
-                            <div class="Espacios"></div>
+                <div class="mov container-md"> 
                             
-                            <div class="form-group col-sm-12">
-                                <label class="ml-1 mr-2 col-form-label">Precio referencial de venta </label>
-                                <div class="">
-                                    <input type = "text" 
-                                    class = "form-control"
-                                    [(ngModel)] = "Productos.Precio_referencial_venta"
-                                    [ngModelOptions] = "{standalone:true}"
-                                    readonly = "true"
-                                    > 
-                                </div>
-                            </div>
+                    <div class="Espacios"></div>
+                    <label>Identidad: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "VentasNormal.Identidad"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength="13"
+                        minlength="13"
+                        pattern="^[0-9]\d*$"
+                        required="true"
+                    > 
+                        
+                    <div class="Espacios"></div>
+                    <div class="form-group col-sm-5">
+                        <label>Cod producto: </label>
 
-
-                            <div class="Espacios"></div>
-                            <div class="form-group col-sm-12">
-                                <label class="ml-1 mr-2 col-form-label">Cantidad: </label>
-                                <div class="">
-                                    
-                                    <input type = "text" 
-                                        class = "form-control"
-                                        [(ngModel)] = "Productos.Cantidad"
-                                        [ngModelOptions] = "{standalone:true}"
-                                    >
-                                </div>
-                            </div>
-            
-
-                            <div class="Espacios"></div>
-                            <div class="form-group col-sm-12">    
-                                <button type = "button" class = "btn btn-primary form-group col-sm-4" 
-                                        width = 74px
-                                        (click) = "AgregarProductoVenta(Productos)"
-                                >Agregar producto</button>
-                            </div>
-
+                        <div class="input-group">
+                            <input type = "text" 
+                            class = "tamaño form-control col-sm-10"
+                            [(ngModel)] = "Productos.Id_producto"
+                            [ngModelOptions] = "{standalone:true}"
+                            readonly = "true"
+                            > 
+                            <button class ="tamaño btn btn-primary form-group col-sm-1"
+                            data-toggle="modal"
+                            data-target="#ProductosModal"
+                            (click) = "get_productos()"
+                            >+</button>
                         </div>
-        
                     </div>
-                </form>
-            </div>
+
+                    <div class="Espacios"></div>
+                    <label>Nombre producto: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Productos.Nombre_producto"
+                        [ngModelOptions] = "{standalone:true}"
+                        readonly = "true"
+                    > 
+                    
+                    <div class="Espacios"></div>
+                    <label>Información adicional: </label>
+                    <textarea id="informacion_producto" 
+                        name="informacion_producto" 
+                        class = "tamañoInput form-control"
+                        rows="5" 
+                        cols="100" 
+                        readonly = "true"
+                        [(ngModel)] = "Productos.Informacion_adicional_producto"
+                        >
+                    </textarea>
+                    
+
+                </div>
+
+                <div class="mover separacionInfo nada form-group col-sm-5">
+                
+                    <label>Precio referencial de venta </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Productos.Precio_referencial_venta"
+                        [ngModelOptions] = "{standalone:true}"
+                        readonly = "true"
+                    > 
+                    
+                    <div class="Espacios"></div>
+                    <label>Cantidad: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Productos.Cantidad"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength="3"
+                        minlength="1"
+                        pattern="^[+]?([1-9]+(?:[0-9]*)+)$"
+                    >
+                    
+                    <div class="Espacios"></div>
+                    <button (click)="form.checkValidity()? AgregarProductoVenta(Productos) : null" class = "tamañoBoton btn btn-primary">Agregar producto</button>
+                    
+                </div>
+            
+            </form>
             
             
         </div>
@@ -273,7 +197,7 @@
                        
                         <div class="col-sm-4">
                             <div class="text-center">
-                                <button (click)="insertar_venta_normal()" class="boton btn btn-primary form-group col-sm-12">Registrar venta</button>
+                                <button (click)="insertar_venta_normal()" class="tamañoBoton btn btn-primary">Registrar venta</button>
                         </div>
         
                         </div>
@@ -467,6 +391,7 @@
 		margin-left: 295px;
 		margin-top: 30px;
 		background: #fff;
+        overflow: hidden;
     }
 
     .contenedorInformativo2{
@@ -479,9 +404,27 @@
 		overflow: scroll;
     }
 
+    .mov{
+        margin-left: 46px;
+        margin-top: 24px;
+    }
+
     .mover{
         margin-left: 30px;
-        margin-top: 30px;
+        margin-top: 40px;
+    }
+
+    .nada{
+        margin-left: 0px;
+        margin-top: -12px;
+    }
+
+    .tamañoInput{
+        width: 398px;
+    }
+
+    .tamaño{
+        width: 398px;
     }
 
     .Espacios{
@@ -520,8 +463,28 @@
         margin-top: 180px;
     }
 
+    .separacionInfo0{
+        margin-top: -100px;
+    }
+
+    .separacionInfo{
+        margin-left: 503px;
+        margin-top: -362px;
+    }
+
+    .separacionInfo2{
+        margin-left: 675px;
+        margin-top: -384px;
+    }
+
     .c{
         margin-top: 5px;
+    }
+
+    .tamañoBoton{
+        width: 180px;
+        height: 40px;
+        margin-top: 20px;
     }
 </style>
 

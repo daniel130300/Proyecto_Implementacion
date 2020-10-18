@@ -6,68 +6,168 @@
 </head>
 
 <body class="fixed-top">
-	<header>
-		<div class="tituloEncabezado">
-			<h1>Variedades K&D</h1>
-		</div>
-	</header>
+
+    <menu></menu>
 	
 	<div class="contedorPrincipal">
-        <main>
-			<nav class="menu">
-				<h2>Menu</h2>
-				<ul>
-					<li><a href="http://localhost:4200/menu">Inicio</a></li>
-					<li><a>Compras</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
-							<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
-							<li><a href="http://localhost:4200/compras_realizadas">Compras Realizadas</a></li>
-						</ul>
-					</li>
-					<li><a>Ventas</a>
-						<ul>
-							<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
-							<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
-							<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
-							<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
-							<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
-						</ul>
-					</li>
-					<li><a>Clientes</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
-						</ul>
-					</li>
-					<li><a>Proveedores</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
-						</ul>
-					</li>
-					<li><a>Empleados</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
-						</ul>
-					</li>
-					<li><a>Inventario</a>
-						<ul>
-							<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
-							<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
-						</ul>
-					</li>
-					<li><a>Devoluciones Sobre Venta</a>
-						<ul>
-							<li><a href="http://localhost:4200/devoluciones_venta">Registrar Devoluciones</a></li>
-						</ul>
-					</li>
-				</ul>
-			</nav>
-		</main>
+      
         <div class="contenedorTitulo">
 			<h2>| Nueva Venta Plus</h2>
-		</div>
+        </div>
+        
         <div class="contenedorInformativo">
-            
+
+            <form [formGroup]="formVentas" ngNativeValidate #form oncopy="return false" onpaste="return false">
+                
+                <div class="mov container-md">
+
+                    <div class="Espacios"></div>
+                    <label>Tipo de cliente: </label>
+                    <select
+                        class="form-control tamañoInput"
+                        [(ngModel)]="Id_tipo_cliente"
+                        [ngModelOptions]="{standalone: true}"
+                        required="true">
+                        <option value="">Seleccione un tipo de cliente</option>
+                        <option *ngFor="let g of listado_tipo_cliente"
+                        [value]="g.Id_tipo_cliente">{{g.Descripcion_cliente}}</option>   
+                    </select>
+
+                    <div class="Espacios"></div>
+                    <div class="form-group col-sm-5">
+                        <label>Cod cliente: </label>
+
+                        <div class="input-group">
+                            <input type = "text" 
+                                class = "tamaño form-control col-sm-10"
+                                [(ngModel)] = "Clientes.Id_cliente"
+                                [ngModelOptions]="{standalone: true}"
+                                readonly = "true"
+                            > 
+                            <button class="tamaño btn btn-primary form-group col-sm-1"
+                            data-toggle="modal"
+                            data-target="#exampleModal"
+                            (click)="get_clientes(Id_tipo_cliente)"
+                            >+</button>
+                        </div>
+                    </div>
+
+                    <div class="Espacios"></div>
+                    <label >Nombre cliente: </label>
+                    <input type="text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Clientes.Nombre_cliente"
+                        [ngModelOptions]="{standalone: true}"
+                        readonly = "true"
+                    >
+
+                    <div class="Espacios"></div>
+                    <label >Tipo de pago: </label>
+                    <select
+                        (change)="HabilitarPlazosPago($event.target.value)"
+                        class="form-control tamañoInput"
+                        [(ngModel)]="Id_tipo_pago"
+                        formControlName = "tipoPago"
+                        required="true">
+                        <option value="">Seleccione un tipo de pago</option>
+                        <option *ngFor="let pago of listado_tipos_pago"
+                        [value]="pago.Id_tipo_pago">{{pago.Descripcion_tipo_pago}}</option>   
+                    </select>  
+
+                    <div class="Espacios"></div>
+                    <label >Plazos de pago: </label>
+                    <select
+                        class="form-control tamañoInput"
+                        [(ngModel)]="Id_plazo"
+                        formControlName = "plazosPago"
+                        required="true">
+                        <option value="">Seleccione un plazo de pago</option>
+                        <option *ngFor="let plazo of listado_plazos_pago"
+                        [value]="plazo.Id_plazo">{{plazo.Descripcion_plazo}}</option>   
+                    </select>
+
+                    <div class="Espacios"></div>
+                    <label >Tipo de venta: </label>
+                    <select
+                        class="form-control tamañoInput"
+                        [(ngModel)]="Id_estado_envio"
+                        [ngModelOptions]="{standalone: true}"
+                        required="true">
+                        <option value="">Seleccione un tipo de venta</option>
+                        <option *ngFor="let envio of listado_estados_envio"
+                        [value]="envio.Id_estatus">{{envio.Descripcion_estatus}}</option>
+                    </select>
+
+                </div>
+
+                <div class="mover separacionInfo nada form-group col-sm-5">
+                    <label >Cod producto: </label>
+                    <div class="input-group">
+                        <input type = "text" 
+                            class = "form-control"
+                            [(ngModel)] = "Productos.Id_producto"
+                            [ngModelOptions]="{standalone: true}"
+                            readonly = "true"
+                        > 
+                        <button class ="btn btn-primary form-group col-sm-2"
+                            data-toggle="modal"
+                            data-target="#ProductosModal"
+                            (click) = "get_productos()"
+                        >+</button>
+                    </div>
+
+                    <div class="Espacios"></div>
+                    <label >Nombre producto: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Productos.Nombre_producto"
+                        [ngModelOptions]="{standalone: true}"
+                        readonly = "true"
+                    >
+
+                    <div class="Espacios"></div>
+                    <label >Información adicional: </label>
+                    <textarea id="informacion_producto" 
+                        name="informacion_producto" 
+                        class = "form-control"
+                        rows="5" 
+                        cols="100" 
+                        readonly = "true"
+                        [(ngModel)] = "Productos.Informacion_adicional_producto"
+                        [ngModelOptions]="{standalone: true}"
+                    ></textarea>
+
+                    <div class="Espacios"></div>
+                    <label >Precio referencial de venta </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Productos.Precio_referencial_venta"
+                        [ngModelOptions]="{standalone: true}"
+                        readonly = "true"
+                    > 
+
+                    <div class="Espacios"></div>
+                    <label >Cantidad: </label>
+                    <input type = "text" 
+                        class = "form-control"
+                        [(ngModel)] = "Productos.Cantidad"
+                        [ngModelOptions]="{standalone: true}"
+                        maxlength="3"
+                        minlength="1"
+                        pattern="^[+]?([1-9]+(?:[0-9]*)+)$"
+                    >
+
+                    <div class="Espacios"></div>
+                    <button (click) = "form.checkValidity()? AgregarProductoVenta(Productos) : null"
+                        class="tamañoBoton btn btn-primary"
+                        >Agregar producto</button>
+
+                </div>
+
+            </form>
+
+
+            <!--
             <div class = "c container-fluid mt-3 pl-3"> 
                 <form  [formGroup]="formVentas">
                     <div class="row">
@@ -249,6 +349,7 @@
                     </div>
                 </form>
             </div>
+            -->
 
         </div>
 
@@ -360,7 +461,7 @@
                         
                         <div class="col-sm-4">
                             <div class="text-center">
-                                <button class="boton btn btn-primary form-group col-sm-12" (click)="insertar_venta_plus()"
+                                <button class="tamañoBoton btn btn-primary" (click)="insertar_venta_plus()"
                                 >Registrar venta</button>
                             </div>
         
@@ -603,11 +704,12 @@
 
 	.contenedorInformativo{
 		width: 75%;
-		max-width: 1250px;
+		max-width: 1050px;
 		height: 600px;
 		margin-left: 295px;
 		margin-top: 30px;
 		background: #fff;
+        overflow: hidden;
     }
 
     .contenedorInformativo2{
@@ -623,6 +725,24 @@
     .mover{
         margin-left: 30px;
         margin-top: 30px;
+    }
+
+    .mov{
+        margin-left: 46px;
+        margin-top: 24px;
+    }
+
+    .nada{
+        margin-left: 0px;
+        margin-top: -12px;
+    }
+
+    .tamañoInput{
+        width: 398px;
+    }
+
+    .tamaño{
+            width: 398px;
     }
 
     .Espacios{
@@ -659,8 +779,19 @@
         margin-top: 180px;
     }
 
+    .separacionInfo{
+        margin-left: 503px;
+        margin-top: -423px;
+    }
+
     .c{
         margin-top: 5px;
+    }
+
+    .tamañoBoton{
+        width: 180px;
+        height: 40px;
+        margin-top: 20px;
     }
 </style>
 

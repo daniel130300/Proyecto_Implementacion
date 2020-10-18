@@ -57,6 +57,8 @@ import {GetInventarioComponent} from './components/productos/consulta_inventario
 
 import {GetMenuVentasComponent} from './components/menu/menu_ventas.component';
 
+import {GetCajasComponent} from './components/menu/cajas.component';
+
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -85,7 +87,9 @@ import {FormsModule, ReactiveFormsModule } from '@angular/forms';
     GetVentasPendientesCobroComponent,
     GetDevolucionesComponent,
     GetMenuVentasComponent,
-    GetVentasIncobrablesComponent
+    GetVentasIncobrablesComponent,
+    GetCajasComponent
+    
   ],
   imports: [ //Modulos
     BrowserModule,

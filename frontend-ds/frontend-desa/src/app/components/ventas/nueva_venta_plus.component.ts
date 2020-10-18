@@ -136,18 +136,30 @@ export class GetVentaPlusComponent
     }
    
     insertar_venta_plus(){
-        var response;
-        this.Asignar_datos_venta();
-        this.service.insertar_venta_plus(this.VentasPlus).subscribe(
-            data=>response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
-                this.pasarDatosDetalleVenta();
-                this.LimpiarInputs();
-            }
-        );
+        
+        if(this.listado_productos_agregados.length == 0){
+            swal.fire({
+                title: "No ha ingresado ningún producto a la compra, por favor hágalo para poder enviar la compra.",
+                icon: 'error'
+            });
+        }
+        else
+        {
+            var response;
+            this.Asignar_datos_venta();
+            this.service.insertar_venta_plus(this.VentasPlus).subscribe(
+                data=>response = data,
+                err => {
+                    console.log("Error al consultar servicio"); 
+                },
+                ()=>{
+                    this.pasarDatosDetalleVenta();
+                    this.LimpiarInputs();
+                }
+            );
+
+        }
+        
     }
 
     insertar_detalle_venta_plus(){
@@ -314,7 +326,7 @@ export class GetVentaPlusComponent
             Nombre_producto: producto.Descripcion_producto,
             Precio_referencial_venta: producto.Precio_referencial_venta,
             Informacion_adicional_producto: "Talla: " + producto.Talla + ", Color: " + producto.Color + ", Modelo: " + producto.Descripcion_modelo + ", Marca: " + producto.Nombre_marca + ", Subcategoria: " + producto.Descripcion_subcategoria, 
-            Cantidad: producto.Cantidad,
+            Cantidad: "",
             Stock: producto.Stock
         }
     }
@@ -337,21 +349,60 @@ export class GetVentaPlusComponent
 
     AgregarProductoVenta()
     {
-        if (this.Productos.Cantidad < this.Productos.Stock)
+        
+        if(this.Clientes.Id_cliente == "")
         {
-            this.listado_productos_agregados.unshift(this.Productos);
-            console.log(this.listado_productos_agregados); 
-            this.calculos();
-            this.restar_inventario();
-            this.LimpiarInputsProductos();
+            swal.fire({
+                title: "No ha seleccionado ningún cliente.",
+                icon: 'error'
+            });
         }
         else
         {
-            swal.fire({
-                icon: 'error',
-                title:"No hay suficiente unidades en el inventario"
-              })
+
+            if(this.Productos.Id_producto == "")
+            {
+                swal.fire({
+                    title: "No ha seleccionado ningún producto.",
+                    icon: 'error'
+                });
+            }
+            else
+            {
+
+                if(this.Productos.Cantidad == "")
+                {
+                    swal.fire({
+                        title: "No ha ingresado ninguna cantidad, por favor hágalo para poder agregar.",
+                        icon: 'error'
+                    });
+                }
+                else
+                {
+
+                    if (this.Productos.Cantidad < this.Productos.Stock)
+                    {
+                        this.listado_productos_agregados.unshift(this.Productos);
+                        console.log(this.listado_productos_agregados); 
+                        this.calculos();
+                        this.restar_inventario();
+                        this.LimpiarInputsProductos();
+                    }
+                    else
+                    {
+                        swal.fire({
+                            icon: 'error',
+                            title:"No hay suficiente unidades en el inventario"
+                        })
+                    }
+
+                }
+
+            }
+
         }
+
+        
     }
 
     EliminarProductoVenta(id)
@@ -371,6 +422,7 @@ export class GetVentaPlusComponent
     calculos()
     {
         this.subtotal = 0;
+        this.descuento_calculado = 0;
         this.isv = 0;
         this.total = 0;
         console.log(this.listado_productos_agregados);

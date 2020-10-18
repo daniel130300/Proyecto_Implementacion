@@ -45,7 +45,7 @@ export class GetLoginComponent {
                 err => {
                     if (err.status == 400){
                         swal.fire({
-                            title: "Error de Autenticacion, Las Credenciales son Incorrectas",
+                            title: "Error de autenticación, las credenciales son incorrectas",
                             icon: 'error'
                         });
                     }else{
@@ -59,10 +59,9 @@ export class GetLoginComponent {
                 () => {
                     try{
                         if (response){
-                            this.service.set_session(response);
-                            this.router.navigateByUrl('/menu');
-                            this.service.set_usuariologueado(this.loading_data.LoginID);
-
+                            this.service.set_session(response["token"]);
+                            this.router.navigateByUrl('/cajas');
+                            this.service.set_usuariologueado(this.loading_data.LoginID, response["roles"]);
                         }else{
                             swal.fire({
                                 title: 'Error interno del servidor',

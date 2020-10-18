@@ -47,6 +47,8 @@ import {GetVentasIncobrablesComponent} from './components/ventas/ventas_incobrab
 import {GetDevolucionesComponent} from './components/ventas/devoluciones.component';
 
 import {GetMenuVentasComponent} from './components/menu/menu_ventas.component';
+import { GetCajasComponent } from './components/menu/cajas.component';
+
 
 const routes: Routes = [
     {
@@ -142,7 +144,11 @@ const routes: Routes = [
     {
         path: 'ventas_incobrables',
         component: GetVentasIncobrablesComponent
-    }
+    },
+    {
+        path: 'cajas',
+        component: GetCajasComponent
+    },
 ];
 
 @NgModule({
