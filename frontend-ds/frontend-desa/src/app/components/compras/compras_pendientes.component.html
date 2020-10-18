@@ -247,7 +247,7 @@
 
 
             <div class="alo modal-body">
-                <form>
+                <form oncopy="return false" onpaste="return false">
                     
                     <label>Codigo Compra: </label>
                     <input type = "number" 
@@ -283,22 +283,26 @@
                     <p></p>
 
                     <label>Cantidad Recibida: </label>
-                    <input type = "number" 
+                    <input type = "text" 
                         class = "tamañoInput form-control"
                         [(ngModel)]="Detalle_compra.Cantidad_recibida"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
+                        minlength="1"
+                        pattern="^[+]?([1-9]+(?:[0-9]*)+)$"
                         required="true"
                     >
                     
                     <p></p>
 
                     <label>Cantidad Rechazada: </label>
-                    <input type = "number" 
+                    <input type = "text" 
                         class = "tamañoInput form-control"
                         [(ngModel)]="Detalle_compra.Cantidad_rechazada"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
+                        minlength="1"
+                        pattern="^[+]?([1-9]+(?:[0-9]*)+)$"
                         required="true"
                     >
 

@@ -121,7 +121,8 @@ export class GetComprasPendientesComponent {
 
         this.Id_Compra = compra.Id_compra;
         this.Estatus = compra.Id_estatus;   
-        this.Gastos = compra.Gastos_adicionales;  
+        this.Gastos = compra.Gastos_adicionales; 
+        this.get_productos_compra(compra.Id_compra); 
 
     }
 
@@ -156,24 +157,86 @@ export class GetComprasPendientesComponent {
             
         }
 
-        var response;
-        this.service.update_detalle_compra(this.Detalle_compra).subscribe(
-            data=>response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
+        if(this.Detalle_compra.Cantidad_rechazada == "0")
+        {
+            this.Detalle_compra.Cantidad_rechazada = "0";
+        }
 
-                this.Detalle_compra = {
-                    Id_compra: "",
-                    Id_producto: "", 
-                    Cantidad_ordenada: "", 
-                    Cantidad_recibida: "",
-                    Cantidad_rechazada: "" 
+        if(this.Detalle_compra.Cantidad_recibida == "" || this.Detalle_compra.Cantidad_rechazada == "")
+        {
+            swal.fire({
+                title: "No ha ingresado un dato, por favor hágalo para poder guardar.",
+                icon: 'error'
+            });
+        }
+        else
+        {
+
+            if ( isNaN(parseInt(this.Detalle_compra.Cantidad_recibida)) ||  isNaN(parseInt(this.Detalle_compra.Cantidad_rechazada)) )
+            {
+                swal.fire({
+                    title: "No puede ingresar texto.",
+                    icon: 'error'
+                }); 
+            }
+            else
+            {
+
+                if(this.Detalle_compra.Cantidad_recibida > this.Detalle_compra.Cantidad_ordenada)
+                {
+                    swal.fire({
+                        title: "La cantidad recibida no puede ser mayor que la cantidad ordenada.",
+                        icon: 'error'
+                    });
+                }
+                else
+                {
+                    if(this.Detalle_compra.Cantidad_rechazada > this.Detalle_compra.Cantidad_ordenada)
+                    {
+                        swal.fire({
+                            title: "La cantidad rechazada no puede ser mayor que la cantidad ordenada.",
+                            icon: 'error'
+                        });    
+                    }
+                    else
+                    {
+                        if(this.Detalle_compra.Cantidad_recibida < "0" || this.Detalle_compra.Cantidad_rechazada < "0")
+                        {
+                            swal.fire({
+                                title: "La cantidad no puede ser negativa.",
+                                icon: 'error'
+                            });
+                        }
+                        else
+                        {
+                            var response;
+                            this.service.update_detalle_compra(this.Detalle_compra).subscribe(
+                                data=>response = data,
+                                err => {
+                                    console.log("Error al consultar servicio"); 
+                                },
+                                ()=>{
+
+                                    this.Detalle_compra = {
+                                        Id_compra: "",
+                                        Id_producto: "", 
+                                        Cantidad_ordenada: "", 
+                                        Cantidad_recibida: "",
+                                        Cantidad_rechazada: "" 
+                                    }
+
+                                }
+                            );            
+                        }
+                    }
                 }
 
+
             }
-        );
+
+
+        }
+        
     }
 
     guardarCambios(){
