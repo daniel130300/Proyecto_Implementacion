@@ -264,7 +264,7 @@ export class AppService {
     login(payload):Observable<any>{
         return this.httpClient.post(this.endpoint + "/login", payload, {responseType: 'json'})
     }
-    
+
     get_tipos_pago():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_tipos", {responseType: 'json'})
     }
@@ -389,13 +389,19 @@ export class AppService {
         localStorage.setItem("KyD", JSON.stringify(token));
     }
 
-    set_usuariologueado(LoginID){
+    set_usuariologueado(LoginID, Rol){
         localStorage.setItem("loggedUser",JSON.stringify(LoginID));
+        localStorage.setItem("rolUser",JSON.stringify(Rol));
     }
 
     get_usuariologueado(){
         if(localStorage.getItem("loggedUser"))
         return JSON.parse(localStorage.getItem("loggedUser"));
+    }
+
+    get_rol_usuario(){
+        if(localStorage.getItem("rolUser"))
+        return JSON.parse(localStorage.getItem("rolUser"));
     }
 
     get_session(){

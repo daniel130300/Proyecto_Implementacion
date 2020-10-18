@@ -35,7 +35,7 @@
 						#username="ngModel"
 						[(ngModel)]="loading_data.LoginID"
 						required="true"/>
-						<p *ngIf="username.errors && username.errors.required&& submitted" class="login-error-text" style="border: none;color: white;"><i class="fa fa-exclamation-circle login-error-icon"></i>El usuario es requerido</p>
+						<p *ngIf="username.errors && username.errors.required&& submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>El usuario es requerido</p>
 					</div>
 					<!--contraseñaUsuario--->
 					<div>
@@ -48,7 +48,8 @@
 						[(ngModel)]="loading_data.Contrasenia"
 						pattern="[0-9|a-z|A-Z|_]+"
 						required="true"/>
-						<p *ngIf="password.errors && password.errors.required&& submitted" class="login-error-text" style="border: none;color: white;"><i class="fa fa-exclamation-circle login-error-icon"></i>La Contraseña es requerida</p>
+						<p *ngIf="password.errors && password.errors.required&& submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>La contraseña es requerida</p>
+						<br/>
 					</div>
 					<!--botonLogin--->
 					<div class="login-buttons">

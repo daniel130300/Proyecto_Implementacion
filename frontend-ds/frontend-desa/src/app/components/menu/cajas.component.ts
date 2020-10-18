@@ -18,15 +18,15 @@ export class GetCajasComponent {
         this.LoginID = [];
     }
     ngOnInit(){
-        console.log(this.service.get_session());
-        console.log(this.service.get_usuariologueado());
+        //console.log(this.service.get_session());
+        //console.log(this.service.get_usuariologueado());
         this.LoginID = this.service.get_usuariologueado();
-        console.log(this.LoginID);
+        //console.log(this.LoginID);
     }
     salir(){
         this.service.reset_session();
         this.router.navigateByUrl('/login');
-        console.log(this.service.get_session());
-        console.log(this.service.get_usuariologueado());
+        //console.log(this.service.get_session());
+        //console.log(this.service.get_usuariologueado());
     }  
 } 

@@ -11,7 +11,8 @@
 			<h2>Menu</h2>
 			<ul>
 				<li><a href="http://localhost:4200/cajas">Inicio</a></li>
-				<li><a>Compras</a>
+				<li *ngIf= "Rol==1"><a>Compras</a>
+
 					<ul>
 						<li><a href="http://localhost:4200/mantenimiento_compras">Nueva Compra</a></li>
 						<li><a href="http://localhost:4200/compras_pendientes">Compras Pendientes</a></li>
@@ -23,28 +24,28 @@
 						<li><a href="http://localhost:4200/menu_venta">Nueva Venta</a></li>
 						<li><a href="http://localhost:4200/ventas_pendientes_envio">Ventas Pendientes De Envio</a></li>
 						<li><a href="http://localhost:4200/ventas_pagadas">Ventas Pagadas</a></li>
-						<li><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
-						<li><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
+						<li *ngIf= "Rol==1"><a href="http://localhost:4200/ventas_incobrables">Ventas Incobrables</a></li>
+						<li *ngIf= "Rol==1"><a href="http://localhost:4200/ventas_pendientes_cobro">Ventas Pendientes De Cobro</a></li>
 					</ul>
 				</li>
-				<li><a>Clientes</a>
+				<li *ngIf= "Rol==1"><a>Clientes</a>
 					<ul>
 						<li><a href="http://localhost:4200/mantenimiento_clientes">Mantenimiento Clientes</a></li>
 					</ul>
 				</li>
-				<li><a>Proveedores</a>
+				<li *ngIf= "Rol==1"><a>Proveedores</a>
 					<ul>
 						<li><a href="http://localhost:4200/mantenimiento_proveedores">Mantenimiento Proveedores</a></li>
 					</ul>
 				</li>
-				<li><a>Empleados</a>
+				<li *ngIf= "Rol==1"><a>Empleados</a>
 					<ul>
 						<li><a href="http://localhost:4200/mantenimiento_empleados">Mantenimiento Empleados</a></li>
 					</ul>
 				</li>
 				<li><a>Inventario</a>
 					<ul>
-						<li><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
+						<li *ngIf= "Rol==1"><a href="http://localhost:4200/mantenimiento_productos">Mantenimiento Inventario</a></li>
 						<li><a href="http://localhost:4200/consulta_inventario">Consultar Inventario</a></li>
 					</ul>
 				</li>
