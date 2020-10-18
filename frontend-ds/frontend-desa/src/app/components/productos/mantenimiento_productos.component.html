@@ -84,7 +84,9 @@
                             <option value="">Seleccione una categoria </option>
                             <option *ngFor = "let categ of listado_categorias"
                                     [value]="categ.Id_categoria">{{categ.Descripcion_categoria}}
-                            </option>
+                                    
+                                </option>
+
                             </select>
 
                             <button class="tamaño btn btn-primary form-group col-sm-1"
@@ -204,6 +206,8 @@
                             [(ngModel)] = "Producto.Descripcion_producto"
                             [ngModelOptions] = "{standalone:true}"
                             required="true"
+                            maxlength="20"
+                            minlength="3"
                             pattern="^(?:\p{L}\p{M}*|[\-])*$"
                             > 
                     </div>
@@ -219,7 +223,7 @@
                         [(ngModel)] = "Producto.Talla"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength="40"
-                        min="1"
+                        minlength="2"
                         pattern="^[0-9]+$"
                         required="true"
                     >
@@ -233,7 +237,8 @@
                         class = "tamañoInput form-control"
                         [(ngModel)] = "Producto.Color"
                         [ngModelOptions] = "{standalone:true}"
-                        maxlength="50"
+                        maxlength="15"
+                        minlength="3"
                         pattern="^[a-zA-Z]+$"
                         required="true"
                     >
@@ -247,6 +252,7 @@
                             class = "tamañoInput form-control"
                             [(ngModel)] = "Producto.Stock"
                             [ngModelOptions] = "{standalone:true}"
+                            minlength="2"
                             pattern="^[0-9]+$"
                             required="true"
                     >
@@ -260,6 +266,8 @@
                         class = "tamañoInput form-control"
                         [(ngModel)] = "Producto.Precio_referencial_venta"
                         [ngModelOptions] = "{standalone:true}"
+                        minlength="4"
+                        maxlength="3"
                         pattern="^[0-9]+$"
                         required="true"
                     >
@@ -273,6 +281,8 @@
                             class = "tamañoInput form-control"
                             [(ngModel)] = "Producto.Precio_referencial_compra"
                             [ngModelOptions] = "{standalone:true}"
+                            minlength="4"
+                             maxlength="3"
                             pattern="^[0-9]+$"
                             required="true"
                     > 
@@ -286,6 +296,7 @@
                             class = "tamañoInput form-control"
                             [(ngModel)] = "Producto.Punto_reorden"
                             [ngModelOptions] = "{standalone:true}"
+                            maxlength="2"
                             pattern="^[0-9]+$"
                             required="true"
                     >
@@ -293,7 +304,7 @@
 
                 <p></p>
 
-                <button (click)="form.checkValidity ? insertar_producto() : null" (click) = "form.checkValidity ? insertar_producto_proveedor() : null" class="btn btn-primary">Guardar Producto</button>
+                <button (click)="form.checkValidity() ? insertar_producto() : null" (click) = "form.checkValidity ? insertar_producto_proveedor() : null" class="btn btn-primary">Guardar Producto</button>
 
                 
             </div>

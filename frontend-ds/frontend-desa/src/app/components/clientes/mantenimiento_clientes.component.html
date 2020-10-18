@@ -75,7 +75,8 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Nombre_compania"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="50"
+                            maxlength="15"
+                            minlength="3"
                             required="true"
                         >
                         <p></p>
@@ -107,6 +108,7 @@
                             [(ngModel)]="Persona.Direccion"
                             [ngModelOptions]="{standalone: true}"
                             maxlength="300"
+                            minlength="10"
                             required="true"
                         >
                     
@@ -118,7 +120,8 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Nombre_contacto"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="100"
+                            maxlength="20"
+                            minlength="4"
                             required="true"
                         >
                         <p></p>
@@ -127,7 +130,8 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Apellido_contacto"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="100"
+                            maxlength="20"
+                            minlength="8"
                             required="true"
                         >
                         <p></p>
@@ -136,7 +140,9 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Telefono_contacto"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="20"
+                            maxlength="8"
+                            minlength="8"
+                            pattern="^[0-9]+$"
                             required="true"
                         >
                         <p></p>
@@ -145,7 +151,7 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Email_contacto"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="150"
+                            minlength="11"
                             required="true"
                             pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                         >
@@ -232,7 +238,8 @@
                     class="form-control"
                     [(ngModel)]="Persona.Nombre_compania"
                     [ngModelOptions]="{standalone: true}"
-                    maxlength="50"
+                    maxlength="15"
+                    minlength="3"
                     required="true"
                 >
                 <p></p>
@@ -264,6 +271,7 @@
                     [(ngModel)]="Persona.Direccion"
                     [ngModelOptions]="{standalone: true}"
                     maxlength="300"
+                    minlength="10"
                     required="true"
                 >
                 <label>Nombre Contacto: </label>
@@ -271,7 +279,8 @@
                     class="form-control"
                     [(ngModel)]="Persona.Nombre_contacto"
                     [ngModelOptions]="{standalone: true}"
-                    maxlength="100"
+                    maxlength="20"
+                    minlength="4"
                     required="true"
                 >
                 <p></p>
@@ -280,17 +289,19 @@
                     class="form-control"
                     [(ngModel)]="Persona.Apellido_contacto"
                     [ngModelOptions]="{standalone: true}"
-                    maxlength="100"
+                    maxlength="20"
+                    minlength="8"
                     required="true"
                 >
                 <p></p>
                 <label>Telefono: </label>
-                <input type="tel"
+                <input type="text"
                     class="form-control"
                     [(ngModel)]="Persona.Telefono_contacto"
-                    [ngModelOptions]="{standalone: true}"
-                    maxlength="20"
-                    pattern = "^[0-9]+$"
+                    [ngModelOptions]="{standalone:true}"
+                    maxlength="8"
+                    minlength="8"
+                    pattern="^[0-9]+$"
                     required="true"
                 >
                 <p></p>
@@ -299,14 +310,14 @@
                     class="form-control"
                     [(ngModel)]="Persona.Email_contacto"
                     [ngModelOptions]="{standalone: true}"
-                    maxlength="150"
+                    minlength="11"
                     required="true"
                     pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                 >
                 
                 <div class="modal-footer">
                     <button (click)="limpiar_cliente()" type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" >Cerrar</button>
-                    <button (click)="form.checkValidity() ? update_cliente(Persona.Id_cliente) : null" type="button" class="btn btn-primary btn-sm">Guardar</button>
+                    <button (click)="form.checkValidity() ? update_cliente(Persona.Id_cliente): null" type="button" class="btn btn-primary btn-sm">Guardar</button>
                 </div>
 
                 </div>
