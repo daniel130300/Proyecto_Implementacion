@@ -15,41 +15,44 @@
 		</div>
         <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
         <div class="contenedorInformativo">
-            <div class="mov container-md">
-                <p></p>
-                <form ngNativeValidate #form>
+            
+            <form ngNativeValidate #form oncopy="return false" onpaste="return false">
+                
+                <div class="mov container-md">
                     <p></p>
                     <label>Proveedor</label>
                     <select
                         class = "tamañoInput form-control input"
                         [(ngModel)]="Compra.Id_proveedor"
                         [ngModelOptions]="{standalone:true}"
-                        required="true"
-                    >
+                        required="true">
+
                         <option value="">Seleccione un proveedor </option>
                         <option *ngFor = "let proveedor of listado_proveedores"
                             [value]="proveedor.Id_proveedor">{{proveedor.Nombre_compania}}
                         </option>
+
                     </select>
+
                     <p></p>
                     <div class="form-group col-sm-5">
                         <label class="ml-1 mr-2 col-form-label">Cod Producto</label>
+                        
                         <div class="input-group">
                             <input type = "text" 
                             class = "tamaño form-control col-sm-8"
                             [(ngModel)] = "Producto.Id_producto"
                             [ngModelOptions] = "{standalone:true}"
                             pattern="^$"
-                            disabled
-                        >
-                        <button class="tamaño btn btn-primary form-group col-sm-1"
-                            type = "button"
-                            width = 74px
-                            data-toggle = "modal"
-                            data-target = "#exampleModal"
-                            (click) = "get_productos(Compra.Id_proveedor)"
+                            disabled>
 
-                        >+</button>
+                            <button class="tamaño btn btn-primary form-group col-sm-1"
+                                type = "button"
+                                width = 74px
+                                data-toggle = "modal"
+                                data-target = "#exampleModal"
+                                (click) = "get_productos(Compra.Id_proveedor)"
+                            >+</button>
                         </div>
                         
                     </div>
@@ -69,12 +72,13 @@
                         rows="5" 
                         [(ngModel)]="Informacion_adicional"
                         [ngModelOptions]="{standalone:true}"
-                        disabled></textarea>
-                </form>
-            </div>
+                        disabled>
+                    </textarea>
+                
+                </div>
 
-            <div class="separacionInfo nada container-md">
-                <form>
+                <div class="separacionInfo nada container-md">
+                
                     <label>Precio</label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
@@ -82,6 +86,7 @@
                         [ngModelOptions]="{standalone:true}"
                         disabled
                     >
+
                     <p></p>
                     <label>Cantidad</label>
                     <input type = "text" 
@@ -89,8 +94,10 @@
                         [(ngModel)]="Producto.Cantidad_ordenada"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
-                        pattern="^[1-9]\d*$"
+                        minlength="1"
+                        pattern="^[+]?([1-9]+(?:[0-9]*)+)$"
                     >
+                    
                     <p></p>
                     <label>Gastos Adicionales</label>
                     <input type = "text" 
@@ -98,15 +105,18 @@
                         [(ngModel)] = "Compra.Gastos_adicionales"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength="4"
-                        pattern="^[0-9]\d*$"
+                        pattern="^[+]?([0-9]\d*)$"
                     > 
+                    
                     <p></p>
                     <button (click)="form.checkValidity()? agregarProducto(Producto) : null" class="tamañoBoton btn btn-primary">Agregar producto</button>
-                </form>
-            </div>
+                
+                </div>
 
+            </form>
             
         </div>
+
         <div class="contenedorInformativo2">
             <div class = "c container-fluid mt-3 pl-3"> 
                 <form>

@@ -136,7 +136,8 @@ export class GetComprasComponent {
         else
         {
 
-            if( producto.Cantidad_ordenada == ""){
+            if( producto.Cantidad_ordenada == "")
+            {
                 swal.fire({
                     title: "No ha ingresado ninguna cantidad, por favor hágalo para poder agregar.",
                     icon: 'error'
@@ -167,6 +168,7 @@ export class GetComprasComponent {
             
             }
         }
+
     }
 
     //Funcion que elimina un producto del listado_productos_compras segun el id
@@ -194,7 +196,15 @@ export class GetComprasComponent {
             this.isv = this.subtotal * 0.15;
             this.total = this.subtotal + this.isv;
         }
-        this.total +=  parseInt( this.Compra.Gastos_adicionales );
+        
+        if(this.Compra.Gastos_adicionales == "")
+        {
+            this.total +=  0;
+        }
+        else
+        {
+            this.total +=  parseInt( this.Compra.Gastos_adicionales );
+        }
     }
 
     /*
@@ -213,33 +223,44 @@ export class GetComprasComponent {
     }*/
 
     insertar_compra(){
-        var response;
-        this.service.insertar_compra(this.Compra).subscribe(
-            data=>response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
+        if(this.listado_productos_compras.length == 0){
+            swal.fire({
+                title: "No ha ingresado ningún producto a la compra, por favor hágalo para poder enviar la compra.",
+                icon: 'error'
+            });
+        }
+        else{
 
-                this. pasarDatosDetalleCompras();
-                
-                //console.log("entro");
-                this.Compra = {
-                    Id_compra: "0",
-                    Fecha_orden: "",
-                    Fecha_recibida: "",
-                    Gastos_adicionales: "0",
-                    Id_proveedor: "",
-                    Id_estatus: "3"
+            var response;
+            this.service.insertar_compra(this.Compra).subscribe(
+                data=>response = data,
+                err => {
+                    console.log("Error al consultar servicio"); 
+                },
+                ()=>{
+
+                    this. pasarDatosDetalleCompras();
+                    
+                    //console.log("entro");
+                    this.Compra = {
+                        Id_compra: "0",
+                        Fecha_orden: "",
+                        Fecha_recibida: "",
+                        Gastos_adicionales: "0",
+                        Id_proveedor: "",
+                        Id_estatus: "3"
+                    }
+
+                    swal.fire({
+                        title: "Compra envida exitosamente.",
+                        icon: 'success'
+                    });
+
                 }
+            );
 
-                swal.fire({
-                    title: "Compra envida exitosamente.",
-                    icon: 'success'
-                });
-
-            }
-        );
+        }
+        
     }
 
     pasarDatosDetalleCompras()
