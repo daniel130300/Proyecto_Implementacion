@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
+const swal = require('sweetalert2');
 
 
 @Component({
@@ -91,23 +92,46 @@ export class GetSubcategoriasComponent {
 
     update_subcategorias()
     {
-        var response;
-        this.service.update_subcategorias(this.Subcategorias).subscribe(
-            data=>response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
+        let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
+        
+        this.Subcategorias =
+        {
+            Id_categoria: this.Subcategorias.Id_categoria,
+            Id_subcategoria: this.Subcategorias.Id_subcategoria,
+            Descripcion_subcategoria: this.Subcategorias.Descripcion_subcategoria
+        }
+        if(this.Subcategorias.Descripcion_subcategoria == "" || this.Subcategorias.Id_categoria == "" || this.Subcategorias.Id_subcategoria == ""){
+            swal.fire({
+                title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
+                icon: 'error'
+            });
+        }else
+            if(regexpLetter.test(this.Subcategorias.Descripcion_subcategoria) == false){
+                swal.fire({
+                    title: "Solo puede escribir letras. Vuelva a intentarlo.",
+                    icon: 'error'
+                });
+            }else
+            {
+                var response;
+                this.service.update_subcategorias(this.Subcategorias).subscribe(
+                data=>response = data,
+                err => {
+                    console.log("Error al consultar servicio"); 
+                },
+                ()=>{
    
-                this.Subcategorias = 
-                {
-                    Id_subcategoria: "",
-                    Descripcion_subcategoria: "",
-                    Id_categoria: ""
+                    this.Subcategorias = 
+                    {
+                        Id_subcategoria: "",
+                        Descripcion_subcategoria: "",
+                        Id_categoria: ""
+                    }
+                    this.get_subcategorias();
                 }
-                this.get_subcategorias();
+            );
             }
-        );
+        
     }
 
     delete_subcategorias(id_subcategoria)

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
 import { ThrowStmt } from '@angular/compiler';
+const swal = require('sweetalert2');
 
 
 @Component({
@@ -266,29 +267,74 @@ export class GetProductosComponent {
 
     update_producto(id_producto)
     {
-        var response;
-        this.service.update_producto(this.Producto).subscribe(
-            data=>response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
-   
-                this.Producto = 
-                {
-                    Id_producto: "", 
-                    Descripcion_producto: "", 
-                    Talla: "", 
-                    Color: "", 
-                    Stock: "", 
-                    Precio_referencial_venta: "", 
-                    Precio_referencial_compra: "", 
-                    Punto_reorden: "",
-                    Id_modelo: ""
-                }
-                this.get_productos();
-            }
-        );
+        let regexpNumber  = /^[+ 0-9]{8}$/;
+        let regexpLetter = /^[a-zA-Z ]{4,20}$/;
+        let regexpLetter1 = /^[a-zA-Z ]{3,20}$/;
+        let regexpMix = /^[A-Za-z0-9 ]{3,15}$/;
+        let regexpDi = /^[A-Za-z0-9.# ]{10,300}$/;
+
+        this.Producto = 
+        {
+            Id_producto: this.Producto.Id_producto, 
+            Descripcion_producto: this.Producto.Descripcion_producto, 
+            Talla: this.Producto.Talla, 
+            Color: this.Producto.Color, 
+            Stock: this.Producto.Stock, 
+            Precio_referencial_venta: this.Producto.Precio_referencial_venta, 
+            Precio_referencial_compra: this.Producto.Precio_referencial_compra, 
+            Punto_reorden: this.Producto.Punto_reorden,
+            Id_modelo: this.Producto.Id_modelo
+        }
+        if(this.Producto.Descripcion_producto == "" || this.Producto.Talla == "" || this.Producto.Color == "" || 
+           this.Producto.Stock == "" || this.Producto.Precio_referencial_venta == "" || 
+           this.Producto.Precio_referencial_compra == "" || this.Producto.Punto_reorden == "" || this.Producto.Id_modelo == "")
+           {
+                swal.fire({
+                    title: "Es necesario que los campos no queden vacios. Vuelve a Intentarlo.",
+                    icon: 'error'
+                });
+
+                }else
+                    if(regexpLetter.test(this.Producto.Descripcion_producto) == false || regexpLetter.test(this.Producto.Color) == false)
+                    {
+                        swal.fire({
+                            title: "Solo se permiten letras. Vuelve a Intentarlo",
+                            icon: 'error'
+                        });
+                    }else 
+                        if(regexpNumber.test(this.Producto.Talla) == false || regexpNumber.test(this.Producto.Stock) == false || 
+                           regexpNumber.test(this.Producto.Precio_referencial_venta) == false || 
+                           regexpNumber.test(this.Producto.Precio_referencial_compra) == false || 
+                           regexpNumber.test(this.Producto.Punto_reorden) == false ){
+                            swal.fire({
+                                title: "Solo se permiten numeros. Vuelve a Intentarlo.",
+                                icon: 'error'
+                            });
+                         }else
+                            {
+                                var response;
+                                this.service.update_producto(this.Producto).subscribe(
+                                data=>response = data,
+                                err => {
+                                    console.log("Error al consultar servicio"); 
+                                    },
+                                    ()=>{
+                                        this.Producto = 
+                                        {
+                                            Id_producto: "", 
+                                            Descripcion_producto: "", 
+                                            Talla: "", 
+                                            Color: "", 
+                                            Stock: "", 
+                                            Precio_referencial_venta: "", 
+                                            Precio_referencial_compra: "", 
+                                            Punto_reorden: "",
+                                            Id_modelo: ""
+                                        }
+                                    }
+                                );
+                                this.get_productos();
+                            }
     }
 
     delete_producto(id_producto)

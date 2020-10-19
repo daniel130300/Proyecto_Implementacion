@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
+const swal = require('sweetalert2');
 
 @Component({
     selector:'mantenimiento_marcas',
@@ -86,23 +87,46 @@ export class GetMarcasComponent {
          }
      }
 
-     update_marca(Id_marca){
-         var response;
-         this.service.update_marca(this.marca).subscribe(
-             data=>response = data,
-             err => {
-                 console.log("Error al consultar servicio");
-             },
-             ()=>{
+     update_marca(Id_marca)
+     {
+        let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
 
-             this.marca ={
-                 Id_marca:"",
-                 Nombre:""
-             }
-             this.get_marcas();
-            }
+        this.marca = 
+        {
+            Id_marca: this.marca.Id_marca,
+            Nombre: this.marca.Nombre
+        }
+        if(this.marca.Nombre == ""){
+            swal.fire({
+                title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
+                icon: 'error'
+            });
+        }else
+            if(regexpLetter.test(this.marca.Nombre) == false){
+                swal.fire({
+                    title: "Solo puede escribir letras. Vuelva a intentarlo.",
+                    icon: 'error'
+                });
+            }else
+                {
+                    var response;
+                    this.service.update_marca(this.marca).subscribe(
+                    data=>response = data,
+                    err => {
+                        console.log("Error al consultar servicio");
+                    },
+                    ()=>{
+
+                        this.marca ={
+                        Id_marca:"",
+                        Nombre:""
+                    }
+                        this.get_marcas();
+                    }
             
-         );
+                    );
+                }
+         
      }
 
 }

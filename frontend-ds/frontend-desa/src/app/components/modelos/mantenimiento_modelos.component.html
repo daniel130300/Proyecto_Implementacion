@@ -1,19 +1,22 @@
 <div class = "container-md"> 
     <h1 class = "text-primary">Listado de Modelos</h1>
     <p class = "text-muted">Realice la inserción y actualización de los modelos</p> 
-    <form>
+    <form ngNativeValidate #form>
         <label>Descripción: </label>
         <input type = "text" 
                class = "form-control"
                [(ngModel)] = "Modelo.Descripcion_modelo"
                [ngModelOptions] = "{standalone:true}"
+               required = "true"
+               pattern="[a-zA-Z]{2,254}"
         > 
 
         <label>Marca: </label>
         <select
             class="form-control input"
             [(ngModel)]="Modelo.Id_marca"
-            [ngModelOptions]="{standalone: true}">
+            [ngModelOptions]="{standalone: true}"
+            required = "true">
             <option value="">-Seleccione una marca-</option>
             <option *ngFor="let marcas of listado_marcas"
             [value]="marcas.Id_marca">{{marcas.Nombre_marca}}</option>
@@ -23,7 +26,8 @@
         <select
           class="form-control input"
             [(ngModel)]="Modelo.Id_subcategoria"
-            [ngModelOptions]="{standalone: true}">
+            [ngModelOptions]="{standalone: true}"
+            required = "true">
             <option value="">-Seleccione una subcategoria-</option>
             <option *ngFor="let subcategoria of listado_subcategorias"
             [value]="subcategoria.Id_subcategoria">{{subcategoria.Descripcion_subcategoria}}</option>   
@@ -32,7 +36,7 @@
         <p>
         </p>
 
-        <button (click)="insertar_modelo()" class="btn btn-primary">Guardar Registro</button>
+        <button (click)="form.checkValidity() ? insertar_modelo() : null" class="btn btn-primary">Guardar Registro</button>
 
         <p>    
         </p>
