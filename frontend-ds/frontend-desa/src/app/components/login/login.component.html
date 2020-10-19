@@ -24,7 +24,7 @@
 				<h1>Iniciar Sesión</h1>
 			</div>
 			<div class="contenedorLogin">
-				<form class="form-container" #login_form="ngForm" novalidate="novalidate" autocomplete="off">
+				<form class="form-container" #login_form="ngForm" novalidate="novalidate" autocomplete="off" oncopy="return false" onpaste="return false">
 					<!--nombreUsuario--->
 					<div class="form-group m-b-20">
 						<input type="text"
@@ -34,8 +34,11 @@
 						name="LoginID"  
 						#username="ngModel"
 						[(ngModel)]="loading_data.LoginID"
+						minlength = "5"
+						maxlength = "20"
 						required="true"/>
-						<p *ngIf="username.errors && username.errors.required&& submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>El usuario es requerido</p>
+						<p *ngIf="username.errors && username.errors.required && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>El usuario es requerido</p>
+						<p *ngIf="username.errors && username.errors.minlength && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>Ingrese al menos 5 caracteres en este campo</p>
 					</div>
 					<!--contraseñaUsuario--->
 					<div>
@@ -46,9 +49,12 @@
 						name="Contrasenia" 
 						#password="ngModel"
 						[(ngModel)]="loading_data.Contrasenia"
+						minlength = "8"
+						maxlength = "30"
 						pattern="[0-9|a-z|A-Z|_]+"
 						required="true"/>
-						<p *ngIf="password.errors && password.errors.required&& submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>La contraseña es requerida</p>
+						<p *ngIf="password.errors && password.errors.required && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>La contraseña es requerida</p>
+						<p *ngIf="password.errors && password.errors.minlength && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>Ingrese al menos 8 caracteres en este campo</p>
 						<br/>
 					</div>
 					<!--botonLogin--->

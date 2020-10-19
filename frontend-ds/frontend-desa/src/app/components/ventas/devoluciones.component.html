@@ -158,20 +158,22 @@
             <!--Tercera Columna -->
             <div class="separacionInfo2 nada container-md">
 
-                <form>
+                <form ngNativeValidate #form3>
                     <label>Cantidad devuelta: </label>
                     <input type = "text"
                     class = "tamañoInput form-control"
-                    [(ngModel)] = "Productos.Cantidad_devuelta"
+                    [(ngModel)] = "Productos.Cantidad_devuelta" 
+                    maxlength = "3"
+                    pattern="^[0-9]" 
+                    required = "true"
+                    
                     [ngModelOptions] = "{standalone:true}"
                     > 
-                </form>
                 
                 <p></p>
 
-                <form>
                     <div class="">
-                        <button (click)="AgregarDevolucion()" class="boton btn btn-primary form-group col-sm-3">Registrar venta</button>
+                        <button (click)="form3.checkValidity() ? AgregarDevolucion() : AgregarDevolucion()" class="boton btn btn-primary form-group col-sm-3">Registrar venta</button>
                     </div>
                     
                 </form>
