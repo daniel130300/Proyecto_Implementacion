@@ -15,53 +15,61 @@
         </div>
         
         <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+
         <div class="contenedorInformativo">
             
-            <form ngNativeValidate #form>
+            <form ngNativeValidate #form2>
 
-                <div class="mov container-md">
+                <div class = "mov container-md">
                 
                     <p></p>
-                        <label>Identidad: </label>
-                        <input type = "text"
-                            class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Identidad"
-                            [ngModelOptions] = "{standalone:true}"
-                            maxlength = "13"
-                            minlength = "13"
-                            pattern = "^[0-9]+$"
-                            required = "true"
-                        >
-                        <p></p>
-                        <label>Nombre: </label>
-                        <input type = "text"
-                            class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Nombre"
-                            [ngModelOptions] = "{standalone:true}"
-                            maxlength = "100"
-                            required = "true"
-                        >
-                        <p></p>
-                        <label>Apellido: </label>
-                        <input type = "text"
-                            class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Apellido"
-                            
-                            [ngModelOptions] = "{standalone:true}"
-                            maxlength = "100"
-                            required = "true"
-                        >
-                        <p></p>
-                        <label>Teléfono: </label>
-                        <input type = "tel"
-                            class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Telefono"
-                            [ngModelOptions] = "{standalone:true}"
-                            maxlength = "20"
-                            required = "true"
-                            pattern = "^[0-9]+$"
-                        >
-                        
+                    <label>Identidad: </label>
+                    <input type = "text"
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Empleado.Identidad"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "13"
+                        minlength = "13"
+                        pattern = "^[0-9]+$"
+                        required
+                    >
+                    
+                    <p></p>
+                    <label>Nombre: </label>
+                    <input type = "text"
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Empleado.Nombre"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "100"
+                        minlength = "3"
+                        pattern = "^[a-zA-Z\s]*$"
+                        required
+                    >
+
+                    <p></p>
+                    <label>Apellido: </label>
+                    <input type = "text"
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Empleado.Apellido"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "100"
+                        minlength = "3"
+                        pattern = "^[a-zA-Z\s]*$"
+                        required
+                    >
+
+                    <p></p>
+                    <label>Teléfono: </label>
+                    <input type = "tel"
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Empleado.Telefono"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "8"
+                        minlength = "8"
+                        pattern = "[0-9]{8}"
+                        required
+                    >   
+
                 </div>
                     
                 <div class="separacionInfo nada container-md">
@@ -73,8 +81,8 @@
                             [(ngModel)] = "Empleado.Email"
                             [ngModelOptions] = "{standalone:true}"
                             maxlength = "150"
-                            required = "true"
                             pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+                            required
                         >
 
                         <p></p>
@@ -84,83 +92,92 @@
                             [(ngModel)] = "Empleado.Direccion"
                             [ngModelOptions] = "{standalone:true}"
                             maxlength = "300"
-                            required = "true"
+                            minlength = "10"
+                            required
                         >
+
                         <p></p>
                         <label>Salario: </label>
                         <input type = "number"
                             class = "tamañoInput form-control"
                             [(ngModel)] = "Empleado.Salario"
                             [ngModelOptions] = "{standalone:true}"
-                            maxlength = "8"
+                            max = "99999"
+                            min = "1000"
                             pattern = "^[0-9]+$"
                         >
+
                         <p></p>
                         <label>Nombre de usuario: </label>
                         <input type = "text"
                             class = "tamañoInput form-control"
                             [(ngModel)] = "Empleado.LoginID"
                             [ngModelOptions] = "{standalone:true}"
-                            maxlength = "50"
-                            required = "true"
+                            maxlength = "20"
+                            minlength = "5"
+                            pattern = "[a-zA-Z0-9]+"
+                            required
                         >
 
                 </div>
 
                 <div class="separacionInfo2 nada container-md">
 
-                        <p></p>
-                        <label>Contraseña: </label>
-                        <input type = "password"
-                            onmouseover = "this.type = 'text'"
-                            onmouseout = "this.type = 'password'"
-                            class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Contrasenia"
-                            [ngModelOptions] = "{standalone:true}"
-                            maxlength = "150"
-                            minlength = "8"
-                            required = "true"
-                        >
-                        <p></p>
-                        <label>Fecha de nacimiento: </label>
-                        <input type = "date"
-                            onkeydown = "return false"
-                            class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Fecha_nacimiento"
-                            [ngModelOptions] = "{standalone:true}"
-                            required = "true"
-                        >
+                    <p></p>
+                    <label>Contraseña: </label>
+                    <input type = "password"
+                        onmouseover = "this.type = 'text'"
+                        onmouseout = "this.type = 'password'"
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Empleado.Contrasenia"
+                        [ngModelOptions] = "{standalone:true}"
+                        maxlength = "30"
+                        minlength = "8"
+                        required
+                    >
 
-                        <p></p>
-                        <label>Puesto: </label>
-                        <select
-                            class = "tamañoInput form-control input"
-                            [(ngModel)] = "Empleado.Id_puesto"
-                            [ngModelOptions] = "{standalone:true}"
-                            required = "true"
-                            
-                        >
-                        <option value="">Seleccione un puesto</option>
-                        <option *ngFor="let puesto of listado_puestos"
-                        [value]="puesto.Id_puesto">{{puesto.Descripcion_puesto}}</option>
-                        </select>
-                        
-                        <p></p>
-                        <button (click)="form.checkValidity() ? insertar_empleado() : null" class="tamañoBoton btn btn-primary">Guardar registro</button>
+                    <p></p>
+                    <label>Fecha de nacimiento: </label>
+                    <input type = "date"
+                        min = "1950-01-01"
+                        max = "2005-01-01"
+                        onkeydown = "return false"
+                        class = "tamañoInput form-control"
+                        [(ngModel)] = "Empleado.Fecha_nacimiento"
+                        [ngModelOptions] = "{standalone:true}"
+                        required
+                    >
+
+                    <p></p>
+                    <label>Puesto: </label>
+                    <select
+                        class = "tamañoInput form-control input"
+                        [(ngModel)] = "Empleado.Id_puesto"
+                        [ngModelOptions] = "{standalone:true}"
+                        required
+                    >
+                    <option value = "">-Seleccione un puesto-</option>
+                    <option *ngFor = "let puesto of listado_puestos"
+                    [value] = "puesto.Id_puesto">{{puesto.Descripcion_puesto}}</option>
+                    </select>
+                    
+                    <p></p>
+                    <button type = "submit" (click) = "form2.checkValidity() ? insertar_empleado() : null" class = "tamañoBoton btn btn-primary">Guardar registro</button>
                     
                 </div>
+                
             </form>
+                
         </div>
         
-        <div class="contenedorInformativo2">
-            <div class="nada container-md">
+        <div class = "contenedorInformativo2">
 
-                <p></p>
-                <table class = "table table-dark table-responsive">
+            <div class = "nada container-md">
+
+                <table class = "table table-dark">
             
                     <thead>
                         <tr>
-            
                             <th>Identidad</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
@@ -176,7 +193,6 @@
                             <th>Puesto</th>
                             <th></th>
                             <th></th>
-            
                         </tr>
                     </thead>
             
@@ -225,16 +241,16 @@
 	</div>
 </body>
 
-<div class="modal fade melvin" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class = "modal fade melvin" id = "exampleModal" tabindex = "-1" role = "dialog" aria-labelledby = "exampleModalLabel" aria-hidden = "true">
                     
     <div class="modal-dialog">
         <div class="modal-content ">
             
             <div class="modal-header">
 
-                <h5 class="modal-title" id="exampleModalLabel">Editar Empleado</h5>
+                <h5 class = "modal-title" id = "exampleModalLabel">Editar Empleado</h5>
 
-                <button (click)="limpiar_empleado()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button (click) = "limpiar_empleado()" type = "button" class = "close" data-dismiss = "modal" aria-label = "Close">
 
                     <span aria-hidden="true">&times;</span>
 
@@ -242,9 +258,10 @@
 
             </div>
 
-            <div class="modal-body">
+            <div class = "modal-body">
                 <form ngNativeValidate #form>
                     
+                    <p></p>
                     <label>Identidad: </label>
                     <input type = "text"
                         class = "form-control"
@@ -253,83 +270,103 @@
                         maxlength = "13"
                         minlength = "13"
                         pattern = "^[0-9]+$"
-                        required = "true"
+                        required
                     >
 
+                    <p></p>
                     <label>Nombre: </label>
                     <input type = "text"
-                        class = "form-control"
+                        class = "tamañoInput form-control"
                         [(ngModel)] = "Empleado.Nombre"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "100"
-                        required = "true"
+                        minlength = "3"
+                        pattern = "^[a-zA-Z\s]*$"
+                        required
                     >
 
+                    <p></p>
                     <label>Apellido: </label>
                     <input type = "text"
-                        class = "form-control"
+                        class = "tamañoInput form-control"
                         [(ngModel)] = "Empleado.Apellido"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "100"
-                        required = "true"
+                        minlength = "3"
+                        pattern = "^[a-zA-Z\s]*$"
+                        required
                     >
 
+                    <p></p>
                     <label>Teléfono: </label>
                     <input type = "text"
                         class = "form-control"
                         [(ngModel)] = "Empleado.Telefono"
                         [ngModelOptions] = "{standalone:true}"
-                        maxlength = "20"
-                        required = "true"
+                        maxlength = "8"
+                        minlength = "8"
                         pattern = "^[0-9]+$"
+                        required
                     >
 
+                    <p></p>
                     <label>Correo electrónico: </label>
                     <input type = "text"
                         class = "form-control"
                         [(ngModel)] = "Empleado.Email"
                         [ngModelOptions] = "{standalone:true}"
-                        maxlength = "150"
-                        required = "true"
+                        maxlength = "85"
+                        minlength = "5"
                         pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+                        required
                     >
 
+                    <p></p>
                     <label>Dirección: </label>
                     <input type = "text"
                         class = "form-control"
                         [(ngModel)] = "Empleado.Direccion"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "300"
-                        required = "true"
+                        minlength = "15"
+                        required
                     >
 
+                    <p></p>
                     <label>Salario: </label>
                     <input type = "text"
                         class = "form-control"
                         [(ngModel)] = "Empleado.Salario"
                         [ngModelOptions] = "{standalone:true}"
-                        maxlength = "8"
+                        maxlength = "6"
+                        minlength = "4"
                         pattern = "^[0-9]+$"
                     >
-
+                    
+                    <p></p>
                     <label>Nombre de usuario: </label>
                     <input type = "text"
                         class = "form-control"
                         [(ngModel)] = "Empleado.LoginID"
                         [ngModelOptions] = "{standalone:true}"
-                        maxlength = "50"
-                        required = "true"
+                        maxlength = "20"
+                        minlength = "5"
+                        required
                     >
 
+                    <p></p>
                     <label>Fecha de nacimiento: </label>
                     <input type = "date"
+                        min = "1950-01-01"
+                        max = "2005-01-01"
                         class = "form-control"
                         onkeydown = "return false"
                         [(ngModel)] = "Empleado.Fecha_nacimiento"
                         [ngModelOptions] = "{standalone:true}"
-                        required = "true"
+                        required
                     >
 
+                    <p></p>
                     <label>Fecha de contratación: </label>
                     <input type = "date"
                         onkeydown = "return false"
@@ -337,39 +374,42 @@
                         [(ngModel)] = "Empleado.Fecha_contratacion"
                         [ngModelOptions] = "{standalone:true}"
                         readonly = "true"
-                        required = "true"
+                        required
                     >
 
+                    <p></p>
                     <label>Fecha de despido: </label>
                     <input type = "date"
                         onkeydown = "return false"
                         class = "form-control"
                         [(ngModel)] = "Empleado.Fecha_despido"
                         [ngModelOptions] = "{standalone:true}"
-                        required = "true"
+                        required
                     >
 
+                    <p></p>
                     <label>Estado: </label>
                     <select
                         class = "form-control input"
                         [(ngModel)] = "Empleado.Id_estatus"
                         [ngModelOptions] = "{standalone:true}"
-                        required = "true"
+                        required
                     >
-                    <option value="">Seleccione un estado</option>
-                    <option *ngFor="let estado of listado_estatus"
+                    <option value = "">-Seleccione un estado-</option>
+                    <option *ngFor = "let estado of listado_estatus"
                     [value]="estado.Id_estatus">{{estado.Descripcion_estatus}}</option>
                     </select>
 
+                    <p></p>
                     <label>Puesto: </label>
                     <select
                         class = "form-control input"
                         [(ngModel)] = "Empleado.Id_puesto"
                         [ngModelOptions] = "{standalone:true}"
-                        required = "true"
+                        required
                     >
-                    <option value="">Seleccione un puesto</option>
-                    <option *ngFor="let puesto of listado_puestos"
+                    <option value = "">-Seleccione un puesto-</option>
+                    <option *ngFor = "let puesto of listado_puestos"
                     [value]="puesto.Id_puesto">{{puesto.Descripcion_puesto}}</option>
                     </select>
 
@@ -378,9 +418,9 @@
 
             <div class="modal-footer">
 
-                <button (click)="limpiar_empleado()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button (click) = "limpiar_empleado()" type="button" class="btn btn-secondary" data-dismiss = "modal">Cerrar</button>
 
-                <button (click)="form.checkValidity() ? update_empleado(Empleado.Id_empleado) : null" type="button" class="btn btn-primary">Guardar</button>
+                <button (click) = "form.checkValidity() ? update_empleado(Empleado.Id_empleado) : null" type = "button" class="btn btn-primary">Guardar</button>
                 
             </div>
 
@@ -391,6 +431,7 @@
 
 <!----------------TODO EL CSS------------------------------>
 <style>
+
     *{
         block-size: border-box;
         margin: 0;
@@ -561,9 +602,11 @@
         height: 40px;
         margin-top: 20px;
     }
+
 </style>
 
 <style>
+
     @media (max-width: 480px){
 
         .tituloEncabezado{
@@ -684,4 +727,5 @@
             width: 530px;
         }
     }
+
 </style>
