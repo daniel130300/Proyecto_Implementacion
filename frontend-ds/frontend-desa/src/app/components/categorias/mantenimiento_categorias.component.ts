@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
-
+const swal = require('sweetalert2');
 
 @Component({
     selector: 'mantenimiento_categorias',
     templateUrl: './mantenimiento_categorias.component.html'
 })
-//BEBEJITAAAAA UAAAA JIII GUAPO
-//HECTOR ES MAMON
+
 export class GetCategoriasComponent {
     
     public listado_categorias: any[];
@@ -72,21 +71,42 @@ export class GetCategoriasComponent {
 
     update_categorias()
     {
-        var response;
-        this.service.update_categorias(this.Categorias).subscribe(
-            data=>response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
-   
-                this.Categorias = 
+        let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
+
+        this.Categorias = {
+            Id_categoria: this.Categorias.Id_categoria,
+            Descripcion_categoria: this.Categorias.Descripcion_categoria
+        }
+        if(this.Categorias.Descripcion_categoria == ""){
+            swal.fire({
+                title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
+                icon: 'error'
+            });
+        }else
+            if(regexpLetter.test(this.Categorias.Descripcion_categoria) == false){
+                swal.fire({
+                    title: "Solo puede escribir letras. Vuelva a intentarlo.",
+                    icon: 'error'
+                });
+            }else
                 {
-                    Id_categoria: "",
-                    Descripcion_categoria: ""
+                    var response;
+                    this.service.update_categorias(this.Categorias).subscribe(
+                    data=>response = data,
+                    err => {
+                        console.log("Error al consultar servicio"); 
+                    },
+                    ()=>{
+   
+                        this.Categorias = 
+                        {
+                            Id_categoria: "",
+                            Descripcion_categoria: ""
+                        }
+                        this.get_categorias();
+                    }
+                );
                 }
-                this.get_categorias();
-            }
-        );
+        
     }
 }

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Variedades K&D</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Variedades K&D</h1>
+	</header>
+	
+	<div class="contedorPrincipal">
+		<div class="contenedorBienvenido">
+			<h1>BIENVENIDO A VARIEDADES K&D</h1>
+			
+		</div>
+		<div class="contenedorInformativo">
+			<div class="tituloLogin">
+				<img src="../../../assets/img/usuarioLogin.png"> 
+				<h1>Recuperación de Contraseña</h1>
+            </div>
+            <br/>
+			<div class="contenedorLogin">
+				<form class="form-container" #login_form="ngForm" novalidate="novalidate" autocomplete="off" oncopy="return false" onpaste="return false">
+					<!--nombreUsuario--->
+					<div class="form-group m-b-20">
+						<input type="email"
+						class = "form-control form-control-lg inverse-mode login-input" 
+						placeholder="Correo electrónico"
+						id="LoginID"
+						name="LoginID" 
+						minlength = "5"
+						maxlength = "20"
+						required="true"/>
+					</div>
+					
+					
+					<!--botonLogin--->
+                    <div class="login-buttons">
+						<button 
+							type="submit"
+							class="tamañoBoton btn btn-primary btn-lock btn-lg">
+							<span><i class="fa fa-sing-in-alt"></i>Enviar correo</span>
+						</button>
+					</div>
+					
+					<br/>
+
+					<div>
+						<button 
+							(click) = "volverpro()"
+							class="regresar_button btn btn-primary btn-lock btn-lg">
+							<span>Regresar</span>
+						</button>
+                    </div>
+                    
+					<style>
+						.logging-buttons 
+						{
+							margin-left: 15px;
+						}
+                    </style>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

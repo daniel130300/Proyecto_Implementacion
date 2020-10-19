@@ -132,14 +132,16 @@
 			<div class="separacionInfo nada container-md">
 				<form>
 					<label class="ml-1 mr-2 col-form-label">Abono: </label>
-							<div class="">
-								<input type = "text"
-								class = "tamañoInput form-control"
-								[(ngModel)] = "Cantidad_abono"
-								[ngModelOptions] = "{standalone:true}"
-								>
-							</div>
-                </form>
+					<div class="">
+						<input type = "text"
+						class = "tamañoInput form-control"
+						[(ngModel)] = "Cantidad_abono"
+						[ngModelOptions] = "{standalone:true}"
+						maxlength="6"
+						minlength="1"
+						>
+					</div>
+				</form>
 			</div>
 
 			<div class="separacionInfo0 nada container-md">

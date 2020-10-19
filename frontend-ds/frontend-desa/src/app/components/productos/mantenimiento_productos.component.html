@@ -468,7 +468,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click) = "limpiaralv()">Cerrar</button>
-                <button (click) = "form.checkValidity() ? update_producto(Producto.Id_producto) : null" (click) = "form.checkValidity() ? update_productos_proveedores() : null" type="button" class="btn btn-primary btn-sm">Guardar</button>
+                <button (click) = "update_producto(Producto.Id_producto)" (click) = "update_productos_proveedores()" type="button" class="btn btn-primary btn-sm">Guardar</button>
         
             </div>
         </div>

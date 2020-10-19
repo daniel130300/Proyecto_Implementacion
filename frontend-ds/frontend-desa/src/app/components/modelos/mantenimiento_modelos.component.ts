@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
-
+const swal = require('sweetalert2');
 
 @Component({
     selector: 'mantenimiento_modelos',
@@ -108,24 +108,47 @@ export class GetModelosComponent {
 
     update_modelo()
     {
-        var response;
-        this.service.update_modelo(this.Modelo).subscribe (
-            data => response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
-   
-                this.Modelo = 
+        let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
+
+        this.Modelo = {
+            Id_modelo: this.Modelo.Id_modelo,
+            Descripcion_modelo: this.Modelo.Descripcion_modelo,
+            Id_marca: this.Modelo.Id_modelo,
+            Id_subcategoria: this.Modelo.Id_subcategoria
+        }
+        if(this.Modelo.Descripcion_modelo == "" || this.Modelo.Id_marca == "" || this.Modelo.Id_modelo == ""){
+            swal.fire({
+                title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
+                icon: 'error'
+            });
+        }else
+            if(regexpLetter.test(this.Modelo.Descripcion_modelo) == false){
+                swal.fire({
+                    title: "Solo puede escribir letras. Vuelva a intentarlo.",
+                    icon: 'error'
+                });
+            }else
                 {
-                    Id_modelo: "",
-                    Descripcion_modelo: "",
-                    Id_marca: "",
-                    Id_subcategoria: "",
+                    var response;
+                    this.service.update_modelo(this.Modelo).subscribe (
+                    data => response = data,
+                    err => {
+                        console.log("Error al consultar servicio"); 
+                    },
+                    ()=>{
+   
+                      this.Modelo = 
+                        {
+                            Id_modelo: "",
+                            Descripcion_modelo: "",
+                            Id_marca: "",
+                            Id_subcategoria: "",
+                        }
+                        this.get_modelos();
+                    }
+                    );
                 }
-                this.get_modelos();
-            }
-        );
+        
     }
 
     delete_modelo(id_modelo)

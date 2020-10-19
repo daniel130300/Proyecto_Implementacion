@@ -120,15 +120,19 @@ export class GetVentasPendientesCobroComponent {
 
     InsertarAbonoValidado()
     {
-        if (this.Cantidad_abono <= this.Cantidad_pendiente)
+        if (this.Cantidad_abono <= this.Cantidad_pendiente && this.Cantidad_abono >0)
         {   
             this.insertar_abono_venta();
+            swal.fire({
+                icon: 'success',
+                title:"Abono agregado exitosamente."
+              })
         }
         else
         {
             swal.fire({
                 icon: 'error',
-                title:"La cantidad abonada no puede ser mayor a la cantidad pendiente"
+                title:"La cantidad abonada no puede ser mayor a la cantidad pendiente y(o) menor a 0"
               })
         }
     }

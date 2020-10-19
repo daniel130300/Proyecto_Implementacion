@@ -59,6 +59,8 @@ import {GetMenuVentasComponent} from './components/menu/menu_ventas.component';
 
 import {GetCajasComponent} from './components/menu/cajas.component';
 
+import {GetRecuperacionContrasenia} from './components/login/recuperacion_contrasenia';
+
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -88,7 +90,8 @@ import {FormsModule, ReactiveFormsModule } from '@angular/forms';
     GetDevolucionesComponent,
     GetMenuVentasComponent,
     GetVentasIncobrablesComponent,
-    GetCajasComponent
+    GetCajasComponent,
+    GetRecuperacionContrasenia
     
   ],
   imports: [ //Modulos
