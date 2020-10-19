@@ -24,8 +24,7 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Nombre_compania"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="15"
-                            minlength="3"
+                            pattern="^[A-Za-z0-9 ]{3,15}$"
                             required="true"
                         >
                         <p></p>
@@ -56,8 +55,7 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Direccion"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="300"
-                            minlength="10"
+                            pattern="^[A-Za-z0-9.# ]{10,300}$"
                             required="true"
                         >
                     
@@ -69,8 +67,7 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Nombre_contacto"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="20"
-                            minlength="4"
+                            pattern="^[a-zA-Z ]{3,20}"
                             required="true"
                         >
                         <p></p>
@@ -79,9 +76,7 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Apellido_contacto"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="20"
-                            minlength="8"
-                            pattern="[a-zA-Z ]{2,254}"
+                            pattern="^[a-zA-Z ]{4,20}"
                             required="true"
                         >
                         <p></p>
@@ -90,8 +85,7 @@
                             class="tamañoInput form-control"
                             [(ngModel)]="Persona.Telefono_contacto"
                             [ngModelOptions]="{standalone: true}"
-                            maxlength="8"
-                            minlength="8"
+                            pattern="^[+ 0-9]{8}$"
                             required="true"
                         >
                         <p></p>
@@ -102,6 +96,7 @@
                             [ngModelOptions]="{standalone: true}"
                             minlength="11"
                             maxlength="64"
+                            pattern="^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                             required="true"
                         >
                     

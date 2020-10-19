@@ -135,8 +135,9 @@ export class GetClientesComponent{
     update_cliente(){
         let regexpNumber: RegExp  = /^[+ 0-9]{8}$/;
        let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}/;
+       let regexpLetter1: RegExp  = /^[a-zA-Z ]{3,20}/;
         let regexpMix: RegExp  = /^[A-Za-z0-9 ]{3,15}$/;
-        let regexpEmail: RegExp  = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9]{11,64}(?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9]{4})?$/;
+        let regexpEmail: RegExp  = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
         
         this.Persona= {
             Id_cliente:this.Persona.Id_cliente,
@@ -165,7 +166,7 @@ export class GetClientesComponent{
                     icon: 'error'
                 });
             }else{
-                if(regexpLetter.test(this.Persona.Nombre_contacto)==false||regexpLetter.test(this.Persona.Apellido_contacto)==false)
+                if(regexpLetter1.test(this.Persona.Nombre_contacto)==false||regexpLetter.test(this.Persona.Apellido_contacto)==false)
                 {
                     swal.fire({
                         title: "Solo se ingresan letras, por favor hágalo para poder guardar.",
