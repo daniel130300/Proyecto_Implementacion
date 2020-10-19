@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 
+const swal = require( 'sweetalert2' );
 
 @Component({
     selector: 'mantenimiento_proveedores',
@@ -32,26 +33,54 @@ export class GetProveedoresComponent {
         this.get_ciudades();
     }
 
+    limpiar_proveedor(){
+
+        this.Proveedor = {
+
+            Id_proveedor: "",
+            Nombre_compania:"",
+            Direccion:"",
+            Nombre_contacto:"",
+            Apellido_contacto:"",
+            Telefono_contacto:"",
+            Email_contacto: "",
+            Id_ciudad: "",
+        }   
+    }
 
     insertar_proveedor(){
+
         var response;
-        this.service.insertar_proveedor(this.Proveedor).subscribe(
-            data=>response = data,
+
+        this.service.insertar_proveedor( this.Proveedor ).subscribe(
+
+            data => response = data,
+
             err => {
-                console.log("Error al consultar servicio"); 
+
+                console.log( "Error al consultar servicio" ); 
             },
-            ()=>{
+
+            () => {
+
                     this.Proveedor = {
-                        Id_proveedor: "",
-                        Nombre_compania:"",
-                        Direccion:"",
-                        Nombre_contacto:"",
-                        Apellido_contacto:"",
-                        Telefono_contacto:"",
-                        Email_contacto: "",
-                        Id_ciudad: "",
+                    Id_proveedor: "",
+                    Nombre_compania:"",
+                    Direccion:"",
+                    Nombre_contacto:"",
+                    Apellido_contacto:"",
+                    Telefono_contacto:"",
+                    Email_contacto: "",
+                    Id_ciudad: "",
                 }
+
                 this.get_proveedores();
+
+                swal.fire({
+
+                    title: "¡Agregado exitosamente!",
+                    icon:  'success'
+                });
             }
         );
     }
