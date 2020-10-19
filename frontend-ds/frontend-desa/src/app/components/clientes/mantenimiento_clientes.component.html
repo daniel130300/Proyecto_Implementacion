@@ -16,7 +16,7 @@
 		</div>
         <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
         <div class="contenedorInformativo">
-            <form ngNativeValidate #form>
+            <form ngNativeValidate #form2>
                 <div class="nada container-md">
                     
                         <label>Nombre Cliente:</label>
@@ -59,7 +59,6 @@
                             [ngModelOptions]="{standalone: true}"
                             maxlength="300"
                             minlength="10"
-                            pattern="^[A-Za-z0-9.# ]+$"
                             required="true"
                         >
                     
@@ -111,7 +110,7 @@
                         >
                     
                     <p></p>
-                    <button (click)="form.checkValidity() ? insertar_cliente() : null" class="tamañoBoton btn btn-primary">Guardar Registro</button>
+                    <button (click)="form2.checkValidity() ? insertar_cliente() : null" class="tamañoBoton btn btn-primary">Guardar Registro</button>
                     
                 </div>
             </form>
@@ -227,7 +226,6 @@
                     [ngModelOptions]="{standalone: true}"
                     maxlength="400"
                     minlength="10"
-                    pattern="^[A-Za-z0-9.# ]+$"
                     required="true"
                 >
                 <label>Nombre Contacto: </label>
