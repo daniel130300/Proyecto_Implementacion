@@ -23,14 +23,14 @@ export class GetDevolucionesComponent
         this.listado_ventas=[];
     }
     
-    public cantidad=
+    public cantidad =
     {
         Id_venta:"",
         Cantidad_devuelta: "",
         Id_producto:"",
     }
 
-    public Devoluciones=
+    public Devoluciones =
     {
         Fecha_Venta:"",
         Informacion_adicional_producto:""
@@ -45,7 +45,6 @@ export class GetDevolucionesComponent
     }
 
     ngOnInit(){
-
         this.get_devoluciones_venta();
     }
 
@@ -79,10 +78,6 @@ export class GetDevolucionesComponent
             }
         )
     }
-
-    //
-
-    //Funcion para pasar los datos de la tabla al textbox
     
     pasarDatosVenta(Devoluciones)
     {
@@ -132,6 +127,7 @@ export class GetDevolucionesComponent
                  Informacion_adicional_producto:""
                  }
                 this.Id_venta=""
+                this.get_devoluciones_venta()
             }  
         );
     }
@@ -140,22 +136,39 @@ export class GetDevolucionesComponent
 
     AgregarDevolucion()
     {
-        if (this.Productos.Cantidad_devuelta < this.Productos.Cantidad_vendida)
+        if (this.Devoluciones.Fecha_Venta == "")
         {
-            this.listado_productos.unshift(this.Productos);
-            console.log(this.listado_productos); 
-            this.update_Cantidad(this.Id_venta);
             swal.fire({
-                icon: 'information',
-                title:"!Agregado exitoso!"
+                icon: 'error',
+                title:"No ha seleccionado una venta"
+              })
+        }
+        else if (this.Productos.Id_producto == "")
+        {
+            swal.fire({
+                icon: 'error',
+                title:"No ha seleccionado un producto"
               })
         }
         else
         {
-            swal.fire({
-                icon: 'error',
-                title:"Cantidad devuelta excede la cantidad vendida"
-              })
+            if (this.Productos.Cantidad_devuelta != "" && parseInt(this.Productos.Cantidad_devuelta) > 0 && parseInt(this.Productos.Cantidad_devuelta) <= parseInt(this.Productos.Cantidad_vendida))
+            {
+                this.listado_productos.unshift(this.Productos);
+                console.log(this.listado_productos); 
+                this.update_Cantidad(this.Id_venta);
+                swal.fire({
+                    icon: 'success',
+                    title:"¡Agregado exitoso!"
+                  })
+            }
+            else if (parseInt(this.Productos.Cantidad_devuelta) > parseInt(this.Productos.Cantidad_vendida))
+            {
+                swal.fire({
+                    icon: 'error',
+                    title:"Cantidad devuelta excede la cantidad vendida"
+                  })
+            }
         }
     }
 }

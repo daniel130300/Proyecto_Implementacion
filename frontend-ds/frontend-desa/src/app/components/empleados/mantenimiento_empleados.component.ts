@@ -76,49 +76,47 @@ export class GetEmpleadosComponent {
 
         var response;
 
-        if( this.Empleado.Identidad != "" && this.Empleado.Nombre != "" && this.Empleado.Apellido != "" && this.Empleado.Telefono != "" && this.Empleado.Email != "" && this.Empleado.Direccion != "" && this.Empleado.Salario != "" && this.Empleado.LoginID != "" && this.Empleado.Contrasenia != "" && this.Empleado.Fecha_nacimiento != "" && this.Empleado.Id_puesto != "" ){
-            
-            this.service.insertar_empleado( this.Empleado ).subscribe(
+        this.service.insertar_empleado( this.Empleado ).subscribe(
 
-                data => response = data,
-    
-                err => {
-    
-                    console.log( "Error al consultar el servicio." ); 
-                },
-    
-                () => {
-    
-                    this.Empleado = {
-    
-                        Id_empleado: "",
-                        Identidad: "",
-                        Nombre: "",
-                        Apellido: "",
-                        Telefono: "",
-                        Email: "",
-                        Direccion: "",
-                        Salario: "",
-                        LoginID: "",
-                        Contrasenia: "",
-                        Fecha_nacimiento: "",
-                        Fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
-                        Fecha_despido: null,
-                        Id_estatus: "1",
-                        Descripcion_estatus: "",
-                        Id_puesto: "",
-                        Descripcion_puesto: ""
-                    }
-                    
-                    this.get_empleados();
-    
-                    swal.fire({
-                        title: "¡Usuario agregado exitosamente!",
-                        icon: 'success'
-                    });
+            data => response = data,
+
+            err => {
+
+                console.log( "Error al consultar el servicio." ); 
+            },
+
+            () => {
+
+                this.Empleado = {
+
+                    Id_empleado: "",
+                    Identidad: "",
+                    Nombre: "",
+                    Apellido: "",
+                    Telefono: "",
+                    Email: "",
+                    Direccion: "",
+                    Salario: "",
+                    LoginID: "",
+                    Contrasenia: "",
+                    Fecha_nacimiento: "",
+                    Fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
+                    Fecha_despido: null,
+                    Id_estatus: "1",
+                    Descripcion_estatus: "",
+                    Id_puesto: "",
+                    Descripcion_puesto: ""
                 }
-            );
-        }        
+                
+                this.get_empleados();
+
+                swal.fire({
+                    
+                    title: "¡Usuario agregado exitosamente!",
+                    icon:  'success'
+                });
+            }
+        );       
     }
     
     get_empleados(){
