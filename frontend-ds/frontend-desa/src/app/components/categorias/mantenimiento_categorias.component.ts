@@ -7,8 +7,7 @@ import { Router } from '@angular/router';
     selector: 'mantenimiento_categorias',
     templateUrl: './mantenimiento_categorias.component.html'
 })
-//BEBEJITAAAAA UAAAA JIII GUAPO
-//HECTOR ES MAMON
+
 export class GetCategoriasComponent {
     
     public listado_categorias: any[];

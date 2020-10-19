@@ -47,7 +47,10 @@ import {GetVentasIncobrablesComponent} from './components/ventas/ventas_incobrab
 import {GetDevolucionesComponent} from './components/ventas/devoluciones.component';
 
 import {GetMenuVentasComponent} from './components/menu/menu_ventas.component';
-import { GetCajasComponent } from './components/menu/cajas.component';
+
+import {GetCajasComponent} from './components/menu/cajas.component';
+
+import {GetRecuperacionContrasenia} from './components/login/recuperacion_contrasenia';
 
 
 const routes: Routes = [
@@ -149,6 +152,10 @@ const routes: Routes = [
         path: 'cajas',
         component: GetCajasComponent
     },
+    {
+        path: 'recuperacion_contrasenia',
+        component: GetRecuperacionContrasenia
+    }
 ];
 
 @NgModule({
