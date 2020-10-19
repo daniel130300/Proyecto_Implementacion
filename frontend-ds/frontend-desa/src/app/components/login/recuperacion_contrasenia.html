@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Variedades K&D</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Variedades K&D</h1>
+	</header>
+	
+	<div class="contedorPrincipal">
+		<div class="contenedorBienvenido">
+			<h1>BIENVENIDOS A VARIEDADES K&D</h1>
+			
+		</div>
+		<div class="contenedorInformativo">
+			<div class="tituloLogin">
+				<img src="../../../assets/img/usuarioLogin.png"> <!--Aloha -->
+				<h1>Recuperación de Contraseña</h1>
+			</div>
+			<div class="contenedorLogin">
+				<form class="form-container" #login_form="ngForm" novalidate="novalidate" autocomplete="off" oncopy="return false" onpaste="return false">
+					<!--nombreUsuario--->
+					<div class="form-group m-b-20">
+						<input type="text"
+						class = "form-control form-control-lg inverse-mode login-input" 
+						placeholder="Nombre Usuario"
+						id="LoginID"
+						name="LoginID"  
+						#username="ngModel"
+						[(ngModel)]="loading_data.LoginID"
+						minlength = "5"
+						maxlength = "20"
+						required="true"/>
+						<p *ngIf="username.errors && username.errors.required && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>El usuario es requerido</p>
+						<p *ngIf="username.errors && username.errors.minlength && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>Ingrese al menos 5 caracteres en este campo</p>
+                    </div>
+                    
+					<div class="login-buttons">
+						<button 
+							(click)="login()"
+							[disabled]="loading"
+							type="submit"
+							class="tamañoBoton btn btn-primary btn-lock btn-lg">
+							<span *ngIf="!loading"><i class="fa fa-sing-in-alt"></i>Iniciar Sesion</span>
+							<span *ngIf="loading"><i class="fa fa-spin fa-spinner"></i>Conectando</span>
+						</button>
+					</div>
+					<style>
+						.logging-buttons 
+						{
+							margin-left: 15px;
+						}
+						
+					
+					</style>
+					<!--<input type="submit" value="Iniciar" (click)="login()">-->
+					<!--<button (click)="login()" class="btn btn-primary">Iniciar Sesion</button>-->
+					<a href="">¿Has olvidado tu contraseña?</a>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
