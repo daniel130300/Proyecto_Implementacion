@@ -18,7 +18,7 @@ export class GetVentasPendientesEnvioComponent {
     public listado_estatus: any[];
     fechas: any[];
     //currentDate = new Date();
-     yesterday = new Date(new Date().setDate(new Date().getDate()-10));
+     yesterday = new Date(new Date().setDate(new Date().getDate()));
 //DECLARAR
     term: any[];
     constructor( public service: AppService ){
@@ -122,15 +122,15 @@ export class GetVentasPendientesEnvioComponent {
                 console.log("Error al consultar servicio"); 
             },
             ()=>{
-                if(this.modifica.Id_venta== null)
+                if(this.modifica.Id_venta == "")
                 {
                     swal.fire({
                         icon: 'error',
-                        title:"Por favor,seleccione una venta de la tabla"
+                        title:"Por favor, seleccione una venta de la tabla"
                     })
                 }
                 else
-                    if(this.modifica.Fecha_entrega== null || this.modifica.Fecha_envio == null)
+                    if(this.modifica.Fecha_entrega == "" || this.modifica.Fecha_envio == "")
                     {
                         swal.fire({
                             icon: 'error',
@@ -154,6 +154,12 @@ export class GetVentasPendientesEnvioComponent {
                                     Fecha_envio: "",
                                     Fecha_entrega: ""
                                 }
+
+                                swal.fire({
+                                    title: "Operación realizada exitosamente.",
+                                    icon: 'success'
+                                });
+
                                 this.get_ventas_pendientes_envio();
                             }
             }
