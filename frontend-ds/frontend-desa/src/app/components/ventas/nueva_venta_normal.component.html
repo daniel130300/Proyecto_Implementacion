@@ -108,37 +108,32 @@
 
         <div class="contenedorInformativo2">
             <div class = "c container-fluid mt-3 pl-3"> 
-                <form>
-                    <div class="">
-                        <div class="">
-                            <div class="">
-                                <table class="tablaModificar table table-dark">
-                                    <thead>
-                                        <tr>  
-                                            <th>Cod Producto</th>
-                                            <th>Nombre Producto</th>
-                                            <th>Informacion Adicional</th>
-                                            <th>Precio Referencial Venta</th>
-                                            <th>Cantidad</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr *ngFor = "let produc of listado_productos_agregados">
-                                        <td>{{produc.Id_producto}}</td>
-                                        <td>{{produc.Nombre_producto}}</td>
-                                        <td>{{produc.Informacion_adicional_producto}}</td>
-                                        <td>{{produc.Precio_referencial_venta}}</td>
-                                        <td>{{produc.Cantidad}}</td>
-                                        <td>
-                                            <button (click)="EliminarProductoVenta(produc.Id_producto)" class="btn btn-primary mb-3">Eliminar</button>
-                                       </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>    
+                <form id="venta">
+                    <div>
+                        <table class="tablaModificar table table-dark">
+                            <thead>
+                                <tr>  
+                                    <th>Cod Producto</th>
+                                    <th>Nombre Producto</th>
+                                    <th>Informacion Adicional</th>
+                                    <th>Precio Referencial Venta</th>
+                                    <th>Cantidad</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor = "let produc of listado_productos_agregados">
+                                <td>{{produc.Id_producto}}</td>
+                                <td>{{produc.Nombre_producto}}</td>
+                                <td>{{produc.Informacion_adicional_producto}}</td>
+                                <td>{{produc.Precio_referencial_venta}}</td>
+                                <td>{{produc.Cantidad}}</td>
+                                <td>
+                                    <button (click)="EliminarProductoVenta(produc.Id_producto)" class="btn btn-primary mb-3">Eliminar</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </form>
             </div>

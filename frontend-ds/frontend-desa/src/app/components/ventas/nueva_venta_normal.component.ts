@@ -1,5 +1,9 @@
 import { Component }  from '@angular/core';
 import { AppService } from 'src/app/app.service';
+import jsPDF from 'jspdf';
+import { PdfMakeWrapper, Txt, Table } from 'pdfmake-wrapper';
+import {pdfmake} from 'pdfmake';
+import pdfFonts from "pdfmake/build/vfs_fonts"; 
 const swal = require('sweetalert2');
 
 @Component({
@@ -55,6 +59,41 @@ export class GetVentaNormalComponent
 
     }
 
+    generarpdf()
+    {
+        /*
+        let contenido = document.getElementById("venta").textContent;
+        let pdf = new jsPDF();
+        pdf.text("Instituto Tecnólogico de Administración de Empresas", 20, 20);
+        pdf.text(contenido, 30, 30);
+        pdf.save("PDF_PRUEBA_NUEVA");
+        */
+    
+
+        /*
+        PdfMakeWrapper.setFonts(pdfFonts);
+    
+        const pdf = new PdfMakeWrapper();
+           
+        pdf.header('This is a header');
+        pdf.add('Hello world!');
+        
+        pdf.add(
+            new Txt('hi!').bold().end
+        );
+
+        pdf.add(
+            new Table([
+                [ 'column 1', 'column 2'],
+                [ 'column 1', 'column 2']
+            ]).end
+        );
+        
+        pdf.create().open();
+        */
+       
+    }
+
     
     //Funcion para insertar la venta normal
     insertar_venta_normal(){
@@ -66,6 +105,24 @@ export class GetVentaNormalComponent
         }
         else
         {
+            swal.fire({
+                title: '¿Desea imprimir la factura para esta venta?',
+                showDenyButton: true,
+                confirmButtonText: `Si`,
+                denyButtonText: `No`
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) 
+                {
+                    this.generarpdf();
+                }
+                else if (result.isDenied) 
+                {
+                  
+                }
+              })
+
+
             var response;
             this.service.insertar_venta_normal(this.VentasNormal).subscribe(
                 data=>response = data,
