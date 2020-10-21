@@ -22,7 +22,7 @@
 				<div class= "form-inline">
                     <i class="fas fa-search" aria-hidden="true"></i>
 					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
-
+					<button (click)="generarpdf()" class = "tamañoBoton btn btn-primary">Imprimir PDF</button>
 				</div>
 		    </form>
         </div>
@@ -282,6 +282,7 @@
         width: 180px;
         height: 40px;
         margin-top: 20px;
+		margin-left: 5px;
     }
 </style>
 
