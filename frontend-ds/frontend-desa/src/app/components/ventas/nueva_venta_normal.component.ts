@@ -1,9 +1,7 @@
-import { Component }  from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import jsPDF from 'jspdf';
-import { PdfMakeWrapper, Txt, Table } from 'pdfmake-wrapper';
-import {pdfmake} from 'pdfmake';
-import pdfFonts from "pdfmake/build/vfs_fonts"; 
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 const swal = require('sweetalert2');
 
 @Component({
@@ -61,15 +59,52 @@ export class GetVentaNormalComponent
 
     generarpdf()
     {
-        /*
-        let contenido = document.getElementById("venta").textContent;
-        let pdf = new jsPDF();
-        pdf.text("Instituto Tecnólogico de Administración de Empresas", 20, 20);
-        pdf.text(contenido, 30, 30);
-        pdf.save("PDF_PRUEBA_NUEVA");
-        */
-    
 
+        console.log(this.listado_productos_agregados);
+
+        var fecha_actual = new Date().toLocaleString()
+
+        const doc = new jsPDF();
+
+        const autoTable = 'autoTable';
+
+        doc.setFont("courier");
+
+        doc.setFontSize(20);
+        doc.text("Variedades K y D", 110, 10, {align: "center"});
+        doc.setFontSize(12);
+        doc.text("Dirección: Zonal Belen, cerca de Banco FICOHSA", 45, 20);
+        doc.text("Télefono: (504) 9797-7966", 75, 30);
+        doc.text("Correo: variedades_k_y_d@gmail.com", 65, 40);
+        doc.text("Factura: ", 15, 65);
+        doc.text("Fecha: " + fecha_actual, 15, 75);
+        doc.text("Identidad: " + String(this.VentasNormal.Identidad), 15, 85);
+   
+        var rows = [];
+        
+        this.listado_productos_agregados.forEach(element => {      
+            var temp = [element.Id_producto, element.Nombre_producto, element.Informacion_adicional_producto, element.Precio_referencial_venta, element.Cantidad];
+            rows.push(temp);
+        });
+
+        console.log(rows);
+
+        doc[autoTable]({
+            head: [['Cod Producto', 'Nombre Producto', 'Información Adicional', 'Precio Referencial Venta', 'Cantidad']],
+            body: rows,
+            startY: 100,
+            styles: {font: "courier", fontsize: 12}
+        });
+
+        doc.text("Subtotal: " + String(this.subtotal), 15, 240);
+        doc.text("ISV: " + String(this.isv), 15, 250);
+        doc.text("Total: " + String(this.total), 15, 260);
+
+        doc.text("¡Gracias por su compra!", 75, 280);
+
+
+        doc.save("Factura_prueba");
+        
         /*
         PdfMakeWrapper.setFonts(pdfFonts);
     
@@ -94,10 +129,11 @@ export class GetVentaNormalComponent
        
     }
 
-    
     //Funcion para insertar la venta normal
-    insertar_venta_normal(){
-        if(this.listado_productos_agregados.length == 0){
+    insertar_venta_normal()
+    {
+        if(this.listado_productos_agregados.length == 0)
+        {
             swal.fire({
                 title: "No ha ingresado ningún producto a la compra, por favor hágalo para poder enviar la compra.",
                 icon: 'error'
@@ -105,46 +141,67 @@ export class GetVentaNormalComponent
         }
         else
         {
-            swal.fire({
+            swal.fire
+            ({
                 title: '¿Desea imprimir la factura para esta venta?',
                 showDenyButton: true,
                 confirmButtonText: `Si`,
                 denyButtonText: `No`
-              }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
+            }).then((result) => 
+            {
                 if (result.isConfirmed) 
                 {
                     this.generarpdf();
+                            
+                    var response;
+                    this.service.insertar_venta_normal(this.VentasNormal).subscribe
+                    (
+                        data=>response = data,
+                        err => 
+                        {
+                            console.log("Error al consultar servicio"); 
+                        },
+                        ()=>
+                        {
+                            this.pasarDatosDetalleVenta();
+                            this.VentasNormal = 
+                            {
+                                Fecha_venta: "",
+                                Identidad: "",
+                                ISV: 0.15,
+                                Id_estado_envio:10,
+                                Id_estado_pago:5,
+                                Id_tipo_pago:1,
+                            }
+                        }
+                    );
                 }
                 else if (result.isDenied) 
-                {
-                  
+                {                
+                    var response;
+                    this.service.insertar_venta_normal(this.VentasNormal).subscribe
+                    (
+                        data=>response = data,
+                        err => {
+                            console.log("Error al consultar servicio"); 
+                        },
+                        ()=>
+                        {
+                            this.pasarDatosDetalleVenta();
+                            this.VentasNormal = 
+                            {
+                                Fecha_venta: "",
+                                Identidad: "",
+                                ISV: 0.15,
+                                Id_estado_envio:10,
+                                Id_estado_pago:5,
+                                Id_tipo_pago:1,
+                            }
+                        }
+                    );                       
                 }
-              })
-
-
-            var response;
-            this.service.insertar_venta_normal(this.VentasNormal).subscribe(
-                data=>response = data,
-                err => {
-                    console.log("Error al consultar servicio"); 
-                },
-                ()=>{
-                        console.log(this.VentasNormal);
-                        this.pasarDatosDetalleVenta();
-                        this.VentasNormal = {
-                            Fecha_venta: "",
-                            Identidad: "",
-                            ISV: 0.15,
-                            Id_estado_envio:10,
-                            Id_estado_pago:5,
-                            Id_tipo_pago:1,
-                    }
-                
-                }
-            );
+            })
         }
-
     }
   
     //************************************************************ */
@@ -217,7 +274,6 @@ export class GetVentaNormalComponent
                 if (this.Productos.Cantidad < this.Productos.Stock)
                 {
                     this.listado_productos_agregados.unshift(this.Productos);
-                    console.log(this.listado_productos_agregados); 
                     this.calculos();
                     this.restar_producto_inventario_venta();
                     this.LimpiarInputsProductos();
@@ -236,13 +292,7 @@ export class GetVentaNormalComponent
 
 
     }
-   /* AgregarProductoVenta()
-    {
-        this.listado_productos_agregados.unshift(this.Productos);
-        console.log(this.listado_productos_agregados); 
-        this.calculos();
-        this.LimpiarInputsProductos();
-    }*/
+
     //Funcion Eliminar producto
      EliminarProductoVenta(id)
     {
@@ -279,7 +329,6 @@ export class GetVentaNormalComponent
         this.subtotal = 0;
         this.isv = 0;
         this.total = 0;
-        console.log(this.listado_productos_agregados);
         for(var i = 0; i < this.listado_productos_agregados.length; i++) {
             this.subtotal += this.listado_productos_agregados[i].Cantidad * this.listado_productos_agregados[i].Precio_referencial_venta;
             this.isv = this.subtotal * 0.15;
