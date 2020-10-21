@@ -3,7 +3,9 @@ import { Component }  from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { getClosureSafeProperty } from '@angular/core/src/util/property';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import { DatePipe } from '@angular/common'
 const swal = require('sweetalert2');
 
 @Component({
@@ -13,6 +15,7 @@ const swal = require('sweetalert2');
     styleUrls: ['../pandora.component.css', '../containerIndex.component.css'],
 })
 
+
 export class GetVentasPendientesEnvioComponent {
     public listado_ventas_pendientes_envio: any[];
     public listado_estatus: any[];
@@ -21,11 +24,10 @@ export class GetVentasPendientesEnvioComponent {
      yesterday = new Date(new Date().setDate(new Date().getDate()));
 //DECLARAR
     term: any[];
-    constructor( public service: AppService ){
+    constructor( public service: AppService,public datepipe: DatePipe){
 
         this.listado_ventas_pendientes_envio = [];
     }
-
     public VentasPendientesEnvio = {
 
         Fecha_venta: "",
@@ -55,6 +57,55 @@ export class GetVentasPendientesEnvioComponent {
 
         this.get_ventas_pendientes_envio();
         this.get_estado();
+    }
+
+    generarpdf()
+    {
+        
+        
+        var fecha_actual = new Date().toLocaleString()
+
+        const doc = new jsPDF('l', 'mm', [297,420]);
+
+        const autoTable = 'autoTable';
+
+        doc.setFont("courier");
+
+        doc.setFontSize(20);
+        doc.text("Variedades K y D", 110, 10, {align: "center"});
+        doc.setFontSize(15);
+        doc.text("Ventas Pendientes de Envio", 90, 20, {align: "center"});
+        doc.setFontSize(12);
+        doc.text("Dirección: Zonal Belen, cerca de Banco FICOHSA", 45, 30);
+        doc.text("Télefono: (504) 9797-7966", 75, 40);
+        doc.text("Correo: variedades_k_y_d@gmail.com", 65, 50);
+      
+        doc.text("Fecha: " + fecha_actual, 15, 75);
+   
+        var rows = [];
+        
+        this.listado_ventas_pendientes_envio.forEach(element => {      
+
+            var temp = [element.Id_venta,this.datepipe.transform(element.Fecha_venta,'yyyy-MM-dd'), element.Subtotal, element.Descuento, element.Isv,
+            element.Total,element.Nombre_compania,element.Nombre_departamento,element.Nombre_ciudad, element.Direccion,
+            element.Nombre_contacto,element.Apellido_contacto,element.Telefono_contacto,element.Email_contacto,element.Descripcion_estatus];
+            rows.push(temp);
+        });
+
+        console.log(rows);
+
+        doc[autoTable]({
+            head: [['Id Ventas', 'Fecha Venta', 'Subtotal', 'Descuento', 'ISV','Total','Nombre Compañia','Departamento','Ciudad',
+            'Direccion','Nombre Contacto','Apellido Contacto','Telefono','Correo Electronico','Estado']],
+            body: rows,
+            startY: 100,
+            styles: {font: "courier", fontsize: 12}
+        });
+
+
+        doc.save("Factura_prueba");
+        
+       
     }
 
     get_ventas_pendientes_envio(){
@@ -102,6 +153,7 @@ export class GetVentasPendientesEnvioComponent {
     {
         this.modifica = 
         {
+
             Id_venta: pendientes.Id_venta,
             Id_estado_envio: pendientes.Id_estado_envio,
             Fecha_envio:pendientes.Fecha_envio,

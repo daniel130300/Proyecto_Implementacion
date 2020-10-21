@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <body class="fixed-top">
@@ -23,10 +24,11 @@
 				<div class= "form-inline">
                     <i class="fas fa-search" aria-hidden="true"></i>
 					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
-				</div>
+
+                </div>
 		    </form>
         </div>
-
+      
         <div class="contenedorInformativo2">
             <div class="">
                 <table class = "table table-dark">
@@ -82,6 +84,7 @@
                 </table>
             </div>
         </div>
+        
 
         <div class="contenedorInformativo3">
             <div class="separacionInfo0 nada container-md">
@@ -108,10 +111,15 @@
             </div>
             <div class="separacionInfo2 nada container-md">
                 <form>
-                    <div class="">
-                        <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="boton btn btn-primary btn-m">Finalizar </button>
+                    <div class="row">
+                        <div class="">
+                            <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="boton btn btn-primary btn-m">Finalizar </button>
+                        </div>
+                        <p></p>
+                        <div class="" >
+                            <button (click)="generarpdf()"type="button" class="boton btn btn-primary btn-m-5 glyphicon glyphicon-print"> Reporte</button>
+                        </div>
                     </div>
-                    
                 </form>
             </div>
             
