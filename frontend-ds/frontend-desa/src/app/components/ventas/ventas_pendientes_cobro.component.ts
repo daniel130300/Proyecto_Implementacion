@@ -80,9 +80,7 @@ export class GetVentasPendientesCobroComponent {
             styles: {font: "courier", fontsize: 12}
         });
 
-        doc.text("¡Su Reporte se reporto con Exito!", 300, 280);
-
-        doc.save("Ventas Pendientes de Cobro");
+        doc.save("Reporte Ventas Pendientes de Cobro");
     }
 
     public Abono_venta = {
