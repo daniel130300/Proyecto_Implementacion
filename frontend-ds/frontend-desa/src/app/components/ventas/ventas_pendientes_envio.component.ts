@@ -69,7 +69,7 @@ export class GetVentasPendientesEnvioComponent {
 
         const autoTable = 'autoTable';
 
-        doc.setFont("courier");
+        doc.setFont("helvetica");
 
         doc.setFontSize(20);
         doc.text("Variedades K y D", 210, 10, {align: "center"});
@@ -97,7 +97,7 @@ export class GetVentasPendientesEnvioComponent {
             'Direccion','Nombre Contacto','Apellido Contacto','Telefono','Correo Electronico','Estado']],
             body: rows,
             startY: 50,
-            styles: {font: "courier", fontsize: 12}
+            styles: {font: "helvetica", fontsize: 12}
         });
 
 

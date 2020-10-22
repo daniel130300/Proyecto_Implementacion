@@ -48,7 +48,7 @@ export class GetVentasPendientesCobroComponent {
 
         const autoTable = 'autoTable';
 
-        doc.setFont("courier");
+        doc.setFont("helvetica");
 
         doc.setFontSize(20);
         doc.text("Variedades K y D", 210, 10, {align: "center"});
@@ -77,10 +77,10 @@ export class GetVentasPendientesCobroComponent {
                     'Apellido Contacto', 'Telefono Contacto', 'Subtotal', 'Descuento', 'ISV', 'Total', 'Total Abono', 'Estado']],
             body: rows,
             startY: 50,
-            styles: {font: "courier", fontsize: 12}
+            styles: {font: "helvetica", fontsize: 12}
         });
 
-        doc.save("Reporte Ventas Pendientes de Cobro");
+        doc.save("Reporte Ventas Pendientes de Cobro_"+fecha_actual);
     }
 
     public Abono_venta = {

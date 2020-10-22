@@ -66,7 +66,7 @@ export class GetVentasIncobrablesComponent {
 
         const autoTable = 'autoTable';
 
-        doc.setFont("courier");
+        doc.setFont("helvetica");
 
         doc.setFontSize(20);
         doc.text("Variedades K y D", 210, 10, {align: "center"});
@@ -91,10 +91,10 @@ export class GetVentasIncobrablesComponent {
             head: [['ID Venta', 'Fecha Venta', 'Fecha Envio', 'Fecha Entrega', 'Subtotal', 'Descuento', 'ISV', 'Total', 'Identidad Cliente', 'Nombre Compañia', 'Nombre Contacto', 'Apellido Contacto', 'Telefono', 'Email']],
             body: rows,
             startY: 50,
-            styles: {font: "courier", fontsize: 12}
+            styles: {font: "helvetica", fontsize: 12}
         });
 
-        doc.save("Reporte Ventas Incobrables");
+        doc.save("Reporte Ventas Incobrables "+fecha_actual);
     }
 
     get_ventas_incobrables(){
