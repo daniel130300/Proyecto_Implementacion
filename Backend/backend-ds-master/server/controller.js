@@ -12,7 +12,7 @@ var con = mysql.createPool({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "emma63194",
+    password: "",
     database: 'variedades_kyd',
     insecureAuth: true,
     multipleStatements: true

@@ -110,22 +110,23 @@
                 </form>
             </div>
             <div class="separacionInfo2 nada container-md">
-                <form>
-                    <div class="row">
-                        <div class="">
-                            <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="boton btn btn-primary btn-m">Finalizar </button>
-                        </div>
-                        <p></p>
-                        <div class="" >
-                            <button (click)="generarpdf()"type="button" class="boton btn btn-primary btn-m-5 glyphicon glyphicon-print"> Reporte</button>
-                        </div>
-                    </div>
-                </form>
+                
+                <div class="col-sm-1">
+                    <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="boton btn btn-primary btn-m">Finalizar </button>
+                </div>
+                
             </div>
             
             
         </div>
         
+            <div class="card" style="width: 75%;	margin-left: 295px; margin-top: 30px;">
+                
+                <button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block glyphicon glyphicon-print"> Reporte</button>
+            
+            </div>
+          
+
         <div class="entreLinea"></div>
         <style>
             .entreLinea{
@@ -141,6 +142,7 @@
         block-size: border-box;
         margin: 0;
         padding: 0;
+        
     }
 
 	body{

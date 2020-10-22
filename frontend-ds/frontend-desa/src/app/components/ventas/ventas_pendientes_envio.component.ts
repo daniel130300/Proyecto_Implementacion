@@ -72,16 +72,14 @@ export class GetVentasPendientesEnvioComponent {
         doc.setFont("courier");
 
         doc.setFontSize(20);
-        doc.text("Variedades K y D", 110, 10, {align: "center"});
-        doc.setFontSize(15);
-        doc.text("Ventas Pendientes de Envio", 90, 20, {align: "center"});
+        doc.text("Variedades K y D", 210, 10, {align: "center"});
+        doc.text("Reporte Ventas Pendientes de Envio", 210, 22, {align: "center"});
         doc.setFontSize(12);
-        doc.text("Dirección: Zonal Belen, cerca de Banco FICOHSA", 45, 30);
-        doc.text("Télefono: (504) 9797-7966", 75, 40);
-        doc.text("Correo: variedades_k_y_d@gmail.com", 65, 50);
-      
-        doc.text("Fecha: " + fecha_actual, 15, 75);
+        doc.text("Fecha: " + fecha_actual, 15, 45);
    
+        var img = new Image()
+        img.src = 'assets/img/LogoKyD2.png'
+        doc.addImage(img, 'png', -10, -20, 80, 80)
         var rows = [];
         
         this.listado_ventas_pendientes_envio.forEach(element => {      
@@ -98,12 +96,12 @@ export class GetVentasPendientesEnvioComponent {
             head: [['Id Ventas', 'Fecha Venta', 'Subtotal', 'Descuento', 'ISV','Total','Nombre Compañia','Departamento','Ciudad',
             'Direccion','Nombre Contacto','Apellido Contacto','Telefono','Correo Electronico','Estado']],
             body: rows,
-            startY: 100,
+            startY: 50,
             styles: {font: "courier", fontsize: 12}
         });
 
 
-        doc.save("Factura_prueba");
+        doc.save("Reporte Ventas Pendientes de Envio_"+fecha_actual);
         
        
     }
