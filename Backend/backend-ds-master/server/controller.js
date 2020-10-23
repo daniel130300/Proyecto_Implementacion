@@ -1798,6 +1798,20 @@ router.post('/insert_detalle_venta_normal',(req,res,next)=>{
 	});
 });
 
+router.get('/get_id_venta', (req, res, next) => {
+	var query = "select max(Id_venta) as Id_venta from ventas";
+	
+	con.query(query, (err, result, fields) => {
+		if(err) {
+				next(err);
+		} else {
+				res.status(200).json(result);
+
+		}
+	});
+});
+
+
 
 router.get('/get_devoluciones_venta', (req, res, next) => {
 	var query = "select v.Id_venta,c.Nombre_contacto,v.Fecha_venta, c.Nombre_compania, "

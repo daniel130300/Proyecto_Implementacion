@@ -343,6 +343,11 @@ export class AppService {
         return this.httpClient.post(this.endpoint + "/insert_venta_normal", load, {responseType:'json'});
     }
 
+    get_cod_factura():Observable<any>{
+        return this.httpClient.get(this.endpoint + "/get_id_venta", {responseType: 'json'})
+    }
+
+
     insertar_detalle_venta_normal(load):Observable<any>{
         return this.httpClient.post(this.endpoint + "/insert_detalle_venta_normal", load, {responseType:'json'});
     }
@@ -392,6 +397,15 @@ export class AppService {
     set_usuariologueado(LoginID, Rol){
         localStorage.setItem("loggedUser",JSON.stringify(LoginID));
         localStorage.setItem("rolUser",JSON.stringify(Rol));
+    }
+
+    set_codigo_factura(cod_factura){
+        localStorage.setItem("cod_factura",JSON.stringify(cod_factura));
+    }
+
+    get_codigo_factura(){
+        if(localStorage.getItem("cod_factura"))
+        return JSON.parse(localStorage.getItem("cod_factura"));
     }
 
     get_usuariologueado(){

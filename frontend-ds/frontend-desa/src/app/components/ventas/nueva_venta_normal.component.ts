@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { AppService } from 'src/app/app.service';
-import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 const swal = require('sweetalert2');
 
 @Component({
@@ -13,6 +13,7 @@ const swal = require('sweetalert2');
 
 export class GetVentaNormalComponent 
 {
+    public numero_factura: any[];
     public listado_productos: any[];
     public listado_clientes: any[];
     public listado_plazos_pago:   any[];
@@ -57,78 +58,7 @@ export class GetVentaNormalComponent
 
     }
 
-    generarpdf()
-    {
-
-        console.log(this.listado_productos_agregados);
-
-        var fecha_actual = new Date().toLocaleString()
-
-        const doc = new jsPDF();
-
-        const autoTable = 'autoTable';
-
-        doc.setFont("courier");
-
-        doc.setFontSize(20);
-        doc.text("Variedades K y D", 110, 10, {align: "center"});
-        doc.setFontSize(12);
-        doc.text("Dirección: Zonal Belen, cerca de Banco FICOHSA", 45, 20);
-        doc.text("Télefono: (504) 9797-7966", 75, 30);
-        doc.text("Correo: variedades_k_y_d@gmail.com", 65, 40);
-        doc.text("Factura: ", 15, 65);
-        doc.text("Fecha: " + fecha_actual, 15, 75);
-        doc.text("Identidad: " + String(this.VentasNormal.Identidad), 15, 85);
-   
-        var rows = [];
-        
-        this.listado_productos_agregados.forEach(element => {      
-            var temp = [element.Id_producto, element.Nombre_producto, element.Informacion_adicional_producto, element.Precio_referencial_venta, element.Cantidad];
-            rows.push(temp);
-        });
-
-        console.log(rows);
-
-        doc[autoTable]({
-            head: [['Cod Producto', 'Nombre Producto', 'Información Adicional', 'Precio Referencial Venta', 'Cantidad']],
-            body: rows,
-            startY: 100,
-            styles: {font: "courier", fontsize: 12}
-        });
-
-        doc.text("Subtotal: " + String(this.subtotal), 15, 240);
-        doc.text("ISV: " + String(this.isv), 15, 250);
-        doc.text("Total: " + String(this.total), 15, 260);
-
-        doc.text("¡Gracias por su compra!", 75, 280);
-
-
-        doc.save("Factura_prueba");
-        
-        /*
-        PdfMakeWrapper.setFonts(pdfFonts);
-    
-        const pdf = new PdfMakeWrapper();
-           
-        pdf.header('This is a header');
-        pdf.add('Hello world!');
-        
-        pdf.add(
-            new Txt('hi!').bold().end
-        );
-
-        pdf.add(
-            new Table([
-                [ 'column 1', 'column 2'],
-                [ 'column 1', 'column 2']
-            ]).end
-        );
-        
-        pdf.create().open();
-        */
-       
-    }
-
+ 
     //Funcion para insertar la venta normal
     insertar_venta_normal()
     {
@@ -150,9 +80,7 @@ export class GetVentaNormalComponent
             }).then((result) => 
             {
                 if (result.isConfirmed) 
-                {
-                    this.generarpdf();
-                            
+                {                         
                     var response;
                     this.service.insertar_venta_normal(this.VentasNormal).subscribe
                     (
@@ -164,6 +92,7 @@ export class GetVentaNormalComponent
                         ()=>
                         {
                             this.pasarDatosDetalleVenta();
+                            this.generarpdf();
                             this.VentasNormal = 
                             {
                                 Fecha_venta: "",
@@ -236,6 +165,22 @@ export class GetVentaNormalComponent
         );
     }
 
+    get_factura(){
+        this.numero_factura = [];
+        var response;
+        this.service.get_cod_factura().subscribe(
+            data=>response = data,
+            err => {
+                this.numero_factura = [];
+                console.log("Error al consultar el servicio");
+            },
+            ()=>{
+                this.numero_factura = response;
+                this.service.set_codigo_factura(this.numero_factura);
+            }  
+        );
+    }
+
     pasarDatosProducto(producto)
     {
         this.Productos = 
@@ -285,16 +230,12 @@ export class GetVentaNormalComponent
                         title:"No hay suficiente unidades en el inventario"
                     })
                 }
-            }
-            
-
+            } 
         }
-
-
     }
 
     //Funcion Eliminar producto
-     EliminarProductoVenta(id)
+    EliminarProductoVenta(id)
     {
         for(var i = this.listado_productos_agregados.length - 1; i >= 0; i--) 
         {
@@ -395,5 +336,57 @@ export class GetVentaNormalComponent
         this.LimpiarInputsVariablesGlobales();
         this.LimpiarInputsProductos();
     }
+
+    generarpdf()
+    {
+        this.get_factura();
+        
+        var codigo = JSON.stringify(this.service.get_codigo_factura()[0].Id_venta);
+
+        console.log(codigo);
+        
+        var fecha_actual = new Date().toLocaleString()
+
+        const doc = new jsPDF();
+
+        const autoTable = 'autoTable';
+
+        doc.setFont("courier");
+
+        doc.setFontSize(20);
+        doc.text("Variedades K y D", 110, 10, {align: "center"});
+        doc.setFontSize(12);
+        doc.text("Dirección: Zonal Belen, cerca de Banco FICOHSA", 45, 20);
+        doc.text("Télefono: (504) 9797-7966", 75, 30);
+        doc.text("Correo: variedades_k_y_d@gmail.com", 65, 40);
+        doc.text("No. Factura: " + String(codigo), 15, 65);
+        doc.text("Fecha: " + fecha_actual, 15, 75);
+        doc.text("Identidad: " + String(this.VentasNormal.Identidad), 15, 85);
+   
+        var rows = [];
+        
+        this.listado_productos_agregados.forEach(element => {      
+            var temp = [element.Id_producto, element.Nombre_producto, element.Informacion_adicional_producto, element.Precio_referencial_venta, element.Cantidad];
+            rows.push(temp);
+        });
+
+        doc[autoTable]({
+            head: [['Cod Producto', 'Nombre Producto', 'Información Adicional', 'Precio Referencial Venta', 'Cantidad']],
+            body: rows,
+            startY: 100,
+            styles: {font: "courier", fontsize: 12}
+        });
+
+        doc.text("Subtotal: " + String(this.subtotal), 15, 240);
+        doc.text("ISV: " + String(this.isv), 15, 250);
+        doc.text("Total: " + String(this.total), 15, 260);
+
+        doc.text("¡Gracias por su compra!", 75, 280);
+
+
+        doc.save("Factura" +"_num_factura_" + codigo + "_fecha_actual_" + fecha_actual);
+       
+    }
+
 
 }
