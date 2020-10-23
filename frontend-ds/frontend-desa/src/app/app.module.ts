@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {DatePipe} from '@angular/common';
 import { AppComponent } from './app.component';
 
 import {AppRoutingModule} from './app.router';
@@ -103,7 +103,8 @@ import {FormsModule, ReactiveFormsModule } from '@angular/forms';
     Ng2SearchPipeModule,
   ],
   providers: [ //Servicios
-    AppService
+    AppService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

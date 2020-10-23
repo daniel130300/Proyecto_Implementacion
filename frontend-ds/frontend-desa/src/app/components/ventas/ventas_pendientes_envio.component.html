@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="fixed-top">
@@ -21,12 +22,13 @@
 		    <!--  AQUI EMPIEZA EL CAMBIO -->		 
 			<form class="form-incline">
 				<div class= "form-inline">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    
 					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
-				</div>
+
+                </div>
 		    </form>
         </div>
-
+      
         <div class="contenedorInformativo2">
             <div class="">
                 <table class = "table table-dark">
@@ -82,6 +84,7 @@
                 </table>
             </div>
         </div>
+        
 
         <div class="contenedorInformativo3">
             <div class="separacionInfo0 nada container-md">
@@ -107,17 +110,22 @@
                 </form>
             </div>
             <div class="separacionInfo2 nada container-md">
-                <form>
-                    <div class="">
-                        <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="boton btn btn-primary btn-m">Finalizar </button>
-                    </div>
-                    
-                </form>
+                
+                <div class="col-sm-1">
+                    <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="boton btn btn-primary btn-m">Finalizar </button>
+                </div>
+                
             </div>
             
             
         </div>
         
+        <div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+                
+			<button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a> Reporte</button>
+		
+		</div>
+
         <div class="entreLinea"></div>
         <style>
             .entreLinea{
@@ -133,6 +141,7 @@
         block-size: border-box;
         margin: 0;
         padding: 0;
+        
     }
 
 	body{

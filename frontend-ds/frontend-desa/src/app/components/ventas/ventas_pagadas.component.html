@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="fixed-top">
@@ -20,9 +21,8 @@
 		    <!--  AQUI EMPIEZA EL CAMBIO -->		 
 			<form class="form-incline">
 				<div class= "form-inline">
-                    <i class="fas fa-search" aria-hidden="true"></i>
+                    
 					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
-
 				</div>
 		    </form>
         </div>
@@ -81,7 +81,13 @@
         
                 </table>
             </div>
-        </div>
+		</div>
+		
+		<div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+                
+			<button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a> Reporte</button>
+		
+		</div>
         
         <div class="entreLinea"></div>
         <style>
@@ -282,6 +288,7 @@
         width: 180px;
         height: 40px;
         margin-top: 20px;
+		margin-left: 5px;
     }
 </style>
 

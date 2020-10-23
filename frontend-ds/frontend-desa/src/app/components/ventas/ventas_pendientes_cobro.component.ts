@@ -1,9 +1,9 @@
-//Aqui codifica Marcela
-
 import { Component }  from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { getClosureSafeProperty } from '@angular/core/src/util/property';
-
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import { DatePipe } from '@angular/common'
 
 const swal = require('sweetalert2');
 
@@ -27,7 +27,7 @@ export class GetVentasPendientesCobroComponent {
     
     term: any[];
 
-    constructor( public service: AppService ){
+    constructor( public service: AppService, public datepipe: DatePipe ){
 
         this.listado_ventas_pendientes_cobro = [];
     }
@@ -36,6 +36,51 @@ export class GetVentasPendientesCobroComponent {
 
         this.get_ventas_pendientes_cobro();
         this.get_estado();
+    }
+
+    generarpdf()
+    {
+        console.log(this.listado_ventas_pendientes_cobro);
+
+        var fecha_actual = new Date().toLocaleString()
+
+        const doc = new jsPDF('l', 'mm', [297, 420]);
+
+        const autoTable = 'autoTable';
+
+        doc.setFont("helvetica");
+
+        doc.setFontSize(20);
+        doc.text("Variedades K y D", 210, 10, {align: "center"});
+        doc.text("Reporte Ventas Pendientes de Cobro", 210, 22, {align: "center"});
+        doc.setFontSize(12);
+        doc.text("Fecha: " + fecha_actual, 15, 45);
+
+        var img = new Image()
+        img.src = 'assets/img/LogoKyD2.png'
+        doc.addImage(img, 'png', -10, -20, 80, 80)
+   
+        var rows = [];
+        
+        this.listado_ventas_pendientes_cobro.forEach(element => {      
+            var temp = [element.Id_venta, this.datepipe.transform(element.Fecha_venta,'yyyy-MM-dd'), element.Descripcion_plazo,
+                        this.datepipe.transform(element.Fecha_envio,'yyyy-MM-dd'), this.datepipe.transform(element.Fecha_entrega,'yyyy-MM-dd'), 
+                        element.Nombre_compania, element.Nombre_contacto, element.Apellido_contacto, element.Telefono_contacto, element.Subtotal,
+                        element.Descuento, element.Isv, element.Total, element.Cantidad_abonada, element.Estado];
+            rows.push(temp);
+        });
+
+        console.log(rows);
+
+        doc[autoTable]({
+            head: [['ID Venta', 'Fecha Venta', 'Plazo de Pago', 'Fecha Envio', 'Fecha Entrega', 'Nombre Compañia', 'Nombre Contacto', 
+                    'Apellido Contacto', 'Telefono Contacto', 'Subtotal', 'Descuento', 'ISV', 'Total', 'Total Abono', 'Estado']],
+            body: rows,
+            startY: 50,
+            styles: {font: "helvetica", fontsize: 12}
+        });
+
+        doc.save("Reporte Ventas Pendientes de Cobro_"+fecha_actual);
     }
 
     public Abono_venta = {
