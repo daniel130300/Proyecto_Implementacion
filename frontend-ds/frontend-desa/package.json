@@ -33,7 +33,7 @@
     "require-node": "^2.0.8",
     "rxjs": "~6.3.3",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^9.17.0",
+    "sweetalert2": "^9.17.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
