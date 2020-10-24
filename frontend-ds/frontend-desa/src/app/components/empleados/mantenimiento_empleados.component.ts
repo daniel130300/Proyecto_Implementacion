@@ -1,5 +1,8 @@
 import { Component }  from '@angular/core';
 import { AppService } from 'src/app/app.service';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import { DatePipe } from '@angular/common'
 
 const swal = require( 'sweetalert2' );
 
@@ -15,9 +18,52 @@ export class GetEmpleadosComponent {
     public listado_estatus:   any[];
     public listado_puestos:   any[];
 
-    constructor( public service: AppService ){
+    constructor( public service: AppService, public datepipe: DatePipe ){
 
         this.listado_empleados = [];
+    }
+
+    generarpdf()
+    {
+        console.log(this.listado_empleados);
+
+        var fecha_actual = new Date().toLocaleString()
+
+        const doc = new jsPDF('l', 'mm', [297, 420]);
+
+        const autoTable = 'autoTable';
+
+        doc.setFont("helvetica");
+
+        doc.setFontSize(20);
+        doc.text("Variedades K y D", 210, 10, {align: "center"});
+        doc.text("Reporte Mensual de Empleados", 210, 22, {align: "center"});
+        doc.setFontSize(12);
+        doc.text("Fecha: " + fecha_actual, 15, 45);
+
+        var img = new Image()
+        img.src = 'assets/img/LogoKyD2.png'
+        doc.addImage(img, 'png', -10, -20, 80, 80)
+   
+        var rows = [];
+        
+        this.listado_empleados.forEach(element => {      
+            var temp = [element.Id_empleado, element.Identidad, element.Nombre, element.Apellido, element.Telefono , element.Email, element.Direccion, element.Salario, this.datepipe.transform(element.Fecha_nacimiento,'yyyy-MM-dd'),
+                        this.datepipe.transform(element.Fecha_contratacion,'yyyy-MM-dd'), this.datepipe.transform(element.Fecha_despido,'yyyy-MM-dd'), element.Descripcion_puesto];
+            rows.push(temp);
+        });
+
+        console.log(rows);
+
+        doc[autoTable]({
+            head: [['ID Empleado', 'Identidad', 'Nombre', 'Apellido', 'Teléfono', 'Email', 'Dirección', 
+                    'Salario', 'Fecha de Nacimiento', 'Fecha de Contratación', 'Fecha de Despido', 'Puesto']],
+            body: rows,
+            startY: 50,
+            styles: {font: "helvetica", fontsize: 12}
+        });
+
+        doc.save("Reporte_Empleados_"+fecha_actual);
     }
 
     public Empleado = {
