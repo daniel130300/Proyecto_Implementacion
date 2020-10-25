@@ -1,7 +1,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="fixed-top">
@@ -11,7 +12,7 @@
 	<div class="contedorPrincipal">
 	  
 		<div class="contenedorTitulo">
-			<h2>| Compras Realizadas</h2>
+			<h2>| Pedidos Realizados</h2>
 		</div>
         <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
         
@@ -19,9 +20,7 @@
 		    <!--  AQUI EMPIEZA EL CAMBIO -->		 
 			<form class="form-incline">
 				<div class= "form-inline">
-                    <i class="fas fa-search" aria-hidden="true"></i>
 					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
-
 				</div>
 		    </form>
         </div>
@@ -34,28 +33,38 @@
                     <thead>
                         <tr>  
                             <th>ID Compra</th>
+                            <th>Código Factura</th>
                             <th>Estado</th>
                             <th>Proveedor</th>
                             <th>Fecha de la Orden</th>
                             <th>Fecha en la que fue Recibida</th>
                             <th>Gastos Adicionales</th>
+                            <th>Monto Total</th>
                         </tr>
                     </thead>
                     <tbody>
                     
                     <tr *ngFor = "let c of listado_compras |filter:term">
                         <td>{{c.Id_compra}}</td>
+                        <td>{{c.Codigo_factura}}</td>
                         <td>{{c.Descripcion_estatus}}</td>
                         <td>{{c.Nombre_compania}}</td>
                         <td>{{c.Fecha_orden | date: 'dd/MM/yyyy'}}</td>
                         <td>{{c.Fecha_recibida | date: 'dd/MM/yyyy'}}</td>
                         <td>{{c.Gastos_adicionales}}</td>
+                        <td>{{c.Monto_total}}</td>
                     </tr>
                     </tbody>
                 </table>
 
             </div>
         </div>
+
+        <div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+                
+			<button (click)="generar_reporte()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a> Reporte</button>
+		
+		</div>
         
         <div class="entreLinea"></div>
         <style>
@@ -256,6 +265,7 @@
         width: 180px;
         height: 40px;
         margin-top: 20px;
+        margin-left: 20px;
     }
 </style>
 

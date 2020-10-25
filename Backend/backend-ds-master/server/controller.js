@@ -12,7 +12,7 @@ var con = mysql.createPool({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "Daniel100",
+    password: "123456",
     database: 'variedades_kyd',
     insecureAuth: true,
     multipleStatements: true
@@ -1228,7 +1228,7 @@ router.get('/get_puestos', (req, res, next) => {
 
 //Consultar todas compras
 router.get('/get_compras', (req, res, next) => {
-	var query = 'SELECT c.Id_compra, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus FROM  compras c inner join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus = es.Id_estatus where c.Id_estatus = 4';
+	var query = 'SELECT c.Id_compra, c.Codigo_factura, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus, (dc.Cantidad_ordenada*dc.Precio_compra)+c.Gastos_adicionales as Monto_total FROM  compras c inner join detalle_compras dc on c.Id_compra = dc.Id_compra join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus = es.Id_estatus where c.Id_estatus = 4 group by c.Id_compra';
 	con.query(query, (err, result, fields) => {
 		if(err) {
 				next(err);
@@ -1242,7 +1242,7 @@ router.get('/get_compras', (req, res, next) => {
 
 //Consultar compras en estado pendiente de recibido
 router.get('/get_compras_pendientes', (req, res, next) => {
-	var query = 'SELECT c.Id_compra, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus FROM  compras c inner join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus = es.Id_estatus where c.Id_estatus = 3';
+	var query = 'SELECT c.Id_compra, c.Codigo_factura, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus FROM  compras c inner join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus = es.Id_estatus where c.Id_estatus = 3';
 	con.query(query, (err, result, fields) => {
 		if(err) {
 				next(err);
@@ -1257,7 +1257,7 @@ router.get('/get_compras_pendientes', (req, res, next) => {
 
 //Consultar una sola compra
 router.get('/get_compra', (req, res, next) => {
-	var query = "SELECT c.Id_compra, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus FROM  compras c inner join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus=es.Id_estatus where c.Id_compra = ? or p.Nombre_compania like  " +"'%"+ req.body.Busqueda+"%'" + "or es.Descripcion_estatus like "+"'%"+ req.body.Busqueda+"%'" ;
+	var query = "SELECT c.Id_compra, c.Codigo_factura, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus FROM  compras c inner join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus=es.Id_estatus where c.Id_compra = ? or p.Nombre_compania like  " +"'%"+ req.body.Busqueda+"%'" + "or es.Descripcion_estatus like "+"'%"+ req.body.Busqueda+"%'" ;
 	var values = [req.body.Busqueda];
 	
 	con.query(query, values, (err, result, fields) => {
@@ -1289,11 +1289,12 @@ router.get('/get_estatus_compra', (req, res, next) => {
 
 //------------------------------------------------------HICE MODIFICACIONES AQUI-----------------------------------------------------
 router.post('/insert_compras', (req, res, next) => {
-    var query = 'insert into compras (Fecha_orden, Fecha_recibida, Gastos_adicionales, Id_proveedor, Id_estatus) ';
-		query= query + 'values (?, ?, ?, ?, ?)';
+    var query = 'insert into compras (Codigo_factura, Fecha_orden, Fecha_recibida, Gastos_adicionales, Id_proveedor, Id_estatus) ';
+		query= query + 'values (?, ?, ?, ?, ?, ?)';
 	var FechaActual = new Date();
 
     var values=[
+				req.body.Codigo_factura,	
     			FechaActual, //Inserta la fecha actual sin que sea mandada del frontend
     			null, //FECHA RECIBIDA NULL ya que no se necesita al insertar la compra
     			req.body.Gastos_adicionales, 
@@ -1797,20 +1798,6 @@ router.post('/insert_detalle_venta_normal',(req,res,next)=>{
 		}
 	});
 });
-
-router.get('/get_id_venta', (req, res, next) => {
-	var query = "select max(Id_venta) as Id_venta from ventas";
-	
-	con.query(query, (err, result, fields) => {
-		if(err) {
-				next(err);
-		} else {
-				res.status(200).json(result);
-
-		}
-	});
-});
-
 
 
 router.get('/get_devoluciones_venta', (req, res, next) => {
