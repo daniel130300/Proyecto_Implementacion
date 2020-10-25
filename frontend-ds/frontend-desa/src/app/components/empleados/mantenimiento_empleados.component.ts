@@ -37,9 +37,12 @@ export class GetEmpleadosComponent {
 
         doc.setFontSize(20);
         doc.text("Variedades K y D", 210, 10, {align: "center"});
-        doc.text("Reporte Mensual de Empleados", 210, 22, {align: "center"});
-        doc.setFontSize(12);
-        doc.text("Fecha: " + fecha_actual, 15, 45);
+        doc.text("Reporte Mensual de Empleados", 210, 19, {align: "center"});
+        doc.setFontSize(14);
+        doc.text("Télefono: (504) 9797-7966", 210, 26, {align: "center"});
+        doc.text("Correo: variedades_k_y_d@gmail.com", 210, 32, {align: "center"});
+        doc.setFontSize(14);
+        doc.text("Fecha: " + fecha_actual, 30, 45, {align: "center"});
 
         var img = new Image()
         img.src = 'assets/img/LogoKyD2.png'
