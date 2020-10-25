@@ -52,9 +52,14 @@ export class GetVentasPendientesCobroComponent {
 
         doc.setFontSize(20);
         doc.text("Variedades K y D", 210, 10, {align: "center"});
-        doc.text("Reporte Ventas Pendientes de Cobro", 210, 22, {align: "center"});
         doc.setFontSize(12);
-        doc.text("Fecha: " + fecha_actual, 15, 45);
+        doc.text("Dirección: Zonal Belen, cerca de Banco FICOHSA", 160, 16);
+        doc.text("Télefono: (504) 9797-7966", 180, 22);
+        doc.text("Correo: variedades_k_y_d@gmail.com", 170, 28);
+        doc.setFontSize(14);
+        doc.text("Reporte Ventas Pendientes de Cobro", 206, 36, {align: "center"});
+        doc.setFontSize(12);
+        doc.text("Fecha: " + fecha_actual, 15, 44);
 
         var img = new Image()
         img.src = 'assets/img/LogoKyD2.png'

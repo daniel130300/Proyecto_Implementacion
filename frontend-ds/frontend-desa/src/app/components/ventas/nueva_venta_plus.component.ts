@@ -1,6 +1,10 @@
 import { Component, OnInit, Input, EventEmitter }  from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';import { parse } from 'url';
+import { auto } from '@popperjs/core';
+;
 
 const swal = require('sweetalert2');
 
@@ -13,6 +17,7 @@ const swal = require('sweetalert2');
 
 export class GetVentaPlusComponent 
 {
+    public numero_factura: any[];
     public listado_productos: any[];
     public listado_clientes: any[];
     public listado_plazos_pago:   any[];
@@ -145,21 +150,50 @@ export class GetVentaPlusComponent
         }
         else
         {
-            var response;
-            this.Asignar_datos_venta();
-            this.service.insertar_venta_plus(this.VentasPlus).subscribe(
-                data=>response = data,
-                err => {
-                    console.log("Error al consultar servicio"); 
-                },
-                ()=>{
-                    this.pasarDatosDetalleVenta();
-                    this.LimpiarInputs();
-                }
-            );
 
-        }
-        
+            swal.fire
+            ({
+                title: '¿Desea imprimir la factura para esta venta?',
+                showCancelButton: true,
+                confirmButtonText: `Si`,
+                cancelButtonText: `No`,
+            }).then((result) => 
+            {
+             
+                if (result.isConfirmed) 
+                {   
+                    var response;
+                    this.Asignar_datos_venta();
+                    this.service.insertar_venta_plus(this.VentasPlus).subscribe(
+                        data=>response = data,
+                        err => {
+                            console.log("Error al consultar servicio"); 
+                        },
+                        ()=>{
+                            this.pasarDatosDetalleVenta();
+                            this.generarpdf();
+                            this.LimpiarInputs();
+                        }
+                    );
+                }
+                else
+                {
+                    var response;
+                    this.Asignar_datos_venta();
+                    this.service.insertar_venta_plus(this.VentasPlus).subscribe(
+                        data=>response = data,
+                        err => {
+                            console.log("Error al consultar servicio"); 
+                        },
+                        ()=>{
+                            this.pasarDatosDetalleVenta();
+                            this.LimpiarInputs();
+                        }
+                    );
+
+                }
+            })
+        }  
     }
 
     insertar_detalle_venta_plus(){
@@ -425,15 +459,133 @@ export class GetVentaPlusComponent
         this.descuento_calculado = 0;
         this.isv = 0;
         this.total = 0;
-        console.log(this.listado_productos_agregados);
         for(var i = 0; i < this.listado_productos_agregados.length; i++) 
         {
             this.subtotal += this.listado_productos_agregados[i].Cantidad * this.listado_productos_agregados[i].Precio_referencial_venta;
-            this.descuento_calculado = this.subtotal * this.descuento
+            this.descuento_calculado = this.subtotal * this.descuento;
             this.isv = (this.subtotal - this.descuento_calculado) * 0.15;
             this.total = (this.subtotal - this.descuento_calculado) + this.isv;
         }
 
+        this.subtotal = parseFloat(this.subtotal).toFixed(2);
+        this.descuento_calculado = parseFloat(this.descuento_calculado).toFixed(2);
+        this.isv = parseFloat(this.isv).toFixed(2);
+        this.total = parseFloat(this.total).toFixed(2);
+    }
+
+    get_factura(){
+        this.numero_factura = [];
+        var response;
+        this.service.get_cod_factura().subscribe(
+            data=>response = data,
+            err => {
+                this.numero_factura = [];
+                console.log("Error al consultar el servicio");
+            },
+            ()=>{
+                this.numero_factura = response;
+                this.service.set_codigo_factura(this.numero_factura);
+            }  
+        );
+    }
+
+    generarpdf()
+    {
+        this.get_factura();
+        
+        var codigo = JSON.stringify(this.service.get_codigo_factura()[0].Id_venta);
+
+        console.log(codigo);
+        
+        var fecha_actual = new Date().toLocaleString()
+
+        const doc = new jsPDF();
+
+        const autoTable = 'autoTable';
+
+        doc.setFont("courier");
+
+        doc.setFontSize(20);
+        doc.text("Variedades K y D", 110, 10, {align: "center"});
+        doc.setFontSize(12);
+        doc.text("Dirección: Zonal Belen, cerca de Banco FICOHSA", 45, 20);
+        doc.text("Télefono: (504) 9797-7966", 75, 30);
+        doc.text("Correo: variedades_k_y_d@gmail.com", 65, 40);
+        doc.text("No. Factura: " + String(codigo), 15, 65);
+        doc.text("Fecha: " + fecha_actual, 15, 75);
+        doc.text("Cliente: " + String(this.Clientes.Nombre_cliente), 15, 85);
+
+        var tipo_pago: String;
+        var plazo_pago:String;
+        var valor = 95;
+
+        doc.setFont("courier");
+
+        if(this.Id_tipo_pago == 1)
+        {
+            tipo_pago = "Contado";
+            doc.text("Tipo de pago: "+ String(tipo_pago), 15, valor);
+        }
+        else
+        {
+            tipo_pago = "Crédito";
+            doc.text("Tipo de pago: "+ String(tipo_pago), 15, valor);
+
+            valor+=10;
+
+            if(this.Id_plazo == 1)
+            {
+                plazo_pago = "15 días";
+            }
+            else if(this.Id_plazo == 2)
+            {
+                plazo_pago = "1 mes";
+            }
+            else{
+                plazo_pago = "3 meses";
+            }
+
+            doc.text("Plazo de pago: "+ String(plazo_pago), 15, valor);
+        }
+
+        valor+=10;
+
+        var tipo_venta: String;
+
+        if(this.Id_estado_envio == 8)
+        {
+            tipo_venta = "Pendiente de envio"
+        }
+        else
+        {   
+            tipo_venta = "Local"
+        }
+
+        doc.text("Tipo de venta: "+ String(tipo_venta), 15, valor);
+
+        var rows = [];
+        
+        this.listado_productos_agregados.forEach(element => {      
+            var temp = [element.Id_producto, element.Nombre_producto, element.Informacion_adicional_producto, element.Precio_referencial_venta, element.Cantidad];
+            rows.push(temp);
+        });
+
+        doc[autoTable]({
+            head: [['Cod Producto', 'Nombre Producto', 'Información Adicional', 'Precio Referencial Venta', 'Cantidad']],
+            body: rows,
+            startY: 130,
+            styles: {font: "courier", fontsize: 12}
+        });
+
+        doc.text("Subtotal: " + String(this.subtotal), 15, 230);
+        doc.text("Descuento: " + String(this.descuento_calculado), 15, 240)
+        doc.text("ISV: " + String(this.isv), 15, 250);
+        doc.text("Total: " + String(this.total), 15, 260);
+
+        doc.text("¡Gracias por su compra!", 75, 280);
+
+
+        doc.save("Factura_plus_" +"num_factura_" + codigo + "_fecha_" + fecha_actual);
     }
 
     //FUNCIONES PARA LIMPIAR TODOS LOS INPUTS

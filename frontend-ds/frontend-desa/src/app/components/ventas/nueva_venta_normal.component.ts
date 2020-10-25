@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import 'jspdf-autotable';;
+
 const swal = require('sweetalert2');
 
 @Component({
@@ -74,9 +75,9 @@ export class GetVentaNormalComponent
             swal.fire
             ({
                 title: '¿Desea imprimir la factura para esta venta?',
-                showDenyButton: true,
+                showCancelButton: true,
                 confirmButtonText: `Si`,
-                denyButtonText: `No`
+                cancelButtonText: `No`,
             }).then((result) => 
             {
                 if (result.isConfirmed) 
@@ -105,13 +106,14 @@ export class GetVentaNormalComponent
                         }
                     );
                 }
-                else if (result.isDenied) 
+                else
                 {                
                     var response;
                     this.service.insertar_venta_normal(this.VentasNormal).subscribe
                     (
                         data=>response = data,
-                        err => {
+                        err => 
+                        {
                             console.log("Error al consultar servicio"); 
                         },
                         ()=>
@@ -127,7 +129,7 @@ export class GetVentaNormalComponent
                                 Id_tipo_pago:1,
                             }
                         }
-                    );                       
+                    );
                 }
             })
         }
@@ -275,6 +277,10 @@ export class GetVentaNormalComponent
             this.isv = this.subtotal * 0.15;
             this.total = this.subtotal + this.isv;
         }
+
+        this.subtotal = parseFloat(this.subtotal).toFixed(2);
+        this.isv = parseFloat(this.isv).toFixed(2);
+        this.total = parseFloat(this.total).toFixed(2);
     }
 
 
@@ -384,9 +390,6 @@ export class GetVentaNormalComponent
         doc.text("¡Gracias por su compra!", 75, 280);
 
 
-        doc.save("Factura" +"_num_factura_" + codigo + "_fecha_actual_" + fecha_actual);
-       
+        doc.save("Factura_normal_" +"num_factura_" + codigo + "_fecha_" + fecha_actual);
     }
-
-
 }

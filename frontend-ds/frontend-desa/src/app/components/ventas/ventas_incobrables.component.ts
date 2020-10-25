@@ -70,9 +70,14 @@ export class GetVentasIncobrablesComponent {
 
         doc.setFontSize(20);
         doc.text("Variedades K y D", 210, 10, {align: "center"});
-        doc.text("Reporte Ventas Inconbrables", 210, 22, {align: "center"});
         doc.setFontSize(12);
-        doc.text("Fecha: " + fecha_actual, 15, 45);
+        doc.text("Dirección: Zonal Belen, cerca de Banco FICOHSA", 160, 16);
+        doc.text("Télefono: (504) 9797-7966", 180, 22);
+        doc.text("Correo: variedades_k_y_d@gmail.com", 170, 28);
+        doc.setFontSize(14);
+        doc.text("Reporte Ventas Incobrables", 210, 36, {align: "center"});
+        doc.setFontSize(12);
+        doc.text("Fecha: " + fecha_actual, 15, 46);
 
         var img = new Image()
         img.src = 'assets/img/LogoKyD2.png'
@@ -90,7 +95,7 @@ export class GetVentasIncobrablesComponent {
         doc[autoTable]({
             head: [['ID Venta', 'Fecha Venta', 'Fecha Envio', 'Fecha Entrega', 'Subtotal', 'Descuento', 'ISV', 'Total', 'Identidad Cliente', 'Nombre Compañia', 'Nombre Contacto', 'Apellido Contacto', 'Telefono', 'Email']],
             body: rows,
-            startY: 50,
+            startY: 54,
             styles: {font: "helvetica", fontsize: 12}
         });
 
