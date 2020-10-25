@@ -1,8 +1,10 @@
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="fixed-top">
@@ -13,8 +15,10 @@
         
 		<div class="contenedorTitulo">
 			<h2>| Mantenimiento Clientes</h2>
-		</div>
+        </div>
+        
         <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+
         <div class="contenedorInformativo">
             <form ngNativeValidate #form2>
                 <div class="nada container-md">
@@ -116,6 +120,15 @@
                 </div>
             </form>
         </div>
+
+        <div class="contenedorInformativo3"> 
+			<form class="form-incline">
+				<div class="form-inline">
+					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
+				</div>
+		    </form>
+        </div>
+
         <div class="contenedorInformativo2">
             <div class="nada container-md">
                 <table class="table table-dark">
@@ -134,7 +147,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let c of listado_clientes">
+                        <tr *ngFor="let c of listado_clientes | filter:term">
+
                             <td>{{c.Nombre_compania}}</td>
                             <td>{{c.Direccion}}</td>
                             <td>{{c.Nombre_ciudad}}</td>
@@ -159,6 +173,13 @@
             </div>
             
         </div>
+
+        <div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+                
+			<button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a> Reporte</button>
+		
+		</div>
+
         <div class="entreLinea"></div>
         <style>
             .entreLinea{
@@ -423,6 +444,17 @@
         overflow: scroll;
     }
 
+    .contenedorInformativo3{
+		
+        width: 75%;
+		max-width: 1050px;
+		height: 80px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+    }
+
     .nada{
         margin-left: 22px;
         margin-top: 22px;
@@ -460,6 +492,13 @@
         height: 40px;
         margin-top: 20px;
         margin-left: -368px;
+    }
+
+    .tamañoInputBuscador{
+        width: 600px;
+        margin-top: 18px;
+        height: 40px;
+        font-size: 16px;
     }
 </style>
 

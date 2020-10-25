@@ -1,8 +1,14 @@
 import {Component} from "@angular/core";
 import { AppService } from 'src/app/app.service';
+import { getClosureSafeProperty } from '@angular/core/src/util/property';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import { DatePipe } from '@angular/common'
+
 const swal = require('sweetalert2');
-//import {} from ;
+
 @Component({
+
     selector:'mantenimiento_clientes',
     templateUrl:'./mantenimiento_clientes.component.html'
 })
@@ -12,11 +18,16 @@ export class GetClientesComponent{
     public listado_clientes:any[];
     public listado_ciudades:any[];
     public listado_tipo_cliente:any[];
-    constructor(public service:AppService){
+
+    constructor( public service:AppService, public datepipe: DatePipe ){
+
         this.listado_clientes=[];
         this.listado_ciudades=[];
         this.listado_tipo_cliente=[];
     }
+    
+    term: any[];
+
     public Persona={
         Id_cliente:"",
         Nombre_compania:"",
@@ -28,10 +39,58 @@ export class GetClientesComponent{
         Telefono_contacto:"",
         Email_contacto:""
     }
+
     ngOnInit(){
         this.get_clientes();
         this.get_ciudad();
         this.get_tipo_cliente();
+    }
+
+    generarpdf()
+    {
+        console.log( this.listado_clientes );
+
+        var fecha_actual = new Date().toLocaleString()
+
+        const doc = new jsPDF( 'l', 'mm', [297, 420] );
+
+        const autoTable = 'autoTable';
+
+        doc.setFont( "helvetica" );
+
+        doc.setFontSize( 20 );
+        doc.text( "Variedades K y D", 210, 10, { align: "center" } );
+        doc.setFontSize( 12 );
+        doc.text( "Dirección: Zonal Belen, cerca de Banco FICOHSA", 160, 16 );
+        doc.text( "Télefono: (504) 9797-7966", 180, 22 );
+        doc.text( "Correo: variedades_k_y_d@gmail.com", 170, 28 );
+        doc.setFontSize( 14 );
+        doc.text( "Reporte de Clientes", 210, 36, { align: "center" } );
+        doc.setFontSize( 12 );
+        doc.text( "Fecha: " + fecha_actual, 15, 44 );
+
+        var img = new Image()
+        img.src = 'assets/img/LogoKyD2.png'
+        doc.addImage( img, 'png', -10, -20, 80, 80 )
+   
+        var rows = [];
+        
+        this.listado_clientes.forEach( element => {      
+            var temp = [ element.Nombre_compania, element.Direccion, element.Nombre_ciudad, element.Descripcion_cliente, element.Nombre_contacto, element.Apellido_contacto, element.Telefono_contacto, element.Email_contacto ];
+            rows.push(temp);
+        });
+
+        console.log(rows);
+
+        doc[autoTable]({
+            
+            head: [[ 'Nombre Compañia', 'Dirección', 'Ciudad', 'Tipo de Cliente', 'Nombre del Contacto', 'Apellido del Contacto', 'Teléfono del Contacto', 'Correo Electrónico' ]],
+            body: rows,
+            startY: 50,
+            styles: {font: "helvetica", fontsize: 12}
+        });
+
+        doc.save( "Reporte de Clientes " + fecha_actual );
     }
 
     limpiar_cliente(){
@@ -47,7 +106,7 @@ export class GetClientesComponent{
             Apellido_contacto:"",
             Telefono_contacto:"",
             Email_contacto:""
-        }   
+        }
     }
 
     get_tipo_cliente(){
