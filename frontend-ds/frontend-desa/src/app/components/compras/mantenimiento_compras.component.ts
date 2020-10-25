@@ -33,6 +33,7 @@ export class GetComprasComponent {
     /* Objeto que trae el Id_proveedor y los Gastos_adicionales de la compra */
     public Compra = {
         Id_compra: "0",
+        Codigo_factura: "",
         Fecha_orden: "",
         Fecha_recibida: "",
         Gastos_adicionales: "0",
@@ -225,7 +226,7 @@ export class GetComprasComponent {
     insertar_compra(){
         if(this.listado_productos_compras.length == 0){
             swal.fire({
-                title: "No ha ingresado ningún producto a la compra, por favor hágalo para poder enviar la compra.",
+                title: "No ha ingresado ningún producto al pedido, por favor hágalo para poder enviar el pedido.",
                 icon: 'error'
             });
         }
@@ -244,6 +245,7 @@ export class GetComprasComponent {
                     //console.log("entro");
                     this.Compra = {
                         Id_compra: "0",
+                        Codigo_factura: "",
                         Fecha_orden: "",
                         Fecha_recibida: "",
                         Gastos_adicionales: "0",
@@ -252,7 +254,7 @@ export class GetComprasComponent {
                     }
 
                     swal.fire({
-                        title: "Compra envida exitosamente.",
+                        title: "Pedido envido exitosamente.",
                         icon: 'success'
                     });
 

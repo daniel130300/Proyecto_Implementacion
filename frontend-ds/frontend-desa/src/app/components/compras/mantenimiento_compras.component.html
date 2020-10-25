@@ -11,7 +11,7 @@
 	<div class="contedorPrincipal">
       
 		<div class="contenedorTitulo">
-			<h2>| Nueva Compra</h2>
+			<h2>| Nuevo Pedido</h2>
 		</div>
         <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
         <div class="contenedorInformativo">
@@ -19,6 +19,18 @@
             <form ngNativeValidate #form oncopy="return false" onpaste="return false">
                 
                 <div class="mov container-md">
+                    <p></p>
+                    <label>Código Factura: </label>
+                    <input type = "text" 
+                        class = "tamañoInput form-control"
+                        [(ngModel)]="Compra.Codigo_factura"
+                        [ngModelOptions]="{standalone:true}" 
+                        maxlength="6"
+                        minlength="1"
+                        pattern="^[+]?([1-9]+(?:[0-9]*)+)$"
+                        required="true"
+                    >
+                    
                     <p></p>
                     <label>Proveedor</label>
                     <select
@@ -69,7 +81,7 @@
                     <p></p>
                     <label>Informacion Adicional</label>
                     <textarea class="tamañoInput form-control" 
-                        rows="5" 
+                        rows="3" 
                         [(ngModel)]="Informacion_adicional"
                         [ngModelOptions]="{standalone:true}"
                         disabled>
@@ -188,7 +200,7 @@
                         disabled
                     >
                     <p></p>
-                    <button (click)="insertar_compra()" class="tamañoBoton btn btn-primary mb-3">Enviar compra</button>
+                    <button (click)="insertar_compra()" class="tamañoBoton btn btn-primary mb-3">Enviar pedido</button>
                 </form>
             </div>
         </div>
@@ -443,7 +455,7 @@
 
     .separacionInfo{
         margin-left: 400px;
-        margin-top: -454px;
+        margin-top: -407px;
     }
 
     .separacionInfo2{
