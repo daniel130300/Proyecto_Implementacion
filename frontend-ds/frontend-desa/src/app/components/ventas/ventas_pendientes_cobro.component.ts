@@ -85,7 +85,7 @@ export class GetVentasPendientesCobroComponent {
             styles: {font: "helvetica", fontsize: 12}
         });
 
-        doc.save("Reporte Ventas Pendientes de Cobro_"+fecha_actual);
+        doc.save("Reporte_Ventas_Pendientes_de_Cobro_" + fecha_actual);
     }
 
     public Abono_venta = {

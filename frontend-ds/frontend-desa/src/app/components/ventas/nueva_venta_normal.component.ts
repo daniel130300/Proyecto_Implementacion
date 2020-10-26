@@ -390,6 +390,6 @@ export class GetVentaNormalComponent
         doc.text("¡Gracias por su compra!", 75, 280);
 
 
-        doc.save("Factura_normal_" +"num_factura_" + codigo + "_fecha_" + fecha_actual);
+        doc.save("Factura_Normal_" + "Num_Factura_" + codigo + "_Fecha_" + fecha_actual);
     }
 }

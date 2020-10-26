@@ -99,7 +99,7 @@ export class GetVentasIncobrablesComponent {
             styles: {font: "helvetica", fontsize: 12}
         });
 
-        doc.save("Reporte Ventas Incobrables "+fecha_actual);
+        doc.save("Reporte_Ventas_Incobrables_" + fecha_actual);
     }
 
     get_ventas_incobrables(){

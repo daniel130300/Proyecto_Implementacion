@@ -585,7 +585,7 @@ export class GetVentaPlusComponent
         doc.text("¡Gracias por su compra!", 75, 280);
 
 
-        doc.save("Factura_plus_" +"num_factura_" + codigo + "_fecha_" + fecha_actual);
+        doc.save("Factura_Plus" +"_Num_Factura_" + codigo + "_Fecha_" + fecha_actual);
     }
 
     //FUNCIONES PARA LIMPIAR TODOS LOS INPUTS

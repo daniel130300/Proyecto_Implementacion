@@ -101,7 +101,7 @@ export class GetComprasRealizadasComponent {
 
         //doc.text("¡Gracias por su compra!", 75, 280);
 
-        doc.save("Reporte_Pedidos_Realizados");
+        doc.save("Reporte_Pedidos_Realizados_" + fecha_actual);
        
     }
 

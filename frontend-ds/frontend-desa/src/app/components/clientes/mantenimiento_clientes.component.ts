@@ -90,7 +90,7 @@ export class GetClientesComponent{
             styles: {font: "helvetica", fontsize: 12}
         });
 
-        doc.save( "Reporte de Clientes " + fecha_actual );
+        doc.save("Reporte_de_Clientes_" + fecha_actual );
     }
 
     limpiar_cliente(){

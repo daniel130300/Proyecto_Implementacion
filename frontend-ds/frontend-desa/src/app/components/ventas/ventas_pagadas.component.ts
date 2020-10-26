@@ -99,7 +99,7 @@ export class GetVentasPagadasComponent {
             styles: {font: "helvetica", fontsize: 12}
         });
 
-        doc.save("Reporte Ventas Pagadas "+fecha_actual);
+        doc.save("Reporte_Ventas_Pagadas_" + fecha_actual);
     }
 
     get_ventas_pagadas(){

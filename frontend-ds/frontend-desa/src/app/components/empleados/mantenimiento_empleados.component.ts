@@ -68,7 +68,7 @@ export class GetEmpleadosComponent {
             styles: {font: "helvetica", fontsize: 12}
         });
 
-        doc.save("Reporte_Empleados_"+fecha_actual);
+        doc.save("Reporte_Empleados_" + fecha_actual);
     }
 
     public Empleado = {
@@ -303,27 +303,5 @@ export class GetEmpleadosComponent {
             }
         );
     }
-
-    /*delete_empleado( id_empleado ) {
-
-        var response;
-
-        var load = { Id_empleado: id_empleado }
-
-        this.service.delete_empleado( load ).subscribe
-        (
-            data => response = data,
-            
-            err => {
-
-                console.log( "Error al consultar el servicio." ); 
-            },
-
-            () => {
-
-                this.get_empleados();
-            }
-        );
-    }*/
 
 }
