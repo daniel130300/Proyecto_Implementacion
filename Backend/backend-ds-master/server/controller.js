@@ -779,6 +779,18 @@ router.put('/update_cuentas_por_cobrar', (req, res, next) => {
    
 });
 
+router.get('/get_id_venta', (req, res, next) => {
+    var query = 'select max(Id_venta) Id_venta from ventas';
+    con.query(query, (err, result, fileds) => {
+        if(err){
+            next(err);
+        } else {
+            res.status(200).json(result);
+        }
+    });
+    
+});
+
 
 /*---------------------------------MANTENIMIENTO CATEGORIAS----------------------------------*/
 

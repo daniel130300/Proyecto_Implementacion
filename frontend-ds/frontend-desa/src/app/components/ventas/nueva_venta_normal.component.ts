@@ -347,10 +347,8 @@ export class GetVentaNormalComponent
     {
         this.get_factura();
         
-        var codigo = JSON.stringify(this.service.get_codigo_factura()[0].Id_venta);
+        var codigo = (JSON.stringify(this.service.get_codigo_factura()[0].Id_venta));
 
-        console.log(codigo);
-        
         var fecha_actual = new Date().toLocaleString()
 
         const doc = new jsPDF();
