@@ -52,6 +52,8 @@ import {GetCajasComponent} from './components/menu/cajas.component';
 
 import {GetRecuperacionContrasenia} from './components/login/recuperacion_contrasenia';
 
+import {GetDashboardComponent} from './components/dashboard/dashboard.component';
+
 
 const routes: Routes = [
     {
@@ -139,7 +141,7 @@ const routes: Routes = [
     {
         path: 'consulta_inventario',
         component: GetInventarioComponent
-    },
+    },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
     {
         path: 'menu_venta',
         component: GetMenuVentasComponent
@@ -155,6 +157,10 @@ const routes: Routes = [
     {
         path: 'recuperacion_contrasenia',
         component: GetRecuperacionContrasenia
+    },
+    {
+        path: 'dashboard',
+        component: GetDashboardComponent
     }
 ];
 

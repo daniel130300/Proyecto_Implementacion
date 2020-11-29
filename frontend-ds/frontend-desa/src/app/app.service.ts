@@ -430,5 +430,32 @@ export class AppService {
         localStorage.removeItem("KyD");
         localStorage.removeItem("loggedUser");
     }
+
+    /*-----EndPoints Graficos-----*/
+
+    get_top_5_productos(): Observable<any>{
+
+        return this.httpClient.get( this.endpoint + "/get_top_5_productos", {responseType: 'json'} )
+    }
+
+    get_ventas_normales_anuales(): Observable<any>{
+
+        return this.httpClient.get( this.endpoint + "/get_ventas_normales_anuales", {responseType: 'json'} )
+    }
+
+    get_ventas_plus_anuales(): Observable<any>{
+
+        return this.httpClient.get( this.endpoint + "/get_ventas_plus_anuales", {responseType: 'json'} )
+    }
+
+    get_grafico_nodevoluciones(): Observable<any>{
+
+        return this.httpClient.get( this.endpoint + "/get_grafico_nodevoluciones", {responseType: 'json'} )
+    }
+
+    get_grafico_sidevoluciones(): Observable<any>{
+
+        return this.httpClient.get( this.endpoint + "/get_grafico_sidevoluciones", {responseType: 'json'} )
+    }
 }
 

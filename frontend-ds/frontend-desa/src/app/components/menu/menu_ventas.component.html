@@ -18,7 +18,7 @@
 			<div class="contenedorTarjetas moverTarjetaSection1">
 				<div class="tarjeta"  href="http://localhost:4200/nueva_venta_normal">
                     
-					<a href="http://localhost:4200/nueva_venta_normal">
+					<a [routerLink]="['/nueva_venta_normal']" [routerLinkActive]="['active']">
 						<img src="../../../assets/img/cliente.png">
 						Venta Normal
 					</a>
@@ -27,7 +27,7 @@
 			<div class="contenedorTarjetas moverTarjetaSection2">
 				<div class="tarjeta" >
 					
-					<a href="http://localhost:4200/nueva_venta_plus">
+					<a [routerLink]="['/nueva_venta_plus']" [routerLinkActive]="['active']">
 						<img src="../../../assets/img/clientesPlus.png">
 						Venta Plus
 					</a>

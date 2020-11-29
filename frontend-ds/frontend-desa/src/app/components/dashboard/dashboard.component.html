@@ -1,67 +1,63 @@
-<body>
-	<header>
-		<div class="tituloEncabezado">
-			<h1>Variedades K&D</h1>
-			<h2>{{LoginID}}</h2>
-		</div>
-		
-	</header>
-	<main>
-		<nav class="menu">
-			<h2>Menu</h2>
-			<ul>
-				<li><a [routerLink]="['/cajas']" [routerLinkActive]="['active']">Inicio</a></li>
-				<li *ngIf= "Rol==1"><a [routerLink]="['/dashboard']" [routerLinkActive]="['active']">Estadísticas</a></li>
-				<li *ngIf= "Rol==1"><a>Pedidos</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
 
-					<ul>
-						<li><a [routerLink]="['/mantenimiento_compras']" [routerLinkActive]="['active']">Nuevo Pedido</a></li>
-						<li><a [routerLink]="['/compras_pendientes']" [routerLinkActive]="['active']">Pedidos Pendientes</a></li>
-						<li><a [routerLink]="['/compras_realizadas']" [routerLinkActive]="['active']">Pedidos Realizados</a></li>
-					</ul>
-				</li>
-				<li><a>Ventas</a>
-					<ul>
-						<li><a [routerLink]="['/menu_venta']" [routerLinkActive]="['active']">Nueva Venta</a></li>
-						<li><a [routerLink]="['/ventas_pendientes_envio']" [routerLinkActive]="['active']">Ventas Pendientes De Envio</a></li>
-						<li><a [routerLink]="['/ventas_pagadas']" [routerLinkActive]="['active']">Ventas Pagadas</a></li>
-						<li *ngIf= "Rol==1"><a [routerLink]="['/ventas_incobrables']" [routerLinkActive]="['active']">Ventas Incobrables</a></li>
-						<li *ngIf= "Rol==1"><a [routerLink]="['/ventas_pendientes_cobro']" [routerLinkActive]="['active']">Ventas Pendientes De Cobro</a></li>
-					</ul>
-				</li>
-				<li *ngIf= "Rol==1"><a>Clientes</a>
-					<ul>
-						<li><a [routerLink]="['/mantenimiento_clientes']" [routerLinkActive]="['active']">Mantenimiento Clientes</a></li>
-					</ul>
-				</li>
-				<li *ngIf= "Rol==1"><a>Proveedores</a>
-					<ul>
-						<li><a [routerLink]="['/mantenimiento_proveedores']" [routerLinkActive]="['active']">Mantenimiento Proveedores</a></li>
-					</ul>
-				</li>
-				<li *ngIf= "Rol==1"><a>Empleados</a>
-					<ul>
-						<li><a [routerLink]="['/mantenimiento_empleados']" [routerLinkActive]="['active']">Mantenimiento Empleados</a></li>
-					</ul>
-				</li>
-				<li><a>Inventario</a>
-					<ul>
-						<li *ngIf= "Rol==1"><a [routerLink]="['/mantenimiento_productos']" [routerLinkActive]="['active']">Mantenimiento Inventario</a></li>
-						<li><a [routerLink]="['/consulta_inventario']" [routerLinkActive]="['active']">Consultar Inventario</a></li>
-					</ul>
-				</li>
-				<li><a>Devoluciones Sobre Venta</a>
-					<ul>
-						<li><a [routerLink]="['/devoluciones_venta']" [routerLinkActive]="['active']">Registrar Devoluciones</a></li>
-					</ul>
-				</li>
+<body class="fixed-top">
+    <menu></menu>
+    
+	<div class="contedorPrincipal">
+        
+        <div class="contenedorTitulo">
+            <h2>| Estadísticas</h2>
+        </div>
+        
+        <div class="contenedorInformativo">
+            <div>
+                <h2>Gráfico 1</h2>
+                <div class="chart">
+                <canvas baseChart
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    [options]="pieChartOptions"
+                    [plugins]="pieChartPlugins"
+                    [colors]="pieChartColors"
+                    [legend]="pieChartLegend">
+                </canvas>
+                </div>
+            </div>
 
-				<li class="">
-					<a class="nav-link" (click)="salir()">Cerrar Sesión</a>
-				</li>
-			</ul>
-		</nav>
-	</main>
+            <div>
+                <div>
+                    <div style="display: inline-block" class="grafico">
+                    <h2>Gráfico 2</h2>
+                    <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [plugins]="barChartPlugins"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                    </canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div style="display: block">
+                    <h2>Gráfico 3</h2>
+                <canvas baseChart
+                    [data]="polarAreaChartData"
+                    [labels]="polarAreaChartLabels"
+                    [legend]="polarAreaLegend"
+                    [chartType]="polarAreaChartType">
+                </canvas>
+                </div>
+            </div>
+        </div>   
+	</div>
 </body>
 
 
@@ -153,9 +149,14 @@
 		height: 600px;
 		margin-top: 10px;
 		background:  #E9E9E9;
-		overflow: hidden;
-		margin-top: 0px;
-	}
+		overflow: scroll;
+        margin-top: 0px;
+    }
+    
+    .grafico{
+        padding: 2em 2em;
+        width: 80%;
+    }
 
 	.contenedorTitulo{
 		width: 75%;
@@ -178,12 +179,20 @@
 	.contenedorInformativo{
 		width: 75%;
 		max-width: 1050px;
-		height: 450px;
+		height: auto;
 		margin-left: 295px;
 		margin-top: 30px;
 		background: #fff;
-
-	}
+		align-items: center;
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    
+    .contenedorInformativo h2{
+        color: rgb(99, 99, 99);
+        padding-bottom: 10px;
+    }
 
 
 	.contenedorTarjetas{
@@ -236,8 +245,6 @@
 		margin-top: -200px;
 		margin-left: 432px;
 	}
-
-
 </style>
 
 
@@ -274,7 +281,7 @@
             margin-left: 18px;
             width: 450px;
             height: 820px;
-            
+            overflow: scroll;
         }
 
         .contenedorInformativo2{

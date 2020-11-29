@@ -61,8 +61,13 @@ import {GetCajasComponent} from './components/menu/cajas.component';
 
 import {GetRecuperacionContrasenia} from './components/login/recuperacion_contrasenia';
 
+import {GetDashboardComponent} from './components/dashboard/dashboard.component';
+
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ChartsModule } from 'ng2-charts';
+
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [ //Componentes
@@ -91,7 +96,8 @@ import {FormsModule, ReactiveFormsModule } from '@angular/forms';
     GetMenuVentasComponent,
     GetVentasIncobrablesComponent,
     GetCajasComponent,
-    GetRecuperacionContrasenia
+    GetRecuperacionContrasenia,
+    GetDashboardComponent
     
   ],
   imports: [ //Modulos
@@ -101,6 +107,8 @@ import {FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
+    ChartsModule,
+    ColorPickerModule
   ],
   providers: [ //Servicios
     AppService,

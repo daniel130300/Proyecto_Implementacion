@@ -1886,5 +1886,70 @@ router.put('/update_devoluciones', (req, res, next) => {
 
 });
 
+//--------------- QUERIES PARA LOS GRÁFICOS ----------------
+
+router.get('/get_top_5_productos', (req, res, next) => {
+	var query = 'SELECT p.Descripcion_producto Producto, count(dv.Id_producto) Cantidad FROM detalle_ventas dv inner join productos p on dv.Id_producto = p.Id_producto group by p.Descripcion_producto order by count(dv.Id_producto) DESC limit 5';
+	con.query(query, (err, result, fields) => {
+		if(err) {
+				next(err);
+		} 
+		else{
+				res.status(200).json(result);
+		}
+	});
+});
+
+
+router.get('/get_ventas_normales_anuales', (req, res, next) => {
+	var query = "SELECT MONTH( a.Fecha_venta ) Mes, ROUND( SUM( ( b.Cantidad_vendida * b.Precio_venta ) + ( ( b.Cantidad_vendida * b.Precio_venta ) * a.ISV ) ), 2 ) Total FROM ventas a INNER JOIN detalle_ventas b ON a.Id_venta = b.Id_venta WHERE a.Id_plazo IS NULL AND YEAR( a.Fecha_venta ) = YEAR( NOW() ) GROUP BY MONTH( a.Fecha_venta )";
+	con.query(query, (err, result, fields) => {
+		if(err) {
+				next(err);
+		} 
+		else{
+				res.status(200).json(result);
+		}
+	});
+});
+
+
+router.get('/get_ventas_plus_anuales', (req, res, next) => {
+	var query = "SELECT MONTH( a.Fecha_venta ) Mes, ROUND( SUM( ( b.Cantidad_vendida -b.Cantidad_devuelta ) * b.Precio_venta ) - SUM( ( ( b.Cantidad_vendida - b.Cantidad_devuelta ) * b.Precio_venta ) * d.Descuento_cliente )  + ( ( SUM( ( b.Cantidad_vendida - b.Cantidad_devuelta ) * b.Precio_venta ) - SUM( ( ( b.Cantidad_vendida - b.Cantidad_devuelta ) * b.Precio_venta ) * d.Descuento_cliente ) ) * a.ISV ), 2 ) Total FROM ventas a INNER JOIN detalle_ventas b ON a.Id_venta = b.Id_venta INNER JOIN clientes c ON a.Id_cliente = c.Id_cliente INNER JOIN tipo_cliente d ON c.Id_tipo_cliente = d.Id_tipo_cliente WHERE a.Id_plazo IS NOT NULL AND YEAR( a.Fecha_venta ) = YEAR( NOW() ) GROUP BY MONTH( a.Fecha_venta )";
+	con.query(query, (err, result, fields) => {
+		if(err) {
+				next(err);
+		} 
+		else{
+				res.status(200).json(result);
+		}
+	});
+});
+
+router.get('/get_grafico_nodevoluciones', (req, res, next) => {
+	var query = 'select count(distinct dv.Id_venta) as VentasTotal from ventas as v join detalle_ventas as dv on v.Id_venta=dv.Id_venta where Cantidad_devuelta=0';
+	con.query(query, (err, result, fields) => {
+		if(err) {
+				next(err);
+		} else {
+				res.status(200).json(result);
+
+		}
+	});
+   
+});
+
+router.get('/get_grafico_sidevoluciones', (req, res, next) => {
+	var query = 'select count(distinct dv.Id_venta) as VentasTotal from ventas as v join detalle_ventas as dv on v.Id_venta=dv.Id_venta where Cantidad_devuelta!=0';
+	con.query(query, (err, result, fields) => {
+		if(err) {
+				next(err);
+		} else {
+				res.status(200).json(result);
+
+		}
+	});
+});
+
 
 module.exports = router;
