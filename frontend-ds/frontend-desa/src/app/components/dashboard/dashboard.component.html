@@ -14,8 +14,26 @@
         </div>
         
         <div class="contenedorInformativo">
+
+			<div>
+                <div>
+                    <div style="display: inline-block" class="grafico">
+                    <h2>Ventas Anuales</h2>
+                    <canvas baseChart
+                        [datasets]="barChartData"
+                        [labels]="barChartLabels"
+                        [options]="barChartOptions"
+                        [plugins]="barChartPlugins"
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+					</canvas>
+					<h3>Meses</h3>
+                    </div>
+                </div>
+			</div>
+			
             <div>
-                <h2>Gráfico 1</h2>
+                <h2>Gráfico Circular sobre Devoluciones de Venta</h2>
                 <div class="chart">
                 <canvas baseChart
                     [data]="pieChartData"
@@ -30,28 +48,13 @@
             </div>
 
             <div>
-                <div>
-                    <div style="display: inline-block" class="grafico">
-                    <h2>Gráfico 2</h2>
-                    <canvas baseChart
-                        [datasets]="barChartData"
-                        [labels]="barChartLabels"
-                        [options]="barChartOptions"
-                        [plugins]="barChartPlugins"
-                        [legend]="barChartLegend"
-                        [chartType]="barChartType">
-                    </canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <div style="display: block">
-                    <h2>Gráfico 3</h2>
+                <div style="display: block" class="grafico3">
+                    <h2>Los 5 Productos más Vendidos</h2>
                 <canvas baseChart
                     [data]="polarAreaChartData"
                     [labels]="polarAreaChartLabels"
-                    [legend]="polarAreaLegend"
+					[legend]="polarAreaLegend"
+					[colors]="polarAreaChartColors"
                     [chartType]="polarAreaChartType">
                 </canvas>
                 </div>
@@ -112,6 +115,14 @@
 		font-size: 1.1em;
 	}
 
+	.contenedorInformativo h3{
+		font-size: 18px;
+		color: rgb(99, 99, 99);
+	}
+
+	.grafico3{
+		margin-top: 25px;
+	}
 
 	.menu ul{
 		list-style: none;
