@@ -63,6 +63,8 @@ import {GetRecuperacionContrasenia} from './components/login/recuperacion_contra
 
 import {GetDashboardComponent} from './components/dashboard/dashboard.component';
 
+import {GetManualUsuarioComponent} from './components/ayuda/mu.componet';    
+
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ChartsModule } from 'ng2-charts';
@@ -97,7 +99,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     GetVentasIncobrablesComponent,
     GetCajasComponent,
     GetRecuperacionContrasenia,
-    GetDashboardComponent
+    GetDashboardComponent,
+    GetManualUsuarioComponent
     
   ],
   imports: [ //Modulos

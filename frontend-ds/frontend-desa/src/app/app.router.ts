@@ -54,6 +54,8 @@ import {GetRecuperacionContrasenia} from './components/login/recuperacion_contra
 
 import {GetDashboardComponent} from './components/dashboard/dashboard.component';
 
+import {GetManualUsuarioComponent} from './components/ayuda/mu.componet';
+
 
 const routes: Routes = [
     {
@@ -161,6 +163,10 @@ const routes: Routes = [
     {
         path: 'dashboard',
         component: GetDashboardComponent
+    },
+    {
+        path: 'mu',
+        component: GetManualUsuarioComponent
     }
 ];
 
