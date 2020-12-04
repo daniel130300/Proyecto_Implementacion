@@ -12,8 +12,10 @@ const swal = require('sweetalert2');
     
 })
 
-export class GetVentaNormalComponent 
+export class GetVentaNormalComponent //CamelCase
 {
+    //Todas las variables tanto locales como globales iran en snake_case, ejemplo: num_factura. TODO EN MINUSCULA
+
     public numero_factura: any[];
     public listado_productos: any[];
     public listado_clientes: any[];
@@ -32,8 +34,8 @@ export class GetVentaNormalComponent
         this.listado_clientes = [];
     }
 
-    public VentasNormal = {
-        Fecha_venta: "",
+    public VentasNormal = { //Los objetos iran en camelCase
+        Fecha_venta: "", //los atributos dentro de los objetos en snake_case todo en minuscula
         Identidad: "",
         ISV: 0.15,
         Id_estado_envio:10,
@@ -61,7 +63,7 @@ export class GetVentaNormalComponent
 
  
     //Funcion para insertar la venta normal
-    insertar_venta_normal()
+    insertar_venta_normal() //Toodas las funciones iran en snake_case, TODO en MINUSCULA.
     {
         if(this.listado_productos_agregados.length == 0)
         {

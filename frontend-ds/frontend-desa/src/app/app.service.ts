@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpUrlEncodingCodec, HttpParameterCodec, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+ //TODOS LOS APPSERVICE IRAN EN SNAKECASE.
+ 
 @Injectable()
 export class AppService {
     private endpoint: string;
