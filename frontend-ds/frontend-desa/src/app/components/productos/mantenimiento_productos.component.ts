@@ -21,6 +21,7 @@ export class GetProductosComponent {
     public Id_categoria: any="";
     public Id_subcategoria: any="";
     public Id_marca: any="";
+    term: any[];
     
     constructor(public service:AppService, private router:Router){
         this.listado_productos = [];
@@ -30,7 +31,7 @@ export class GetProductosComponent {
     public Producto = {
         Id_producto: "", 
         Descripcion_producto: "", 
-        Talla: "", 
+        Talla: null, 
         Color: "", 
         Stock: "", 
         Precio_referencial_venta: "", 
@@ -75,10 +76,8 @@ export class GetProductosComponent {
     ngOnInit(){
         this.get_productos();
         this.get_categorias();
-      
         this.get_marcas();
         this.get_proveedores();
-       
     }
 
     get_categorias(){
@@ -178,26 +177,33 @@ export class GetProductosComponent {
                             Punto_reorden: "",
                             Id_modelo: ""
                     }
-
                     this.get_productos();
                 }
             );
+            
+            this.service.insert_producto_proveedor(this.prove).subscribe(
+                data=>response = data,
+                err => {
+                    console.log("Error al consultar servicio"); 
+                },
+                ()=>{
+                    this.prove = { Id_proveedor: ""}
+                    this.get_productos();
+                }
+            );
+
+            this.Id_categoria = "";
+            this.Id_subcategoria = "";
+            this.Id_marca = "";
+            
+            this.get_productos();
+
+            swal.fire({
+
+                title: "¡Agregado exitosamente!",
+                icon:  'success'
+            }); 
         } 
-    }
-    
-    insertar_producto_proveedor(){
-        var response;
-        this.service.insert_producto_proveedor(this.prove).subscribe(
-            data=>response = data,
-            err => {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>{
-                  
-                this.prove = { Id_proveedor: ""}
-                this.get_proveedores();
-            }
-        );
     }
 
     update_productos_proveedores()
@@ -206,7 +212,6 @@ export class GetProductosComponent {
         this.actualizar={
             Id_proveedor:this.prove.Id_proveedor,
             Id_producto:this.Producto.Id_producto
-            
         }
         this.service.update_producto_proveedor(this.actualizar).subscribe(
             data=>response = data,
@@ -219,8 +224,6 @@ export class GetProductosComponent {
                     Id_producto:""
                     
                 }
-                
-                console.log(this.prove.Id_proveedor)
                 this.get_proveedores();
             }
         );
@@ -245,6 +248,10 @@ export class GetProductosComponent {
     
     pasarDatosProducto(producto)
     {
+        this.get_subcategorias();
+        this.get_modelos();
+        this.get_proveedores();
+
         this.Producto = 
         {
             Id_producto: producto.Id_producto, 
@@ -261,17 +268,15 @@ export class GetProductosComponent {
         this.Id_categoria = producto.Id_categoria;
         this.Id_subcategoria = producto.Id_subcategoria;
         this.Id_marca = producto.Id_marca;
-
+        this.prove.Id_proveedor = producto.Id_proveedor;
     }
 
 
     update_producto(id_producto)
     {
-        let regexpNumber  = /^[+ 0-9]{8}$/;
-        let regexpLetter = /^[a-zA-Z ]{4,20}$/;
-        let regexpLetter1 = /^[a-zA-Z ]{3,20}$/;
-        let regexpMix = /^[A-Za-z0-9 ]{3,15}$/;
-        let regexpDi = /^[A-Za-z0-9.# ]{10,300}$/;
+        let regexpLetterNumbers = /^[a-zA-Z0-9\s]{4,50}$/;
+        let regexpNumber  =  /^[0-9]{1,5}$/;
+        let regexpLetter =  /^[a-zA-Z\s]{4,50}$/;
 
         this.Producto = 
         {
@@ -285,56 +290,99 @@ export class GetProductosComponent {
             Punto_reorden: this.Producto.Punto_reorden,
             Id_modelo: this.Producto.Id_modelo
         }
-        if(this.Producto.Descripcion_producto == "" || this.Producto.Talla == "" || this.Producto.Color == "" || 
+
+        if(this.Producto.Descripcion_producto == "" || this.Producto.Color == "" || 
            this.Producto.Stock == "" || this.Producto.Precio_referencial_venta == "" || 
            this.Producto.Precio_referencial_compra == "" || this.Producto.Punto_reorden == "" || this.Producto.Id_modelo == "")
-           {
+        {
+            swal.fire({
+                title: "Es necesario que los campos no queden vacios. Vuelve a intentarlo.",
+                icon: 'error'
+            });
+
+        }
+        else
+        {
+            if(regexpLetterNumbers.test(this.Producto.Descripcion_producto) == false || regexpLetter.test(this.Producto.Color) == false)
+            {
                 swal.fire({
-                    title: "Es necesario que los campos no queden vacios. Vuelve a Intentarlo.",
+                    title: "Solo se permiten letras. Vuelve a intentarlo",
                     icon: 'error'
                 });
+            }
+            else if(regexpNumber.test(this.Producto.Stock) == false || 
+                    regexpNumber.test(this.Producto.Precio_referencial_venta) == false || 
+                    regexpNumber.test(this.Producto.Precio_referencial_compra) == false || 
+                    regexpNumber.test(this.Producto.Punto_reorden) == false )
+            {
+                swal.fire({
+                    title: "Solo se permiten numeros. Vuelve a intentarlo.",
+                    icon: 'error'
+                });
+            }
+            else
+            {
+                console.log(this.Producto);
 
-                }else
-                    if(regexpLetter.test(this.Producto.Descripcion_producto) == false || regexpLetter.test(this.Producto.Color) == false)
+                var response;
+                this.service.update_producto(this.Producto).subscribe(
+                    data=>response = data,
+                    err => 
                     {
-                        swal.fire({
-                            title: "Solo se permiten letras. Vuelve a Intentarlo",
-                            icon: 'error'
-                        });
-                    }else 
-                        if(regexpNumber.test(this.Producto.Talla) == false || regexpNumber.test(this.Producto.Stock) == false || 
-                           regexpNumber.test(this.Producto.Precio_referencial_venta) == false || 
-                           regexpNumber.test(this.Producto.Precio_referencial_compra) == false || 
-                           regexpNumber.test(this.Producto.Punto_reorden) == false ){
-                            swal.fire({
-                                title: "Solo se permiten numeros. Vuelve a Intentarlo.",
-                                icon: 'error'
-                            });
-                         }else
-                            {
-                                var response;
-                                this.service.update_producto(this.Producto).subscribe(
-                                data=>response = data,
-                                err => {
-                                    console.log("Error al consultar servicio"); 
-                                    },
-                                    ()=>{
-                                        this.Producto = 
-                                        {
-                                            Id_producto: "", 
-                                            Descripcion_producto: "", 
-                                            Talla: "", 
-                                            Color: "", 
-                                            Stock: "", 
-                                            Precio_referencial_venta: "", 
-                                            Precio_referencial_compra: "", 
-                                            Punto_reorden: "",
-                                            Id_modelo: ""
-                                        }
-                                    }
-                                );
-                                this.get_productos();
-                            }
+                        console.log("Error al consultar servicio"); 
+                    },
+                    ()=>{
+                        this.get_productos();
+                    }
+                );
+
+                this.actualizar={
+                    Id_proveedor:this.prove.Id_proveedor,
+                    Id_producto:this.Producto.Id_producto
+                }
+
+                this.service.update_producto_proveedor(this.actualizar).subscribe(
+                    data=>response = data,
+                    err => {
+                        console.log("Error al consultar servicio"); 
+                    },
+                    ()=>{
+                        this.actualizar=
+                        {
+                            Id_proveedor:"",
+                            Id_producto:""
+                        }
+                        this.get_productos();
+                    }
+                );
+
+                this.get_productos();
+
+                this.Producto = 
+                {
+                    Id_producto: "", 
+                    Descripcion_producto: "", 
+                    Talla: "", 
+                    Color: "", 
+                    Stock: "", 
+                    Precio_referencial_venta: "", 
+                    Precio_referencial_compra: "", 
+                    Punto_reorden: "",
+                    Id_modelo: ""
+                }
+
+                this.Id_categoria = "";
+                this.Id_subcategoria = "";
+                this.Id_marca = "";
+                this.prove.Id_proveedor = "";
+
+                swal.fire({
+
+                    title: "¡Editado exitosamente!",
+                    icon:  'success'
+                });
+            }
+        }       
     }
 
     delete_producto(id_producto)
@@ -356,6 +404,12 @@ export class GetProductosComponent {
                 this.get_productos();
             }
         );
+
+        swal.fire({
+
+            title: "¡Eliminado exitosamente!",
+            icon:  'success'
+        });
     }
 
     limpiaralv()
@@ -374,6 +428,10 @@ export class GetProductosComponent {
             Id_modelo: ""
         }
         
+        this.Id_categoria = "";
+        this.Id_subcategoria = "";
+        this.Id_marca = "";
+        this.prove.Id_proveedor = "";
     
     }
     get_subcategoria_filtrado(Id_categoria){

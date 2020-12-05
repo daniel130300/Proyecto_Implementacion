@@ -85,19 +85,7 @@ router.delete('/delete_proveedor', (req, res, next) => {
    
 });
 
-//Consultar un Proveedor en particular.
 
-router.get('/get_proveedor', (req, res, next) => {
-	var query = "select a.Id_proveedor, a.Nombre_compania, a.Nombre_contacto, a.Apellido_contacto, a.Telefono_contacto, a.Email_contacto, a.Direccion, b.Id_ciudad, b.Nombre_ciudad , c.Id_departamento, c.Nombre_departamento from proveedores a inner join ciudades b on a.Id_ciudad = b.Id_ciudad inner join departamentos c on b.Id_departamento = c.Id_departamento where Estado_logico = 1 and a.Nombre_compania like " + "'%"+req.body.Busqueda+"%'" + "or a.Nombre_contacto like " + "'%"+req.body.Busqueda+"%'" + " or a.Apellido_contacto like " + "'%"+req.body.Busqueda+"%'" + "or a.Email_contacto like " + "'%"+req.body.Busqueda+"%'" + "or a.Direccion like " + "'%"+req.body.Busqueda+"%'" + "or b.Nombre_ciudad like " + "'%"+req.body.Busqueda+"%'" +  "or c.Nombre_departamento like " + "'%"+req.body.Busqueda+"%'"; 
-	
-    con.query(query, (err, result, fields) => {
-        if(err){
-            next(err);
-        }else{
-            res.status(200).json(result);
-        }
-    });
-});
 
 //Consultar todos los Proveedores.
 
@@ -169,20 +157,7 @@ router.put ('/update_producto_compra', (req, res, next) => {
 });
 
 
-//Consultar un registro en Productos_Proveedor.
 
-router.get('/get_producto_proveedor', (req, res, next) => {
-	var query = "select pv.Id_producto,p.Descripcion_producto,p.Talla,p.Color,p.Stock,p.Precio_referencial_venta,p.Precio_referencial_compra,p.Punto_reorden,p.Id_modelo,pv.Id_proveedor,pr.Nombre_compania,	pr.Direccion,pr.Id_ciudad,pr.Nombre_contacto,pr.Apellido_contacto,pr.Telefono_contacto,pr.Email_contacto from productos_proveedores pv JOIN productos p ON pv.Id_producto= p.Id_producto JOIN proveedores pr ON pv.Id_proveedor=pr.Id_proveedor  where p.Descripcion_producto like " + "'%"+req.body.Busqueda+"%'"+ "or p.Talla like " + "'%"+req.body.Busqueda+"%'"+ "or p.Color like " + "'%"+req.body.Busqueda+"%'"+ "or pr.Nombre_compania like " + "'%"+req.body.Busqueda+"%'"+ "or pr.Direccion like " + "'%"+req.body.Busqueda+"%'"+ "or pr.Nombre_contacto like " + "'%"+req.body.Busqueda+"%'"+ "or pr.Email_contacto like " + "'%"+req.body.Busqueda+"%'";
-	
-	con.query(query,  (err, result, fields) => {
-		if(err){
-			next(err);
-		}
-		else{
-			res.status(200).json(result);
-		}
-	});
-});
 
 //Consultar todos los registros en Productos_Proveedores.
 router.get('/get_productos_proveedor', (req, res, next) => {
@@ -216,19 +191,7 @@ router.get('/get_ciudades', (req, res, next) => {
     });
 });
 
-//Consultar una ciudad 
-router.get('/get_ciudad', (req, res, next) => {
-	var query = "SELECT c.Id_ciudad, c.Nombre_ciudad, c.Id_departamento, d.Nombre_departamento FROM ciudades c inner join departamentos d on c.Id_departamento=d.Id_departamento where c.Nombre_ciudad like "+"'%"+ req.body.Busqueda+"%'"+" or d.Nombre_departamento like "+"'%"+ req.body.Busqueda+"%'";
-	con.query(query, (err, result, fields) => {
-		if(err) {
-				next(err);
-		} else {
-				res.status(200).json(result);
 
-		}
-	});
-   
-});
 
 // Insertar una nueva ciudad.
 
@@ -364,20 +327,7 @@ router.get('/get_clientes', (req, res, next) => {
     })
 });
 
-//Consultar cliente especifico
 
-router.get('/get_cliente_especifico', (req, res, next) => {
-    var query = "select a.Id_cliente, a.Nombre_compania, a.Nombre_contacto, a.Apellido_contacto, a.Telefono_contacto, a.Email_contacto, c.Id_tipo_cliente, c.Descripcion_cliente, c.Descuento_cliente, a.Direccion, b.Id_ciudad, b.Nombre_ciudad, d.Id_departamento, d.Nombre_departamento from clientes a inner join ciudades b on a.Id_ciudad = b.Id_ciudad inner join tipo_cliente c on a.Id_tipo_cliente = c.Id_tipo_cliente inner join departamentos d on b.Id_departamento = d.Id_departamento where Estado_logico = 1 and a.Nombre_compania like " + "'%"+req.body.Busqueda+"%'" + "or a.Nombre_contacto like " + "'%"+req.body.Busqueda+"%'" + "or a.Apellido_contacto like " + "'%"+req.body.Busqueda+"%'" + "or a.Email_contacto like " + "'%"+req.body.Busqueda+"%'" + "or a.Direccion like " + "'%"+req.body.Busqueda+"%'" + "or b.Nombre_ciudad like " + "'%"+req.body.Busqueda+"%'" + "or d.Nombre_departamento like " + "'%"+req.body.Busqueda+"%'";
-
-    con.query(query, (err, result, fields) => {
-        if(err) {
-            next(err);
-        }else {
-            res.status(200).json(result);
-        }
-    })
-    
-});
 
 router.get('/get_tipo_cliente', (req, res, next) => {
     var query = 'SELECT * FROM tipo_cliente';
@@ -398,21 +348,7 @@ router.get('/get_tipo_cliente', (req, res, next) => {
 //Consulta Productos
 
 router.get('/get_productos', (req, res, next) => {
-	var query= 'select a.Id_producto, a.Descripcion_producto, a.Talla, a.Color, a.Stock,a.Precio_referencial_venta, a.Precio_referencial_compra, a.Punto_reorden, b.Descripcion_modelo, c.Nombre_marca, d.Descripcion_subcategoria, e.Descripcion_categoria, g.Nombre_compania from productos a inner join modelos b on a.Id_modelo = b.Id_modelo inner join marcas c on b.Id_marca = c.Id_marca inner join subcategorias d on b.Id_subcategoria = d.Id_subcategoria inner join categorias e on d.Id_categoria = e.Id_categoria inner join productos_proveedores f on a.Id_producto = f.Id_producto inner join proveedores g on f.Id_proveedor = g.Id_proveedor  where a.Estado_logico = 1';
-    con.query(query, (err, result, fields) => {
-        if(err){
-            next(err);
-        }else{
-            res.status(200).json(result);
-        }
-    });
-});
-
-//Buscar Productos
-
-router.get('/get_productos_Buscar', (req, res, next) => {
-	var query= 'select a.Id_producto, a.Descripcion_producto, a.Talla, a.Color, a.Stock, a.Precio_referencial_venta, a.Precio_referencial_compra, a.Punto_reorden, c.Nombre_marca, d.Descripcion_subcategoria, e.Descripcion_categoria from productos a inner join modelos b on a.Id_modelo = b.Id_modelo inner join marcas c on b.Id_marca = c.Id_marca inner join subcategorias d on b.Id_subcategoria = d.Id_subcategoria inner join categorias e on d.Id_categoria = e.Id_categoria';
-	query = query + " where Estado_logico = 1 and a.Descripcion_producto like " + "'%"+req.body.Busqueda+"%'" + "or a.Talla like " + "'%"+req.body.Busqueda+"%'" + "or a.Color like " + "'%"+req.body.Busqueda+"%'" + "or c.Nombre_marca like " + "'%"+req.body.Busqueda+"%'" + "or d.Descripcion_subcategoria like " + "'%"+req.body.Busqueda+"%'" + "or e.Descripcion_categoria like " + "'%"+req.body.Busqueda+"%'";
+	var query= 'select a.Id_producto, a.Descripcion_producto, a.Talla, a.Color, a.Stock, a.Precio_referencial_venta, a.Precio_referencial_compra, a.Punto_reorden, b.Id_modelo, b.Descripcion_modelo, c.Id_marca, c.Nombre_marca, d.Id_subcategoria, d.Descripcion_subcategoria, e.Id_categoria, e.Descripcion_categoria, g.Id_proveedor, g.Nombre_compania from productos a inner join modelos b on a.Id_modelo = b.Id_modelo inner join marcas c on b.Id_marca = c.Id_marca inner join subcategorias d on b.Id_subcategoria = d.Id_subcategoria inner join categorias e on d.Id_categoria = e.Id_categoria inner join productos_proveedores f on a.Id_producto = f.Id_producto inner join proveedores g on f.Id_proveedor = g.Id_proveedor where a.Estado_logico = 1 order by a.Id_producto desc';
     con.query(query, (err, result, fields) => {
         if(err){
             next(err);
@@ -449,8 +385,8 @@ router.post ('/Insert_productos', (req, res, next) => {
 //Actualizar Productos
 
 router.put ('/update_productos', (req, res, next) => {
-    var query= 'update productos set  Descripcion_producto = ?, Talla = ? , Color = ?, Stock = ?, Precio_referencial_venta = ?, Precio_referencial_compra = ?, Punto_reorden = ?, Id_modelo=?';
-        query=query+ 'where Id_producto = ?';
+    var query = 'update productos set Descripcion_producto = ?, Talla = ? , Color = ?, Stock = ?, Precio_referencial_venta = ?, Precio_referencial_compra = ?, Punto_reorden = ?, Id_modelo = ?';
+        query = query + ' where Id_producto = ?';
     var values=[
         req.body.Descripcion_producto,
         req.body.Talla,
@@ -503,7 +439,7 @@ router.get('/get_modelo_filtrado', (req, res, next) => {
 //Insertar un nuevo registro
 
 router.post('/insert_productos_proveedores',(req,res,next)=>{
-	var query='set @codigo=(select max(Id_producto)  from productos); INSERT INTO productos_proveedores (Id_producto, Id_proveedor) VALUES (@codigo,?)';
+	var query='set @codigo=(select max(Id_producto) from productos); INSERT INTO productos_proveedores (Id_producto, Id_proveedor) VALUES (@codigo,?)';
 	var values=[req.body.Id_proveedor]
 		con.query(query,values,(err,result,fields)=>{
 			if(err){
@@ -551,22 +487,6 @@ router.get('/get_subcategoria_filtrado', (req, res, next) => {
 
 router.get('/get_ventas', (req, res, next) => {
 	var query = 'select a.Id_venta, a.Cod_factura, a.Fecha_venta, a.Fecha_envio, a.Fecha_entrega, a.Identidad, a.ISV, b.Id_cliente, b.Nombre_compania, c.Id_estatus, c.Descripcion_estatus, d.Id_tipo_pago, d.Descripcion_tipo_pago, e.Id_plazo, e.Descripcion_plazo from ventas a inner join clientes b on a.Id_cliente = b.Id_cliente inner join Estatus c on a.Id_estatus = c.Id_estatus inner join tipo_pago d on a.Id_tipo_pago = d.Id_tipo_pago inner join plazos_pago e on a.Id_plazo = e.Id_plazo';
-	con.query(query, (err, result, fields) => {
-		if(err) {
-				next(err);
-		} else {
-				res.status(200).json(result);
-
-		}
-	});
-   
-});
-
-//Consultar una sola venta
-
-router.get('/get_venta', (req, res, next) => {
-	var query = "select a.Id_venta, a.Cod_factura, a.Fecha_venta, a.Fecha_envio, a.Fecha_entrega, a.Identidad, a.ISV, b.Id_cliente, b.Nombre_compania, c.Id_estatus, c.Descripcion_estatus, d.Id_tipo_pago, d.Descripcion_tipo_pago, e.Id_plazo, e.Descripcion_plazo from ventas a inner join clientes b on a.Id_cliente = b.Id_cliente inner join Estatus c on a.Id_estatus = c.Id_estatus inner join tipo_pago d on a.Id_tipo_pago = d.Id_tipo_pago inner join plazos_pago e on a.Id_plazo = e.Id_plazo where a.Cod_factura like " + "'%"+req.body.Busqueda+"%'" + "or a.Identidad like " + "'%"+req.body.Busqueda+"%'" + "or b.Nombre_compania like " + "'%"+req.body.Busqueda+"%'";
-	
 	con.query(query, (err, result, fields) => {
 		if(err) {
 				next(err);
@@ -716,21 +636,7 @@ router.get('/get_cuentas_por_cobrar', (req, res, next) => {
    
 });
 
-//Consultar una sola cuenta por cobrar
-router.get('/get_cuenta_por_cobrar', (req, res, next) => {
-	var query = "select cpc.Id_cobro, cpc.Abono, cpc.Id_venta, v.Cod_factura, v.Fecha_venta, v.Fecha_envio, v.Fecha_entrega, v.Identidad, v.ISV, v.Id_cliente, c.Nombre_compania , v.Id_empleado, e.Nombre, e.Apellido, v.Id_estatus, es.Descripcion_estatus, v.Id_tipo_pago, tp.Descripcion_tipo_pago, v.Id_plazo, pp.Descripcion_plazo from cuentas_por_cobrar cpc inner join ventas v on cpc.Id_venta=v.Id_venta inner join clientes c on v.Id_cliente = c.Id_cliente inner join empleados e on v.Id_empleado = e.Id_empleado inner join estatus es  on v.Id_estatus = es.Id_estatus inner join tipo_pago tp on v.Id_tipo_pago = tp.Id_tipo_pago inner join plazos_pago pp on v.Id_plazo = pp.Id_plazo where v.Cod_factura like " +"'%"+ req.body.Busqueda+"%'" + " or v.Identidad like " +"'%"+ req.body.Busqueda+"%'" + " or c.Nombre_compania like " +"'%"+ req.body.Busqueda+"%'" + " or e.Nombre like " +"'%"+ req.body.Busqueda+"%'" + " or e.Apellido like " +"'%"+ req.body.Busqueda+"%'" + " or es.Descripcion_estatus like " +"'%"+ req.body.Busqueda+"%'" + " or tp.Descripcion_tipo_pago like " +"'%"+ req.body.Busqueda+"%'" + " or pp.Descripcion_plazo like " +"'%"+ req.body.Busqueda+"%' " ;
-	
-	
-	con.query(query, (err, result, fields) => {
-		if(err) {
-				next(err);
-		} else {
-				res.status(200).json(result);
 
-		}
-	});
-   
-});
 
 //Insertar una nueva cuenta por cobrar
 
@@ -808,21 +714,6 @@ router.get('/get_categorias', (req, res, next) => {
     
 });
 
-//Consultar una sola categoria 
-router.get('/get_categoria', (req, res, next) => {
-	var query = 'select * from categorias where Id_categoria=? or Descripcion_categoria like ' +"'%"+ req.body.Busqueda+"%'";
-	var values = [req.body.Busqueda];
-	con.query(query, values, (err, result, fields) => {
-		if(err) {
-				next(err);
-		} else {
-				res.status(200).json(result);
-
-		}
-	});
-   
-});
-
 //Insertar datos
 
 router.post('/insert_categoria', (req, res, next) => {
@@ -882,27 +773,14 @@ router.get('/get_subcategorias', (req, res, next) => {
     
 });
 
-//Buscar subcategoria
-router.get('/get_subcategoria', (req, res, next) => {
-    var query ="SELECT s.Id_subcategoria,s.Descripcion_subcategoria,c.Id_categoria,c.Descripcion_categoria FROM subcategorias s JOIN categorias c ON s.Id_categoria = c.Id_Categoria where s.Descripcion_subcategoria like " + "'%"+req.body.Busqueda+"%'"+ "or c.Descripcion_categoria like " + "'%"+req.body.Busqueda+"%'"; 
-    con.query(query,  (err, result, fileds) => {
-        if(err){
-            next(err);
-        } else {
-            res.status(200).json(result);
-        }
-    });
-    
-});
-
 //Insertar datos
 router.post('/insert_subcategoria', (req, res, next) => {
     var query = 'insert into subcategorias (Descripcion_subcategoria, Id_categoria)';
         query = query  + 'values (?,?)';
     
     var values = [
-                  req.body.Descripcion_subcategoria,
-                  req.body.Id_categoria
+                  req.body.descripcion_subcategoria,
+                  req.body.id_categoria
                 ];
 
     
@@ -952,20 +830,6 @@ router.get('/get_marcas', (req, res, next) => {
      }else {
          res.status(200).json(result);
 
-     }
-    });
-
-});
-
-//Consultar una marca en particular 
-
-router.get('/get_marca', (req, res, next) => {
-    var query ="select * from marcas where Nombre_Marca like " + "'%"+req.body.Busqueda+"%'";
- con.query(query,(err,result,fields) => {
-     if(err){
-         next(err);
-     }else {
-         res.status(200).json(result);
      }
     });
 
@@ -1052,20 +916,6 @@ router.get('/get_marcas', (req, res, next) => {
 
 });
 
-//Consultar un modelo en particular 
-
-router.get('/get_modelo', (req, res, next) => {
-    var query = "select a.Id_modelo, a.Descripcion_modelo, b.Id_marca, b.Nombre_marca, c.Id_subcategoria, c.Descripcion_subcategoria, d.Id_categoria, d.Descripcion_categoria from modelos a inner join marcas b on a.Id_marca = b.Id_marca inner join subcategorias c on a.Id_subcategoria = c.Id_subcategoria inner join categorias d on c.Id_categoria = d.Id_categoria where a.Descripcion_modelo like " + "'%"+req.body.Busqueda+"%'" + "or b.Nombre_marca like" + "'%"+req.body.Busqueda+"%'" + "or c.Descripcion_subcategoria like " + "'%"+req.body.Busqueda+"%'" + "or d.Descripcion_categoria like " + "'%"+req.body.Busqueda+"%'";
- con.query(query,(err,result,fields) => {
-     if(err){
-         next(err);
-     }else {
-         res.status(200).json(result);
-     }
-    });
-
-});
-
 //Insertar un nuevo modelo
 
 router.post('/insert_modelo', (req, res, next) => {
@@ -1123,19 +973,6 @@ router.get('/get_empleados', (req, res, next) => {
     	}
     });
 });
-
-//Consultar un empleado
-router.get('/get_empleado', (req, res, next) => {
-	var query="SELECT em.Id_empleado, em.Identidad, em.Nombre,em.Apellido,em.Telefono,em.Email,em.Direccion,em.Salario,em.LoginID,em.Contrasenia,em.Fecha_nacimiento,em.Fecha_contratacion,em.Fecha_despido,e.Id_estatus,e.Descripcion_estatus,p.Id_puesto,p.Descripcion_puesto FROM empleados em JOIN estatus e ON e.Id_estatus = em.Id_estatus JOIN puestos p ON em.Id_puesto = p.Id_puesto where em.Nombre like " + "'%"+req.body.Busqueda+"%'"  + "or em.Identidad like " + "'%"+req.body.Busqueda+"%'" + "or em.Apellido like " + "'%"+req.body.Busqueda+"%'"+ "or em.Email like " + "'%"+req.body.Busqueda+"%'"+ "or em.Direccion like " + "'%"+req.body.Busqueda+"%'";
-	 con.query(query,(err,result,fields) => {
-		 if(err){
-			 next(err);
-		 }else {
-			 res.status(200).json(result);
-		 }
-		});
-	
-	});
 
 //Insertar nuevo empleado
 
@@ -1256,23 +1093,6 @@ router.get('/get_compras', (req, res, next) => {
 router.get('/get_compras_pendientes', (req, res, next) => {
 	var query = 'SELECT c.Id_compra, c.Codigo_factura, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus FROM  compras c inner join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus = es.Id_estatus where c.Id_estatus = 3';
 	con.query(query, (err, result, fields) => {
-		if(err) {
-				next(err);
-		} else {
-				res.status(200).json(result);
-
-		}
-	});
-   
-});
-
-
-//Consultar una sola compra
-router.get('/get_compra', (req, res, next) => {
-	var query = "SELECT c.Id_compra, c.Codigo_factura, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus FROM  compras c inner join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus=es.Id_estatus where c.Id_compra = ? or p.Nombre_compania like  " +"'%"+ req.body.Busqueda+"%'" + "or es.Descripcion_estatus like "+"'%"+ req.body.Busqueda+"%'" ;
-	var values = [req.body.Busqueda];
-	
-	con.query(query, values, (err, result, fields) => {
 		if(err) {
 				next(err);
 		} else {
@@ -1459,8 +1279,8 @@ router.get('/get_ciudades', (req, res, next) => {
 
 router.post('/login', (req, res, next) =>{
 	var user = {
-		LoginID: req.body.LoginID,
-		Contrasenia: req.body.Contrasenia
+		LoginID: req.body.login_id,
+		Contrasenia: req.body.contrasenia
 	};
 	const get_token = (user) => {
 		var query = "SELECT LoginID, Contrasenia, Id_puesto FROM empleados WHERE LoginID = ?"

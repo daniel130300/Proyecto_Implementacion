@@ -210,7 +210,7 @@
                     </thead>
             
                     <tbody>
-                        <tr *ngFor = "let e of listado_empleados |filter:term">
+                        <tr *ngFor = "let e of listado_empleados | filter:term">
             
                             <td>{{e.Identidad}}</td>
                             <td>{{e.Nombre}}</td>
@@ -247,13 +247,6 @@
 			<button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a>  Reporte</button>
 		
 		</div>
-        <!-- <div class="entreLinea"></div>
-            <style>
-                .entreLinea{
-                    margin-top: 26px;
-                }
-            </style>
-        </div> -->
         
 	</div>
 </body>

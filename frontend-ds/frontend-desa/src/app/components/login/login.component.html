@@ -23,9 +23,9 @@
 				<img src="../../../assets/img/usuarioLogin.png"> 
 				<h1>Iniciar Sesión</h1>
 			</div>
+
 			<div class="contenedorLogin">
 				<form class="form-container" #login_form="ngForm" novalidate="novalidate" autocomplete="off" oncopy="return false" onpaste="return false">
-					<!--nombreUsuario--->
 					<div class="form-group m-b-20">
 						<input type="text"
 						class = "form-control form-control-lg inverse-mode login-input" 
@@ -33,14 +33,14 @@
 						id="LoginID"
 						name="LoginID"  
 						#username="ngModel"
-						[(ngModel)]="loading_data.LoginID"
+						[(ngModel)]="LoadingData.login_id"
 						minlength = "5"
 						maxlength = "20"
 						required="true"/>
 						<p *ngIf="username.errors && username.errors.required && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>El usuario es requerido</p>
 						<p *ngIf="username.errors && username.errors.minlength && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>Ingrese al menos 5 caracteres en este campo</p>
 					</div>
-					<!--contraseñaUsuario--->
+
 					<div>
 						<input type="password" 
 						class = "form-control form-control-lg inverse-mode login-input"
@@ -48,7 +48,7 @@
 						id="Contrasenia"
 						name="Contrasenia" 
 						#password="ngModel"
-						[(ngModel)]="loading_data.Contrasenia"
+						[(ngModel)]="LoadingData.contrasenia"
 						minlength = "8"
 						maxlength = "30"
 						pattern="[0-9|a-z|A-Z|_]+"
@@ -57,7 +57,7 @@
 						<p *ngIf="password.errors && password.errors.minlength && submitted" class="login-error-text" style="border: none;color: red;"><i class="fa fa-exclamation-circle login-error-icon"></i>Ingrese al menos 8 caracteres en este campo</p>
 						<br/>
 					</div>
-					<!--botonLogin--->
+
 					<div class="login-buttons">
 						<button 
 							(click)="login()"
@@ -68,22 +68,20 @@
 							<span *ngIf="loading"><i class="fa fa-spin fa-spinner"></i>Conectando</span>
 						</button>
 					</div>
+
 					<style>
 						.logging-buttons 
 						{
 							margin-left: 15px;
 						}
 						
-					
 					</style>
-					<!--<input type="submit" value="Iniciar" (click)="login()">-->
-					<!--<button (click)="login()" class="btn btn-primary">Iniciar Sesion</button>-->
-					<a href="http://localhost:4200/recuperacion_contrasenia">¿Has olvidado tu contraseña?</a>
+
+					<a [routerLink]="['/recuperacion_contrasenia']" [routerLinkActive]="['active']">¿Has olvidado tu contraseña?</a>
 				</form>
 				
 			</div>
 		</div>
 	</div>
-	
 </body>
 </html>

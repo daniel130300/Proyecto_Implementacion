@@ -2,11 +2,7 @@ import { AppService } from 'src/app/app.service';
 import { Router } from '@angular/router';
 import { Component, OnDestroy, ViewChild }  from '@angular/core';
 import {  NgForm, FormControlDirective } from '@angular/forms';
-//import pageSettings from 'node_modules/config/page-settings';
-//import swal from 'sweetalert2';
-//var requireNode = require('require-node');
-//import { Require } from 'node_modules/require-node'
-//var require = requireNode;
+
 const swal = require('sweetalert2');
 
 @Component({
@@ -21,26 +17,24 @@ export class GetLoginComponent {
     @ViewChild('login_form') login_form:FormControlDirective;
     public submitted = false;
     public loading = false;
-    public loading_data = {
-        LoginID:"",
-        Contrasenia:""
+    public LoadingData = {
+        login_id:"",
+        contrasenia:""
     }
     constructor(public service:AppService, private router:Router){
 
     }
-    /*ngOnInit(){
-        this.get_empleados();
-    }*/
+
     login() {
         if (this.login_form.valid){
             this.submitted = false;
             this.loading = true;
             var response;
-            var load = {
-                LoginID: this.loading_data.LoginID,
-                Contrasenia: this.loading_data.Contrasenia
+            var Load = {
+                login_id: this.LoadingData.login_id,
+                contrasenia: this.LoadingData.contrasenia
             };
-            this.service.login(load).subscribe(
+            this.service.login(Load).subscribe(
                 data => response = data,
                 err => {
                     if (err.status == 400){
@@ -61,7 +55,7 @@ export class GetLoginComponent {
                         if (response){
                             this.service.set_session(response["token"]);
                             this.router.navigateByUrl('/cajas');
-                            this.service.set_usuariologueado(this.loading_data.LoginID, response["roles"]);
+                            this.service.set_usuariologueado(this.LoadingData.login_id, response["roles"]);
                         }else{
                             swal.fire({
                                 title: 'Error interno del servidor',

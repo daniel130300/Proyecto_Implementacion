@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpUrlEncodingCodec, HttpParameterCodec, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
- //TODOS LOS APPSERVICE IRAN EN SNAKECASE.
  
 @Injectable()
 export class AppService {
@@ -10,7 +9,7 @@ export class AppService {
     constructor(private httpClient: HttpClient) {
         this.endpoint = "http://"+window.location.hostname+":8200/api"
     }
-    //LLAMADA A VENTAS PENDIENTES DE ENVIO
+
     get_ventas_pendientes_envio():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_ventas_pendientes_envio", {responseType: 'json'})
     }
@@ -22,7 +21,6 @@ export class AppService {
     get_estado():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_unicos_estados", {responseType: 'json'})
     }
-    //LLAMADA A VENTAS_PAGADAS
 
     get_ventas_pagadas():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_ventas_pagadas", {responseType: 'json'})
@@ -32,7 +30,6 @@ export class AppService {
         return this.httpClient.get(this.endpoint + "/get_venta_pagada", {responseType: 'json'})
     }
 
-    // Llamadas a servicios del backend para mantenimiento de proveedores
     get_proveedores():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_proveedores", {responseType: 'json'})
     }
@@ -48,8 +45,6 @@ export class AppService {
     delete_proveedor(load):Observable<any>{
         return this.httpClient.delete(this.endpoint + "/delete_proveedor", {params: load, responseType:'json'});
     }
-    
-    //Llamadas a servicios del backend para mantenimiento de compras
 
     get_compras():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_compras", {responseType: 'json'})
@@ -74,8 +69,6 @@ export class AppService {
         return this.httpClient.delete(this.endpoint + "/delete_compras", {params: load, responseType:'json'});
     }
 
-    //Llamadas a servicios para mantenimiento de categorias
-
     get_categorias():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_categorias", {responseType: 'json'})
     }
@@ -92,8 +85,6 @@ export class AppService {
         return this.httpClient.delete(this.endpoint + "/delete_categoria", {params: load, responseType:'json'});
     }
 
-
-    //llamadas a servivios del backend para el mantenimiento de clientes
     get_clientes():Observable<any>{
         return this.httpClient.get(this.endpoint+"/get_clientes",{responseType:'json'})
     }
@@ -129,8 +120,6 @@ export class AppService {
         return this.httpClient.get(this.endpoint + "/get_modelo_filtrado", {params});
     }
 
-    // Llamadas a servicios del backend para mantenimiento de productos
-
     get_subcategorias():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_subcategorias", {responseType: 'json'});
     }
@@ -163,8 +152,6 @@ export class AppService {
         return this.httpClient.delete(this.endpoint + "/delete_productos", {params: load, responseType:'json'});
     }
 
-    //Llamadas a servicios para mantenimiento de marcas
-
     get_marcas():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_marcas", {responseType: 'json'})
     }
@@ -183,8 +170,6 @@ export class AppService {
       return this.httpClient.delete(this.endpoint + "/delete_marca",
       {params: load,responseType:'json'});
     }
-
-    //Llamada a servicios para mantenimiento de las ciudades
     
     get_ciudades():Observable<any> {
         return this.httpClient.get(this.endpoint + "/get_ciudades", {responseType: 'json'})
@@ -202,7 +187,6 @@ export class AppService {
         return this.httpClient.delete(this.endpoint + "/delete_ciudad", {params: load, responseType: 'json'})
     }
 
-    // Llamadas a servicios del backend para mantenimiento de modelos
     insertar_modelo(load):Observable<any> {
         return this.httpClient.post(this.endpoint + "/insert_modelo", load, {responseType: 'json'})
     }
@@ -214,9 +198,6 @@ export class AppService {
     delete_modelo(load):Observable<any> {
         return this.httpClient.delete(this.endpoint + "/delete_modelo", {params: load, responseType: 'json'})
     }
-
-
-    // Llamadas a servicios del backend para mantenimiento de subcategorias
 
     insertar_subcategorias(load):Observable<any>{
         return this.httpClient.post(this.endpoint + "/insert_subcategoria", load, {responseType:'json'});
@@ -230,7 +211,6 @@ export class AppService {
         return this.httpClient.delete(this.endpoint + "/delete_subcategorias", {params: load, responseType:'json'});
     }
 
-     // Llamada a los servicios para el mantenimiento de los empleados.
     get_empleados(): Observable<any>{
 
         return this.httpClient.get( this.endpoint + "/get_empleados", {responseType: 'json'} )
@@ -256,8 +236,6 @@ export class AppService {
         return this.httpClient.get( this.endpoint + "/get_puestos", {responseType: 'json'} )
     }
 
-    //Comboboxes
-
     get_departamentos():Observable<any> {
         return this.httpClient.get(this.endpoint + "/get_departamentos", {responseType: 'json'})
     }
@@ -273,9 +251,6 @@ export class AppService {
     get_plazos_pago():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_plazos", {responseType: 'json'})
     }
-
-        
-    //Llamadas a servicios del backend para mantenimiento de compras detalle
     
     get_detalle_compras():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_detalle_compras", {responseType: 'json'})
@@ -288,8 +263,6 @@ export class AppService {
     update_detalle_compra(load):Observable<any>{
         return this.httpClient.put(this.endpoint + "/update_detalle_compras", load, {responseType:'json'});
     }
-
-    //Llamadas a servicios del backend para mantenimiento de ventas_plus y venta normal
 
     insertar_venta_plus( load ): Observable<any>{
 
@@ -364,14 +337,11 @@ export class AppService {
         return this.httpClient.get(this.endpoint + "/get_devolucion_productos", {params});
     }
 
-    //Actualizar la cantidad devuelta
-      update_devoluciones(load):Observable<any>{
+    update_devoluciones(load):Observable<any>{
         return this.httpClient.put(this.endpoint + "/update_devoluciones", load, {responseType:'json'});
     }
 
-
-     /* ------------------------------ Compras pendientes ---------------- */
-     get_compras_pendientes():Observable<any>{
+    get_compras_pendientes():Observable<any>{
         return this.httpClient.get(this.endpoint + "/get_compras_pendientes", {responseType: 'json'})
     }
 
@@ -431,8 +401,6 @@ export class AppService {
         localStorage.removeItem("KyD");
         localStorage.removeItem("loggedUser");
     }
-
-    /*-----EndPoints Graficos-----*/
 
     get_top_5_productos(): Observable<any>{
 

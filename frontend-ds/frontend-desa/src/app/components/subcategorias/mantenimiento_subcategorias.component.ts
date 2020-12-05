@@ -20,9 +20,9 @@ export class GetSubcategoriasComponent {
     }
 
     public Subcategorias = {
-        Id_subcategoria: "",
-        Descripcion_subcategoria: "",
-        Id_categoria: ""
+        id_subcategoria: "",
+        descripcion_subcategoria: "",
+        id_categoria: ""
     }
 
     ngOnInit(){
@@ -43,9 +43,9 @@ export class GetSubcategoriasComponent {
             },
             ()=>{
                     this.Subcategorias = {
-                        Id_subcategoria: "",
-                        Descripcion_subcategoria: "",
-                        Id_categoria: ""
+                        id_subcategoria: "",
+                        descripcion_subcategoria: "",
+                        id_categoria: ""
                 }
                 this.get_subcategorias();
             }
@@ -80,13 +80,13 @@ export class GetSubcategoriasComponent {
         );
     }
 
-    pasarDatosSubcategorias(subcategorias)
+    pasar_datos_subcategorias(subcategorias)
     {
         this.Subcategorias = 
         {
-            Id_subcategoria: subcategorias.Id_subcategoria,
-            Descripcion_subcategoria: subcategorias.Descripcion_subcategoria,
-            Id_categoria:subcategorias.Id_categoria
+            id_subcategoria: subcategorias.Id_subcategoria,
+            descripcion_subcategoria: subcategorias.Descripcion_subcategoria,
+            id_categoria:subcategorias.Id_categoria
         }      
     }
 
@@ -96,17 +96,17 @@ export class GetSubcategoriasComponent {
         
         this.Subcategorias =
         {
-            Id_categoria: this.Subcategorias.Id_categoria,
-            Id_subcategoria: this.Subcategorias.Id_subcategoria,
-            Descripcion_subcategoria: this.Subcategorias.Descripcion_subcategoria
+            id_categoria: this.Subcategorias.id_categoria,
+            id_subcategoria: this.Subcategorias.id_subcategoria,
+            descripcion_subcategoria: this.Subcategorias.descripcion_subcategoria
         }
-        if(this.Subcategorias.Descripcion_subcategoria == "" || this.Subcategorias.Id_categoria == "" || this.Subcategorias.Id_subcategoria == ""){
+        if(this.Subcategorias.descripcion_subcategoria == "" || this.Subcategorias.id_categoria == "" || this.Subcategorias.id_subcategoria == ""){
             swal.fire({
                 title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
                 icon: 'error'
             });
         }else
-            if(regexpLetter.test(this.Subcategorias.Descripcion_subcategoria) == false){
+            if(regexpLetter.test(this.Subcategorias.descripcion_subcategoria) == false){
                 swal.fire({
                     title: "Solo puede escribir letras. Vuelva a intentarlo.",
                     icon: 'error'
@@ -123,37 +123,23 @@ export class GetSubcategoriasComponent {
    
                     this.Subcategorias = 
                     {
-                        Id_subcategoria: "",
-                        Descripcion_subcategoria: "",
-                        Id_categoria: ""
+                        id_subcategoria: "",
+                        descripcion_subcategoria: "",
+                        id_categoria: ""
                     }
                     this.get_subcategorias();
                 }
             );
             }
-        
     }
 
-    delete_subcategorias(id_subcategoria)
+    limpiar_subcategorias()
     {
-        var response;
-        var load = 
-        {
-            Id_subcategoria:id_subcategoria
+        this.Subcategorias = {
+            id_subcategoria: "",
+            descripcion_subcategoria: "",
+            id_categoria: ""
         }
-        this.service.delete_subcategorias(load).subscribe
-        (
-            data=>response = data,
-            err => 
-            {
-                console.log("Error al consultar servicio"); 
-            },
-            ()=>
-            {
-                this.get_subcategorias();
-            }
-        );
     }
-
 }
 

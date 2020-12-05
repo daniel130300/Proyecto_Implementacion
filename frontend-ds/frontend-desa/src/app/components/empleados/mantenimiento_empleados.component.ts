@@ -17,6 +17,7 @@ export class GetEmpleadosComponent {
     public listado_empleados: any[];
     public listado_estatus:   any[];
     public listado_puestos:   any[];
+    term: any[];
 
     constructor( public service: AppService, public datepipe: DatePipe ){
 

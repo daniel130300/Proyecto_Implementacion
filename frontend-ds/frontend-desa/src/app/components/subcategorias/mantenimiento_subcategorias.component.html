@@ -5,7 +5,7 @@
         <label>Nombre de la Subcategoria: </label>
         <input type = "text" 
                class = "form-control"
-               [(ngModel)] = "Subcategorias.Descripcion_subcategoria"
+               [(ngModel)] = "Subcategorias.descripcion_subcategoria"
                [ngModelOptions] = "{standalone:true}"
                required = "true"
                pattern="[a-zA-Z]{2,254}"
@@ -14,7 +14,7 @@
         <label>Categoría: </label>
         <select
             class = "form-control input"
-            [(ngModel)] = "Subcategorias.Id_categoria"
+            [(ngModel)] = "Subcategorias.id_categoria"
             [ngModelOptions] = "{standalone:true}"
             required = "true"
         >
@@ -60,7 +60,7 @@
                 width = 74px
                 data-toggle = "modal"
                 data-target = "#exampleModal"
-                (click) = "pasarDatosSubcategorias(s)">Editar</button>
+                (click) = "pasar_datos_subcategorias(s)">Editar</button>
             </td> 
 
            
@@ -82,14 +82,14 @@
                 <label>Nombre de la subcategoría: </label>
                 <input type = "text" 
                     class = "form-control"
-                    [(ngModel)] = "Subcategorias.Descripcion_subcategoria"
+                    [(ngModel)] = "Subcategorias.descripcion_subcategoria"
                     [ngModelOptions] = "{standalone:true}"
                 > 
 
                 <label>Categoría: </label>
                 <select
                     class = "form-control input"
-                    [(ngModel)] = "Subcategorias.Id_categoria"
+                    [(ngModel)] = "Subcategorias.id_categoria"
                     [ngModelOptions] = "{standalone:true}"
                 >
                 <option value="">Seleccione una categoría </option>
@@ -101,8 +101,8 @@
             </form>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button (click)="update_subcategorias(Subcategorias.Id_subcategoria)"type="button" class="btn btn-primary">Guardar</button>
+            <button (click)="limpiar_subcategorias()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            <button (click)="update_subcategorias(Subcategorias.id_subcategoria)"type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
         </div>
