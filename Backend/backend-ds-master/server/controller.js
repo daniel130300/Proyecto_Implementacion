@@ -801,9 +801,9 @@ router.put('/update_subcategoria', (req, res, next) => {
         query = query  + ' where Id_subcategoria = ?';
     
     var values = [
-                  req.body.Descripcion_subcategoria,
-                  req.body.Id_categoria,
-                  req.body.Id_subcategoria
+                  req.body.descripcion_subcategoria,
+                  req.body.id_categoria,
+                  req.body.id_subcategoria
                 ];
 
     

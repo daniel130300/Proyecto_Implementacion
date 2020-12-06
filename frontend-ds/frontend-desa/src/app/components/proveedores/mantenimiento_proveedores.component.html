@@ -119,6 +119,15 @@
             </form>
 
         </div>
+
+        
+        <div class="contenedorInformativo3"> 
+			<form class="form-incline">
+				<div class="form-inline">
+					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
+				</div>
+		    </form>
+        </div>
         
         <div class = "contenedorInformativo2">
 
@@ -141,7 +150,7 @@
 
                 <tbody>
 
-                    <tr *ngFor = "let p of listado_proveedores">
+                    <tr *ngFor = "let p of listado_proveedores |filter:term">
 
                         <td>{{p.Nombre_compania}}</td>
                         <td>{{p.Direccion}}</td>

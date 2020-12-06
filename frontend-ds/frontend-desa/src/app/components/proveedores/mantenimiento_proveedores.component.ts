@@ -12,6 +12,7 @@ export class GetProveedoresComponent {
     
     public listado_proveedores: any[];
     public listado_ciudades: any[];
+    public term:any = "";
 
     constructor(public service:AppService){
         this.listado_proveedores = [];
