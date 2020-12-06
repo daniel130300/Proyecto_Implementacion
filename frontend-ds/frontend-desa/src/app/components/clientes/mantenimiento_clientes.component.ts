@@ -29,15 +29,15 @@ export class GetClientesComponent{
     term: any[];
 
     public Persona={
-        Id_cliente:"",
-        Nombre_compania:"",
-        Id_ciudad:"",
-        Id_tipo_cliente:"",
-        Direccion:"",
-        Nombre_contacto:"",
-        Apellido_contacto:"",
-        Telefono_contacto:"",
-        Email_contacto:""
+        id_cliente:"",
+        nombre_compania:"",
+        id_ciudad:"",
+        id_tipo_cliente:"",
+        direccion:"",
+        nombre_contacto:"",
+        apellido_contacto:"",
+        telefono_contacto:"",
+        email_contacto:""
     }
 
     ngOnInit(){
@@ -76,7 +76,7 @@ export class GetClientesComponent{
         var rows = [];
         
         this.listado_clientes.forEach( element => {      
-            var temp = [ element.Nombre_compania, element.Direccion, element.Nombre_ciudad, element.Descripcion_cliente, element.Nombre_contacto, element.Apellido_contacto, element.Telefono_contacto, element.Email_contacto ];
+            var temp = [ element.nombre_compania, element.direccion, element.nombre_ciudad, element.descripcion_cliente, element.nombre_contacto, element.apellido_contacto, element.telefono_contacto, element.email_contacto ];
             rows.push(temp);
         });
 
@@ -97,15 +97,15 @@ export class GetClientesComponent{
 
         this.Persona = {
 
-            Id_cliente:"",
-            Nombre_compania:"",
-            Id_ciudad:"",
-            Id_tipo_cliente:"",
-            Direccion:"",
-            Nombre_contacto:"",
-            Apellido_contacto:"",
-            Telefono_contacto:"",
-            Email_contacto:""
+            id_cliente:"",
+            nombre_compania:"",
+            id_ciudad:"",
+            id_tipo_cliente:"",
+            direccion:"",
+            nombre_contacto:"",
+            apellido_contacto:"",
+            telefono_contacto:"",
+            email_contacto:""
         }
     }
 
@@ -118,7 +118,6 @@ export class GetClientesComponent{
             },
             ()=>{
                 this.listado_tipo_cliente=response;
-              //  console.log(this.listado_clientes);
             }
             
         )
@@ -132,7 +131,6 @@ export class GetClientesComponent{
             },
             ()=>{
                 this.listado_ciudades=response;
-              //  console.log(this.listado_clientes);
             }
             
         )
@@ -147,7 +145,6 @@ export class GetClientesComponent{
             },
             ()=>{
                 this.listado_clientes=response;
-              //  console.log(this.listado_clientes);
             }   
         )
     }
@@ -161,15 +158,15 @@ export class GetClientesComponent{
             },
             ()=>{
                     this.Persona = {
-                        Id_cliente:"",
-                        Nombre_compania:"",
-                        Id_ciudad:"",
-                        Id_tipo_cliente:"",
-                        Direccion:"",
-                        Nombre_contacto:"",
-                        Apellido_contacto:"",
-                        Telefono_contacto:"",
-                        Email_contacto:""
+                        id_cliente:"",
+                        nombre_compania:"",
+                        id_ciudad:"",
+                        id_tipo_cliente:"",
+                        direccion:"",
+                        nombre_contacto:"",
+                        apellido_contacto:"",
+                        telefono_contacto:"",
+                        email_contacto:""
                 }
                 this.get_clientes();
             }
@@ -178,15 +175,15 @@ export class GetClientesComponent{
     }
     pasarDatosCliente(clientes){
         this.Persona= {
-            Id_cliente:clientes.Id_cliente,
-            Nombre_compania:clientes.Nombre_compania,
-            Id_ciudad:clientes.Id_ciudad,
-            Id_tipo_cliente:clientes.Id_tipo_cliente,
-            Direccion:clientes.Direccion,
-            Nombre_contacto:clientes.Nombre_contacto,
-            Apellido_contacto:clientes.Apellido_contacto,
-            Telefono_contacto:clientes.Telefono_contacto,
-            Email_contacto:clientes.Email_contacto
+            id_cliente:clientes.Id_cliente,
+            nombre_compania:clientes.Nombre_compania,
+            id_ciudad:clientes.Id_ciudad,
+            id_tipo_cliente:clientes.Id_tipo_cliente,
+            direccion:clientes.Direccion,
+            nombre_contacto:clientes.Nombre_contacto,
+            apellido_contacto:clientes.Apellido_contacto,
+            telefono_contacto:clientes.Telefono_contacto,
+            email_contacto:clientes.Email_contacto
           
             }
         
@@ -200,52 +197,52 @@ export class GetClientesComponent{
         let regexpEmail: RegExp  = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
         
         this.Persona= {
-            Id_cliente:this.Persona.Id_cliente,
-            Nombre_compania:this.Persona.Nombre_compania,
-            Id_ciudad:this.Persona.Id_ciudad,
-            Id_tipo_cliente:this.Persona.Id_tipo_cliente,
-            Direccion:this.Persona.Direccion,
-            Nombre_contacto:this.Persona.Nombre_contacto,
-            Apellido_contacto:this.Persona.Apellido_contacto,
-            Telefono_contacto:this.Persona.Telefono_contacto,
-            Email_contacto:this.Persona.Email_contacto
+            id_cliente:this.Persona.id_cliente,
+            nombre_compania:this.Persona.nombre_compania,
+            id_ciudad:this.Persona.id_ciudad,
+            id_tipo_cliente:this.Persona.id_tipo_cliente,
+            direccion:this.Persona.direccion,
+            nombre_contacto:this.Persona.nombre_contacto,
+            apellido_contacto:this.Persona.apellido_contacto,
+            telefono_contacto:this.Persona.telefono_contacto,
+            email_contacto:this.Persona.email_contacto
           
         }
-        if(this.Persona.Apellido_contacto==""||this.Persona.Direccion==""||this.Persona.Email_contacto==""||this.Persona.Id_ciudad==""||this.Persona.Id_cliente==""
-        ||this.Persona.Id_tipo_cliente==""||this.Persona.Nombre_compania==""||this.Persona.Nombre_contacto==""||this.Persona.Telefono_contacto==""){
+        if(this.Persona.apellido_contacto==""||this.Persona.direccion==""||this.Persona.email_contacto==""||this.Persona.id_ciudad==""||this.Persona.id_cliente==""
+        ||this.Persona.id_tipo_cliente==""||this.Persona.nombre_compania==""||this.Persona.nombre_contacto==""||this.Persona.telefono_contacto==""){
             swal.fire({
                 title: "No ha ingresado un dato, por favor hágalo para poder guardar.",
                 icon: 'error'
             });
         }else{
              
-            if(regexpNumber.test(this.Persona.Telefono_contacto)==false ){
+            if(regexpNumber.test(this.Persona.telefono_contacto)==false ){
                 
                 swal.fire({
                     title: "Ingrese solo numeros, por favor hágalo para poder guardar.",
                     icon: 'error'
                 });
             }else{
-                if(regexpLetter1.test(this.Persona.Nombre_contacto)==false||regexpLetter.test(this.Persona.Apellido_contacto)==false)
+                if(regexpLetter1.test(this.Persona.nombre_contacto)==false||regexpLetter.test(this.Persona.apellido_contacto)==false)
                 {
                     swal.fire({
                         title: "Solo se ingresan letras, por favor hágalo para poder guardar.",
                         icon: 'error'
                     });
                 }else{
-                    if(regexpEmail.test(this.Persona.Email_contacto)==false){
+                    if(regexpEmail.test(this.Persona.email_contacto)==false){
                         swal.fire({
                             title: "Formato incorrecto en Email, por favor hágalo para poder guardar.",
                             icon: 'error'
                         });
                     }else{
-                        if(regexpMix.test(this.Persona.Nombre_compania)==false){
+                        if(regexpMix.test(this.Persona.nombre_compania)==false){
                             swal.fire({
                                 title: "No debe de colocar caracteres especiales, por favor hágalo para poder guardar.",
                                 icon: 'error'
                             });
                         }else{
-                            if(regexpDic.test(this.Persona.Direccion)==false){
+                            if(regexpDic.test(this.Persona.direccion)==false){
                                 swal.fire({
                                     title: "El formato no es el correcto, por favor hágalo para poder guardar.",
                                     icon: 'error'
@@ -261,15 +258,15 @@ export class GetClientesComponent{
                                 
                            
                                         this.Persona = {
-                                            Id_cliente:"",
-                                            Nombre_compania:"",
-                                            Id_ciudad:"",
-                                            Id_tipo_cliente:"",
-                                            Direccion:"",
-                                            Nombre_contacto:"",
-                                            Apellido_contacto:"",
-                                            Telefono_contacto:"",
-                                            Email_contacto:""
+                                            id_cliente:"",
+                                            nombre_compania:"",
+                                            id_ciudad:"",
+                                            id_tipo_cliente:"",
+                                            direccion:"",
+                                            nombre_contacto:"",
+                                            apellido_contacto:"",
+                                            telefono_contacto:"",
+                                            email_contacto:""
                                         } 
                                     }
                                 );
@@ -286,10 +283,10 @@ export class GetClientesComponent{
         
        
     }
-   delete_cliente(Id_cliente){ 
+   delete_cliente(id_cliente){ 
         var response;
         var load={
-            Id_cliente:Id_cliente
+            id_cliente:id_cliente
         }
         this.service.delete_cliente(load).subscribe(
             data=>response=data,

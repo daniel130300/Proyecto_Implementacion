@@ -12,10 +12,8 @@ const swal = require('sweetalert2');
     
 })
 
-export class GetVentaNormalComponent //CamelCase
+export class GetVentaNormalComponent
 {
-    //Todas las variables tanto locales como globales iran en snake_case, ejemplo: num_factura. TODO EN MINUSCULA
-
     public numero_factura: any[];
     public listado_productos: any[];
     public listado_clientes: any[];
@@ -34,36 +32,34 @@ export class GetVentaNormalComponent //CamelCase
         this.listado_clientes = [];
     }
 
-    public VentasNormal = { //Los objetos iran en camelCase
-        Fecha_venta: "", //los atributos dentro de los objetos en snake_case todo en minuscula
-        Identidad: "",
-        ISV: 0.15,
-        Id_estado_envio:10,
-        Id_estado_pago:5,
-        Id_tipo_pago:1,
+    public VentasNormal = { 
+        fecha_venta: "", 
+        identidad: "",
+        isv: 0.15,
+        id_estado_envio:10,
+        id_estado_pago:5,
+        id_tipo_pago:1,
     }
     public DetalleVentaNormal = {
-        Id_producto: "",
-        Precio_referencial_venta: "",
-        Cantidad_vendida: ""
+        id_producto: "",
+        precio_referencial_venta: "",
+        cantidad_vendida: ""
     }
 
     public Productos = {
-        Id_producto: "",
-        Nombre_producto: "",
-        Informacion_adicional_producto: "",
-        Precio_referencial_venta: "",
-        Cantidad: "",
-        Stock:""
+        id_producto: "",
+        nombre_producto: "",
+        informacion_adicional_producto: "",
+        precio_referencial_venta: "",
+        cantidad: "",
+        stock:""
     }
 
     ngOnInit(){
 
     }
 
- 
-    //Funcion para insertar la venta normal
-    insertar_venta_normal() //Toodas las funciones iran en snake_case, TODO en MINUSCULA.
+    insertar_venta_normal() 
     {
         if(this.listado_productos_agregados.length == 0)
         {
@@ -98,12 +94,12 @@ export class GetVentaNormalComponent //CamelCase
                             this.generarpdf();
                             this.VentasNormal = 
                             {
-                                Fecha_venta: "",
-                                Identidad: "",
-                                ISV: 0.15,
-                                Id_estado_envio:10,
-                                Id_estado_pago:5,
-                                Id_tipo_pago:1,
+                                fecha_venta: "",
+                                identidad: "",
+                                isv: 0.15,
+                                id_estado_envio:10,
+                                id_estado_pago:5,
+                                id_tipo_pago:1,
                             }
                         }
                     );
@@ -123,12 +119,12 @@ export class GetVentaNormalComponent //CamelCase
                             this.pasarDatosDetalleVenta();
                             this.VentasNormal = 
                             {
-                                Fecha_venta: "",
-                                Identidad: "",
-                                ISV: 0.15,
-                                Id_estado_envio:10,
-                                Id_estado_pago:5,
-                                Id_tipo_pago:1,
+                                fecha_venta: "",
+                                identidad: "",
+                                isv: 0.15,
+                                id_estado_envio:10,
+                                id_estado_pago:5,
+                                id_tipo_pago:1,
                             }
                         }
                     );
@@ -189,19 +185,19 @@ export class GetVentaNormalComponent //CamelCase
     {
         this.Productos = 
         {
-            Id_producto: producto.Id_producto,
-            Nombre_producto: producto.Descripcion_producto,
-            Precio_referencial_venta: producto.Precio_referencial_venta,
-            Informacion_adicional_producto: "Talla: " + producto.Talla + ", Color: " + producto.Color + ", Modelo: " + producto.Descripcion_modelo + ", Marca: " + producto.Nombre_marca + ", Subcategoria: " + producto.Descripcion_subcategoria, 
-            Cantidad: "",
-            Stock: producto.Stock
+            id_producto: producto.Id_producto,
+            nombre_producto: producto.Descripcion_producto,
+            precio_referencial_venta: producto.Precio_referencial_venta,
+            informacion_adicional_producto: "Talla: " + producto.Talla + ", Color: " + producto.Color + ", Modelo: " + producto.Descripcion_modelo + ", Marca: " + producto.Nombre_marca + ", Subcategoria: " + producto.Descripcion_subcategoria, 
+            cantidad: "",
+            stock: producto.Stock
         }
     }
     //Funcion para agregar producto
 
     AgregarProductoVenta()
     {
-        if(this.Productos.Id_producto == "")
+        if(this.Productos.id_producto == "")
         {
             swal.fire({
                 title: "No ha seleccionado ningún producto.",
@@ -211,7 +207,7 @@ export class GetVentaNormalComponent //CamelCase
         else
         {
             
-            if(this.Productos.Cantidad == "")
+            if(this.Productos.cantidad == "")
             {
                 swal.fire({
                     title: "No ha ingresado ninguna cantidad, por favor hágalo para poder agregar.",
@@ -220,7 +216,7 @@ export class GetVentaNormalComponent //CamelCase
             }
             else
             {
-                if (this.Productos.Cantidad < this.Productos.Stock)
+                if (this.Productos.cantidad < this.Productos.stock)
                 {
                     this.listado_productos_agregados.unshift(this.Productos);
                     this.calculos();
@@ -243,7 +239,7 @@ export class GetVentaNormalComponent //CamelCase
     {
         for(var i = this.listado_productos_agregados.length - 1; i >= 0; i--) 
         {
-            if(this.listado_productos_agregados[i].Id_producto === id) 
+            if(this.listado_productos_agregados[i].id_producto === id) 
             {
                this.agregar_inventario(this.listado_productos_agregados[i]) 
                this.listado_productos_agregados.splice(i, 1);
@@ -258,12 +254,12 @@ export class GetVentaNormalComponent //CamelCase
     {
         this.Productos = 
         {
-            Id_producto: "",
-            Nombre_producto: "",
-            Precio_referencial_venta: "",
-            Informacion_adicional_producto: "", 
-            Cantidad: "",
-            Stock:""
+            id_producto: "",
+            nombre_producto: "",
+            precio_referencial_venta: "",
+            informacion_adicional_producto: "", 
+            cantidad: "",
+            stock:""
         }
     }
 
@@ -275,7 +271,7 @@ export class GetVentaNormalComponent //CamelCase
         this.isv = 0;
         this.total = 0;
         for(var i = 0; i < this.listado_productos_agregados.length; i++) {
-            this.subtotal += this.listado_productos_agregados[i].Cantidad * this.listado_productos_agregados[i].Precio_referencial_venta;
+            this.subtotal += this.listado_productos_agregados[i].cantidad * this.listado_productos_agregados[i].precio_referencial_venta;
             this.isv = this.subtotal * 0.15;
             this.total = this.subtotal + this.isv;
         }
@@ -293,9 +289,9 @@ export class GetVentaNormalComponent //CamelCase
         for(var i = 0; i < this.listado_productos_agregados.length; i++) 
         {
             this.DetalleVentaNormal = {
-                Id_producto: this.listado_productos_agregados[i].Id_producto,
-                Precio_referencial_venta: this.listado_productos_agregados[i].Precio_referencial_venta,
-                Cantidad_vendida: this.listado_productos_agregados[i].Cantidad
+                id_producto: this.listado_productos_agregados[i].id_producto,
+                precio_referencial_venta: this.listado_productos_agregados[i].precio_referencial_venta,
+                cantidad_vendida: this.listado_productos_agregados[i].cantidad
             }
             
             this.insertar_detalle_venta_normal();
@@ -367,12 +363,12 @@ export class GetVentaNormalComponent //CamelCase
         doc.text("Correo: variedades_k_y_d@gmail.com", 65, 40);
         doc.text("No. Factura: " + String(codigo), 15, 65);
         doc.text("Fecha: " + fecha_actual, 15, 75);
-        doc.text("Identidad: " + String(this.VentasNormal.Identidad), 15, 85);
+        doc.text("Identidad: " + String(this.VentasNormal.identidad), 15, 85);
    
         var rows = [];
         
         this.listado_productos_agregados.forEach(element => {      
-            var temp = [element.Id_producto, element.Nombre_producto, element.Informacion_adicional_producto, element.Precio_referencial_venta, element.Cantidad];
+            var temp = [element.id_producto, element.nombre_producto, element.informacion_adicional_producto, element.precio_referencial_venta, element.cantidad];
             rows.push(temp);
         });
 

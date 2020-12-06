@@ -31,14 +31,14 @@ export class GetVentaPlusComponent
     public isv: any = "";
     public total: any = "";
 
-    public Fecha_venta: any;
+    public fecha_venta: any;
     public Isv: 0.15;
-    public Id_cliente: any;
-    public Id_estado_envio: any = "";
-    public Id_estado_pago: any = "";
-    public Id_tipo_pago: any = "";
-    public Id_plazo: any = "";
-    public Id_tipo_cliente: any = "";
+    public id_cliente: any;
+    public id_estado_envio: any = "";
+    public id_estado_pago: any = "";
+    public id_tipo_pago: any = "";
+    public id_plazo: any = "";
+    public id_tipo_cliente: any = "";
 
     constructor( public service: AppService ){
 
@@ -51,39 +51,36 @@ export class GetVentaPlusComponent
         this.get_tipos_pago();
         this.get_tipo_cliente();
         this.get_estados_envio();
-        //this.HabilitarPlazosPago();
     }
 
-    //DECLARACION DE OBJETOS
-
     public Productos = {
-        Id_producto: "",
-        Nombre_producto: "",
-        Informacion_adicional_producto: "",
-        Precio_referencial_venta: "",
-        Cantidad: "",
-        Stock: ""
+        id_producto: "",
+        nombre_producto: "",
+        informacion_adicional_producto: "",
+        precio_referencial_venta: "",
+        cantidad: "",
+        stock: ""
     }
 
     public Clientes = {
-        Id_cliente: "",
-        Nombre_cliente: ""
+        id_cliente: "",
+        nombre_cliente: ""
     }
 
     public VentasPlus = {
-        Fecha_venta: "",
-        Isv: 0.15,
-        Id_cliente: 1,
-        Id_estado_envio: "",
-        Id_estado_pago: "",
-        Id_tipo_pago: "",
-        Id_plazo: "",
+        fecha_venta: "",
+        isv: 0.15,
+        id_cliente: 1,
+        id_estado_envio: "",
+        id_estado_pago: "",
+        id_tipo_pago: "",
+        id_plazo: "",
     }
 
     public DetalleVentasPlus = {
-        Id_producto: "",
-        Precio_referencial_venta: "",
-        Cantidad_vendida: ""
+        id_producto: "",
+        precio_referencial_venta: "",
+        cantidad_vendida: ""
     }
 
     //PRUEBA DE VALIDACIONES
@@ -100,7 +97,7 @@ export class GetVentaPlusComponent
 
         if(valor == 1 || valor == "") 
         {   
-            this.Id_plazo = "";
+            this.id_plazo = "";
             this.formVentas.get('plazosPago').disable();
         } 
         else if (valor == 2)
@@ -110,33 +107,31 @@ export class GetVentaPlusComponent
 
     }
 
-    // TODAS LAS FUNCIONES NECESARIAS PARA INSERTAR VENTA Y DETALLE DE LA VENTA
-
     Asignar_datos_venta()
     {
-        if (this.Id_plazo == "")
+        if (this.id_plazo == "")
         {
-            this.Id_plazo = null
+            this.id_plazo = null
         }
 
-        if (this.Id_tipo_pago == "1")
+        if (this.id_tipo_pago == "1")
         {
-            this.Id_estado_pago = "5"
+            this.id_estado_pago = "5"
         }
 
-        if (this.Id_tipo_pago == "2")
+        if (this.id_tipo_pago == "2")
         {
-            this.Id_estado_pago = "6"
+            this.id_estado_pago = "6"
         }
 
         this.VentasPlus = {
-            Fecha_venta: this.Fecha_venta,
-            Isv: 0.15,
-            Id_cliente: this.Id_cliente,
-            Id_estado_envio: this.Id_estado_envio,
-            Id_estado_pago: this.Id_estado_pago,
-            Id_tipo_pago: this.Id_tipo_pago,
-            Id_plazo: this.Id_plazo,
+            fecha_venta: this.fecha_venta,
+            isv: 0.15,
+            id_cliente: this.id_cliente,
+            id_estado_envio: this.id_estado_envio,
+            id_estado_pago: this.id_estado_pago,
+            id_tipo_pago: this.id_tipo_pago,
+            id_plazo: this.id_plazo,
         }
     }
    
@@ -345,23 +340,23 @@ export class GetVentaPlusComponent
     {
         this.Clientes = 
         {
-            Id_cliente:cliente.Id_cliente,
-            Nombre_cliente:cliente.Nombre_compania
+            id_cliente:cliente.Id_cliente,
+            nombre_cliente:cliente.Nombre_compania
         }
         
-        this.Id_cliente = cliente.Id_cliente
+        this.id_cliente = cliente.Id_cliente
     }
 
     pasarDatosProducto(producto)
     {
         this.Productos = 
         {
-            Id_producto: producto.Id_producto,
-            Nombre_producto: producto.Descripcion_producto,
-            Precio_referencial_venta: producto.Precio_referencial_venta,
-            Informacion_adicional_producto: "Talla: " + producto.Talla + ", Color: " + producto.Color + ", Modelo: " + producto.Descripcion_modelo + ", Marca: " + producto.Nombre_marca + ", Subcategoria: " + producto.Descripcion_subcategoria, 
-            Cantidad: "",
-            Stock: producto.Stock
+            id_producto: producto.Id_producto,
+            nombre_producto: producto.Descripcion_producto,
+            precio_referencial_venta: producto.Precio_referencial_venta,
+            informacion_adicional_producto: "Talla: " + producto.Talla + ", Color: " + producto.Color + ", Modelo: " + producto.Descripcion_modelo + ", Marca: " + producto.Nombre_marca + ", Subcategoria: " + producto.Descripcion_subcategoria, 
+            cantidad: "",
+            stock: producto.Stock
         }
     }
 
@@ -370,9 +365,9 @@ export class GetVentaPlusComponent
         for(var i = 0; i < this.listado_productos_agregados.length; i++) 
         {
             this.DetalleVentasPlus = {
-                Id_producto: this.listado_productos_agregados[i].Id_producto,
-                Precio_referencial_venta: this.listado_productos_agregados[i].Precio_referencial_venta,
-                Cantidad_vendida: this.listado_productos_agregados[i].Cantidad
+                id_producto: this.listado_productos_agregados[i].id_producto,
+                precio_referencial_venta: this.listado_productos_agregados[i].precio_referencial_venta,
+                cantidad_vendida: this.listado_productos_agregados[i].cantidad
             }
             
             this.insertar_detalle_venta_plus();
@@ -384,7 +379,7 @@ export class GetVentaPlusComponent
     AgregarProductoVenta()
     {
         
-        if(this.Clientes.Id_cliente == "")
+        if(this.Clientes.id_cliente == "")
         {
             swal.fire({
                 title: "No ha seleccionado ningún cliente.",
@@ -394,7 +389,7 @@ export class GetVentaPlusComponent
         else
         {
 
-            if(this.Productos.Id_producto == "")
+            if(this.Productos.id_producto == "")
             {
                 swal.fire({
                     title: "No ha seleccionado ningún producto.",
@@ -404,7 +399,7 @@ export class GetVentaPlusComponent
             else
             {
 
-                if(this.Productos.Cantidad == "")
+                if(this.Productos.cantidad == "")
                 {
                     swal.fire({
                         title: "No ha ingresado ninguna cantidad, por favor hágalo para poder agregar.",
@@ -414,7 +409,7 @@ export class GetVentaPlusComponent
                 else
                 {
 
-                    if (this.Productos.Cantidad < this.Productos.Stock)
+                    if (this.Productos.cantidad < this.Productos.stock)
                     {
                         this.listado_productos_agregados.unshift(this.Productos);
                         console.log(this.listado_productos_agregados); 
@@ -443,7 +438,7 @@ export class GetVentaPlusComponent
     {
         for(var i = this.listado_productos_agregados.length - 1; i >= 0; i--) 
         {
-            if(this.listado_productos_agregados[i].Id_producto === id) 
+            if(this.listado_productos_agregados[i].id_producto === id) 
             {
                this.agregar_inventario(this.listado_productos_agregados[i]) 
                this.listado_productos_agregados.splice(i, 1);
@@ -461,7 +456,7 @@ export class GetVentaPlusComponent
         this.total = 0;
         for(var i = 0; i < this.listado_productos_agregados.length; i++) 
         {
-            this.subtotal += this.listado_productos_agregados[i].Cantidad * this.listado_productos_agregados[i].Precio_referencial_venta;
+            this.subtotal += this.listado_productos_agregados[i].cantidad * this.listado_productos_agregados[i].precio_referencial_venta;
             this.descuento_calculado = this.subtotal * this.descuento;
             this.isv = (this.subtotal - this.descuento_calculado) * 0.15;
             this.total = (this.subtotal - this.descuento_calculado) + this.isv;
@@ -513,7 +508,7 @@ export class GetVentaPlusComponent
         doc.text("Correo: variedades_k_y_d@gmail.com", 65, 40);
         doc.text("No. Factura: " + String(codigo), 15, 65);
         doc.text("Fecha: " + fecha_actual, 15, 75);
-        doc.text("Cliente: " + String(this.Clientes.Nombre_cliente), 15, 85);
+        doc.text("Cliente: " + String(this.Clientes.nombre_cliente), 15, 85);
 
         var tipo_pago: String;
         var plazo_pago:String;
@@ -521,7 +516,7 @@ export class GetVentaPlusComponent
 
         doc.setFont("courier");
 
-        if(this.Id_tipo_pago == 1)
+        if(this.id_tipo_pago == 1)
         {
             tipo_pago = "Contado";
             doc.text("Tipo de pago: "+ String(tipo_pago), 15, valor);
@@ -533,11 +528,11 @@ export class GetVentaPlusComponent
 
             valor+=10;
 
-            if(this.Id_plazo == 1)
+            if(this.id_plazo == 1)
             {
                 plazo_pago = "15 días";
             }
-            else if(this.Id_plazo == 2)
+            else if(this.id_plazo == 2)
             {
                 plazo_pago = "1 mes";
             }
@@ -552,7 +547,7 @@ export class GetVentaPlusComponent
 
         var tipo_venta: String;
 
-        if(this.Id_estado_envio == 8)
+        if(this.id_estado_envio == 8)
         {
             tipo_venta = "Pendiente de envio"
         }
@@ -566,7 +561,7 @@ export class GetVentaPlusComponent
         var rows = [];
         
         this.listado_productos_agregados.forEach(element => {      
-            var temp = [element.Id_producto, element.Nombre_producto, element.Informacion_adicional_producto, element.Precio_referencial_venta, element.Cantidad];
+            var temp = [element.id_producto, element.nombre_producto, element.informacion_adicional_producto, element.precio_referencial_venta, element.cantidad];
             rows.push(temp);
         });
 
@@ -594,12 +589,12 @@ export class GetVentaPlusComponent
     {
         this.Productos = 
         {
-            Id_producto: "",
-            Nombre_producto: "",
-            Precio_referencial_venta: "",
-            Informacion_adicional_producto: "", 
-            Cantidad: "",
-            Stock: ""
+            id_producto: "",
+            nombre_producto: "",
+            precio_referencial_venta: "",
+            informacion_adicional_producto: "", 
+            cantidad: "",
+            stock: ""
         }
     }
 
@@ -607,21 +602,21 @@ export class GetVentaPlusComponent
     {
         this.Clientes = 
         {
-            Id_cliente:"",
-            Nombre_cliente:""
+            id_cliente:"",
+            nombre_cliente:""
         }
     }
 
     LimpiarInputsVariablesGlobales()
     {
-        this.Fecha_venta = "";
+        this.fecha_venta = "";
         this.Isv = 0.15;
-        this.Id_cliente = "";
-        this.Id_estado_envio = "";
-        this.Id_estado_pago = "";
-        this.Id_tipo_pago = "";
-        this.Id_plazo = "";
-        this.Id_tipo_cliente = "",
+        this.id_cliente = "";
+        this.id_estado_envio = "";
+        this.id_estado_pago = "";
+        this.id_tipo_pago = "";
+        this.id_plazo = "";
+        this.id_tipo_cliente = "",
         this.subtotal = "",
         this.descuento = "",
         this.descuento_calculado = "",

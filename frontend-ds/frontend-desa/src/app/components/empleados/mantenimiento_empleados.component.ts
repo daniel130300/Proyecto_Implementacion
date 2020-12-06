@@ -54,8 +54,8 @@ export class GetEmpleadosComponent {
         var rows = [];
         
         this.listado_empleados.forEach(element => {      
-            var temp = [element.Id_empleado, element.Identidad, element.Nombre, element.Apellido, element.Telefono , element.Email, element.Direccion, element.Salario, this.datepipe.transform(element.Fecha_nacimiento,'yyyy-MM-dd'),
-                        this.datepipe.transform(element.Fecha_contratacion,'yyyy-MM-dd'), this.datepipe.transform(element.Fecha_despido,'yyyy-MM-dd'), element.Descripcion_puesto];
+            var temp = [element.id_empleado, element.identidad, element.nombre, element.apellido, element.telefono , element.email, element.direccion, element.salario, this.datepipe.transform(element.fecha_nacimiento,'yyyy-MM-dd'),
+                        this.datepipe.transform(element.fecha_contratacion,'yyyy-MM-dd'), this.datepipe.transform(element.fecha_despido,'yyyy-MM-dd'), element.descripcion_puesto];
             rows.push(temp);
         });
 
@@ -74,23 +74,23 @@ export class GetEmpleadosComponent {
 
     public Empleado = {
         
-        Id_empleado: "",
-        Identidad: "",
-        Nombre: "",
-        Apellido: "",
-        Telefono: "",
-        Email: "",
-        Direccion: "",
-        Salario: "",
-        LoginID: "",
-        Contrasenia: "",
-        Fecha_nacimiento: "",
-        Fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
-        Fecha_despido: null,
-        Id_estatus: "1",
-        Descripcion_estatus: "",
-        Id_puesto: "",
-        Descripcion_puesto: ""
+        id_empleado: "",
+        identidad: "",
+        nombre: "",
+        apellido: "",
+        telefono: "",
+        email: "",
+        direccion: "",
+        salario: "",
+        loginid: "",
+        contrasenia: "",
+        fecha_nacimiento: "",
+        fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
+        fecha_despido: null,
+        id_estatus: "1",
+        descripcion_estatus: "",
+        id_puesto: "",
+        descripcion_puesto: ""
     }
 
     ngOnInit(){
@@ -104,23 +104,23 @@ export class GetEmpleadosComponent {
 
         this.Empleado = {
 
-            Id_empleado: "",
-            Identidad: "",
-            Nombre: "",
-            Apellido: "",
-            Telefono: "",
-            Email: "",
-            Direccion: "",
-            Salario: "",
-            LoginID: "",
-            Contrasenia: "",
-            Fecha_nacimiento: "",
-            Fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
-            Fecha_despido: null,
-            Id_estatus: "1",
-            Descripcion_estatus: "",
-            Id_puesto: "",
-            Descripcion_puesto: ""
+            id_empleado: "",
+            identidad: "",
+            nombre: "",
+            apellido: "",
+            telefono: "",
+            email: "",
+            direccion: "",
+            salario: "",
+            loginid: "",
+            contrasenia: "",
+            fecha_nacimiento: "",
+            fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
+            fecha_despido: null,
+            id_estatus: "1",
+            descripcion_estatus: "",
+            id_puesto: "",
+            descripcion_puesto: ""
         }   
     }
 
@@ -141,23 +141,23 @@ export class GetEmpleadosComponent {
 
                 this.Empleado = {
 
-                    Id_empleado: "",
-                    Identidad: "",
-                    Nombre: "",
-                    Apellido: "",
-                    Telefono: "",
-                    Email: "",
-                    Direccion: "",
-                    Salario: "",
-                    LoginID: "",
-                    Contrasenia: "",
-                    Fecha_nacimiento: "",
-                    Fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
-                    Fecha_despido: null,
-                    Id_estatus: "1",
-                    Descripcion_estatus: "",
-                    Id_puesto: "",
-                    Descripcion_puesto: ""
+                    id_empleado: "",
+                    identidad: "",
+                    nombre: "",
+                    apellido: "",
+                    telefono: "",
+                    email: "",
+                    direccion: "",
+                    salario: "",
+                    loginid: "",
+                    contrasenia: "",
+                    fecha_nacimiento: "",
+                    fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
+                    fecha_despido: null,
+                    id_estatus: "1",
+                    descripcion_estatus: "",
+                    id_puesto: "",
+                    descripcion_puesto: ""
                 }
                 
                 this.get_empleados();
@@ -239,23 +239,23 @@ export class GetEmpleadosComponent {
     {
         this.Empleado = {
 
-            Id_empleado: empleado.Id_empleado,
-            Identidad: empleado.Identidad,
-            Nombre: empleado.Nombre,
-            Apellido: empleado.Apellido,
-            Telefono: empleado.Telefono,
-            Email: empleado.Email,
-            Direccion: empleado.Direccion,
-            Salario: empleado.Salario,
-            LoginID: empleado.LoginID,
-            Contrasenia: empleado.Contrasenia,
-            Fecha_nacimiento: String( empleado.Fecha_nacimiento ).substring( 0, 10 ),
-            Fecha_contratacion: String( empleado.Fecha_contratacion ).substring( 0, 10 ),
-            Fecha_despido: String( empleado.Fecha_contratacion ).substring( 0, 10 ),
-            Id_estatus: empleado.Id_estatus,
-            Descripcion_estatus: empleado.Descripcion_estatus,
-            Id_puesto: empleado.Id_puesto,
-            Descripcion_puesto: empleado.Descripcion_puesto
+            id_empleado: empleado.Id_empleado,
+            identidad: empleado.Identidad,
+            nombre: empleado.Nombre,
+            apellido: empleado.Apellido,
+            telefono: empleado.Telefono,
+            email: empleado.Email,
+            direccion: empleado.Direccion,
+            salario: empleado.Salario,
+            loginid: empleado.LoginID,
+            contrasenia: empleado.Contrasenia,
+            fecha_nacimiento: String( empleado.Fecha_nacimiento ).substring( 0, 10 ),
+            fecha_contratacion: String( empleado.Fecha_contratacion ).substring( 0, 10 ),
+            fecha_despido: String( empleado.Fecha_contratacion ).substring( 0, 10 ),
+            id_estatus: empleado.Id_estatus,
+            descripcion_estatus: empleado.Descripcion_estatus,
+            id_puesto: empleado.Id_puesto,
+            descripcion_puesto: empleado.Descripcion_puesto
         }      
     }
 
@@ -276,23 +276,23 @@ export class GetEmpleadosComponent {
    
                 this.Empleado = {
 
-                    Id_empleado: "",
-                    Identidad: "",
-                    Nombre: "",
-                    Apellido: "",
-                    Telefono: "",
-                    Email: "",
-                    Direccion: "",
-                    Salario: "",
-                    LoginID: "",
-                    Contrasenia: "",
-                    Fecha_nacimiento: "",
-                    Fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
-                    Fecha_despido: null,
-                    Id_estatus: "1",
-                    Descripcion_estatus: "",
-                    Id_puesto: "",
-                    Descripcion_puesto: ""
+                    id_empleado: "",
+                    identidad: "",
+                    nombre: "",
+                    apellido: "",
+                    telefono: "",
+                    email: "",
+                    direccion: "",
+                    salario: "",
+                    loginid: "",
+                    contrasenia: "",
+                    fecha_nacimiento: "",
+                    fecha_contratacion: String( new Date().toISOString().substring( 0, 10 ) ),
+                    fecha_despido: null,
+                    id_estatus: "1",
+                    descripcion_estatus: "",
+                    id_puesto: "",
+                    descripcion_puesto: ""
                 }
 
                 this.get_empleados();

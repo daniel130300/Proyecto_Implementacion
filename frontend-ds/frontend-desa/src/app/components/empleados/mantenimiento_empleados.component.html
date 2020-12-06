@@ -14,8 +14,6 @@
 		<div class="contenedorTitulo">
 			<h2>| Mantenimiento Empleados</h2>
         </div>
-        
-        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
 
         <div class="contenedorInformativo">
             
@@ -27,7 +25,7 @@
                     <label>Identidad: </label>
                     <input type = "text"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Empleado.Identidad"
+                        [(ngModel)] = "Empleado.identidad"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "13"
                         minlength = "13"
@@ -39,7 +37,7 @@
                     <label>Nombre: </label>
                     <input type = "text"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Empleado.Nombre"
+                        [(ngModel)] = "Empleado.nombre"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "100"
                         minlength = "3"
@@ -51,7 +49,7 @@
                     <label>Apellido: </label>
                     <input type = "text"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Empleado.Apellido"
+                        [(ngModel)] = "Empleado.apellido"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "100"
                         minlength = "3"
@@ -63,7 +61,7 @@
                     <label>Teléfono: </label>
                     <input type = "tel"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Empleado.Telefono"
+                        [(ngModel)] = "Empleado.telefono"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "8"
                         minlength = "8"
@@ -79,7 +77,7 @@
                         <label>Correo electrónico: </label>
                         <input type = "email"
                             class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Email"
+                            [(ngModel)] = "Empleado.email"
                             [ngModelOptions] = "{standalone:true}"
                             maxlength = "150"
                             pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
@@ -90,7 +88,7 @@
                         <label>Dirección: </label>
                         <input type = "text"
                             class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Direccion"
+                            [(ngModel)] = "Empleado.direccion"
                             [ngModelOptions] = "{standalone:true}"
                             maxlength = "300"
                             minlength = "10"
@@ -101,7 +99,7 @@
                         <label>Salario: </label>
                         <input type = "number"
                             class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.Salario"
+                            [(ngModel)] = "Empleado.salario"
                             [ngModelOptions] = "{standalone:true}"
                             max = "99999"
                             min = "1000"
@@ -112,7 +110,7 @@
                         <label>Nombre de usuario: </label>
                         <input type = "text"
                             class = "tamañoInput form-control"
-                            [(ngModel)] = "Empleado.LoginID"
+                            [(ngModel)] = "Empleado.loginid"
                             [ngModelOptions] = "{standalone:true}"
                             maxlength = "20"
                             minlength = "5"
@@ -130,7 +128,7 @@
                         onmouseover = "this.type = 'text'"
                         onmouseout = "this.type = 'password'"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Empleado.Contrasenia"
+                        [(ngModel)] = "Empleado.contrasenia"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "30"
                         minlength = "8"
@@ -144,7 +142,7 @@
                         max = "2002-01-01"
                         onkeydown = "return false"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Empleado.Fecha_nacimiento"
+                        [(ngModel)] = "Empleado.fecha_nacimiento"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -153,7 +151,7 @@
                     <label>Puesto: </label>
                     <select
                         class = "tamañoInput form-control input"
-                        [(ngModel)] = "Empleado.Id_puesto"
+                        [(ngModel)] = "Empleado.id_puesto"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -275,7 +273,7 @@
                     <label>Identidad: </label>
                     <input type = "text"
                         class = "form-control"
-                        [(ngModel)] = "Empleado.Identidad"
+                        [(ngModel)] = "Empleado.identidad"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "13"
                         minlength = "13"
@@ -287,7 +285,7 @@
                     <label>Nombre: </label>
                     <input type = "text"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Empleado.Nombre"
+                        [(ngModel)] = "Empleado.nombre"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "100"
                         minlength = "3"
@@ -299,7 +297,7 @@
                     <label>Apellido: </label>
                     <input type = "text"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Empleado.Apellido"
+                        [(ngModel)] = "Empleado.apellido"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "100"
                         minlength = "3"
@@ -311,7 +309,7 @@
                     <label>Teléfono: </label>
                     <input type = "text"
                         class = "form-control"
-                        [(ngModel)] = "Empleado.Telefono"
+                        [(ngModel)] = "Empleado.telefono"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "8"
                         minlength = "8"
@@ -323,7 +321,7 @@
                     <label>Correo electrónico: </label>
                     <input type = "text"
                         class = "form-control"
-                        [(ngModel)] = "Empleado.Email"
+                        [(ngModel)] = "Empleado.email"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "85"
                         minlength = "5"
@@ -335,7 +333,7 @@
                     <label>Dirección: </label>
                     <input type = "text"
                         class = "form-control"
-                        [(ngModel)] = "Empleado.Direccion"
+                        [(ngModel)] = "Empleado.direccion"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "300"
                         minlength = "15"
@@ -346,7 +344,7 @@
                     <label>Salario: </label>
                     <input type = "text"
                         class = "form-control"
-                        [(ngModel)] = "Empleado.Salario"
+                        [(ngModel)] = "Empleado.salario"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "6"
                         minlength = "4"
@@ -357,7 +355,7 @@
                     <label>Nombre de usuario: </label>
                     <input type = "text"
                         class = "form-control"
-                        [(ngModel)] = "Empleado.LoginID"
+                        [(ngModel)] = "Empleado.loginid"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "20"
                         minlength = "5"
@@ -371,7 +369,7 @@
                         max = "2002-01-01"
                         class = "form-control"
                         onkeydown = "return false"
-                        [(ngModel)] = "Empleado.Fecha_nacimiento"
+                        [(ngModel)] = "Empleado.fecha_nacimiento"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -381,7 +379,7 @@
                     <input type = "date"
                         onkeydown = "return false"
                         class = "form-control"
-                        [(ngModel)] = "Empleado.Fecha_contratacion"
+                        [(ngModel)] = "Empleado.fecha_contratacion"
                         [ngModelOptions] = "{standalone:true}"
                         readonly = "true"
                         required
@@ -392,7 +390,7 @@
                     <input type = "date"
                         onkeydown = "return false"
                         class = "form-control"
-                        [(ngModel)] = "Empleado.Fecha_despido"
+                        [(ngModel)] = "Empleado.fecha_despido"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -401,7 +399,7 @@
                     <label>Estado: </label>
                     <select
                         class = "form-control input"
-                        [(ngModel)] = "Empleado.Id_estatus"
+                        [(ngModel)] = "Empleado.id_estatus"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -414,7 +412,7 @@
                     <label>Puesto: </label>
                     <select
                         class = "form-control input"
-                        [(ngModel)] = "Empleado.Id_puesto"
+                        [(ngModel)] = "Empleado.id_puesto"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -430,7 +428,7 @@
 
                 <button (click) = "limpiar_empleado()" type="button" class="btn btn-secondary" data-dismiss = "modal">Cerrar</button>
 
-                <button (click) = "form.checkValidity() ? update_empleado(Empleado.Id_empleado) : null" type = "button" class="btn btn-primary">Guardar</button>
+                <button (click) = "form.checkValidity() ? update_empleado(Empleado.id_empleado) : null" type = "button" class="btn btn-primary">Guardar</button>
                 
             </div>
 
