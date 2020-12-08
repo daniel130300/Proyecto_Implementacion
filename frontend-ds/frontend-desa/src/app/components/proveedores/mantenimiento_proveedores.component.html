@@ -14,8 +14,6 @@
             
         </div>
         
-        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
-        
         <div class="contenedorInformativo">
         
             <form ngNativeValidate #form>
@@ -28,7 +26,7 @@
                         maxlength = "50"
                         minlength = "3"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Proveedor.Nombre_compania"
+                        [(ngModel)] = "Proveedor.nombre_compania"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -37,7 +35,7 @@
                     <label>Ciudad: </label>
                     <select
                         class = "tamañoInput form-control input"
-                        [(ngModel)] = "Proveedor.Id_ciudad"
+                        [(ngModel)] = "Proveedor.id_ciudad"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -52,7 +50,7 @@
                         maxlength = "300"    
                         minlength = "10"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Proveedor.Direccion"
+                        [(ngModel)] = "Proveedor.direccion"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -67,7 +65,7 @@
                         maxlength = "65"    
                         minlength = "3"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Proveedor.Nombre_contacto"
+                        [(ngModel)] = "Proveedor.nombre_contacto"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -78,7 +76,7 @@
                         maxlength = "65" 
                         minlength = "3"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Proveedor.Apellido_contacto"
+                        [(ngModel)] = "Proveedor.apellido_contacto"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -89,7 +87,7 @@
                         maxlength = "8"
                         minlength = "8"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Proveedor.Telefono_contacto"
+                        [(ngModel)] = "Proveedor.telefono_contacto"
                         [ngModelOptions] = "{standalone:true}"
                         pattern = "[0-9]{8}"
                         required
@@ -105,7 +103,7 @@
                         maxlength = "85"
                         minlength = "10"
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Proveedor.Email_contacto"
+                        [(ngModel)] = "Proveedor.email_contacto"
                         [ngModelOptions] = "{standalone:true}"
                         pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                         required
@@ -220,7 +218,7 @@
                     <label>ID del Proveedor: </label>
                     <input type = "text"
                         class = "form-control"
-                        [(ngModel)] = "Proveedor.Id_proveedor"
+                        [(ngModel)] = "Proveedor.id_proveedor"
                         [ngModelOptions] = "{standalone:true}"
                         readonly = "true"
                     >
@@ -231,7 +229,7 @@
                         class = "form-control"
                         maxlength = "50"
                         minlength = "3"
-                        [(ngModel)] = "Proveedor.Nombre_compania"
+                        [(ngModel)] = "Proveedor.nombre_compania"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -240,7 +238,7 @@
                     <label>Ciudad: </label>
                     <select
                         class = "form-control"
-                        [(ngModel)] = "Proveedor.Id_ciudad"
+                        [(ngModel)] = "Proveedor.id_ciudad"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -255,7 +253,7 @@
                         class = "form-control"
                         maxlength = "300"    
                         minlength = "10"
-                        [(ngModel)] = "Proveedor.Direccion"
+                        [(ngModel)] = "Proveedor.direccion"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -266,7 +264,7 @@
                         class = "form-control"
                         maxlength = "65"    
                         minlength = "3"
-                        [(ngModel)] = "Proveedor.Nombre_contacto"
+                        [(ngModel)] = "Proveedor.nombre_contacto"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -277,7 +275,7 @@
                         class = "form-control"
                         maxlength = "65" 
                         minlength = "3"
-                        [(ngModel)] = "Proveedor.Apellido_contacto"
+                        [(ngModel)] = "Proveedor.apellido_contacto"
                         [ngModelOptions] = "{standalone:true}"
                         required
                     >
@@ -288,7 +286,7 @@
                         class = "form-control"
                         maxlength = "8"
                         minlength = "8"
-                        [(ngModel)] = "Proveedor.Telefono_contacto"
+                        [(ngModel)] = "Proveedor.telefono_contacto"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength = "20"
                         pattern = "[0-9]{8}"
@@ -301,7 +299,7 @@
                         class = "form-control"
                         maxlength = "85"
                         minlength = "10"
-                        [(ngModel)] = "Proveedor.Email_contacto"
+                        [(ngModel)] = "Proveedor.email_contacto"
                         [ngModelOptions] = "{standalone:true}"
                         pattern = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
                         required
@@ -316,7 +314,7 @@
                 <p></p>
                 <button (click) = "limpiar_proveedor()" type = "button" class = "btn btn-secondary" data-dismiss = "modal">Cerrar</button>
 
-                <button (click) = "form.checkValidity() ? update_proveedor(Proveedor.Id_proveedor) : null" type = "button" class = "btn btn-primary">Guardar</button>
+                <button (click) = "form.checkValidity() ? update_proveedor(Proveedor.id_proveedor) : null" type = "button" class = "btn btn-primary">Guardar</button>
 
             </div>
 

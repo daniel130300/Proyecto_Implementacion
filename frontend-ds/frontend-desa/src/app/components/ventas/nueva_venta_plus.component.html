@@ -25,7 +25,7 @@
                     <label>Tipo de cliente: </label>
                     <select
                         class="form-control tamañoInput"
-                        [(ngModel)]="Id_tipo_cliente"
+                        [(ngModel)]="id_tipo_cliente"
                         [ngModelOptions]="{standalone: true}"
                         required="true">
                         <option value="">Seleccione un tipo de cliente</option>
@@ -40,14 +40,14 @@
                         <div class="input-group">
                             <input type = "text" 
                                 class = "tamaño form-control col-sm-10"
-                                [(ngModel)] = "Clientes.Id_cliente"
+                                [(ngModel)] = "Clientes.id_cliente"
                                 [ngModelOptions]="{standalone: true}"
                                 readonly = "true"
                             > 
                             <button class="tamaño btn btn-primary form-group col-sm-1"
                             data-toggle="modal"
                             data-target="#exampleModal"
-                            (click)="get_clientes(Id_tipo_cliente)"
+                            (click)="get_clientes(id_tipo_cliente)"
                             >+</button>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     <label >Nombre cliente: </label>
                     <input type="text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Clientes.Nombre_cliente"
+                        [(ngModel)] = "Clientes.nombre_cliente"
                         [ngModelOptions]="{standalone: true}"
                         readonly = "true"
                     >
@@ -66,7 +66,7 @@
                     <select
                         (change)="HabilitarPlazosPago($event.target.value)"
                         class="form-control tamañoInput"
-                        [(ngModel)]="Id_tipo_pago"
+                        [(ngModel)]="id_tipo_pago"
                         formControlName = "tipoPago"
                         required="true">
                         <option value="">Seleccione un tipo de pago</option>
@@ -78,7 +78,7 @@
                     <label >Plazos de pago: </label>
                     <select
                         class="form-control tamañoInput"
-                        [(ngModel)]="Id_plazo"
+                        [(ngModel)]="id_plazo"
                         formControlName = "plazosPago"
                         required="true">
                         <option value="">Seleccione un plazo de pago</option>
@@ -90,7 +90,7 @@
                     <label >Tipo de venta: </label>
                     <select
                         class="form-control tamañoInput"
-                        [(ngModel)]="Id_estado_envio"
+                        [(ngModel)]="id_estado_envio"
                         [ngModelOptions]="{standalone: true}"
                         required="true">
                         <option value="">Seleccione un tipo de venta</option>
@@ -105,7 +105,7 @@
                     <div class="input-group">
                         <input type = "text" 
                             class = "form-control"
-                            [(ngModel)] = "Productos.Id_producto"
+                            [(ngModel)] = "Productos.id_producto"
                             [ngModelOptions]="{standalone: true}"
                             readonly = "true"
                         > 
@@ -120,7 +120,7 @@
                     <label >Nombre producto: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Productos.Nombre_producto"
+                        [(ngModel)] = "Productos.nombre_producto"
                         [ngModelOptions]="{standalone: true}"
                         readonly = "true"
                     >
@@ -133,7 +133,7 @@
                         rows="5" 
                         cols="100" 
                         readonly = "true"
-                        [(ngModel)] = "Productos.Informacion_adicional_producto"
+                        [(ngModel)] = "Productos.informacion_adicional_producto"
                         [ngModelOptions]="{standalone: true}"
                     ></textarea>
 
@@ -141,7 +141,7 @@
                     <label >Precio referencial de venta </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Productos.Precio_referencial_venta"
+                        [(ngModel)] = "Productos.precio_referencial_venta"
                         [ngModelOptions]="{standalone: true}"
                         readonly = "true"
                     > 
@@ -150,7 +150,7 @@
                     <label >Cantidad: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Productos.Cantidad"
+                        [(ngModel)] = "Productos.cantidad"
                         [ngModelOptions]="{standalone: true}"
                         maxlength="3"
                         minlength="1"
@@ -185,13 +185,13 @@
                                     </thead>
                                     <tbody>
                                     <tr *ngFor = "let produc of listado_productos_agregados">
-                                        <td>{{produc.Id_producto}}</td>
-                                        <td>{{produc.Nombre_producto}}</td>
-                                        <td>{{produc.Informacion_adicional_producto}}</td>
-                                        <td>{{produc.Precio_referencial_venta}}</td>
-                                        <td>{{produc.Cantidad}}</td>
+                                        <td>{{produc.id_producto}}</td>
+                                        <td>{{produc.nombre_producto}}</td>
+                                        <td>{{produc.informacion_adicional_producto}}</td>
+                                        <td>{{produc.precio_referencial_venta}}</td>
+                                        <td>{{produc.cantidad}}</td>
                                         <td>
-                                            <button (click)="EliminarProductoVenta(produc.Id_producto)" class="btn btn-primary mb-3">Eliminar</button>
+                                            <button (click)="EliminarProductoVenta(produc.id_producto)" class="btn btn-primary mb-3">Eliminar</button>
                                        </td>
 
                                     </tr>

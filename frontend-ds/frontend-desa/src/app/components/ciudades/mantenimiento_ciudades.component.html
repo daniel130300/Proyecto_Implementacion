@@ -5,14 +5,14 @@
         <label>Nombre: </label>
         <input type = "text" 
                class = "form-control"
-               [(ngModel)] = "Ciudad.Nombre_ciudad"
+               [(ngModel)] = "Ciudad.nombre_ciudad"
                [ngModelOptions] = "{standalone:true}"
         > 
 
         <label>Departamento: </label>
         <select 
                class = "form-control input"
-               [(ngModel)] = "Ciudad.Id_departamento"
+               [(ngModel)] = "Ciudad.id_departamento"
                [ngModelOptions] = "{standalone:true}"
         >   
         <option vale="">- Seleccione un departamento -</option>
@@ -67,7 +67,7 @@
                 <label>ID Ciudad: </label>
                 <input type = "text" 
                     class = "form-control"
-                    [(ngModel)] = "Ciudad.Id_ciudad"
+                    [(ngModel)] = "Ciudad.id_ciudad"
                     [ngModelOptions] = "{standalone:true}"
                     readonly = "true"
                 > 
@@ -75,14 +75,14 @@
                 <label>Nombre: </label>
                 <input type = "text" 
                     class = "form-control"
-                    [(ngModel)] = "Ciudad.Nombre_ciudad"
+                    [(ngModel)] = "Ciudad.nombre_ciudad"
                     [ngModelOptions] = "{standalone:true}"
                 > 
 
                 <label>Departamento: </label>
                 <select 
                     class = "form-control input"
-                    [(ngModel)] = "Ciudad.Id_departamento"
+                    [(ngModel)] = "Ciudad.id_departamento"
                     [ngModelOptions] = "{standalone:true}"
                 >   
                 <option vale="">- Seleccione un departamento -</option>
@@ -94,7 +94,7 @@
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button (click)="update_ciudad(Ciudad.Id_ciudad)"type="button" class="btn btn-primary">Guardar</button>
+            <button (click)="update_ciudad(Ciudad.id_ciudad)"type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
         </div>

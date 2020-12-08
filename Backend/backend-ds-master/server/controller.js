@@ -12,7 +12,7 @@ var con = mysql.createPool({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "Daniel100",
+    password: "emma63194",
     database: 'variedades_kyd',
     insecureAuth: true,
     multipleStatements: true
@@ -21,17 +21,16 @@ var con = mysql.createPool({
 /*---------------------------------MANTENIMIENTO PROVEEDORES----------------------------------*/
 
 //Insertar un nuevo Proveedor
-
 router.post('/insert_proveedor', (req, res, next) => {
 	var query = 'insert into proveedores (Nombre_compania, Direccion, Id_ciudad, Nombre_contacto, Apellido_contacto, Telefono_contacto, Email_contacto)';
 	    query = query  + 'values (?,?,?,?,?,?,?)';	
-	var values = [req.body.Nombre_compania,
-				  req.body.Direccion,
-				  req.body.Id_ciudad,
-				  req.body.Nombre_contacto,
-				  req.body.Apellido_contacto,
-				  req.body.Telefono_contacto,
-				  req.body.Email_contacto];	
+	var values = [req.body.nombre_compania,
+				  req.body.direccion,
+				  req.body.id_ciudad,
+				  req.body.nombre_contacto,
+				  req.body.apellido_contacto,
+				  req.body.telefono_contacto,
+				  req.body.email_contacto];	
 	con.query(query, values, (err, result, fields) => {
 		if(err) {
 				next(err);
@@ -43,20 +42,19 @@ router.post('/insert_proveedor', (req, res, next) => {
 });
 
 //Editar un Proveedor
-
 router.put('/update_proveedor', (req, res, next) => {
 	var query = 'update proveedores set Nombre_compania = ?, Direccion = ?, Id_ciudad = ?, Nombre_contacto = ?, Apellido_contacto = ?, Telefono_contacto = ?, Email_contacto = ?';
 	    query = query  + ' where Id_proveedor = ?';
 	
 	var values = [
-				  req.body.Nombre_compania,
-				  req.body.Direccion,
-				  req.body.Id_ciudad,
-				  req.body.Nombre_contacto,
-				  req.body.Apellido_contacto,
-				  req.body.Telefono_contacto,
-				  req.body.Email_contacto,
-				  req.body.Id_proveedor];
+				  req.body.nombre_compania,
+				  req.body.direccion,
+				  req.body.id_ciudad,
+				  req.body.nombre_contacto,
+				  req.body.apellido_contacto,
+				  req.body.telefono_contacto,
+				  req.body.email_contacto,
+				  req.body.id_proveedor];
 
 	con.query(query, values, (err, result, fields) => {
 		if(err) {
@@ -69,11 +67,10 @@ router.put('/update_proveedor', (req, res, next) => {
 });
 
 //Eliminar un Proveedor
-
 router.delete('/delete_proveedor', (req, res, next) => {
 	var query = 'update proveedores set Estado_logico = 0 where Id_proveedor = ?';
 	
-	var values = [req.query.Id_proveedor];
+	var values = [req.query.id_proveedor];
 
 	con.query(query, values, (err, result, fields) => {
 		if(err) {
@@ -88,7 +85,6 @@ router.delete('/delete_proveedor', (req, res, next) => {
 
 
 //Consultar todos los Proveedores.
-
 router.get('/get_proveedores', (req, res, next) => {
 	var query = "select a.Id_proveedor, a.Nombre_compania, a.Nombre_contacto, a.Apellido_contacto, a.Telefono_contacto, a.Email_contacto, a.Direccion, b.Id_ciudad, b.Nombre_ciudad , c.Id_departamento, c.Nombre_departamento from proveedores a inner join ciudades b on a.Id_ciudad = b.Id_ciudad inner join departamentos c on b.Id_departamento = c.Id_departamento where Estado_logico = 1";
 	con.query(query, (err, result, fields) => {
@@ -176,7 +172,7 @@ router.get('/get_productos_proveedor', (req, res, next) => {
 });
 
 
-/*---------------------------------MANTENIMIENTO CIUDADES----------------------------------*/
+/---------------------------------MANTENIMIENTO CIUDADES----------------------------------/
 
 // Consultar todas las ciudades.
 
@@ -199,8 +195,8 @@ router.post('/insert_ciudad', (req, res, next) => {
     var query = 'INSERT INTO ciudades (Nombre_ciudad, Id_departamento) VALUES (?, ?)';
     
     var values = [
-        req.body.Nombre_ciudad,
-        req.body.Id_departamento
+        req.body.nombre_ciudad,
+        req.body.id_departamento
     ];
 
     con.query(query, values, (err, result, fields) => {
@@ -218,9 +214,9 @@ router.put('/update_ciudad', (req, res, next) => {
     var query = 'UPDATE ciudades SET Nombre_ciudad = ?, Id_departamento = ? WHERE Id_ciudad = ?';
     
     var values = [
-        req.body.Nombre_ciudad,
-        req.body.Id_departamento,
-        req.body.Id_ciudad
+        req.body.nombre_ciudad,
+        req.body.id_departamento,
+        req.body.id_ciudad
     ];
 
     con.query(query, values, (err, result, fields) => {
@@ -247,19 +243,18 @@ router.get('/get_departamentos', (req, res, next) => {
 /*---------------------------------MANTENIMIENTO CLIENTES----------------------------------*/
 
 //Insertar cliente
-
 router.post('/insert_cliente', (req, res, next) => {
     var query = 'INSERT INTO clientes (Nombre_compania, Id_ciudad, Id_tipo_cliente, Direccion, Nombre_contacto, Apellido_contacto, Telefono_contacto, Email_contacto) ';
         query = query + 'values (?, ?, ?, ?, ?, ?, ?, ?)';
 
-    var values = [req.body.Nombre_compania,
-        req.body.Id_ciudad,
-        req.body.Id_tipo_cliente,
-        req.body.Direccion,
-        req.body.Nombre_contacto,
-        req.body.Apellido_contacto,
-        req.body.Telefono_contacto,
-        req.body.Email_contacto
+    var values = [req.body.nombre_compania,
+        req.body.id_ciudad,
+        req.body.id_tipo_cliente,
+        req.body.direccion,
+        req.body.nombre_contacto,
+        req.body.apellido_contacto,
+        req.body.telefono_contacto,
+        req.body.email_contacto
     ];
     
     con.query(query, values, (err, result, fields) => {
@@ -273,20 +268,19 @@ router.post('/insert_cliente', (req, res, next) => {
 });
 
 //Actualizar cliente
-
 router.put('/update_cliente', (req, res, next) => {
     var query = 'UPDATE clientes SET Nombre_compania = ?, Id_ciudad = ?, Id_tipo_cliente = ?, Direccion = ?, Nombre_contacto = ?, Apellido_contacto = ?, Telefono_contacto = ?, Email_contacto = ?';
         query = query + 'WHERE Id_cliente = ?';
 
-        var values = [req.body.Nombre_compania,
-            req.body.Id_ciudad,
-            req.body.Id_tipo_cliente,
-            req.body.Direccion,
-            req.body.Nombre_contacto,
-            req.body.Apellido_contacto,
-            req.body.Telefono_contacto,
-            req.body.Email_contacto,
-            req.body.Id_cliente
+        var values = [req.body.nombre_compania,
+            req.body.id_ciudad,
+            req.body.id_tipo_cliente,
+            req.body.direccion,
+            req.body.nombre_contacto,
+            req.body.apellido_contacto,
+            req.body.telefono_contacto,
+            req.body.email_contacto,
+            req.body.id_cliente
         ];
     
     con.query(query, values, (err, result, fields) => {
@@ -300,10 +294,9 @@ router.put('/update_cliente', (req, res, next) => {
 });
 
 //Eliminar un Cliente
-
 router.delete('/delete_cliente', (req, res, next) => {
     var query = 'update clientes set Estado_logico = 0 where Id_cliente = ?';
-    var values = [req.query.Id_cliente];
+    var values = [req.query.id_cliente];
 
     con.query(query, values, (err, result, fields) => {
         if(err) {
@@ -315,7 +308,6 @@ router.delete('/delete_cliente', (req, res, next) => {
 });
 
 //Consultar todos los clientes
-
 router.get('/get_clientes', (req, res, next) => {
     var query = 'select a.Id_cliente, a.Nombre_compania, a.Nombre_contacto, a.Apellido_contacto, a.Telefono_contacto, a.Email_contacto, c.Id_tipo_cliente, c.Descripcion_cliente, c.Descuento_cliente, a.Direccion, b.Id_ciudad, b.Nombre_ciudad, d.Id_departamento, d.Nombre_departamento from clientes a inner join ciudades b on a.Id_ciudad = b.Id_ciudad inner join tipo_cliente c on a.Id_tipo_cliente = c.Id_tipo_cliente inner join departamentos d on b.Id_departamento = d.Id_departamento where Estado_logico = 1';
     con.query(query, (err, result, fields) => {
@@ -364,14 +356,14 @@ router.post ('/Insert_productos', (req, res, next) => {
     var query = 'insert into productos (Descripcion_producto, Talla, Color, Stock, Precio_referencial_venta, Precio_referencial_compra, Punto_reorden, Id_modelo)';
         query=query+ 'values (?,?,?,?,?,?,?,?)';
     var values=[
-        req.body.Descripcion_producto,
-        req.body.Talla,
-        req.body.Color,
-        req.body.Stock,
-        req.body.Precio_referencial_venta,
-        req.body.Precio_referencial_compra,
-        req.body.Punto_reorden,
-        req.body.Id_modelo
+        req.body.descripcion_producto,
+        req.body.talla,
+        req.body.color,
+        req.body.stock,
+        req.body.precio_referencial_venta,
+        req.body.precio_referencial_compra,
+        req.body.punto_reorden,
+        req.body.id_modelo
     ];
     con.query(query, values, (err, result, fields) => {
         if(err){
@@ -388,15 +380,15 @@ router.put ('/update_productos', (req, res, next) => {
     var query = 'update productos set Descripcion_producto = ?, Talla = ? , Color = ?, Stock = ?, Precio_referencial_venta = ?, Precio_referencial_compra = ?, Punto_reorden = ?, Id_modelo = ?';
         query = query + ' where Id_producto = ?';
     var values=[
-        req.body.Descripcion_producto,
-        req.body.Talla,
-        req.body.Color,
-        req.body.Stock,
-        req.body.Precio_referencial_venta,
-        req.body.Precio_referencial_compra,
-        req.body.Punto_reorden,
-        req.body.Id_modelo,
-        req.body.Id_producto
+        req.body.descripcion_producto,
+        req.body.talla,
+        req.body.color,
+        req.body.stock,
+        req.body.precio_referencial_venta,
+        req.body.precio_referencial_compra,
+        req.body.punto_reorden,
+        req.body.id_modelo,
+        req.body.id_producto
     ];
     con.query(query, values, (err, result, fields) => {
         if(err){
@@ -411,7 +403,7 @@ router.put ('/update_productos', (req, res, next) => {
 
 router.delete('/delete_productos', (req, res, next) => {
     var query= 'update productos set Estado_logico = 0 where Id_producto = ?';
-   var values=[req.query.Id_producto];
+   var values=[req.query.id_producto];
     con.query(query, values, (err, result, fields) => {
         if(err){
             next(err);
@@ -426,8 +418,8 @@ router.delete('/delete_productos', (req, res, next) => {
 
 router.get('/get_modelo_filtrado', (req, res, next) => {
 	var query= 'select a.Id_modelo, a.Descripcion_modelo from modelos a where a.Id_marca=? and a.Id_subcategoria=?';
-		var values = [req.query.Id_marca,
-			req.query.Id_subcategoria];
+		var values = [req.query.id_marca,
+			req.query.id_subcategoria];
     con.query(query, values, (err, result, fields) => {
         if(err){
             next(err);
@@ -440,7 +432,7 @@ router.get('/get_modelo_filtrado', (req, res, next) => {
 
 router.post('/insert_productos_proveedores',(req,res,next)=>{
 	var query='set @codigo=(select max(Id_producto) from productos); INSERT INTO productos_proveedores (Id_producto, Id_proveedor) VALUES (@codigo,?)';
-	var values=[req.body.Id_proveedor]
+	var values=[req.body.id_proveedor]
 		con.query(query,values,(err,result,fields)=>{
 			if(err){
 				next(err);
@@ -453,8 +445,8 @@ router.post('/insert_productos_proveedores',(req,res,next)=>{
 router.put('/update_productos_proveedores', (req, res, next) => {
 	var query = 'update productos_proveedores set Id_proveedor = ? where Id_producto = ?';
 	var values = [
-					req.body.Id_proveedor,
-					req.body.Id_producto
+					req.body.id_proveedor,
+					req.body.id_producto
 				];
 
 	con.query(query, values, (err, result, fields) => {
@@ -470,7 +462,7 @@ router.put('/update_productos_proveedores', (req, res, next) => {
 
 router.get('/get_subcategoria_filtrado', (req, res, next) => {
 	var query= 'select a.Id_subcategoria, a.Descripcion_subcategoria from subcategorias a inner join categorias b on a.Id_categoria=b.Id_categoria where b.Id_categoria = ?';
-		var values = [req.query.Id_categoria];
+		var values = [req.query.id_categoria];
     con.query(query, values, (err, result, fields) => {
         if(err){
             next(err);
@@ -499,19 +491,18 @@ router.get('/get_ventas', (req, res, next) => {
 });
 
 //Insertar una nueva venta
-
 router.post ('/Insert_venta_plus', (req, res, next) => {
 	var query = 'insert into ventas (Fecha_venta, ISV, Id_cliente, Id_estado_envio, Id_estado_pago, Id_tipo_pago, Id_plazo) ';
 	var FechaActual = new Date();
         query=query+ 'values (?,?,?,?,?,?,?)';
     var values=[
     	FechaActual,
-        req.body.Isv,
-        req.body.Id_cliente,
-        req.body.Id_estado_envio,
-		req.body.Id_estado_pago,
-		req.body.Id_tipo_pago,   
-        req.body.Id_plazo
+        req.body.isv,
+        req.body.id_cliente,
+        req.body.id_estado_envio,
+		req.body.id_estado_pago,
+		req.body.id_tipo_pago,   
+        req.body.id_plazo
     ];
     con.query(query, values, (err, result, fields) => {
         if(err){
@@ -526,7 +517,6 @@ router.post ('/Insert_venta_plus', (req, res, next) => {
 /*---------------------------------MANTENIMIENTO DETALLE_VENTAS----------------------------------*/
 
 //Consultar todos los detalles de ventas
-
 router.get('/get_detalle_ventas', (req, res, next) => {
 	var query = 'select * from detalle_ventas';
 	con.query(query, (err, result, fields) => {
@@ -540,7 +530,6 @@ router.get('/get_detalle_ventas', (req, res, next) => {
 });
 
 //Consultar los producto de una venta especifica
-
 router.get('/get_productos_venta', (req, res, next) => {
 	var query = 'select dv.Id_venta, dv.Id_producto, a.Descripcion_producto, a.Talla, a.Color, a.Stock, a.Precio_referencial_venta, a.Precio_referencial_compra, a.Punto_reorden, c.Nombre_marca, d.Descripcion_subcategoria, e.Descripcion_categoria, dv.Precio_venta, dv.Cantidad_vendida, dv.Cantidad_devuelta from detalle_ventas dv inner join productos a on dv.Id_producto=a.Id_producto inner join modelos b on a.Id_modelo = b.Id_modelo inner join marcas c on b.Id_marca = c.Id_marca inner join subcategorias d on b.Id_subcategoria = d.Id_subcategoria inner join categorias e on d.Id_categoria = e.Id_categoria where dv.Id_venta = ?';
 	var values = [req.query.Id_venta];
@@ -555,7 +544,6 @@ router.get('/get_productos_venta', (req, res, next) => {
 });
 
 //Consultar un solo detalle de venta CAMBIOS
-
 router.get('/get_detalle_venta', (req, res, next) => {
 	var query = 'select * from detalle_ventas where Id_venta = ? and Id_producto = ?';
 	var values = [req.query.Id_venta,
@@ -573,13 +561,12 @@ router.get('/get_detalle_venta', (req, res, next) => {
 });
 
 //Insertar un nuevo detalle CAMBIOS
-
 router.post('/insert_detalle_venta',(req,res,next)=>{
 	var query='set @codigo = (select max(Id_venta) from ventas); INSERT INTO detalle_ventas (Id_venta, Id_producto, Precio_venta, Cantidad_vendida, Cantidad_devuelta) VALUES (@codigo,?,?,?,?)';
 	var values=[
-		req.body.Id_producto,
-		req.body.Precio_referencial_venta,
-		req.body.Cantidad_vendida,
+		req.body.id_producto,
+		req.body.precio_referencial_venta,
+		req.body.cantidad_vendida,
 		0
 	]
 	
@@ -594,7 +581,6 @@ router.post('/insert_detalle_venta',(req,res,next)=>{
 
 
 //Actualizar la tabla detalle de ventas
-
 router.put('/update_detalle_venta', (req, res, next) => {
 	var query = 'update detalle_ventas set Precio_venta = ?, Cantidad_vendida = ?, Cantidad_devuelta = ? ';
 	    query = query  + 'where Id_venta =? and Id_producto = ?';
@@ -636,12 +622,7 @@ router.get('/get_cuentas_por_cobrar', (req, res, next) => {
    
 });
 
-
-
 //Insertar una nueva cuenta por cobrar
-
-//Insertar una nueva cuenta por cobrar
-
 router.post('/insert_cuentas_por_cobrar', (req, res, next) => {
 	var query = 'INSERT INTO cuentas_por_cobrar (Abono, Id_venta) ';
 	    query = query  + 'values (?,?)';
@@ -720,7 +701,7 @@ router.post('/insert_categoria', (req, res, next) => {
 	var query = 'insert into categorias (Descripcion_categoria)';
 	    query = query  + 'values (?)';
 	
-	var values = [req.body.Descripcion_categoria];
+	var values = [req.body.descripcion_categoria];
 
 	
 	con.query(query, values, (err, result, fields) => {
@@ -741,8 +722,8 @@ router.put('/update_categoria', (req, res, next) => {
 	    query = query  + ' where Id_categoria = ?';
 	
 	var values = [
-				  req.body.Descripcion_categoria,
-				  req.body.Id_categoria
+				  req.body.descripcion_categoria,
+				  req.body.id_categoria
 	            ];
 
 	
@@ -962,7 +943,6 @@ router.put('/update_modelo', (req, res, next) => {
 /*---------------------------------MANTENIMIENTO EMPLEADOS----------------------------------*/
 
 //consultar todos los empleados
-
 router.get('/get_empleados', (req, res, next) => {
     var query = 'SELECT em.Id_empleado, em.Identidad, em.Nombre,em.Apellido,em.Telefono,em.Email,em.Direccion,em.Salario,em.LoginID,em.Contrasenia,em.Fecha_nacimiento,em.Fecha_contratacion,em.Fecha_despido,e.Id_estatus,e.Descripcion_estatus,p.Id_puesto,p.Descripcion_puesto FROM empleados em JOIN estatus e ON e.Id_estatus = em.Id_estatus JOIN puestos p ON em.Id_puesto = p.Id_puesto;';
     con.query(query, (err, result, fields) => {
@@ -975,25 +955,22 @@ router.get('/get_empleados', (req, res, next) => {
 });
 
 //Insertar nuevo empleado
-
 router.post('/insert_empleados', (req, res, next) => {
-    /*var query = 'insert into empleados (Identidad, Nombre, Apellido, Telefono, Email, Direccion, Salario, LoginID, Contrasenia, Fecha_nacimiento, Fecha_contratacion, Fecha_despido, Id_puesto, Id_estatus) ';
-    	query= query + 'values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)';*/
     
-    var emp = {Identidad: req.body.Identidad,
-    			Nombre: req.body.Nombre, 
-    			Apellido: req.body.Apellido, 
-    			Telefono: req.body.Telefono, 
-    			Email: req.body.Email, 
-    			Direccion: req.body.Direccion, 
-    			Salario: req.body.Salario, 
-    			LoginID: req.body.LoginID, 
-    			Contrasenia: req.body.Contrasenia, 
-    			Fecha_nacimiento: req.body.Fecha_nacimiento, 
-    			Fecha_contratacion: req.body.Fecha_contratacion, 
-    			Fecha_despido: req.body.Fecha_despido, 
-    			Id_puesto: req.body.Id_puesto, 
-    			Id_estatus: req.body.Id_estatus
+    var emp = {Identidad: req.body.identidad,
+    			Nombre: req.body.nombre, 
+    			Apellido: req.body.apellido, 
+    			Telefono: req.body.telefono, 
+    			Email: req.body.email, 
+    			Direccion: req.body.direccion, 
+    			Salario: req.body.salario, 
+    			LoginID: req.body.loginid, 
+    			Contrasenia: req.body.contrasenia, 
+    			Fecha_nacimiento: req.body.fecha_nacimiento, 
+    			Fecha_contratacion: req.body.fecha_contratacion, 
+    			Fecha_despido: req.body.fecha_despido, 
+    			Id_puesto: req.body.id_puesto, 
+    			Id_estatus: req.body.id_estatus
 	};
 	const create_empleado = (emp) => {
 		var query = 'insert into empleados (Identidad, Nombre, Apellido, Telefono, Email, Direccion, Salario, LoginID, Contrasenia, Fecha_nacimiento, Fecha_contratacion, Fecha_despido, Id_puesto, Id_estatus) values (?)';
@@ -1015,27 +992,26 @@ router.post('/insert_empleados', (req, res, next) => {
 
 
 //Actualizar Empleado
-
 router.put('/update_empleados', (req, res, next) => {
     var query = 'update empleados set Identidad=?, Nombre=?, Apellido=?, Telefono=?, Email=?, Direccion=?, Salario=?, LoginID=?, Contrasenia=?, Fecha_nacimiento=?, Fecha_contratacion=?, Fecha_despido=?, Id_puesto=?, Id_estatus=? ';
     	query= query + 'where Id_empleado=?';
     
     var values=[
-    			req.body.Identidad,
-    			req.body.Nombre, 
-    			req.body.Apellido, 
-    			req.body.Telefono, 
-    			req.body.Email, 
-    			req.body.Direccion, 
-    			req.body.Salario, 
-    			req.body.LoginID, 
-    			req.body.Contrasenia, 
-    			req.body.Fecha_nacimiento, 
-    			req.body.Fecha_contratacion, 
-    			req.body.Fecha_despido, 
-    			req.body.Id_puesto, 
-    			req.body.Id_estatus,
-    			req.body.Id_empleado
+    			req.body.identidad,
+    			req.body.nombre, 
+    			req.body.apellido, 
+    			req.body.telefono, 
+    			req.body.email, 
+    			req.body.direccion, 
+    			req.body.salario, 
+    			req.body.loginid, 
+    			req.body.contrasenia, 
+    			req.body.fecha_nacimiento, 
+    			req.body.fecha_contratacion, 
+    			req.body.fecha_despido, 
+    			req.body.id_puesto, 
+    			req.body.id_estatus,
+    			req.body.id_empleado
     ];
 
     con.query(query, values, (err, result, fields) => {
@@ -1048,7 +1024,6 @@ router.put('/update_empleados', (req, res, next) => {
 });
 
 // Consultar estados.
-
 router.get('/get_estatus', (req, res, next) => {
     var query = 'SELECT * FROM estatus LIMIT 2;';
     con.query(query, (err, result, fields) => {
@@ -1061,7 +1036,6 @@ router.get('/get_estatus', (req, res, next) => {
 });
 
 // Consultar puestos.
-
 router.get('/get_puestos', (req, res, next) => {
     var query = 'SELECT * FROM puestos;';
     con.query(query, (err, result, fields) => {
@@ -1457,8 +1431,8 @@ router.put('/restar_producto_inventario', (req, res, next) => {
 	var query = 'update productos set Stock = Stock - ? where Id_producto = ? ';
 
 	var values = [
-				  req.body.Cantidad,
-				  req.body.Id_producto,
+				  req.body.cantidad,
+				  req.body.id_producto,
 	];
 	
 	con.query(query, values, (err, result, fields) => {
@@ -1576,8 +1550,8 @@ router.post('/insert_abono_venta', (req, res, next) => {
     	query = query + 'values (?, ?)';
     
 	var values = [
-					req.body.Abono, 
-					req.body.Id_venta
+					req.body.abono, 
+					req.body.id_venta
 				];
 
     con.query(query, values, (err, result, fields) => {
@@ -1598,11 +1572,11 @@ router.post('/insert_venta_normal', (req, res, next) => {
 	
 			var values = [
 						fechaAc,
-						req.body.Identidad,
-						req.body.ISV,
-						req.body.Id_estado_envio,
-						req.body.Id_estado_pago,
-						req.body.Id_tipo_pago,
+						req.body.identidad,
+						req.body.isv,
+						req.body.id_estado_envio,
+						req.body.id_estado_pago,
+						req.body.id_tipo_pago,
 		]
 		con.query(query,values,(err,result,fields)=>{
 			if(err){
@@ -1616,9 +1590,9 @@ router.post('/insert_venta_normal', (req, res, next) => {
 router.post('/insert_detalle_venta_normal',(req,res,next)=>{
 	var query='set @codigo = (select max(Id_venta) from ventas); INSERT INTO detalle_ventas (Id_venta, Id_producto, Precio_venta, Cantidad_vendida,Cantidad_devuelta) VALUES (@codigo,?,?,?,?)';
 	var values=[
-		req.body.Id_producto,
-		req.body.Precio_referencial_venta,
-		req.body.Cantidad_vendida,
+		req.body.id_producto,
+		req.body.precio_referencial_venta,
+		req.body.cantidad_vendida,
 		0
 	]
 	

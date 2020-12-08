@@ -16,8 +16,6 @@
 		<div class="contenedorTitulo">
 			<h2>| Mantenimiento Clientes</h2>
         </div>
-        
-        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
 
         <div class="contenedorInformativo">
             <form ngNativeValidate #form2>
@@ -26,7 +24,7 @@
                         <label>Nombre Cliente:</label>
                         <input type="text"
                             class="tamañoInput form-control"
-                            [(ngModel)]="Persona.Nombre_compania"
+                            [(ngModel)]="Persona.nombre_compania"
                             [ngModelOptions]="{standalone: true}"
                             pattern="^[A-Za-z0-9 ]{3,15}$"
                             minlength = "3"
@@ -37,7 +35,7 @@
                         <label>Ciudad: </label>
                         <select
                             class="tamañoInput form-control input"
-                            [(ngModel)]="Persona.Id_ciudad"
+                            [(ngModel)]="Persona.id_ciudad"
                             [ngModelOptions]="{standalone: true}"
                             required="true">
                             <option value="">Seleccione una ciudad</option>
@@ -48,7 +46,7 @@
                         <label>Tipo de Cliente: </label>
                         <select
                         class="tamañoInput form-control input"
-                            [(ngModel)]="Persona.Id_tipo_cliente"
+                            [(ngModel)]="Persona.id_tipo_cliente"
                             [ngModelOptions]="{standalone: true}"
                             required="true">
                             <option value="">Seleccione un tipo de cliente</option>
@@ -59,7 +57,7 @@
                         <label>Dirección: </label>
                         <input type="text"
                             class="tamañoInput form-control"
-                            [(ngModel)]="Persona.Direccion"
+                            [(ngModel)]="Persona.direccion"
                             [ngModelOptions]="{standalone: true}"
                             pattern="^[A-Za-z0-9.# ]{10,300}$"
                             minlength = "10"
@@ -73,7 +71,7 @@
                         <label>Nombre Contacto: </label>
                         <input type="text"
                             class="tamañoInput form-control"
-                            [(ngModel)]="Persona.Nombre_contacto"
+                            [(ngModel)]="Persona.nombre_contacto"
                             [ngModelOptions]="{standalone: true}"
                             pattern="^[a-zA-Z ]{3,20}"
                             minlength = "3"
@@ -84,7 +82,7 @@
                         <label>Apellido Contacto: </label>
                         <input type="text"
                             class="tamañoInput form-control"
-                            [(ngModel)]="Persona.Apellido_contacto"
+                            [(ngModel)]="Persona.apellido_contacto"
                             [ngModelOptions]="{standalone: true}"
                             pattern="^[a-zA-Z ]{4,20}"
                             minlength = "4"
@@ -95,7 +93,7 @@
                         <label>Telefono: </label>
                         <input type="tel"
                             class="tamañoInput form-control"
-                            [(ngModel)]="Persona.Telefono_contacto"
+                            [(ngModel)]="Persona.telefono_contacto"
                             [ngModelOptions]="{standalone: true}"
                             pattern="^[+ 0-9]{8}$"
                             minlength="8"
@@ -106,7 +104,7 @@
                         <label>Correo: </label>
                         <input type="email"
                             class="tamañoInput form-control"
-                            [(ngModel)]="Persona.Email_contacto"
+                            [(ngModel)]="Persona.email_contacto"
                             [ngModelOptions]="{standalone: true}"
                             minlength="11"
                             maxlength="64"
@@ -211,7 +209,7 @@
                 <label>Nombre Cliente:</label>
                 <input type="text"
                     class="form-control"
-                    [(ngModel)]="Persona.Nombre_compania"
+                    [(ngModel)]="Persona.nombre_compania"
                     [ngModelOptions]="{standalone: true}"
                     maxlength="15"
                     minlength="3"
@@ -222,7 +220,7 @@
                 <label>Ciudad: </label>
                 <select
                     class="form-control input"
-                    [(ngModel)]="Persona.Id_ciudad"
+                    [(ngModel)]="Persona.id_ciudad"
                     [ngModelOptions]="{standalone: true}"
                     required="true">
                     <option value="">Seleccione una ciudad</option>
@@ -233,7 +231,7 @@
                 <label>Tipo de Cliente: </label>
                 <select
                 class="form-control input"
-                    [(ngModel)]="Persona.Id_tipo_cliente"
+                    [(ngModel)]="Persona.id_tipo_cliente"
                     [ngModelOptions]="{standalone: true}"
                     required="true">
                     <option value="">Seleccione un tipo de cliente</option>
@@ -244,7 +242,7 @@
                 <label>Dirección: </label>
                 <input type="text"
                     class="form-control"
-                    [(ngModel)]="Persona.Direccion"
+                    [(ngModel)]="Persona.direccion"
                     [ngModelOptions]="{standalone: true}"
                     maxlength="300"
                     minlength="10"
@@ -253,7 +251,7 @@
                 <label>Nombre Contacto: </label>
                 <input type="text"
                     class="form-control"
-                    [(ngModel)]="Persona.Nombre_contacto"
+                    [(ngModel)]="Persona.nombre_contacto"
                     [ngModelOptions]="{standalone: true}"
                     maxlength="20"
                     minlength="4"
@@ -264,7 +262,7 @@
                 <label>Apellido Contacto: </label>
                 <input type="text"
                     class="form-control"
-                    [(ngModel)]="Persona.Apellido_contacto"
+                    [(ngModel)]="Persona.apellido_contacto"
                     [ngModelOptions]="{standalone: true}"
                     maxlength="20"
                     minlength="8"
@@ -275,7 +273,7 @@
                 <label>Telefono: </label>
                 <input type="text"
                     class="form-control"
-                    [(ngModel)]="Persona.Telefono_contacto"
+                    [(ngModel)]="Persona.telefono_contacto"
                     [ngModelOptions]="{standalone:true}"
                     maxlength="8"
                     minlength="8"
@@ -286,7 +284,7 @@
                 <label>Correo: </label>
                 <input type="email"
                     class="form-control"
-                    [(ngModel)]="Persona.Email_contacto"
+                    [(ngModel)]="Persona.email_contacto"
                     [ngModelOptions]="{standalone: true}"
                     minlength="11"
                     maxlength="64"
@@ -296,7 +294,7 @@
                 
                 <div class="modal-footer">
                     <button (click)="limpiar_cliente()" type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" >Cerrar</button>
-                    <button (click)="update_cliente(Persona.Id_cliente)" type="button" class="btn btn-primary btn-sm">Guardar</button>
+                    <button (click)="update_cliente(Persona.id_cliente)" type="button" class="btn btn-primary btn-sm">Guardar</button>
                    
                 </div>
 

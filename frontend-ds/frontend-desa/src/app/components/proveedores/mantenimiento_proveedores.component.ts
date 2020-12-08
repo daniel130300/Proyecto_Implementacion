@@ -19,14 +19,14 @@ export class GetProveedoresComponent {
     }
 
     public Proveedor = {
-        Id_proveedor: "",
-        Nombre_compania: "",
-        Direccion: "",
-        Nombre_contacto: "",
-        Apellido_contacto: "",
-        Telefono_contacto: "",
-        Email_contacto: "",
-        Id_ciudad: "",
+        id_proveedor: "",
+        nombre_compania: "",
+        direccion: "",
+        nombre_contacto: "",
+        apellido_contacto: "",
+        telefono_contacto: "",
+        email_contacto: "",
+        id_ciudad: "",
     }
 
     ngOnInit(){
@@ -38,14 +38,14 @@ export class GetProveedoresComponent {
 
         this.Proveedor = {
 
-            Id_proveedor: "",
-            Nombre_compania:"",
-            Direccion:"",
-            Nombre_contacto:"",
-            Apellido_contacto:"",
-            Telefono_contacto:"",
-            Email_contacto: "",
-            Id_ciudad: "",
+            id_proveedor: "",
+            nombre_compania:"",
+            direccion:"",
+            nombre_contacto:"",
+            apellido_contacto:"",
+            telefono_contacto:"",
+            email_contacto: "",
+            id_ciudad: "",
         }   
     }
 
@@ -65,14 +65,14 @@ export class GetProveedoresComponent {
             () => {
 
                     this.Proveedor = {
-                    Id_proveedor: "",
-                    Nombre_compania:"",
-                    Direccion:"",
-                    Nombre_contacto:"",
-                    Apellido_contacto:"",
-                    Telefono_contacto:"",
-                    Email_contacto: "",
-                    Id_ciudad: "",
+                    id_proveedor: "",
+                    nombre_compania:"",
+                    direccion:"",
+                    nombre_contacto:"",
+                    apellido_contacto:"",
+                    telefono_contacto:"",
+                    email_contacto: "",
+                    id_ciudad: "",
                 }
 
                 this.get_proveedores();
@@ -116,14 +116,14 @@ export class GetProveedoresComponent {
     {
         this.Proveedor = 
         {
-            Id_proveedor: proveedor.Id_proveedor,
-            Nombre_compania:proveedor.Nombre_compania,
-            Direccion:proveedor.Direccion,
-            Nombre_contacto:proveedor.Nombre_contacto,
-            Apellido_contacto:proveedor.Apellido_contacto,
-            Telefono_contacto:proveedor.Telefono_contacto,
-            Email_contacto:proveedor.Email_contacto,
-            Id_ciudad: proveedor.Id_ciudad
+            id_proveedor: proveedor.Id_proveedor,
+            nombre_compania:proveedor.Nombre_compania,
+            direccion:proveedor.Direccion,
+            nombre_contacto:proveedor.Nombre_contacto,
+            apellido_contacto:proveedor.Apellido_contacto,
+            telefono_contacto:proveedor.Telefono_contacto,
+            email_contacto:proveedor.Email_contacto,
+            id_ciudad: proveedor.Id_ciudad
         }      
     }
 
@@ -139,14 +139,14 @@ export class GetProveedoresComponent {
    
                 this.Proveedor = 
                 {
-                    Id_proveedor: "",
-                    Nombre_compania:"",
-                    Direccion:"",
-                    Nombre_contacto:"",
-                    Apellido_contacto:"",
-                    Telefono_contacto:"",
-                    Email_contacto: "",
-                    Id_ciudad: ""
+                    id_proveedor: "",
+                    nombre_compania:"",
+                    direccion:"",
+                    nombre_contacto:"",
+                    apellido_contacto:"",
+                    telefono_contacto:"",
+                    email_contacto: "",
+                    id_ciudad: ""
                 }
                 this.get_proveedores();
             }
@@ -158,8 +158,9 @@ export class GetProveedoresComponent {
         var response;
         var load = 
         {
-            Id_proveedor:id_proveedor
+            id_proveedor:id_proveedor
         }
+        console.log(id_proveedor);
         this.service.delete_proveedor(load).subscribe
         (
             data=>response = data,

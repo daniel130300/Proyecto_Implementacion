@@ -13,20 +13,15 @@ import {Router} from '@angular/router'
 
 export class GetCajasComponent { 
 
-    public LoginID:any[];
+    public loginid:any[];
     constructor(public service:AppService, private router:Router) {
-        this.LoginID = [];
+        this.loginid = [];
     }
     ngOnInit(){
-        //console.log(this.service.get_session());
-        //console.log(this.service.get_usuariologueado());
-        this.LoginID = this.service.get_usuariologueado();
-        //console.log(this.LoginID);
+        this.loginid = this.service.get_usuariologueado();
     }
     salir(){
         this.service.reset_session();
         this.router.navigateByUrl('/login');
-        //console.log(this.service.get_session());
-        //console.log(this.service.get_usuariologueado());
     }  
 } 

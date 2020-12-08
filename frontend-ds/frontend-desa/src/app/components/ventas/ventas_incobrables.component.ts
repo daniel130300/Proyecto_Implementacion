@@ -1,7 +1,3 @@
-// Aqui codificara Melvin
-
-//Aqui codifica Marcela
-
 import { Component }  from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { getClosureSafeProperty } from '@angular/core/src/util/property';
@@ -28,23 +24,23 @@ export class GetVentasIncobrablesComponent {
     }
 
     public VentasIncobrables = {
-        Id_venta: "",
-        Cod_factura: "",
-        Fecha_venta: "",
-        Fecha_envio: "",
-        Fecha_entrega: "",
-        Subtotal: "",
-        Descuento: "",
-        Isv: "",
-        Total:"",
-        Identidad: "",
-        Id_cliente: "",
-        Nombre_compania: "",
-        Nombre_contacto: "",
-        Apellido_contacto: "",
-        Telefono_contacto: "",
-        Email_contacto: "",
-        Descripcion_estatus:""
+        id_venta: "",
+        cod_factura: "",
+        fecha_venta: "",
+        fecha_envio: "",
+        fecha_entrega: "",
+        subtotal: "",
+        descuento: "",
+        isv: "",
+        total:"",
+        identidad: "",
+        id_cliente: "",
+        nombre_compania: "",
+        nombre_contacto: "",
+        apellido_contacto: "",
+        telefono_contacto: "",
+        email_contacto: "",
+        descripcion_estatus:""
     }
 
     public busqueda = {
@@ -86,7 +82,7 @@ export class GetVentasIncobrablesComponent {
         var rows = [];
         
         this.listado_ventas_incobrables.forEach(element => {      
-            var temp = [element.Id_venta, this.datepipe.transform(element.Fecha_venta,'yyyy-MM-dd'), this.datepipe.transform(element.Fecha_envio,'yyyy-MM-dd'), this.datepipe.transform(element.Fecha_entrega,'yyyy-MM-dd'), element.Subtotal, element.Descuento, element.Isv, element.Total, element.Identidad, element.Nombre_compania, element.Nombre_contacto, element.Apellido_contacto, element.Telefono_contacto, element.Telefono_contacto, element.Email_contacto];
+            var temp = [element.id_venta, this.datepipe.transform(element.fecha_venta,'yyyy-MM-dd'), this.datepipe.transform(element.fecha_envio,'yyyy-MM-dd'), this.datepipe.transform(element.fecha_entrega,'yyyy-MM-dd'), element.subtotal, element.descuento, element.isv, element.total, element.identidad, element.nombre_compania, element.nombre_contacto, element.apellido_contacto, element.telefono_contacto, element.telefono_contacto, element.email_contacto];
             rows.push(temp);
         });
 
