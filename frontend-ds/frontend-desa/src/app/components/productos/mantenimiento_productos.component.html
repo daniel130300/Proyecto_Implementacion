@@ -24,9 +24,9 @@
                         <div class="input-group">
                             <select
                                 class = "tamaño form-control col-sm-8"
-                                [(ngModel)] = "Id_categoria"
+                                [(ngModel)] = "id_categoria"
                                 [ngModelOptions] = "{standalone:true}"
-                                (change)="get_subcategoria_filtrado(Id_categoria)"
+                                (change)="get_subcategoria_filtrado(id_categoria)"
                                 required="true"
                             >
                             <option value="">Seleccione una categoria </option>
@@ -52,7 +52,7 @@
                         <div class="input-group">
                             <select
                                 class = "tamaño form-control col-sm-8"
-                                [(ngModel)] = "Id_subcategoria"
+                                [(ngModel)] = "id_subcategoria"
                                 [ngModelOptions] = "{standalone:true}"
                                 required="true"
                             >
@@ -77,7 +77,7 @@
                         <div class="input-group">
                             <select
                                 class = "tamaño form-control col-sm-8"
-                                [(ngModel)] = "Id_marca"
+                                [(ngModel)] = "id_marca"
                                 [ngModelOptions] = "{standalone:true}"
                                 (change)="get_modelo_filtrado()"
                                 required="true"
@@ -103,7 +103,7 @@
                         <div class="input-group">
                             <select
                                 class = "tamaño form-control col-sm-8"
-                                [(ngModel)] = "Producto.Id_modelo"
+                                [(ngModel)] = "Producto.id_modelo"
                                 [ngModelOptions] = "{standalone:true}"
                                 (change)="get_modelo_filtrado()"
                                 required="true"
@@ -127,7 +127,7 @@
                         <div class="input-group">
                             <select
                                 class = "tamaño form-control col-sm-8"
-                                [(ngModel)] = "prove.Id_proveedor"
+                                [(ngModel)] = "prove.id_proveedor"
                                 [ngModelOptions] = "{standalone:true}"
                                 required="true"
                             >
@@ -151,7 +151,7 @@
                     <div class="col-sm-8">
                         <input type = "text" 
                             class = "tamañoInput form-control"
-                            [(ngModel)] = "Producto.Descripcion_producto"
+                            [(ngModel)] = "Producto.descripcion_producto"
                             [ngModelOptions] = "{standalone:true}"
                             required="true"
                             minlength="3"
@@ -167,7 +167,7 @@
                 <div class="col-sm-8">
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Producto.Talla"
+                        [(ngModel)] = "Producto.talla"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="2"
                         maxlength="2"
@@ -181,7 +181,7 @@
                 <div class="col-sm-8">
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Producto.Color"
+                        [(ngModel)] = "Producto.color"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="3"
                         maxlength="15"
@@ -196,7 +196,7 @@
                 <div class="col-sm-8">
                     <input type = "text" 
                             class = "tamañoInput form-control"
-                            [(ngModel)] = "Producto.Stock"
+                            [(ngModel)] = "Producto.stock"
                             [ngModelOptions] = "{standalone:true}"
                             minlength="2"
                             maxlength="4"
@@ -211,7 +211,7 @@
                 <div class="col-sm-8">
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Producto.Precio_referencial_venta"
+                        [(ngModel)] = "Producto.precio_referencial_venta"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="3"
                         maxlength="4"
@@ -226,7 +226,7 @@
                 <div class="col-sm-8">
                     <input type = "text" 
                             class = "tamañoInput form-control"
-                            [(ngModel)] = "Producto.Precio_referencial_compra"
+                            [(ngModel)] = "Producto.precio_referencial_compra"
                             [ngModelOptions] = "{standalone:true}"
                             minlength="3"
                             maxlength="4"
@@ -241,7 +241,7 @@
                 <div class="col-sm-8">
                     <input type = "text" 
                             class = "tamañoInput form-control"
-                            [(ngModel)] = "Producto.Punto_reorden"
+                            [(ngModel)] = "Producto.punto_reorden"
                             [ngModelOptions] = "{standalone:true}"
                             minlength="1"
                             maxlength="3"
@@ -250,7 +250,7 @@
                     >
                 </div>
                 <p></p>
-                <button (click)="form.checkValidity() ? insertar_producto() : null" (click) = "form.checkValidity ? insertar_producto() : null" class="btn btn-primary">Guardar Producto</button>
+                <button (click)="form.checkValidity() ? insertar_producto() : null" class="btn btn-primary">Guardar Producto</button>
             </div>
         </form> 
         </div>
@@ -339,7 +339,7 @@
                     <label>Descripcion: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Producto.Descripcion_producto"
+                        [(ngModel)] = "Producto.descripcion_producto"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="6"
                         maxlength="50"
@@ -350,7 +350,7 @@
                     <label>Talla: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Producto.Talla"
+                        [(ngModel)] = "Producto.talla"
                         [ngModelOptions] = "{standalone:true}"
                         pattern="^[0-9]+$"
                     > 
@@ -358,7 +358,7 @@
                     <label>Color: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Producto.Color"
+                        [(ngModel)] = "Producto.color"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="3"
                         maxlength="15"
@@ -369,7 +369,7 @@
                     <label>Stock: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Producto.Stock"
+                        [(ngModel)] = "Producto.stock"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="2"
                         maxlength="4"
@@ -380,7 +380,7 @@
                     <label>Precio Referencial Venta: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Producto.Precio_referencial_venta"
+                        [(ngModel)] = "Producto.precio_referencial_venta"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="3"
                         maxlength="4"
@@ -391,7 +391,7 @@
                     <label>Precio Referencial Compra: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Producto.Precio_referencial_compra"
+                        [(ngModel)] = "Producto.precio_referencial_compra"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="3"
                         maxlength="4"
@@ -402,7 +402,7 @@
                     <label>Punto de Reorden: </label>
                     <input type = "text" 
                         class = "form-control"
-                        [(ngModel)] = "Producto.Punto_reorden"
+                        [(ngModel)] = "Producto.punto_reorden"
                         [ngModelOptions] = "{standalone:true}"
                         minlength="1"
                         maxlength="3"
@@ -413,9 +413,9 @@
                     <label>Categoria: </label>
                     <select
                         class = "form-control input"
-                        [(ngModel)] = "Id_categoria"
+                        [(ngModel)] = "id_categoria"
                         [ngModelOptions] = "{standalone:true}"
-                        (change)="get_subcategoria_filtrado(Id_categoria)"
+                        (change)="get_subcategoria_filtrado(id_categoria)"
                         required="true"
                     >
                     <option value="">Seleccione una categoria </option>
@@ -427,7 +427,7 @@
                     <label>Subcategoria: </label>
                     <select
                         class = "form-control input"
-                        [(ngModel)] = "Id_subcategoria"
+                        [(ngModel)] = "id_subcategoria"
                         [ngModelOptions] = "{standalone:true}"
                         required="true"
                     >
@@ -441,7 +441,7 @@
                     <label>Marca: </label>
                     <select
                     class = "form-control input"
-                    [(ngModel)] = "Id_marca"
+                    [(ngModel)] = "id_marca"
                     [ngModelOptions] = "{standalone:true}"
                     required="true"
                     (change)="get_modelo_filtrado()"
@@ -456,7 +456,7 @@
                     <label>Modelo: </label>
                     <select
                         class = "form-control input"
-                        [(ngModel)] = "Producto.Id_modelo"
+                        [(ngModel)] = "Producto.id_modelo"
                         [ngModelOptions] = "{standalone:true}"
                         required="true"
                     >
@@ -468,7 +468,7 @@
                     <label>Proveedor: </label>
                     <select
                     class = "form-control input"
-                    [(ngModel)] = "prove.Id_proveedor"
+                    [(ngModel)] = "prove.id_proveedor"
                     [ngModelOptions] = "{standalone:true}"
                     required="true"
                 
@@ -482,7 +482,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" (click) = "limpiaralv()">Cerrar</button>
-                <button (click) = "update_producto(Producto.Id_producto)" type="button" class="btn btn-primary btn-sm">Guardar</button>
+                <button (click) = "update_producto(Producto.id_producto)" type="button" class="btn btn-primary btn-sm">Guardar</button>
         
             </div>
         </div>

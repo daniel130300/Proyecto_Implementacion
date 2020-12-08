@@ -12,7 +12,7 @@ var con = mysql.createPool({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "Daniel100",
+    password: "emma63194",
     database: 'variedades_kyd',
     insecureAuth: true,
     multipleStatements: true
@@ -172,7 +172,7 @@ router.get('/get_productos_proveedor', (req, res, next) => {
 });
 
 
-/*---------------------------------MANTENIMIENTO CIUDADES----------------------------------*/
+/---------------------------------MANTENIMIENTO CIUDADES----------------------------------/
 
 // Consultar todas las ciudades.
 
@@ -195,8 +195,8 @@ router.post('/insert_ciudad', (req, res, next) => {
     var query = 'INSERT INTO ciudades (Nombre_ciudad, Id_departamento) VALUES (?, ?)';
     
     var values = [
-        req.body.Nombre_ciudad,
-        req.body.Id_departamento
+        req.body.nombre_ciudad,
+        req.body.id_departamento
     ];
 
     con.query(query, values, (err, result, fields) => {
@@ -214,9 +214,9 @@ router.put('/update_ciudad', (req, res, next) => {
     var query = 'UPDATE ciudades SET Nombre_ciudad = ?, Id_departamento = ? WHERE Id_ciudad = ?';
     
     var values = [
-        req.body.Nombre_ciudad,
-        req.body.Id_departamento,
-        req.body.Id_ciudad
+        req.body.nombre_ciudad,
+        req.body.id_departamento,
+        req.body.id_ciudad
     ];
 
     con.query(query, values, (err, result, fields) => {
@@ -356,14 +356,14 @@ router.post ('/Insert_productos', (req, res, next) => {
     var query = 'insert into productos (Descripcion_producto, Talla, Color, Stock, Precio_referencial_venta, Precio_referencial_compra, Punto_reorden, Id_modelo)';
         query=query+ 'values (?,?,?,?,?,?,?,?)';
     var values=[
-        req.body.Descripcion_producto,
-        req.body.Talla,
-        req.body.Color,
-        req.body.Stock,
-        req.body.Precio_referencial_venta,
-        req.body.Precio_referencial_compra,
-        req.body.Punto_reorden,
-        req.body.Id_modelo
+        req.body.descripcion_producto,
+        req.body.talla,
+        req.body.color,
+        req.body.stock,
+        req.body.precio_referencial_venta,
+        req.body.precio_referencial_compra,
+        req.body.punto_reorden,
+        req.body.id_modelo
     ];
     con.query(query, values, (err, result, fields) => {
         if(err){
@@ -380,15 +380,15 @@ router.put ('/update_productos', (req, res, next) => {
     var query = 'update productos set Descripcion_producto = ?, Talla = ? , Color = ?, Stock = ?, Precio_referencial_venta = ?, Precio_referencial_compra = ?, Punto_reorden = ?, Id_modelo = ?';
         query = query + ' where Id_producto = ?';
     var values=[
-        req.body.Descripcion_producto,
-        req.body.Talla,
-        req.body.Color,
-        req.body.Stock,
-        req.body.Precio_referencial_venta,
-        req.body.Precio_referencial_compra,
-        req.body.Punto_reorden,
-        req.body.Id_modelo,
-        req.body.Id_producto
+        req.body.descripcion_producto,
+        req.body.talla,
+        req.body.color,
+        req.body.stock,
+        req.body.precio_referencial_venta,
+        req.body.precio_referencial_compra,
+        req.body.punto_reorden,
+        req.body.id_modelo,
+        req.body.id_producto
     ];
     con.query(query, values, (err, result, fields) => {
         if(err){
@@ -403,7 +403,7 @@ router.put ('/update_productos', (req, res, next) => {
 
 router.delete('/delete_productos', (req, res, next) => {
     var query= 'update productos set Estado_logico = 0 where Id_producto = ?';
-   var values=[req.query.Id_producto];
+   var values=[req.query.id_producto];
     con.query(query, values, (err, result, fields) => {
         if(err){
             next(err);
@@ -418,8 +418,8 @@ router.delete('/delete_productos', (req, res, next) => {
 
 router.get('/get_modelo_filtrado', (req, res, next) => {
 	var query= 'select a.Id_modelo, a.Descripcion_modelo from modelos a where a.Id_marca=? and a.Id_subcategoria=?';
-		var values = [req.query.Id_marca,
-			req.query.Id_subcategoria];
+		var values = [req.query.id_marca,
+			req.query.id_subcategoria];
     con.query(query, values, (err, result, fields) => {
         if(err){
             next(err);
@@ -432,7 +432,7 @@ router.get('/get_modelo_filtrado', (req, res, next) => {
 
 router.post('/insert_productos_proveedores',(req,res,next)=>{
 	var query='set @codigo=(select max(Id_producto) from productos); INSERT INTO productos_proveedores (Id_producto, Id_proveedor) VALUES (@codigo,?)';
-	var values=[req.body.Id_proveedor]
+	var values=[req.body.id_proveedor]
 		con.query(query,values,(err,result,fields)=>{
 			if(err){
 				next(err);
@@ -445,8 +445,8 @@ router.post('/insert_productos_proveedores',(req,res,next)=>{
 router.put('/update_productos_proveedores', (req, res, next) => {
 	var query = 'update productos_proveedores set Id_proveedor = ? where Id_producto = ?';
 	var values = [
-					req.body.Id_proveedor,
-					req.body.Id_producto
+					req.body.id_proveedor,
+					req.body.id_producto
 				];
 
 	con.query(query, values, (err, result, fields) => {
@@ -462,7 +462,7 @@ router.put('/update_productos_proveedores', (req, res, next) => {
 
 router.get('/get_subcategoria_filtrado', (req, res, next) => {
 	var query= 'select a.Id_subcategoria, a.Descripcion_subcategoria from subcategorias a inner join categorias b on a.Id_categoria=b.Id_categoria where b.Id_categoria = ?';
-		var values = [req.query.Id_categoria];
+		var values = [req.query.id_categoria];
     con.query(query, values, (err, result, fields) => {
         if(err){
             next(err);
@@ -1550,8 +1550,8 @@ router.post('/insert_abono_venta', (req, res, next) => {
     	query = query + 'values (?, ?)';
     
 	var values = [
-					req.body.Abono, 
-					req.body.Id_venta
+					req.body.abono, 
+					req.body.id_venta
 				];
 
     con.query(query, values, (err, result, fields) => {

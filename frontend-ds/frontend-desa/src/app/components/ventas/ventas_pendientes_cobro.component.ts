@@ -18,12 +18,12 @@ const swal = require('sweetalert2');
 export class GetVentasPendientesCobroComponent {
     public listado_ventas_pendientes_cobro: any[];
     public listado_estados: any[];
-    public Id_venta: any;
-    public Id_estado: any = "";
-    public Cantidad_abono: any;
-    public Total_venta: any;
-    public Total_abonado: any;
-    public Cantidad_pendiente: any;
+    public id_venta: any;
+    public id_estado: any = "";
+    public cantidad_abono: any;
+    public total_venta: any;
+    public total_abonado: any;
+    public cantidad_pendiente: any;
     
     term: any[];
 
@@ -89,8 +89,8 @@ export class GetVentasPendientesCobroComponent {
     }
 
     public Abono_venta = {
-        Id_venta: "",
-        Abono: ""
+        id_venta: "",
+        abono: ""
     }
 
     get_ventas_pendientes_cobro(){
@@ -137,24 +137,25 @@ export class GetVentasPendientesCobroComponent {
 
     pasarIdVenta(Venta)
     {
-       this.Id_venta = Venta.Id_venta;
-       this.Total_venta = Venta.Total ;
-       this.Total_abonado = Venta.Cantidad_abonada;
-       this.Cantidad_pendiente = this.Total_venta - this.Total_abonado; 
+       this.id_venta = Venta.Id_venta;
+       this.total_venta = Venta.Total ;
+       this.total_abonado = Venta.Cantidad_abonada;
+       this.cantidad_pendiente = this.total_venta - this.total_abonado; 
     }
 
     Asignar_datos_abono()
     {
         this.Abono_venta = 
         {
-            Id_venta: this.Id_venta,
-            Abono: this.Cantidad_abono
+            id_venta: this.id_venta,
+            abono: this.cantidad_abono
         }   
     }
 
     insertar_abono_venta(){
         var response;
         this.Asignar_datos_abono();
+        console.log(this.Abono_venta);
         this.service.insertar_abono_venta(this.Abono_venta).subscribe(
             data=>response = data,
             err => {
@@ -170,7 +171,7 @@ export class GetVentasPendientesCobroComponent {
 
     InsertarAbonoValidado()
     {
-        if (this.Cantidad_abono <= this.Cantidad_pendiente && this.Cantidad_abono >0)
+        if (this.cantidad_abono <= this.cantidad_pendiente && this.cantidad_abono >0)
         {   
             this.insertar_abono_venta();
             swal.fire({
@@ -189,12 +190,12 @@ export class GetVentasPendientesCobroComponent {
 
     LimpiarInputs()
     {
-        this.Id_venta = "";
-        this.Id_estado = "";
-        this.Cantidad_abono = "";
-        this.Total_venta = "";
-        this.Total_abonado = "";
-        this.Cantidad_pendiente = "";
+        this.id_venta = "";
+        this.id_estado = "";
+        this.cantidad_abono = "";
+        this.total_venta = "";
+        this.total_abonado = "";
+        this.cantidad_pendiente = "";
     }
 
 }

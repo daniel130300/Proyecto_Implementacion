@@ -18,9 +18,9 @@ export class GetProductosComponent {
     public listado_marcas: any[];
     public listado_modelos: any[];
     public listado_proveedores: any[];
-    public Id_categoria: any="";
-    public Id_subcategoria: any="";
-    public Id_marca: any="";
+    public id_categoria: any="";
+    public id_subcategoria: any="";
+    public id_marca: any="";
     term: any[];
     
     constructor(public service:AppService, private router:Router){
@@ -29,28 +29,27 @@ export class GetProductosComponent {
     }
 
     public Producto = {
-        Id_producto: "", 
-        Descripcion_producto: "", 
-        Talla: null, 
-        Color: "", 
-        Stock: "", 
-        Precio_referencial_venta: "", 
-        Precio_referencial_compra: "", 
-        Punto_reorden: "",
-        Id_modelo: ""
+        id_producto: "", 
+        descripcion_producto: "", 
+        talla: null, 
+        color: "", 
+        stock: "", 
+        precio_referencial_venta: "", 
+        precio_referencial_compra: "", 
+        punto_reorden: "",
+        id_modelo: ""
     }
-    public Categ = { Id_subcategoria: "" }
+    public Categ = { id_subcategoria: "" }
 
-    public prove = { Id_proveedor: ""}
+    public prove = { id_proveedor: ""}
 
-    public modelos={
-        
-        Id_marca:"",
-        Id_subcategoria:""
+    public modelos={    
+        id_marca:"",
+        id_subcategoria:""
     }
     public actualizar={
-        Id_producto:"",
-        Id_proveedor:""
+        id_producto:"",
+        id_proveedor:""
     }
     
     redirigir_categorias(){
@@ -157,7 +156,7 @@ export class GetProductosComponent {
     insertar_producto(){
         var response;
 
-        if(this.Producto.Descripcion_producto!="" && this.Producto.Talla!="" && this.Producto.Color!="" && this.Producto.Stock!="" && this.Producto.Precio_referencial_venta!="" && this.Producto.Precio_referencial_compra!="" && this.Producto.Punto_reorden!="" && this.Producto.Id_modelo!="")
+        if(this.Producto.descripcion_producto!="" && this.Producto.talla!="" && this.Producto.color!="" && this.Producto.stock!="" && this.Producto.precio_referencial_venta!="" && this.Producto.precio_referencial_compra!="" && this.Producto.punto_reorden!="" && this.Producto.id_modelo!="")
         {
             this.service.insertar_producto(this.Producto).subscribe(
                 data=>response = data,
@@ -167,15 +166,15 @@ export class GetProductosComponent {
                 ()=>{
 
                     this.Producto = {
-                            Id_producto: "", 
-                            Descripcion_producto: "", 
-                            Talla: "", 
-                            Color: "", 
-                            Stock: "", 
-                            Precio_referencial_venta: "", 
-                            Precio_referencial_compra: "", 
-                            Punto_reorden: "",
-                            Id_modelo: ""
+                            id_producto: "", 
+                            descripcion_producto: "", 
+                            talla: "", 
+                            color: "", 
+                            stock: "", 
+                            precio_referencial_venta: "", 
+                            precio_referencial_compra: "", 
+                            punto_reorden: "",
+                            id_modelo: ""
                     }
                     this.get_productos();
                 }
@@ -187,14 +186,14 @@ export class GetProductosComponent {
                     console.log("Error al consultar servicio"); 
                 },
                 ()=>{
-                    this.prove = { Id_proveedor: ""}
+                    this.prove = { id_proveedor: ""}
                     this.get_productos();
                 }
             );
 
-            this.Id_categoria = "";
-            this.Id_subcategoria = "";
-            this.Id_marca = "";
+            this.id_categoria = "";
+            this.id_subcategoria = "";
+            this.id_marca = "";
             
             this.get_productos();
 
@@ -210,8 +209,8 @@ export class GetProductosComponent {
     {
         var response;
         this.actualizar={
-            Id_proveedor:this.prove.Id_proveedor,
-            Id_producto:this.Producto.Id_producto
+            id_proveedor:this.prove.id_proveedor,
+            id_producto:this.Producto.id_producto
         }
         this.service.update_producto_proveedor(this.actualizar).subscribe(
             data=>response = data,
@@ -220,8 +219,8 @@ export class GetProductosComponent {
             },
             ()=>{
                 this.actualizar={
-                    Id_proveedor:"",
-                    Id_producto:""
+                    id_proveedor:"",
+                    id_producto:""
                     
                 }
                 this.get_proveedores();
@@ -243,7 +242,7 @@ export class GetProductosComponent {
     }
 
     pasarproveedor(prove){
-        this.prove = { Id_proveedor: prove.Id_proveedor}
+        this.prove = { id_proveedor: prove.Id_proveedor}
     }
     
     pasarDatosProducto(producto)
@@ -254,21 +253,21 @@ export class GetProductosComponent {
 
         this.Producto = 
         {
-            Id_producto: producto.Id_producto, 
-            Descripcion_producto: producto.Descripcion_producto, 
-            Talla: producto.Talla, 
-            Color: producto.Color, 
-            Stock: producto.Stock, 
-            Precio_referencial_venta: producto.Precio_referencial_venta, 
-            Precio_referencial_compra: producto.Precio_referencial_compra, 
-            Punto_reorden: producto.Punto_reorden,
-            Id_modelo: producto.Id_modelo
+            id_producto: producto.Id_producto, 
+            descripcion_producto: producto.Descripcion_producto, 
+            talla: producto.Talla, 
+            color: producto.Color, 
+            stock: producto.Stock, 
+            precio_referencial_venta: producto.Precio_referencial_venta, 
+            precio_referencial_compra: producto.Precio_referencial_compra, 
+            punto_reorden: producto.Punto_reorden,
+            id_modelo: producto.Id_modelo
         }
 
-        this.Id_categoria = producto.Id_categoria;
-        this.Id_subcategoria = producto.Id_subcategoria;
-        this.Id_marca = producto.Id_marca;
-        this.prove.Id_proveedor = producto.Id_proveedor;
+        this.id_categoria = producto.Id_categoria;
+        this.id_subcategoria = producto.Id_subcategoria;
+        this.id_marca = producto.Id_marca;
+        this.prove.id_proveedor = producto.Id_proveedor;
     }
 
 
@@ -280,20 +279,20 @@ export class GetProductosComponent {
 
         this.Producto = 
         {
-            Id_producto: this.Producto.Id_producto, 
-            Descripcion_producto: this.Producto.Descripcion_producto, 
-            Talla: this.Producto.Talla, 
-            Color: this.Producto.Color, 
-            Stock: this.Producto.Stock, 
-            Precio_referencial_venta: this.Producto.Precio_referencial_venta, 
-            Precio_referencial_compra: this.Producto.Precio_referencial_compra, 
-            Punto_reorden: this.Producto.Punto_reorden,
-            Id_modelo: this.Producto.Id_modelo
+            id_producto: this.Producto.id_producto, 
+            descripcion_producto: this.Producto.descripcion_producto, 
+            talla: this.Producto.talla, 
+            color: this.Producto.color, 
+            stock: this.Producto.stock, 
+            precio_referencial_venta: this.Producto.precio_referencial_venta, 
+            precio_referencial_compra: this.Producto.precio_referencial_compra, 
+            punto_reorden: this.Producto.punto_reorden,
+            id_modelo: this.Producto.id_modelo
         }
 
-        if(this.Producto.Descripcion_producto == "" || this.Producto.Color == "" || 
-           this.Producto.Stock == "" || this.Producto.Precio_referencial_venta == "" || 
-           this.Producto.Precio_referencial_compra == "" || this.Producto.Punto_reorden == "" || this.Producto.Id_modelo == "")
+        if(this.Producto.descripcion_producto == "" || this.Producto.color == "" || 
+           this.Producto.stock == "" || this.Producto.precio_referencial_venta == "" || 
+           this.Producto.precio_referencial_compra == "" || this.Producto.punto_reorden == "" || this.Producto.id_modelo == "")
         {
             swal.fire({
                 title: "Es necesario que los campos no queden vacios. Vuelve a intentarlo.",
@@ -303,17 +302,17 @@ export class GetProductosComponent {
         }
         else
         {
-            if(regexpLetterNumbers.test(this.Producto.Descripcion_producto) == false || regexpLetter.test(this.Producto.Color) == false)
+            if(regexpLetterNumbers.test(this.Producto.descripcion_producto) == false || regexpLetter.test(this.Producto.color) == false)
             {
                 swal.fire({
                     title: "Solo se permiten letras. Vuelve a intentarlo",
                     icon: 'error'
                 });
             }
-            else if(regexpNumber.test(this.Producto.Stock) == false || 
-                    regexpNumber.test(this.Producto.Precio_referencial_venta) == false || 
-                    regexpNumber.test(this.Producto.Precio_referencial_compra) == false || 
-                    regexpNumber.test(this.Producto.Punto_reorden) == false )
+            else if(regexpNumber.test(this.Producto.stock) == false || 
+                    regexpNumber.test(this.Producto.precio_referencial_venta) == false || 
+                    regexpNumber.test(this.Producto.precio_referencial_compra) == false || 
+                    regexpNumber.test(this.Producto.punto_reorden) == false )
             {
                 swal.fire({
                     title: "Solo se permiten numeros. Vuelve a intentarlo.",
@@ -337,8 +336,8 @@ export class GetProductosComponent {
                 );
 
                 this.actualizar={
-                    Id_proveedor:this.prove.Id_proveedor,
-                    Id_producto:this.Producto.Id_producto
+                    id_proveedor:this.prove.id_proveedor,
+                    id_producto:this.Producto.id_producto
                 }
 
                 this.service.update_producto_proveedor(this.actualizar).subscribe(
@@ -349,8 +348,8 @@ export class GetProductosComponent {
                     ()=>{
                         this.actualizar=
                         {
-                            Id_proveedor:"",
-                            Id_producto:""
+                            id_proveedor:"",
+                            id_producto:""
                         }
                         this.get_productos();
                     }
@@ -360,21 +359,21 @@ export class GetProductosComponent {
 
                 this.Producto = 
                 {
-                    Id_producto: "", 
-                    Descripcion_producto: "", 
-                    Talla: "", 
-                    Color: "", 
-                    Stock: "", 
-                    Precio_referencial_venta: "", 
-                    Precio_referencial_compra: "", 
-                    Punto_reorden: "",
-                    Id_modelo: ""
+                    id_producto: "", 
+                    descripcion_producto: "", 
+                    talla: "", 
+                    color: "", 
+                    stock: "", 
+                    precio_referencial_venta: "", 
+                    precio_referencial_compra: "", 
+                    punto_reorden: "",
+                    id_modelo: ""
                 }
 
-                this.Id_categoria = "";
-                this.Id_subcategoria = "";
-                this.Id_marca = "";
-                this.prove.Id_proveedor = "";
+                this.id_categoria = "";
+                this.id_subcategoria = "";
+                this.id_marca = "";
+                this.prove.id_proveedor = "";
 
                 swal.fire({
 
@@ -417,26 +416,26 @@ export class GetProductosComponent {
         
         this.Producto = 
         {
-            Id_producto: "", 
-            Descripcion_producto: "", 
-            Talla: "", 
-            Color: "", 
-            Stock: "", 
-            Precio_referencial_venta: "", 
-            Precio_referencial_compra: "", 
-            Punto_reorden: "",
-            Id_modelo: ""
+            id_producto: "", 
+            descripcion_producto: "", 
+            talla: "", 
+            color: "", 
+            stock: "", 
+            precio_referencial_venta: "", 
+            precio_referencial_compra: "", 
+            punto_reorden: "",
+            id_modelo: ""
         }
         
-        this.Id_categoria = "";
-        this.Id_subcategoria = "";
-        this.Id_marca = "";
-        this.prove.Id_proveedor = "";
+        this.id_categoria = "";
+        this.id_subcategoria = "";
+        this.id_marca = "";
+        this.prove.id_proveedor = "";
     
     }
-    get_subcategoria_filtrado(Id_categoria){
+    get_subcategoria_filtrado(id_categoria){
         var response;
-        this.service.get_subcategoria_filtrado(Id_categoria).subscribe(
+        this.service.get_subcategoria_filtrado(id_categoria).subscribe(
             data=>response=data,
             err=>{
                 console.log("ERROR AL CONSULTAR EL SERVICIO");
@@ -449,11 +448,11 @@ export class GetProductosComponent {
     get_modelo_filtrado(){
         var response;
         this.modelos={
-            Id_marca:this.Id_marca,
-            Id_subcategoria:this.Id_subcategoria
+            id_marca:this.id_marca,
+            id_subcategoria:this.id_subcategoria
             
         }
-        this.service.get_modelo_filtrado(this.Id_marca,this.Id_subcategoria).subscribe(
+        this.service.get_modelo_filtrado(this.id_marca,this.id_subcategoria).subscribe(
             data=>response=data,
             err=>{
                 console.log("ERROR AL CONSULTAR EL SERVICIO");
@@ -467,5 +466,3 @@ export class GetProductosComponent {
 
 
 }
-
-

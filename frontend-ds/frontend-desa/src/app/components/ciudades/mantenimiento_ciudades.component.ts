@@ -16,9 +16,9 @@ export class GetCiudadesComponent{
     }
 
     public Ciudad={
-        Id_ciudad: "",
-        Nombre_ciudad: "",
-        Id_departamento: ""
+        id_ciudad: "",
+        nombre_ciudad: "",
+        id_departamento: ""
     }
 
     ngOnInit(){
@@ -49,9 +49,9 @@ export class GetCiudadesComponent{
             },
             ()=>{
                     this.Ciudad={
-                        Id_ciudad:"",
-                        Nombre_ciudad:"",
-                        Id_departamento:""
+                        id_ciudad:"",
+                        nombre_ciudad:"",
+                        id_departamento:""
                 }
                 this.get_ciudades();
             }
@@ -61,9 +61,9 @@ export class GetCiudadesComponent{
 
     pasarDatosCiudades(ciudades){
         this.Ciudad={
-            Id_ciudad:ciudades.Id_ciudad,
-            Nombre_ciudad:ciudades.Nombre_ciudad,
-            Id_departamento:ciudades.Id_departamento
+            id_ciudad:ciudades.Id_ciudad,
+            nombre_ciudad:ciudades.Nombre_ciudad,
+            id_departamento:ciudades.Id_departamento
         }
         
     }
@@ -78,9 +78,9 @@ export class GetCiudadesComponent{
             ()=>{
    
                 this.Ciudad={
-                    Id_ciudad:"",
-                    Nombre_ciudad:"",
-                    Id_departamento:""
+                    id_ciudad:"",
+                    nombre_ciudad:"",
+                    id_departamento:""
             }
             this.get_ciudades();
             }

@@ -106,16 +106,14 @@ export class AppService {
 
     get_subcategoria_filtrado(id_categoria):Observable<any>{
         let params = new HttpParams()
-            .set('Id_categoria', id_categoria)
-            
-    
+            .set('id_categoria', id_categoria)
         return this.httpClient.get(this.endpoint + "/get_subcategoria_filtrado", {params});
     }
 
     get_modelo_filtrado(id_marca,id_subcategoria):Observable<any>{
         let params = new HttpParams()
-        .set('Id_marca',id_marca)
-        .set('Id_subcategoria', id_subcategoria)
+        .set('id_marca',id_marca)
+        .set('id_subcategoria', id_subcategoria)
         
         return this.httpClient.get(this.endpoint + "/get_modelo_filtrado", {params});
     }
