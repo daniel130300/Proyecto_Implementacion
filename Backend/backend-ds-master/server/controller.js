@@ -701,7 +701,7 @@ router.post('/insert_categoria', (req, res, next) => {
 	var query = 'insert into categorias (Descripcion_categoria)';
 	    query = query  + 'values (?)';
 	
-	var values = [req.body.Descripcion_categoria];
+	var values = [req.body.descripcion_categoria];
 
 	
 	con.query(query, values, (err, result, fields) => {
@@ -722,8 +722,8 @@ router.put('/update_categoria', (req, res, next) => {
 	    query = query  + ' where Id_categoria = ?';
 	
 	var values = [
-				  req.body.Descripcion_categoria,
-				  req.body.Id_categoria
+				  req.body.descripcion_categoria,
+				  req.body.id_categoria
 	            ];
 
 	

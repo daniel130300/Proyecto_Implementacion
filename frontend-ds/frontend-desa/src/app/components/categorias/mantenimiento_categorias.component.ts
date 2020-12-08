@@ -17,8 +17,8 @@ export class GetCategoriasComponent {
     }
 
     public Categorias = {
-        Id_categoria: "", //CATEGORIA
-        Descripcion_categoria: "" //Hola Mundo
+        id_categoria: "", 
+        descripcion_categoria: ""
         
     }
 
@@ -39,8 +39,8 @@ export class GetCategoriasComponent {
             },
             ()=>{
                     this.Categorias = {
-                        Id_categoria: "",
-                        Descripcion_categoria: ""
+                        id_categoria: "",
+                        descripcion_categoria: ""
                 }
                 this.get_categorias();
             }
@@ -64,8 +64,8 @@ export class GetCategoriasComponent {
     {
         this.Categorias = 
         {
-            Id_categoria: Categorias.Id_categoria,
-            Descripcion_categoria: Categorias.Descripcion_categoria
+            id_categoria: Categorias.Id_categoria,
+            descripcion_categoria: Categorias.Descripcion_categoria
         }      
     }
 
@@ -74,16 +74,16 @@ export class GetCategoriasComponent {
         let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
 
         this.Categorias = {
-            Id_categoria: this.Categorias.Id_categoria,
-            Descripcion_categoria: this.Categorias.Descripcion_categoria
+            id_categoria: this.Categorias.id_categoria,
+            descripcion_categoria: this.Categorias.descripcion_categoria
         }
-        if(this.Categorias.Descripcion_categoria == ""){
+        if(this.Categorias.descripcion_categoria == ""){
             swal.fire({
                 title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
                 icon: 'error'
             });
         }else
-            if(regexpLetter.test(this.Categorias.Descripcion_categoria) == false){
+            if(regexpLetter.test(this.Categorias.descripcion_categoria) == false){
                 swal.fire({
                     title: "Solo puede escribir letras. Vuelva a intentarlo.",
                     icon: 'error'
@@ -100,8 +100,8 @@ export class GetCategoriasComponent {
    
                         this.Categorias = 
                         {
-                            Id_categoria: "",
-                            Descripcion_categoria: ""
+                            id_categoria: "",
+                            descripcion_categoria: ""
                         }
                         this.get_categorias();
                     }
