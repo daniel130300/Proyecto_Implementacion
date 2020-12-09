@@ -15,10 +15,8 @@
 		<div class="contenedorTitulo">
 			<h2>| Devoluciones Venta</h2>
 		</div>
-        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
 
-        <div class="contenedorInformativo">
-		    <!--  AQUI EMPIEZA EL CAMBIO -->		 
+        <div class="contenedorInformativo">	 
 			<form class="form-incline">
 				<div class= "form-inline">
                     <i class="fas fa-search" aria-hidden="true"></i>
@@ -63,10 +61,8 @@
                 </table> 
             </div>
         </div>
-
         
         <div class="contenedorInformativo3">
-             <!--Primera Columna -->
             <div class="mov container-md">
 			<div class="separacionInfo0 nada container-md">
                 
@@ -74,7 +70,7 @@
 					<label>Fecha venta: </label>
 					<input type = "text"
 					class = "tamañoInput form-control"
-					[(ngModel)] = "Devoluciones.fecha_venta"
+					[(ngModel)] = "Devoluciones.fecha_Venta"
 					[ngModelOptions] = "{standalone:true}"
 					readonly = "true"
 					> 
@@ -86,7 +82,7 @@
 					<label>ID venta: </label>
 					<input type = "text"
                     class = "tamañoInput form-control"
-                    [(ngModel)] = "id_venta"
+                    [(ngModel)] = "Id_venta"
                     [ngModelOptions] = "{standalone:true}"
                     readonly = "true"
                     > 
@@ -100,17 +96,14 @@
                         <button class ="tamañoBoton btn btn-primary"
                         data-toggle="modal"
                         data-target="#ProductosModal"
-                        (click) = "get_devoluciones_productos(id_venta)"
+                        (click) = "get_devoluciones_productos(Id_venta)"
                         >Mostrar</button>
                     </div>
                 </form>
             </div>
 
             </div>
-            <!--Primera Columna -->
 
-
-            <!--Segunda Columna -->
 			<div class="separacionInfo nada container-md">
 
                 <form>
@@ -153,9 +146,7 @@
                  </form>
                 
             </div>
-            <!--Segunda Columna -->
-            
-            <!--Tercera Columna -->
+
             <div class="separacionInfo2 nada container-md">
 
                 <form ngNativeValidate #form3>
@@ -173,7 +164,7 @@
                 <p></p>
 
                     <div class="">
-                        <button (click)="form3.checkValidity() ? AgregarDevolucion() : AgregarDevolucion()" class="tamañoBoton btn btn-primary">Registrar venta</button>
+                        <button (click)="form3.checkValidity() ? agregar_devolucion() : agregar_devolucion()" class="tamañoBoton btn btn-primary">Registrar venta</button>
                     </div>
                     
                 </form>
@@ -181,8 +172,6 @@
                 <p></p>
                 
             </div>
-            <!--Tercera Columna -->
-
         </div>
         
 
@@ -238,7 +227,7 @@
                                 <td>
                                 <button type = "button" class = "btn btn-primary btn-sm " 
                                             width = 74px
-                                            (click) = "pasarDatosProducto(produ)">Seleccionar
+                                            (click) = "pasar_datos_producto(produ)">Seleccionar
                                 </button>
                             </td>
                             </tr>

@@ -725,7 +725,7 @@ router.post('/insert_marca', (req, res, next) => {
     query= query + ' values(?)';
 
     var values = [
-        req.body.Nombre];
+        req.body.nombre];
 
  con.query(query,values,(err,result,fields) => {
      if(err){
@@ -741,8 +741,8 @@ router.put('/update_marca', (req, res, next) => {
     var query = 'update marcas set Nombre_marca = ? ';
     query= query + 'where Id_marca = ?';
 
-    var values = [req.body.Nombre,
-        req.body.Id_marca];
+    var values = [req.body.nombre,
+        req.body.id_marca];
 
  con.query(query,values,(err,result,fields) => {
      if(err){
@@ -790,6 +790,7 @@ router.get('/get_marcas', (req, res, next) => {
 router.post('/insert_modelo', (req, res, next) => {
     var query = 'insert into modelos(Descripcion_modelo,Id_marca, Id_subcategoria)';
     query= query + ' values(?,?,?)';
+
     var values = [
         req.body.descripcion_modelo,
         req.body.id_marca,
@@ -804,6 +805,7 @@ router.post('/insert_modelo', (req, res, next) => {
      }
     });
 });
+
 
 router.put('/update_modelo', (req, res, next) => {
     var query = 'update modelos set Descripcion_modelo = ?, Id_marca = ?, Id_subcategoria = ? ';
@@ -821,6 +823,7 @@ router.put('/update_modelo', (req, res, next) => {
          res.status(200).json(result);
      }
     });
+
 });
 
 router.get('/get_empleados', (req, res, next) => {
@@ -965,12 +968,12 @@ router.post('/insert_compras', (req, res, next) => {
 	var FechaActual = new Date();
 
     var values=[
-				req.body.Codigo_factura,	
-    			FechaActual, 
-    			null, 
-    			req.body.Gastos_adicionales, 
-    			req.body.Id_proveedor, 
-    			req.body.Id_estatus	
+				req.body.codigo_factura,	
+    			FechaActual,
+    			null,
+    			req.body.gastos_adicionales, 
+    			req.body.id_proveedor, 
+    			req.body.id_estatus	
     ];
 
     con.query(query, values, (err, result, fields) => {
@@ -1006,11 +1009,11 @@ router.put('/update_compra', (req, res, next) => {
 router.post('/insert_detalle_compras',(req,res,next)=>{
 	var query='set @codigo=(select max(Id_compra)  from compras); INSERT INTO detalle_compras (Id_compra, Id_producto, Precio_compra, Cantidad_ordenada, Cantidad_recibida, Cantidad_rechazada) VALUES (@codigo,?,?,?,?,?)';
 	var values=[
-		req.body.Id_producto,
-		req.body.Precio_compra,
-		req.body.Cantidad_ordenada,
-		req.body.Cantidad_recibida,
-		req.body.Cantidad_rechazada
+		req.body.id_producto,
+		req.body.precio_compra,
+		req.body.cantidad_ordenada,
+		req.body.cantidad_recibida,
+		req.body.cantidad_rechazada
 	]
 
 	con.query(query,values,(err,result,fields)=>{
@@ -1424,7 +1427,6 @@ router.post('/insert_detalle_venta_normal',(req,res,next)=>{
 	});
 });
 
-
 router.get('/get_devoluciones_venta', (req, res, next) => {
 	var query = "select v.Id_venta,c.Nombre_contacto,v.Fecha_venta, c.Nombre_compania, "
 	+"SUM(Distinct dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) as Subtotal, "
@@ -1451,7 +1453,6 @@ router.get('/get_devoluciones_venta', (req, res, next) => {
 	});
 });
 
-
 router.get('/get_devolucion_productos', (req, res, next) => {
 	var query = "select p.Id_producto, s.Descripcion_subcategoria,ma.Nombre_marca,m.Descripcion_modelo, "+
 	"p.Talla,p.Color,p.Precio_referencial_venta,dv.Cantidad_vendida,dv.Cantidad_devuelta,p.Descripcion_producto "+
@@ -1466,13 +1467,14 @@ router.get('/get_devolucion_productos', (req, res, next) => {
 	"ON p.Id_producto= dv.Id_producto "+
 	"WHERE dv.Id_venta = ? "
 
-	var values = [req.query.id_venta];
-	
+	var values = [req.query.Id_venta];
+
 	con.query(query,values, (err, result, fields) => {
 		if(err) {
 				next(err);
 		} else {
 				res.status(200).json(result);
+
 		}
 	});
 });
@@ -1481,16 +1483,16 @@ router.put('/update_devoluciones', (req, res, next) => {
     var query = 'UPDATE detalle_ventas SET Cantidad_devuelta = ? ';
     query= query + 'WHERE Id_venta = ? AND Id_producto = ?';
 
-    var values = [req.body.Cantidad_devuelta,
+    var values = [req.body.cantidad_devuelta,
         req.body.id_venta,
         req.body.id_producto];
 
- con.query(query,values,(err,result,fields) => {
-     if(err){
-         next(err);
-     }else {
-         res.status(200).json(result);
-     }
+ 	con.query(query,values,(err,result,fields) => {
+    if(err){
+        next(err);
+    }else {
+        res.status(200).json(result);
+	}
     });
 });
 

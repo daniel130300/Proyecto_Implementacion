@@ -16,7 +16,7 @@ export class GetComprasPendientesComponent {
     public listado_compras_pendientes: any[];
     public listado_productos_compra: any[];
     public listado_estatus: any[];
-    public id_Compra: any = "";
+    public id_compra: any = "";
     public estatus: any = "";
     public gastos: any = "";
     public subtotal: number; 
@@ -116,7 +116,7 @@ export class GetComprasPendientesComponent {
 
     pasar_datos_compra(datos_compra)
     {
-        this.id_Compra = datos_compra.Id_compra;
+        this.id_compra = datos_compra.Id_compra;
         this.estatus = datos_compra.Id_estatus;   
         this.gastos = datos_compra.Gastos_adicionales; 
         this.get_productos_compra(datos_compra.Id_compra); 
@@ -226,7 +226,7 @@ export class GetComprasPendientesComponent {
 
     guardar_cambios(){
         
-        if(this.id_Compra=="")
+        if(this.id_compra=="")
         {
 
             swal.fire({
@@ -240,14 +240,14 @@ export class GetComprasPendientesComponent {
             {
                 this.Compra = 
                 {
-                    id_compra: this.id_Compra,
+                    id_compra: this.id_compra,
                     id_estatus: this.estatus
                 }
                 
                 this.update_compra();
 
                 for(var i = 0; i < this.listado_productos_compra.length; i++) {
-                    if(this.id_Compra == this.listado_productos_compra[i].Id_compra){
+                    if(this.id_compra == this.listado_productos_compra[i].Id_compra){
                         this.Producto = 
                         {
                             id_producto: this.listado_productos_compra[i].Id_producto,  
@@ -258,7 +258,7 @@ export class GetComprasPendientesComponent {
                     this.update_producto_compra();
                 }
                 
-                this.id_Compra = "";
+                this.id_compra = "";
                 this.estatus = "";
                 this.gastos = "";
                 this.subtotal = 0.00;

@@ -74,7 +74,7 @@
                     <label>ID Compra: </label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="id_Compra"
+                        [(ngModel)]="id_compra"
                         [ngModelOptions]="{standalone:true}"
                         disabled
                     >
@@ -86,7 +86,7 @@
                             class="tamañoBoton btn btn-primary"
                             data-toggle = "modal"
                             data-target = "#exampleModal"
-                            (click)="get_productos_compra(id_Compra)"
+                            (click)="get_productos_compra(id_compra)"
                         >Mostrar</button>
                         
                     </div>
@@ -257,7 +257,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Cantidades</h5>
-                <button (click)="get_productos_compra(id_Compra)" data-toggle = "modal" data-target = "#exampleModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button (click)="get_productos_compra(id_compra)" data-toggle = "modal" data-target = "#exampleModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
@@ -326,7 +326,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button (click)="get_productos_compra(id_Compra)" data-toggle = "modal" data-target = "#exampleModal"  type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button (click)="get_productos_compra(id_compra)" data-toggle = "modal" data-target = "#exampleModal"  type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button (click)="update_detalle_compra()"type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>

@@ -135,15 +135,15 @@ export class GetVentasPendientesCobroComponent {
         );
     }
 
-    pasarIdVenta(Venta)
+    pasar_id_venta(venta)
     {
-       this.id_venta = Venta.Id_venta;
-       this.total_venta = Venta.Total ;
-       this.total_abonado = Venta.Cantidad_abonada;
+       this.id_venta = venta.Id_venta;
+       this.total_venta = venta.Total ;
+       this.total_abonado = venta.Cantidad_abonada;
        this.cantidad_pendiente = this.total_venta - this.total_abonado; 
     }
 
-    Asignar_datos_abono()
+    asignar_datos_abono()
     {
         this.Abono_venta = 
         {
@@ -154,7 +154,7 @@ export class GetVentasPendientesCobroComponent {
 
     insertar_abono_venta(){
         var response;
-        this.Asignar_datos_abono();
+        this.asignar_datos_abono();
         console.log(this.Abono_venta);
         this.service.insertar_abono_venta(this.Abono_venta).subscribe(
             data=>response = data,

@@ -35,17 +35,17 @@ export class GetModelosComponent {
 
     volverpro(){
         this.router.navigateByUrl('/mantenimiento_productos');
-     }
+    }
 
     get_modelos(){
         var response;
         this.service.get_modelos().subscribe(
             data=>response = data,
             err => {
-                console.log("Error al consultar el servicio.");
+                console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_modelos = response;
+                this.listado_modelos = response;
             }  
         );
     }
@@ -55,10 +55,10 @@ export class GetModelosComponent {
         this.service.get_marcas().subscribe(
             data=>response = data,
             err => {
-                console.log("Error al consultar el servicio.");
+                console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_marcas = response;
+                this.listado_marcas = response;
             }  
         );
     }
@@ -68,10 +68,10 @@ export class GetModelosComponent {
         this.service.get_subcategorias().subscribe(
             data=>response = data,
             err => {
-                console.log("Error al consultar el servicio.");
+                console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_subcategorias = response;
+                this.listado_subcategorias = response;
             }  
         );
     }
@@ -81,7 +81,7 @@ export class GetModelosComponent {
         this.service.insertar_modelo(this.Modelo).subscribe(
             data=>response = data,
             err => {
-                console.log("Error al consultar servicio."); 
+                console.log("Error al consultar servicio"); 
             },
             ()=>{
                     this.Modelo = {
@@ -99,10 +99,10 @@ export class GetModelosComponent {
     {
         this.Modelo = 
         {
-            id_modelo:modelo.Id_modelo,
+            id_modelo: modelo.Id_modelo,
             descripcion_modelo: modelo.Descripcion_modelo,
-            id_marca:modelo.Id_marca,
-            id_subcategoria:modelo.Id_subcategoria
+            id_marca: modelo.Id_marca,
+            id_subcategoria: modelo.Id_subcategoria
         }      
     }
 
@@ -110,36 +110,28 @@ export class GetModelosComponent {
     {
         let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
 
-        this.Modelo = {
-            id_modelo:this.Modelo.id_modelo,
-            descripcion_modelo:this.Modelo.descripcion_modelo,
-            id_marca:this.Modelo.id_modelo,
-            id_subcategoria:this.Modelo.id_subcategoria
-        }
         if(this.Modelo.descripcion_modelo == "" || this.Modelo.id_marca == "" || this.Modelo.id_modelo == ""){
             swal.fire({
-                title: "No se pueden dejar los campos vacíos. Vuelva a intentarlo.",
+                title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
                 icon: 'error'
             });
         }else
-        {
             if(regexpLetter.test(this.Modelo.descripcion_modelo) == false){
                 swal.fire({
                     title: "Solo puede escribir letras. Vuelva a intentarlo.",
                     icon: 'error'
                 });
-            }
-            else
-            {
-                var response;
-                this.service.update_modelo(this.Modelo).subscribe(
+            }else
+                {
+                    var response;
+                    this.service.update_modelo(this.Modelo).subscribe (
                     data => response = data,
                     err => {
-                        console.log("Error al consultar servicio."); 
+                        console.log("Error al consultar servicio"); 
                     },
                     ()=>{
-
-                        this.Modelo = 
+   
+                      this.Modelo = 
                         {
                             id_modelo: "",
                             descripcion_modelo: "",
@@ -148,24 +140,24 @@ export class GetModelosComponent {
                         }
                         this.get_modelos();
                     }
-                );
-            }
-        }    
+                    );
+                }
+        
     }
 
-    delete_modelo(id_modelo_borrar)
+    delete_modelo(id_modelo)
     {
         var response;
         var load = 
         {
-            id_modelo: id_modelo_borrar
+            Id_modelo: id_modelo
         }
         this.service.delete_modelo(load).subscribe
         (
             data=>response = data,
             err => 
             {
-                console.log("Error al consultar servicio."); 
+                console.log("Error al consultar servicio"); 
             },
             ()=>
             {
@@ -173,4 +165,5 @@ export class GetModelosComponent {
             }
         );
     }
+
 }

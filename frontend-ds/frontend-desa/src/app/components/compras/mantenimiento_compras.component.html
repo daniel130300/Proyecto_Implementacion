@@ -13,7 +13,7 @@
 		<div class="contenedorTitulo">
 			<h2>| Nuevo Pedido</h2>
 		</div>
-        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+
         <div class="contenedorInformativo">
             
             <form ngNativeValidate #form oncopy="return false" onpaste="return false">
@@ -24,7 +24,7 @@
                     <label>Código Factura: </label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Compra.Codigo_factura"
+                        [(ngModel)]="Compra.codigo_factura"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="6"
                         minlength="1"
@@ -36,7 +36,7 @@
                     <label>Proveedor</label>
                     <select
                         class = "tamañoInput form-control input"
-                        [(ngModel)]="Compra.Id_proveedor"
+                        [(ngModel)]="Compra.id_proveedor"
                         [ngModelOptions]="{standalone:true}"
                         required="true">
 
@@ -54,7 +54,7 @@
                         <div class="input-group">
                             <input type = "text" 
                             class = "tamaño form-control col-sm-10"
-                            [(ngModel)] = "Producto.Id_producto"
+                            [(ngModel)] = "Producto.id_producto"
                             [ngModelOptions] = "{standalone:true}"
                             pattern="^$"
                             disabled>
@@ -64,7 +64,7 @@
                                 width = 74px
                                 data-toggle = "modal"
                                 data-target = "#exampleModal"
-                                (click) = "get_productos(Compra.Id_proveedor)"
+                                (click) = "get_productos(Compra.id_proveedor)"
                             >+</button>
                         </div>
                         
@@ -74,7 +74,7 @@
                     <label >Nombre Producto</label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Producto.Descripcion_producto"
+                        [(ngModel)]="Producto.descripcion_producto"
                         [ngModelOptions]="{standalone:true}"
                         disabled
                     >
@@ -95,7 +95,7 @@
                     <label>Precio</label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Producto.Precio_referencial_compra"
+                        [(ngModel)]="Producto.precio_referencial_compra"
                         [ngModelOptions]="{standalone:true}"
                         disabled
                     >
@@ -104,7 +104,7 @@
                     <label>Cantidad</label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Producto.Cantidad_ordenada"
+                        [(ngModel)]="Producto.cantidad_ordenada"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
                         minlength="1"
@@ -115,14 +115,14 @@
                     <label>Gastos Adicionales</label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)] = "Compra.Gastos_adicionales"
+                        [(ngModel)] = "Compra.gastos_adicionales"
                         [ngModelOptions] = "{standalone:true}"
                         maxlength="4"
                         pattern="^[+]?([0-9]\d*)$"
                     > 
                     
                     <p></p>
-                    <button (click)="form.checkValidity()? agregarProducto(Producto) : null" class="tamañoBoton btn btn-primary">Agregar producto</button>
+                    <button (click)="form.checkValidity()? agregar_producto(Producto) : null" class="tamañoBoton btn btn-primary">Agregar producto</button>
                 
                 </div>
 
@@ -151,18 +151,18 @@
                         </thead>
                         <tbody>
                         <tr *ngFor = "let pro of listado_productos_compras">
-                            <td>{{pro.Id_producto}}</td>
-                            <td>{{pro.Descripcion_producto}}</td>
-                            <td>{{pro.Talla}}</td>
-                            <td>{{pro.Color}}</td>
-                            <td>{{pro.Cantidad_ordenada}}</td>
-                            <td>{{pro.Precio_referencial_compra}}</td>
-                            <td>{{pro.Descripcion_modelo}}</td>
-                            <td>{{pro.Nombre_marca}}</td>
-                            <td>{{pro.Descripcion_subcategoria}}</td>
-                            <td>{{pro.Descripcion_categoria}}</td> 
+                            <td>{{pro.id_producto}}</td>
+                            <td>{{pro.descripcion_producto}}</td>
+                            <td>{{pro.talla}}</td>
+                            <td>{{pro.color}}</td>
+                            <td>{{pro.cantidad_ordenada}}</td>
+                            <td>{{pro.precio_referencial_compra}}</td>
+                            <td>{{pro.descripcion_modelo}}</td>
+                            <td>{{pro.nombre_marca}}</td>
+                            <td>{{pro.descripcion_subcategoria}}</td>
+                            <td>{{pro.descripcion_categoria}}</td> 
                             <td>
-                                <button (click)="eliminarProducto(pro.Id_producto) " class="botonTabla btn btn-primary mb-3">Eliminar</button>
+                                <button (click)="eliminar_producto(pro.id_producto) " class="botonTabla btn btn-primary mb-3">Eliminar</button>
                             </td> 
 
                         </tr>
@@ -244,7 +244,6 @@
                                     <th>Subcategoria</th>
                                     <th>Categoria</th>
                                     <th></th>
-                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -264,7 +263,7 @@
                                     width = 74px
                                     data-toggle = "modal"
                                     data-target = "#editModal"
-                                    (click) = "pasarDatosProducto(pro)">Seleccionar</button>
+                                    (click) = "pasar_datos_producto(pro)">Seleccionar</button>
                                 </td> 
                     
                             </tr>
