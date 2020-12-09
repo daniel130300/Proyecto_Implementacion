@@ -82,7 +82,7 @@ export class GetVentasIncobrablesComponent {
         var rows = [];
         
         this.listado_ventas_incobrables.forEach(element => {      
-            var temp = [element.id_venta, this.datepipe.transform(element.fecha_venta,'yyyy-MM-dd'), this.datepipe.transform(element.fecha_envio,'yyyy-MM-dd'), this.datepipe.transform(element.fecha_entrega,'yyyy-MM-dd'), element.subtotal, element.descuento, element.isv, element.total, element.identidad, element.nombre_compania, element.nombre_contacto, element.apellido_contacto, element.telefono_contacto, element.telefono_contacto, element.email_contacto];
+            var temp = [element.Id_venta, this.datepipe.transform(element.Fecha_venta,'yyyy-MM-dd'), this.datepipe.transform(element.Fecha_envio,'yyyy-MM-dd'), this.datepipe.transform(element.Fecha_entrega,'yyyy-MM-dd'), element.Subtotal, element.Descuento, element.Isv, element.Total, element.Identidad, element.Nombre_compania, element.Nombre_contacto, element.Apellido_contacto, element.Telefono_contacto, element.Telefono_contacto, element.Email_contacto];
             rows.push(temp);
         });
 

@@ -8,13 +8,12 @@ const swal = require('sweetalert2');
     templateUrl: './Devoluciones.component.html'
 })
 
-
 export class GetDevolucionesComponent
 {
  public listado_productos: any[];
  public listado_estatus: any[];
  public listado_ventas: any[];
- public Id_venta:"";
+ public id_venta:"";
  term: any[];
 
   constructor( public service: AppService ){
@@ -25,37 +24,36 @@ export class GetDevolucionesComponent
     
     public cantidad =
     {
-        Id_venta:"",
-        Cantidad_devuelta: "",
-        Id_producto:"",
+        id_venta:"",
+        cantidad_devuelta: "",
+        id_producto:"",
     }
 
     public Devoluciones =
     {
-        Fecha_Venta:"",
-        Informacion_adicional_producto:""
+        fecha_venta:"",
+        informacion_adicional_producto:""
     }
     
     public Productos = {
-        Id_producto: "",
-        Nombre_producto: "",
-        Informacion_adicional_producto: "",
-        Cantidad_vendida:"",
-        Cantidad_devuelta:""
+        id_producto: "",
+        nombre_producto: "",
+        informacion_adicional_producto: "",
+        cantidad_vendida:"",
+        cantidad_devuelta:""
     }
 
     ngOnInit(){
         this.get_devoluciones_venta();
     }
 
-    //Consultar datos de Venta
     get_devoluciones_venta()
     {
         var response;
         this.service.get_devoluciones_venta().subscribe(
             data=>response=data,
             err=>{
-                console.log("ERROR AL CONSULTAR EL SERVICIO");
+                console.log("Error al consultar servicio.");
             },
             ()=>
             {
@@ -63,14 +61,14 @@ export class GetDevolucionesComponent
             }
         )
     }
-    //Consultar Productos
-    get_devoluciones_productos(Id_venta)
+    
+    get_devoluciones_productos(id_venta)
     {
         var response;
-        this.service.get_devoluciones_productos(Id_venta).subscribe(
+        this.service.get_devoluciones_productos(id_venta).subscribe(
             data=>response=data,
             err=>{
-                console.log("ERROR AL CONSULTAR EL SERVICIO");
+                console.log("Error al consultar servicio.");
             },
             ()=>
             {
@@ -83,31 +81,30 @@ export class GetDevolucionesComponent
     {
         this.Devoluciones = 
         {
-            Fecha_Venta:String(Devoluciones.Fecha_venta).substring(0, 10),
-            Informacion_adicional_producto: "Talla: " + Devoluciones.Talla + ", Color: " + Devoluciones.Color + ", Modelo: " + Devoluciones.Descripcion_modelo + ", Marca: " + Devoluciones.Nombre_marca + ", Subcategoria: " + Devoluciones.Descripcion_subcategoria,
+            fecha_venta:String(Devoluciones.fecha_venta).substring(0, 10),
+            informacion_adicional_producto: "Talla: " + Devoluciones.talla + ", Color: " + Devoluciones.color + ", Modelo: " + Devoluciones.descripcion_modelo + ", Marca: " + Devoluciones.nombre_marca + ", Subcategoria: " + Devoluciones.descripcion_subcategoria,
         }
-        this.Id_venta=Devoluciones.Id_venta
+        this.id_venta=Devoluciones.id_venta
     }
-    //Funcion para pasar los productos
+    
     pasarDatosProducto(producto)
     {
         this.Productos = 
         {
-            Id_producto: producto.Id_producto,
-            Nombre_producto: producto.Descripcion_producto,
-            Informacion_adicional_producto: "Talla: " + producto.Talla + ", Color: " + producto.Color + ", Modelo: " + producto.Descripcion_modelo + ", Marca: " + producto.Nombre_marca + ", Subcategoria: " + producto.Descripcion_subcategoria, 
-            Cantidad_devuelta: producto.Cantidad_devuelta,
-            Cantidad_vendida:producto.Cantidad_vendida
+            id_producto: producto.Id_producto,
+            nombre_producto: producto.Descripcion_producto,
+            informacion_adicional_producto: "Talla: " + producto.Talla + ", Color: " + producto.Color + ", Modelo: " + producto.Descripcion_modelo + ", Marca: " + producto.Nombre_marca + ", Subcategoria: " + producto.Descripcion_subcategoria, 
+            cantidad_devuelta: producto.Cantidad_devuelta,
+            cantidad_vendida:producto.Cantidad_vendida
         }
     }
     
-    //Funcion para actualizar la cantidad devuelta
-    update_Cantidad(Id_venta){
+    update_Cantidad(id_venta){
 
         this.cantidad = {
-            Id_venta: this.Id_venta,
-            Cantidad_devuelta: this.Productos.Cantidad_devuelta,
-            Id_producto: this.Productos.Id_producto,
+            id_venta: this.id_venta,
+            cantidad_devuelta: this.Productos.cantidad_devuelta,
+            id_producto: this.Productos.id_producto,
         }
         var response;
         this.service.update_devoluciones(this.cantidad).subscribe(
@@ -116,57 +113,55 @@ export class GetDevolucionesComponent
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.cantidad={Id_venta:"",Cantidad_devuelta:"",Id_producto:""}
-                 this.Productos={Id_producto: "",
-                 Nombre_producto: "",
-                 Informacion_adicional_producto: "",
-                 Cantidad_vendida:"",
-                 Cantidad_devuelta:""}
+                 this.cantidad={id_venta:"",cantidad_devuelta:"",id_producto:""}
+                 this.Productos={id_producto: "",
+                 nombre_producto: "",
+                 informacion_adicional_producto: "",
+                 cantidad_vendida:"",
+                 cantidad_devuelta:""}
                  this.Devoluciones={
-                 Fecha_Venta:"",
-                 Informacion_adicional_producto:""
+                 fecha_venta:"",
+                 informacion_adicional_producto:""
                  }
-                this.Id_venta=""
+                this.id_venta=""
                 this.get_devoluciones_venta()
             }  
         );
     }
 
-    //Funcion para actualizar en la base
-
     AgregarDevolucion()
     {
-        if (this.Devoluciones.Fecha_Venta == "")
+        if (this.Devoluciones.fecha_venta == "")
         {
             swal.fire({
                 icon: 'error',
-                title:"No ha seleccionado una venta"
+                title:"No ha seleccionado una venta."
               })
         }
-        else if (this.Productos.Id_producto == "")
+        else if (this.Productos.id_producto == "")
         {
             swal.fire({
                 icon: 'error',
-                title:"No ha seleccionado un producto"
+                title:"No ha seleccionado un producto."
               })
         }
         else
         {
-            if (this.Productos.Cantidad_devuelta != "" && parseInt(this.Productos.Cantidad_devuelta) > 0 && parseInt(this.Productos.Cantidad_devuelta) <= parseInt(this.Productos.Cantidad_vendida))
+            if (this.Productos.cantidad_devuelta != "" && parseInt(this.Productos.cantidad_devuelta) > 0 && parseInt(this.Productos.cantidad_devuelta) <= parseInt(this.Productos.cantidad_vendida))
             {
                 this.listado_productos.unshift(this.Productos);
                 console.log(this.listado_productos); 
-                this.update_Cantidad(this.Id_venta);
+                this.update_Cantidad(this.id_venta);
                 swal.fire({
                     icon: 'success',
                     title:"¡Agregado exitoso!"
                   })
             }
-            else if (parseInt(this.Productos.Cantidad_devuelta) > parseInt(this.Productos.Cantidad_vendida))
+            else if (parseInt(this.Productos.cantidad_devuelta) > parseInt(this.Productos.cantidad_vendida))
             {
                 swal.fire({
                     icon: 'error',
-                    title:"Cantidad devuelta excede la cantidad vendida"
+                    title:"Cantidad devuelta excede la cantidad vendida."
                   })
             }
         }

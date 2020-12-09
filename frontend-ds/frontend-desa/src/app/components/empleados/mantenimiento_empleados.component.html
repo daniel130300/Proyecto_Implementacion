@@ -14,6 +14,8 @@
 		<div class="contenedorTitulo">
 			<h2>| Mantenimiento Empleados</h2>
         </div>
+        
+        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
 
         <div class="contenedorInformativo">
             
@@ -168,23 +170,19 @@
             </form>
                 
         </div>
+
+        <div class="contenedorInformativo3">
+		    <form class="form-incline">
+                <div class= "form-inline">
+                    
+                    <input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
+
+                </div>
+            </form>
+        </div>
         
         <div class = "contenedorInformativo2">
-
-            <div class = "nada container-md">
-                <br>
-
-                <form class="form-incline">
-                    <div class= "form-inline">
-                        
-                        <input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
-    
-                    </div>
-                </form>
-
-                <br>
-                
-
+            <div class = "">                
                 <table class = "table table-dark">
             
                     <thead>
@@ -225,7 +223,7 @@
                             <td>{{e.Descripcion_puesto}}</td>
             
                             <td>
-                                <button type = "button" class = "btn btn-primary btn-sm " 
+                                <button type = "button" class = "botonTabla btn btn-primary btn-sm " 
                                     width = 74px
                                     data-toggle = "modal"
                                     data-target = "#exampleModal"
@@ -240,7 +238,7 @@
  
             </div>
         </div> 
-        <div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+        <div class="card" style="width: 75%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
                 
 			<button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a>  Reporte</button>
 		
@@ -564,7 +562,7 @@
 		max-width: 1050px;
 		height: 450px;
 		margin-left: 295px;
-		margin-top: 30px;
+		margin-top: 0px;
 		background: #fff;
         overflow: scroll;
     }
@@ -609,6 +607,28 @@
         width: 180px;
         height: 40px;
         margin-top: 20px;
+    }
+
+    .contenedorInformativo3{
+        width: 75%;
+		max-width: 1050px;
+		height: 80px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+    }
+
+    .tamañoInputBuscador{
+        width: 600px;
+        margin-top: 18px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .botonTabla{
+        height: 40px;
+	    width: 70px;
     }
 
 </style>

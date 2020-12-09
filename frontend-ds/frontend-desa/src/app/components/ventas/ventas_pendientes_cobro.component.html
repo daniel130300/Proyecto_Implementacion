@@ -71,7 +71,7 @@
 							<td>{{vpc.Cantidad_abonada}}</td>
 							<td>{{vpc.Estado}}</td>
 							<td>
-								<button type = "button" class = "btn btn-primary btn-sm " 
+								<button type = "button" class = "botonTabla btn btn-primary btn-sm " 
 										width = 74px
 										(click) = "pasarIdVenta(vpc)"
 										>Seleccionar
@@ -85,7 +85,7 @@
 		</div>
 
 				
-		<div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+		<div class="card" style="width: 75%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
                 
 			<button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a> Reporte</button>
 		
@@ -155,7 +155,7 @@
 			<div class="separacionInfo0 nada container-md">
                 <form>
                     <div class="">
-						<button class="boton btn btn-primary form-group col-sm-2" (click) = "InsertarAbonoValidado()">Guardar Cambios</button>
+						<button class="tamañoBoton btn btn-primary" (click) = "InsertarAbonoValidado()">Guardar Cambios</button>
                     </div>
                     
                 </form>
@@ -297,7 +297,7 @@
 		max-width: 1050px;
 		height: 450px;
 		margin-left: 295px;
-		margin-top: 30px;
+		margin-top: 0px;
 		background: #fff;
         overflow: scroll;
     }
@@ -305,7 +305,7 @@
     .contenedorInformativo3{
         width: 75%;
 		max-width: 1050px;
-		height: 230px;
+		height: 250px;
 		margin-left: 295px;
 		margin-top: 30px;
 		background: #fff;
@@ -358,8 +358,13 @@
 
     .tamañoBoton{
         width: 180px;
-        height: 26px;
-        margin-left: 5px;
+        height: 40px;
+        margin-top: 14px;
+	}
+	
+	.botonTabla{
+        height: 40px;
+	    width: 80px;
     }
 </style>
 

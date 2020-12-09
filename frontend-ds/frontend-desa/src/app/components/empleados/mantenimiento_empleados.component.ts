@@ -54,8 +54,8 @@ export class GetEmpleadosComponent {
         var rows = [];
         
         this.listado_empleados.forEach(element => {      
-            var temp = [element.id_empleado, element.identidad, element.nombre, element.apellido, element.telefono , element.email, element.direccion, element.salario, this.datepipe.transform(element.fecha_nacimiento,'yyyy-MM-dd'),
-                        this.datepipe.transform(element.fecha_contratacion,'yyyy-MM-dd'), this.datepipe.transform(element.fecha_despido,'yyyy-MM-dd'), element.descripcion_puesto];
+            var temp = [element.Id_empleado, element.Identidad, element.Nombre, element.Apellido, element.Telefono , element.Email, element.Direccion, element.Salario, this.datepipe.transform(element.Fecha_nacimiento,'yyyy-MM-dd'),
+                        this.datepipe.transform(element.Fecha_contratacion,'yyyy-MM-dd'), this.datepipe.transform(element.Fecha_despido,'yyyy-MM-dd'), element.Descripcion_puesto];
             rows.push(temp);
         });
 

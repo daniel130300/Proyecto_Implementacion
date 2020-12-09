@@ -76,7 +76,7 @@ export class GetClientesComponent{
         var rows = [];
         
         this.listado_clientes.forEach( element => {      
-            var temp = [ element.nombre_compania, element.direccion, element.nombre_ciudad, element.descripcion_cliente, element.nombre_contacto, element.apellido_contacto, element.telefono_contacto, element.email_contacto ];
+            var temp = [ element.Nombre_compania, element.Direccion, element.Nombre_ciudad, element.Descripcion_cliente, element.Nombre_contacto, element.Apellido_contacto, element.Telefono_contacto, element.Email_contacto ];
             rows.push(temp);
         });
 
@@ -268,10 +268,11 @@ export class GetClientesComponent{
                                             telefono_contacto:"",
                                             email_contacto:""
                                         } 
+
+                                        this.get_clientes();
+                                        this.limpiar_cliente();
                                     }
                                 );
-                                this.get_clientes();
-                                this.limpiar_cliente();
                             }
                         }
                             
@@ -279,11 +280,10 @@ export class GetClientesComponent{
                      
                 }
             }
-        }
-        
-       
+        }    
     }
-   delete_cliente(id_cliente){ 
+
+    delete_cliente(id_cliente){ 
         var response;
         var load={
             id_cliente:id_cliente

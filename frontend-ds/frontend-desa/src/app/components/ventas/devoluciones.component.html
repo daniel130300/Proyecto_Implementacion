@@ -53,7 +53,7 @@
                         <td>{{ve.Impuesto}}</td>
                         <td>{{ve.Total}}</td>
                         <td>
-                            <button type = "button" class = "btn btn-primary btn-sm " 
+                            <button type = "button" class = "botonTabla btn btn-primary btn-sm " 
                             width = 74px
                             (click) = "pasarDatosVenta(ve)">Seleccionar
                             </button>
@@ -74,7 +74,7 @@
 					<label>Fecha venta: </label>
 					<input type = "text"
 					class = "tamañoInput form-control"
-					[(ngModel)] = "Devoluciones.Fecha_Venta"
+					[(ngModel)] = "Devoluciones.fecha_venta"
 					[ngModelOptions] = "{standalone:true}"
 					readonly = "true"
 					> 
@@ -86,7 +86,7 @@
 					<label>ID venta: </label>
 					<input type = "text"
                     class = "tamañoInput form-control"
-                    [(ngModel)] = "Id_venta"
+                    [(ngModel)] = "id_venta"
                     [ngModelOptions] = "{standalone:true}"
                     readonly = "true"
                     > 
@@ -97,10 +97,10 @@
                 <form>
 					<label>Visualizar producto: </label>
 					<div class="boton input-group">
-                        <button class ="btn btn-primary form-group col-sm-3"
+                        <button class ="tamañoBoton btn btn-primary"
                         data-toggle="modal"
                         data-target="#ProductosModal"
-                        (click) = "get_devoluciones_productos(Id_venta)"
+                        (click) = "get_devoluciones_productos(id_venta)"
                         >Mostrar</button>
                     </div>
                 </form>
@@ -117,7 +117,7 @@
 					<label>Cod producto: </label>
                     <input type = "text"
                     class = "tamañoInput form-control"
-                    [(ngModel)] = "Productos.Id_producto"
+                    [(ngModel)] = "Productos.id_producto"
                     [ngModelOptions] = "{standalone:true}"
                     readonly = "true"
                     > 
@@ -129,7 +129,7 @@
 					<label>Nombre producto: </label>
                     <input type = "text"
                     class = "tamañoInput form-control"
-                    [(ngModel)] = "Productos.Nombre_producto"
+                    [(ngModel)] = "Productos.nombre_producto"
                     [ngModelOptions] = "{standalone:true}"
                     readonly = "true"
                     > 
@@ -146,7 +146,7 @@
                         rows="5" 
                         cols="100" 
                         readonly = "true"
-                        [(ngModel)] = "Productos.Informacion_adicional_producto"
+                        [(ngModel)] = "Productos.informacion_adicional_producto"
                         >
                         </textarea>
                 </div>
@@ -162,7 +162,7 @@
                     <label>Cantidad devuelta: </label>
                     <input type = "text"
                     class = "tamañoInput form-control"
-                    [(ngModel)] = "Productos.Cantidad_devuelta" 
+                    [(ngModel)] = "Productos.cantidad_devuelta" 
                     maxlength = "3"
                     pattern="^[0-9]" 
                     required = "true"
@@ -173,7 +173,7 @@
                 <p></p>
 
                     <div class="">
-                        <button (click)="form3.checkValidity() ? AgregarDevolucion() : AgregarDevolucion()" class="boton btn btn-primary form-group col-sm-3">Registrar venta</button>
+                        <button (click)="form3.checkValidity() ? AgregarDevolucion() : AgregarDevolucion()" class="tamañoBoton btn btn-primary">Registrar venta</button>
                     </div>
                     
                 </form>
@@ -380,7 +380,7 @@
 		max-width: 1050px;
 		height: 500px;
 		margin-left: 295px;
-		margin-top: 30px;
+		margin-top: 0px;
 		background: #fff;
         overflow: scroll;
     }
@@ -410,7 +410,7 @@
     }
 
     .tamañoInput{
-        width: 300px;
+        width: 275px;
     }
 
     .tamañoInputBuscador{
@@ -427,7 +427,7 @@
 
     .separacionInfo{
         margin-left: 360px;
-        margin-top: -204px;
+        margin-top: -236px;
     
     }
 
@@ -445,6 +445,11 @@
         width: 180px;
         height: 40px;
         margin-top: 20px;
+    }
+
+    .botonTabla{
+        height: 40px;
+	    width: 80px;
     }
 </style>
 

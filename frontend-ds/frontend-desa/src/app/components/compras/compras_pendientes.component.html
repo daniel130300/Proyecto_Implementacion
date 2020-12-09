@@ -25,10 +25,10 @@
         </div>
 
         <div class="contenedorInformativo2">
-            <div class = "c container-fluid mt-3 pl-3"> 
+            <div class = ""> 
                 <form>
 
-                    <table class="tablaModificar table table-dark">
+                    <table class="table table-dark">
     
                         <thead>
                             <tr>  
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+        <div class="card" style="width: 75%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
                 
 			<button (click)="generar_reporte()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a> Reporte</button>
 		
@@ -74,7 +74,7 @@
                     <label>ID Compra: </label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Id_Compra"
+                        [(ngModel)]="id_Compra"
                         [ngModelOptions]="{standalone:true}"
                         disabled
                     >
@@ -83,10 +83,10 @@
                     <div class="form-group col-sm-5">
                         <label class="ml-1 mr-2 col-form-label">Visualizar productos: </label>
                         <button 
-                            class="tamaño btn btn-primary form-group"
+                            class="tamañoBoton btn btn-primary"
                             data-toggle = "modal"
                             data-target = "#exampleModal"
-                            (click)="get_productos_compra(Id_Compra)"
+                            (click)="get_productos_compra(id_Compra)"
                         >Mostrar</button>
                         
                     </div>
@@ -98,7 +98,7 @@
                         <label>Estatus: </label>
                         <select
                             class = "tamañoInput form-control input"
-                            [(ngModel)] = "Estatus"
+                            [(ngModel)] = "estatus"
                             [ngModelOptions] = "{standalone:true}"
                             required="true"
                         >
@@ -146,7 +146,7 @@
                     <label>Gastos adicionales: </label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Gastos"
+                        [(ngModel)]="gastos"
                         [ngModelOptions]="{standalone:true}"
                         disabled
                     >
@@ -257,7 +257,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Cantidades</h5>
-                <button (click)="get_productos_compra(Id_Compra)" data-toggle = "modal" data-target = "#exampleModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button (click)="get_productos_compra(id_Compra)" data-toggle = "modal" data-target = "#exampleModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
@@ -269,7 +269,7 @@
                     <label>Codigo Compra: </label>
                     <input type = "number" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Detalle_compra.Id_compra"
+                        [(ngModel)]="DetalleCompra.id_compra"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
                         disabled
@@ -280,7 +280,7 @@
                     <label>Codigo Producto: </label>
                     <input type = "number" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Detalle_compra.Id_producto"
+                        [(ngModel)]="DetalleCompra.id_producto"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
                         disabled
@@ -291,7 +291,7 @@
                     <label>Cantidad Ordenada: </label>
                     <input type = "number" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Detalle_compra.Cantidad_ordenada"
+                        [(ngModel)]="DetalleCompra.cantidad_ordenada"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
                         disabled
@@ -302,7 +302,7 @@
                     <label>Cantidad Recibida: </label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Detalle_compra.Cantidad_recibida"
+                        [(ngModel)]="DetalleCompra.cantidad_recibida"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
                         minlength="1"
@@ -315,7 +315,7 @@
                     <label>Cantidad Rechazada: </label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
-                        [(ngModel)]="Detalle_compra.Cantidad_rechazada"
+                        [(ngModel)]="DetalleCompra.cantidad_rechazada"
                         [ngModelOptions]="{standalone:true}" 
                         maxlength="3"
                         minlength="1"
@@ -326,7 +326,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button (click)="get_productos_compra(Id_Compra)" data-toggle = "modal" data-target = "#exampleModal"  type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button (click)="get_productos_compra(id_Compra)" data-toggle = "modal" data-target = "#exampleModal"  type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <button (click)="update_detalle_compra()"type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
@@ -466,12 +466,16 @@
 
     }
 
+    .margenTabla{
+        margin-right: 90px;
+    }
+
     .contenedorInformativo2{
         width: 75%;
 		max-width: 1050px;
 		height: 400px;
 		margin-left: 295px;
-		margin-top: 30px;
+		margin-top: 0px;
 		background: #fff;
         overflow: scroll;
     }
@@ -480,7 +484,7 @@
     .contenedorInformativo3{
         width: 75%;
 		max-width: 1050px;
-		height: 320px;
+		height: 360px;
 		margin-left: 295px;
 		margin-top: 30px;
 		background: #fff;
@@ -507,7 +511,7 @@
     }
 
     .tamañoInput{
-        width: 312px;
+        width: 350px;
     }
 
     .tamañoInputBuscador{
@@ -523,7 +527,7 @@
 
     .separacionInfo{
         margin-left: 400px;
-        margin-top: -116px;
+        margin-top: -152px;
     }
 
     .separacionInfo2{

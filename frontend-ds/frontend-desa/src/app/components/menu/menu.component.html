@@ -2,7 +2,7 @@
 	<header>
 		<div class="tituloEncabezado">
 			<h1>Variedades K&D</h1>
-			<h2>{{LoginID}}</h2>
+			<h2>{{login_id}}</h2>
 		</div>
 		
 	</header>
@@ -11,8 +11,8 @@
 			<h2>Menu</h2>
 			<ul>
 				<li><a [routerLink]="['/cajas']" [routerLinkActive]="['active']">Inicio</a></li>
-				<li *ngIf= "Rol==1"><a [routerLink]="['/dashboard']" [routerLinkActive]="['active']">Estadísticas</a></li>
-				<li *ngIf= "Rol==1"><a>Pedidos</a>
+				<li *ngIf= "rol==1"><a [routerLink]="['/dashboard']" [routerLinkActive]="['active']">Estadísticas</a></li>
+				<li *ngIf= "rol==1"><a>Pedidos</a>
 
 					<ul>
 						<li><a [routerLink]="['/mantenimiento_compras']" [routerLinkActive]="['active']">Nuevo Pedido</a></li>
@@ -25,28 +25,28 @@
 						<li><a [routerLink]="['/menu_venta']" [routerLinkActive]="['active']">Nueva Venta</a></li>
 						<li><a [routerLink]="['/ventas_pendientes_envio']" [routerLinkActive]="['active']">Ventas Pendientes De Envio</a></li>
 						<li><a [routerLink]="['/ventas_pagadas']" [routerLinkActive]="['active']">Ventas Pagadas</a></li>
-						<li *ngIf= "Rol==1"><a [routerLink]="['/ventas_incobrables']" [routerLinkActive]="['active']">Ventas Incobrables</a></li>
-						<li *ngIf= "Rol==1"><a [routerLink]="['/ventas_pendientes_cobro']" [routerLinkActive]="['active']">Ventas Pendientes De Cobro</a></li>
+						<li *ngIf= "rol==1"><a [routerLink]="['/ventas_incobrables']" [routerLinkActive]="['active']">Ventas Incobrables</a></li>
+						<li *ngIf= "rol==1"><a [routerLink]="['/ventas_pendientes_cobro']" [routerLinkActive]="['active']">Ventas Pendientes De Cobro</a></li>
 					</ul>
 				</li>
-				<li *ngIf= "Rol==1"><a>Clientes</a>
+				<li *ngIf= "rol==1"><a>Clientes</a>
 					<ul>
 						<li><a [routerLink]="['/mantenimiento_clientes']" [routerLinkActive]="['active']">Mantenimiento Clientes</a></li>
 					</ul>
 				</li>
-				<li *ngIf= "Rol==1"><a>Proveedores</a>
+				<li *ngIf= "rol==1"><a>Proveedores</a>
 					<ul>
 						<li><a [routerLink]="['/mantenimiento_proveedores']" [routerLinkActive]="['active']">Mantenimiento Proveedores</a></li>
 					</ul>
 				</li>
-				<li *ngIf= "Rol==1"><a>Empleados</a>
+				<li *ngIf= "rol==1"><a>Empleados</a>
 					<ul>
 						<li><a [routerLink]="['/mantenimiento_empleados']" [routerLinkActive]="['active']">Mantenimiento Empleados</a></li>
 					</ul>
 				</li>
 				<li><a>Inventario</a>
 					<ul>
-						<li *ngIf= "Rol==1"><a [routerLink]="['/mantenimiento_productos']" [routerLinkActive]="['active']">Mantenimiento Inventario</a></li>
+						<li *ngIf= "rol==1"><a [routerLink]="['/mantenimiento_productos']" [routerLinkActive]="['active']">Mantenimiento Inventario</a></li>
 						<li><a [routerLink]="['/consulta_inventario']" [routerLinkActive]="['active']">Consultar Inventario</a></li>
 					</ul>
 				</li>

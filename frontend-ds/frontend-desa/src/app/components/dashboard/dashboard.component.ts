@@ -14,7 +14,7 @@ export class GetDashboardComponent
 {
 
     private test: number[]  = [];
-    private nombre_top = [];
+    private nombre_top = []; 
     private top = [];
     private ventas_label = [];
     private ventas_normales_data = []; 
@@ -40,8 +40,6 @@ export class GetDashboardComponent
         this.get_ventas_devoluciones();
         this.get_ventas_anuales();
     }
-
-    /*FUNCIONES*/
 
     get_top_productos(){
 
@@ -149,9 +147,8 @@ export class GetDashboardComponent
         );
     }
 
-    public barChartOptions: ChartOptions = {
+    public barchartoptions: ChartOptions = {
         responsive: true,
-        // We use these empty structures as placeholders for dynamic theming.
         scales: { xAxes: [{}], yAxes: [{}] },
         plugins: {
         datalabels: {
@@ -160,18 +157,16 @@ export class GetDashboardComponent
         }
         }
     };
-    public barChartLabels: Label[] = this.ventas_label;
-    public barChartType: ChartType = 'bar';
-    public barChartLegend = true;
-    public barChartPlugins = [pluginDataLabels];
+    public barchartcabels: Label[] = this.ventas_label;
+    public barcharttype: ChartType = 'bar';
+    public barchartlegend = true;
+    public barchartplugins = [pluginDataLabels];
 
-    public barChartData: ChartDataSets[] = [
+    public barchartdata: ChartDataSets[] = [
         { data: this.ventas_plus_data, label: 'Ventas Plus' },
         { data: this.ventas_normales_data, label: 'Ventas Normales' }
     ];
 
-
-    // events
     public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
         console.log(event, active);
     }
@@ -180,7 +175,7 @@ export class GetDashboardComponent
         console.log(event, active);
     }
 
-    public pieChartOptions: ChartOptions = {
+    public piechartoptions: ChartOptions = {
         responsive: true,
         legend: {
           position: 'top',
@@ -195,21 +190,21 @@ export class GetDashboardComponent
         }
     };
 
-    public pieChartLabels: Label[] = [['Ventas sin Devolución'], ['Ventas con Devolución']];
-    public pieChartData: number[] = this.test;
-    public pieChartType: ChartType = 'pie';
-    public pieChartLegend = true;
-    public pieChartPlugins = [pluginDataLabels];
-    public pieChartColors = [
+    public piechartlabels: Label[] = [['Ventas sin Devolución'], ['Ventas con Devolución']];
+    public piechartdata: number[] = this.test;
+    public pieCharttype: ChartType = 'pie';
+    public piechartlegend = true;
+    public piechartplugins = [pluginDataLabels];
+    public piechartcolors = [
     {
         backgroundColor: ['rgba(255,0,0,0.3)', 'rgba(0,255,0,0.3)'],
     },];
     
-    public polarAreaChartLabels: Label[] = this.nombre_top;
-    public polarAreaChartData: number[] = this.top;
-    public polarAreaLegend = true;
-    public polarAreaChartType: ChartType = 'polarArea';
-    public polarAreaChartColors: Array<any> = [
+    public polarareachartlabels: Label[] = this.nombre_top;
+    public polarareachartdata: number[] = this.top;
+    public polararealegend = true;
+    public polarareacharttype: ChartType = 'polarArea';
+    public polarareachartcolors: Array<any> = [
         {
           backgroundColor: [
             'rgba(52, 152, 219,0.4)',

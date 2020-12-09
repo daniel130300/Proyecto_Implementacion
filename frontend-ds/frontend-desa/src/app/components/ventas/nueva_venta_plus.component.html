@@ -104,12 +104,12 @@
                     <label >Cod producto: </label>
                     <div class="input-group">
                         <input type = "text" 
-                            class = "form-control"
+                            class = "tamaño form-control col-sm-10"
                             [(ngModel)] = "Productos.id_producto"
                             [ngModelOptions]="{standalone: true}"
                             readonly = "true"
                         > 
-                        <button class ="btn btn-primary form-group col-sm-2"
+                        <button class ="tamaño btn btn-primary form-group col-sm-1"
                             data-toggle="modal"
                             data-target="#ProductosModal"
                             (click) = "get_productos()"
@@ -119,7 +119,7 @@
                     <div class="Espacios"></div>
                     <label >Nombre producto: </label>
                     <input type = "text" 
-                        class = "form-control"
+                        class = "tamañoInput form-control"
                         [(ngModel)] = "Productos.nombre_producto"
                         [ngModelOptions]="{standalone: true}"
                         readonly = "true"
@@ -129,7 +129,7 @@
                     <label >Información adicional: </label>
                     <textarea id="informacion_producto" 
                         name="informacion_producto" 
-                        class = "form-control"
+                        class = "tamañoInput form-control"
                         rows="5" 
                         cols="100" 
                         readonly = "true"
@@ -140,7 +140,7 @@
                     <div class="Espacios"></div>
                     <label >Precio referencial de venta </label>
                     <input type = "text" 
-                        class = "form-control"
+                        class = "tamañoInput form-control"
                         [(ngModel)] = "Productos.precio_referencial_venta"
                         [ngModelOptions]="{standalone: true}"
                         readonly = "true"
@@ -149,7 +149,7 @@
                     <div class="Espacios"></div>
                     <label >Cantidad: </label>
                     <input type = "text" 
-                        class = "form-control"
+                        class = "tamañoInput form-control"
                         [(ngModel)] = "Productos.cantidad"
                         [ngModelOptions]="{standalone: true}"
                         maxlength="3"
@@ -167,7 +167,7 @@
         </div>
 
         <div class="contenedorInformativo2">
-            <div class = "c container-fluid mt-3 pl-3"> 
+            <div class = ""> 
                 <form>
                     <div class="">
                         <div class="">
@@ -185,13 +185,13 @@
                                     </thead>
                                     <tbody>
                                     <tr *ngFor = "let produc of listado_productos_agregados">
-                                        <td>{{produc.id_producto}}</td>
-                                        <td>{{produc.nombre_producto}}</td>
-                                        <td>{{produc.informacion_adicional_producto}}</td>
-                                        <td>{{produc.precio_referencial_venta}}</td>
-                                        <td>{{produc.cantidad}}</td>
+                                        <td>{{produc.Id_producto}}</td>
+                                        <td>{{produc.Nombre_producto}}</td>
+                                        <td>{{produc.Informacion_adicional_producto}}</td>
+                                        <td>{{produc.Precio_referencial_venta}}</td>
+                                        <td>{{produc.Cantidad}}</td>
                                         <td>
-                                            <button (click)="EliminarProductoVenta(produc.id_producto)" class="btn btn-primary mb-3">Eliminar</button>
+                                            <button (click)="EliminarProductoVenta(produc.Id_producto)" class="botonTabla btn btn-primary mb-3">Eliminar</button>
                                        </td>
 
                                     </tr>
@@ -557,7 +557,7 @@
     }
 
     .tamañoInput{
-        width: 398px;
+        width: 375px;
     }
 
     .tamaño{
@@ -581,7 +581,7 @@
 
     .tablaModificar{
         table-layout: fixed;
-        width: 97%;
+        width: 100%;
     }
 
     .contenedorInformativo3{
@@ -619,6 +619,12 @@
         height: 40px;
         margin-top: 20px;
     }
+
+    .botonTabla{
+        height: 40px;
+        width: 70px;
+    }
+
 </style>
 
 <style>

@@ -13,23 +13,19 @@ import {Router} from '@angular/router'
 
 export class GetMenuComponent { 
 
-    public LoginID:any;
-    public Rol:any;
+    public login_id:any;
+    public rol:any;
     constructor(public service:AppService, private router:Router) {
-        this.LoginID = [];
-        this.Rol = [];
+        this.login_id = [];
+        this.rol = [];
     }
     ngOnInit(){
         console.log(this.service.get_session());
-        //console.log(this.service.get_usuariologueado());
-        this.LoginID = this.service.get_usuariologueado();
-        this.Rol = this.service.get_rol_usuario();
-        console.log(this.Rol);
+        this.login_id = this.service.get_usuariologueado();
+        this.rol = this.service.get_rol_usuario();
     }
     salir(){
         this.service.reset_session();
         this.router.navigateByUrl('/login');
-        //console.log(this.service.get_session());
-        //console.log(this.service.get_usuariologueado());
     }  
 } 

@@ -6,21 +6,17 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const secret_key = process.env.SECRET_KEY || "prew";
 
-//Conexion a la base de datos MYSQL
 
 var con = mysql.createPool({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "emma63194",
+    password: "Daniel100",
     database: 'variedades_kyd',
     insecureAuth: true,
     multipleStatements: true
 });
 
-/*---------------------------------MANTENIMIENTO PROVEEDORES----------------------------------*/
-
-//Insertar un nuevo Proveedor
 router.post('/insert_proveedor', (req, res, next) => {
 	var query = 'insert into proveedores (Nombre_compania, Direccion, Id_ciudad, Nombre_contacto, Apellido_contacto, Telefono_contacto, Email_contacto)';
 	    query = query  + 'values (?,?,?,?,?,?,?)';	
@@ -41,7 +37,6 @@ router.post('/insert_proveedor', (req, res, next) => {
    
 });
 
-//Editar un Proveedor
 router.put('/update_proveedor', (req, res, next) => {
 	var query = 'update proveedores set Nombre_compania = ?, Direccion = ?, Id_ciudad = ?, Nombre_contacto = ?, Apellido_contacto = ?, Telefono_contacto = ?, Email_contacto = ?';
 	    query = query  + ' where Id_proveedor = ?';
@@ -66,7 +61,7 @@ router.put('/update_proveedor', (req, res, next) => {
    
 });
 
-//Eliminar un Proveedor
+
 router.delete('/delete_proveedor', (req, res, next) => {
 	var query = 'update proveedores set Estado_logico = 0 where Id_proveedor = ?';
 	
@@ -82,9 +77,6 @@ router.delete('/delete_proveedor', (req, res, next) => {
    
 });
 
-
-
-//Consultar todos los Proveedores.
 router.get('/get_proveedores', (req, res, next) => {
 	var query = "select a.Id_proveedor, a.Nombre_compania, a.Nombre_contacto, a.Apellido_contacto, a.Telefono_contacto, a.Email_contacto, a.Direccion, b.Id_ciudad, b.Nombre_ciudad , c.Id_departamento, c.Nombre_departamento from proveedores a inner join ciudades b on a.Id_ciudad = b.Id_ciudad inner join departamentos c on b.Id_departamento = c.Id_departamento where Estado_logico = 1";
 	con.query(query, (err, result, fields) => {
@@ -96,10 +88,6 @@ router.get('/get_proveedores', (req, res, next) => {
 		}
 	});
 });
-
-/*---------------------------------MANTENIMIENTO PRODUCTOS_PROVEEDORES----------------------------------*/
-
-//Insertar un nuevo registro en Productos_Proveedores
 
 router.post('/insert_producto_proveedor', (req, res, next) => {
 	var query = 'insert into productos_proveedores (Id_producto, Id_proveedor)';
@@ -115,8 +103,6 @@ router.post('/insert_producto_proveedor', (req, res, next) => {
 	});
    
 });
-
-//Editar un registro en Productos_Proveedores
 
 router.put('/update_producto_proveedor', (req, res, next) => {
 	var query = 'update productos_proveedores set Id_producto = ?';
@@ -152,10 +138,6 @@ router.put ('/update_producto_compra', (req, res, next) => {
     });
 });
 
-
-
-
-//Consultar todos los registros en Productos_Proveedores.
 router.get('/get_productos_proveedor', (req, res, next) => {
 	var query= 'select a.Id_producto, a.Descripcion_producto, a.Talla, a.Color, a.Stock, a.Precio_referencial_venta, a.Precio_referencial_compra, a.Punto_reorden, b.Descripcion_modelo, c.Nombre_marca, d.Descripcion_subcategoria, e.Descripcion_categoria from productos a inner join modelos b on a.Id_modelo = b.Id_modelo inner join marcas c on b.Id_marca = c.Id_marca inner join subcategorias d on b.Id_subcategoria = d.Id_subcategoria inner join categorias e on d.Id_categoria = e.Id_categoria inner join productos_proveedores f on a.Id_producto = f.Id_producto ';
 		query = query + 'where a.Estado_logico = 1 and f.Id_proveedor = ?;';
@@ -171,11 +153,6 @@ router.get('/get_productos_proveedor', (req, res, next) => {
 	});
 });
 
-
-/---------------------------------MANTENIMIENTO CIUDADES----------------------------------/
-
-// Consultar todas las ciudades.
-
 router.get('/get_ciudades', (req, res, next) => {
     var query = 'select a.Id_ciudad, a.Nombre_ciudad, b.Id_departamento, b.Nombre_departamento from ciudades a inner join departamentos b on a.Id_departamento = b.Id_departamento';
     con.query(query, (err, result, fields) => {
@@ -186,10 +163,6 @@ router.get('/get_ciudades', (req, res, next) => {
         }
     });
 });
-
-
-
-// Insertar una nueva ciudad.
 
 router.post('/insert_ciudad', (req, res, next) => {
     var query = 'INSERT INTO ciudades (Nombre_ciudad, Id_departamento) VALUES (?, ?)';
@@ -207,8 +180,6 @@ router.post('/insert_ciudad', (req, res, next) => {
         }
     });
 });
-
-// Actualizar ciudad.
 
 router.put('/update_ciudad', (req, res, next) => {
     var query = 'UPDATE ciudades SET Nombre_ciudad = ?, Id_departamento = ? WHERE Id_ciudad = ?';
@@ -239,10 +210,6 @@ router.get('/get_departamentos', (req, res, next) => {
     });
 });
 
-
-/*---------------------------------MANTENIMIENTO CLIENTES----------------------------------*/
-
-//Insertar cliente
 router.post('/insert_cliente', (req, res, next) => {
     var query = 'INSERT INTO clientes (Nombre_compania, Id_ciudad, Id_tipo_cliente, Direccion, Nombre_contacto, Apellido_contacto, Telefono_contacto, Email_contacto) ';
         query = query + 'values (?, ?, ?, ?, ?, ?, ?, ?)';
@@ -267,7 +234,6 @@ router.post('/insert_cliente', (req, res, next) => {
     
 });
 
-//Actualizar cliente
 router.put('/update_cliente', (req, res, next) => {
     var query = 'UPDATE clientes SET Nombre_compania = ?, Id_ciudad = ?, Id_tipo_cliente = ?, Direccion = ?, Nombre_contacto = ?, Apellido_contacto = ?, Telefono_contacto = ?, Email_contacto = ?';
         query = query + 'WHERE Id_cliente = ?';
@@ -293,7 +259,6 @@ router.put('/update_cliente', (req, res, next) => {
     
 });
 
-//Eliminar un Cliente
 router.delete('/delete_cliente', (req, res, next) => {
     var query = 'update clientes set Estado_logico = 0 where Id_cliente = ?';
     var values = [req.query.id_cliente];
@@ -307,7 +272,6 @@ router.delete('/delete_cliente', (req, res, next) => {
     })
 });
 
-//Consultar todos los clientes
 router.get('/get_clientes', (req, res, next) => {
     var query = 'select a.Id_cliente, a.Nombre_compania, a.Nombre_contacto, a.Apellido_contacto, a.Telefono_contacto, a.Email_contacto, c.Id_tipo_cliente, c.Descripcion_cliente, c.Descuento_cliente, a.Direccion, b.Id_ciudad, b.Nombre_ciudad, d.Id_departamento, d.Nombre_departamento from clientes a inner join ciudades b on a.Id_ciudad = b.Id_ciudad inner join tipo_cliente c on a.Id_tipo_cliente = c.Id_tipo_cliente inner join departamentos d on b.Id_departamento = d.Id_departamento where Estado_logico = 1';
     con.query(query, (err, result, fields) => {
@@ -318,8 +282,6 @@ router.get('/get_clientes', (req, res, next) => {
         }
     })
 });
-
-
 
 router.get('/get_tipo_cliente', (req, res, next) => {
     var query = 'SELECT * FROM tipo_cliente';
@@ -334,11 +296,6 @@ router.get('/get_tipo_cliente', (req, res, next) => {
     
 });
 
-
-/*---------------------------------MANTENIMIENTO PRODUCTOS----------------------------------*/
-
-//Consulta Productos
-
 router.get('/get_productos', (req, res, next) => {
 	var query= 'select a.Id_producto, a.Descripcion_producto, a.Talla, a.Color, a.Stock, a.Precio_referencial_venta, a.Precio_referencial_compra, a.Punto_reorden, b.Id_modelo, b.Descripcion_modelo, c.Id_marca, c.Nombre_marca, d.Id_subcategoria, d.Descripcion_subcategoria, e.Id_categoria, e.Descripcion_categoria, g.Id_proveedor, g.Nombre_compania from productos a inner join modelos b on a.Id_modelo = b.Id_modelo inner join marcas c on b.Id_marca = c.Id_marca inner join subcategorias d on b.Id_subcategoria = d.Id_subcategoria inner join categorias e on d.Id_categoria = e.Id_categoria inner join productos_proveedores f on a.Id_producto = f.Id_producto inner join proveedores g on f.Id_proveedor = g.Id_proveedor where a.Estado_logico = 1 order by a.Id_producto desc';
     con.query(query, (err, result, fields) => {
@@ -349,8 +306,6 @@ router.get('/get_productos', (req, res, next) => {
         }
     });
 });
-
-//Insertar Productos
 
 router.post ('/Insert_productos', (req, res, next) => {
     var query = 'insert into productos (Descripcion_producto, Talla, Color, Stock, Precio_referencial_venta, Precio_referencial_compra, Punto_reorden, Id_modelo)';
@@ -373,8 +328,6 @@ router.post ('/Insert_productos', (req, res, next) => {
         }
     });
 });
-
-//Actualizar Productos
 
 router.put ('/update_productos', (req, res, next) => {
     var query = 'update productos set Descripcion_producto = ?, Talla = ? , Color = ?, Stock = ?, Precio_referencial_venta = ?, Precio_referencial_compra = ?, Punto_reorden = ?, Id_modelo = ?';
@@ -399,8 +352,6 @@ router.put ('/update_productos', (req, res, next) => {
     });
 });
 
-//Eliminar producto
-
 router.delete('/delete_productos', (req, res, next) => {
     var query= 'update productos set Estado_logico = 0 where Id_producto = ?';
    var values=[req.query.id_producto];
@@ -412,9 +363,6 @@ router.delete('/delete_productos', (req, res, next) => {
         }
     });
 });
-
-
-//Productos filtrados segun MODELO
 
 router.get('/get_modelo_filtrado', (req, res, next) => {
 	var query= 'select a.Id_modelo, a.Descripcion_modelo from modelos a where a.Id_marca=? and a.Id_subcategoria=?';
@@ -428,7 +376,6 @@ router.get('/get_modelo_filtrado', (req, res, next) => {
         }
     });
 });
-//Insertar un nuevo registro
 
 router.post('/insert_productos_proveedores',(req,res,next)=>{
 	var query='set @codigo=(select max(Id_producto) from productos); INSERT INTO productos_proveedores (Id_producto, Id_proveedor) VALUES (@codigo,?)';
@@ -458,8 +405,6 @@ router.put('/update_productos_proveedores', (req, res, next) => {
 	});
 });
 
-//Productos filtrados segun categoria
-
 router.get('/get_subcategoria_filtrado', (req, res, next) => {
 	var query= 'select a.Id_subcategoria, a.Descripcion_subcategoria from subcategorias a inner join categorias b on a.Id_categoria=b.Id_categoria where b.Id_categoria = ?';
 		var values = [req.query.id_categoria];
@@ -471,11 +416,6 @@ router.get('/get_subcategoria_filtrado', (req, res, next) => {
         }
     });
 });
-
-
-/*---------------------------------MANTENIMIENTO VENTAS----------------------------------*/
-
-//Consultar todas ventas
 
 router.get('/get_ventas', (req, res, next) => {
 	var query = 'select a.Id_venta, a.Cod_factura, a.Fecha_venta, a.Fecha_envio, a.Fecha_entrega, a.Identidad, a.ISV, b.Id_cliente, b.Nombre_compania, c.Id_estatus, c.Descripcion_estatus, d.Id_tipo_pago, d.Descripcion_tipo_pago, e.Id_plazo, e.Descripcion_plazo from ventas a inner join clientes b on a.Id_cliente = b.Id_cliente inner join Estatus c on a.Id_estatus = c.Id_estatus inner join tipo_pago d on a.Id_tipo_pago = d.Id_tipo_pago inner join plazos_pago e on a.Id_plazo = e.Id_plazo';
@@ -490,7 +430,6 @@ router.get('/get_ventas', (req, res, next) => {
    
 });
 
-//Insertar una nueva venta
 router.post ('/Insert_venta_plus', (req, res, next) => {
 	var query = 'insert into ventas (Fecha_venta, ISV, Id_cliente, Id_estado_envio, Id_estado_pago, Id_tipo_pago, Id_plazo) ';
 	var FechaActual = new Date();
@@ -513,10 +452,6 @@ router.post ('/Insert_venta_plus', (req, res, next) => {
     });
 });
 
-
-/*---------------------------------MANTENIMIENTO DETALLE_VENTAS----------------------------------*/
-
-//Consultar todos los detalles de ventas
 router.get('/get_detalle_ventas', (req, res, next) => {
 	var query = 'select * from detalle_ventas';
 	con.query(query, (err, result, fields) => {
@@ -529,7 +464,6 @@ router.get('/get_detalle_ventas', (req, res, next) => {
 	});
 });
 
-//Consultar los producto de una venta especifica
 router.get('/get_productos_venta', (req, res, next) => {
 	var query = 'select dv.Id_venta, dv.Id_producto, a.Descripcion_producto, a.Talla, a.Color, a.Stock, a.Precio_referencial_venta, a.Precio_referencial_compra, a.Punto_reorden, c.Nombre_marca, d.Descripcion_subcategoria, e.Descripcion_categoria, dv.Precio_venta, dv.Cantidad_vendida, dv.Cantidad_devuelta from detalle_ventas dv inner join productos a on dv.Id_producto=a.Id_producto inner join modelos b on a.Id_modelo = b.Id_modelo inner join marcas c on b.Id_marca = c.Id_marca inner join subcategorias d on b.Id_subcategoria = d.Id_subcategoria inner join categorias e on d.Id_categoria = e.Id_categoria where dv.Id_venta = ?';
 	var values = [req.query.Id_venta];
@@ -543,7 +477,6 @@ router.get('/get_productos_venta', (req, res, next) => {
 	});
 });
 
-//Consultar un solo detalle de venta CAMBIOS
 router.get('/get_detalle_venta', (req, res, next) => {
 	var query = 'select * from detalle_ventas where Id_venta = ? and Id_producto = ?';
 	var values = [req.query.Id_venta,
@@ -560,7 +493,6 @@ router.get('/get_detalle_venta', (req, res, next) => {
    
 });
 
-//Insertar un nuevo detalle CAMBIOS
 router.post('/insert_detalle_venta',(req,res,next)=>{
 	var query='set @codigo = (select max(Id_venta) from ventas); INSERT INTO detalle_ventas (Id_venta, Id_producto, Precio_venta, Cantidad_vendida, Cantidad_devuelta) VALUES (@codigo,?,?,?,?)';
 	var values=[
@@ -579,8 +511,6 @@ router.post('/insert_detalle_venta',(req,res,next)=>{
 	});
 });
 
-
-//Actualizar la tabla detalle de ventas
 router.put('/update_detalle_venta', (req, res, next) => {
 	var query = 'update detalle_ventas set Precio_venta = ?, Cantidad_vendida = ?, Cantidad_devuelta = ? ';
 	    query = query  + 'where Id_venta =? and Id_producto = ?';
@@ -605,10 +535,6 @@ router.put('/update_detalle_venta', (req, res, next) => {
    
 });
 
-
-/*---------------------------------MANTENIMIENTO CUENTAS POR COBRAR----------------------------------*/
-
-//Consultar todas las cuentas por cobrar
 router.get('/get_cuentas_por_cobrar', (req, res, next) => {
 	var query = 'select cpc.Id_cobro, cpc.Abono, cpc.Id_venta, v.Cod_factura, v.Fecha_venta, v.Fecha_envio, v.Fecha_entrega, v.Identidad, v.ISV, v.Id_cliente, c.Nombre_compania , v.Id_empleado, e.Nombre, e.Apellido, v.Id_estatus, es.Descripcion_estatus, v.Id_tipo_pago, tp.Descripcion_tipo_pago, v.Id_plazo, pp.Descripcion_plazo from cuentas_por_cobrar cpc inner join ventas v on cpc.Id_venta=v.Id_venta inner join clientes c on v.Id_cliente = c.Id_cliente inner join empleados e on v.Id_empleado = e.Id_empleado inner join estatus es  on v.Id_estatus = es.Id_estatus inner join tipo_pago tp on v.Id_tipo_pago = tp.Id_tipo_pago inner join plazos_pago pp on v.Id_plazo = pp.Id_plazo';
 	con.query(query, (err, result, fields) => {
@@ -622,7 +548,6 @@ router.get('/get_cuentas_por_cobrar', (req, res, next) => {
    
 });
 
-//Insertar una nueva cuenta por cobrar
 router.post('/insert_cuentas_por_cobrar', (req, res, next) => {
 	var query = 'INSERT INTO cuentas_por_cobrar (Abono, Id_venta) ';
 	    query = query  + 'values (?,?)';
@@ -642,8 +567,6 @@ router.post('/insert_cuentas_por_cobrar', (req, res, next) => {
 	});
    
 });
-
-//Actualizar campo en cuentas por cobrar
 
 router.put('/update_cuentas_por_cobrar', (req, res, next) => {
 	var query = 'update cuentas_por_cobrar set Abono = ?, Id_venta = ?';
@@ -678,11 +601,6 @@ router.get('/get_id_venta', (req, res, next) => {
     
 });
 
-
-/*---------------------------------MANTENIMIENTO CATEGORIAS----------------------------------*/
-
-//Consultar todas los categorias
-
 router.get('/get_categorias', (req, res, next) => {
     var query = 'SELECT * FROM categorias';
     con.query(query, (err, result, fileds) => {
@@ -694,8 +612,6 @@ router.get('/get_categorias', (req, res, next) => {
     });
     
 });
-
-//Insertar datos
 
 router.post('/insert_categoria', (req, res, next) => {
 	var query = 'insert into categorias (Descripcion_categoria)';
@@ -714,8 +630,6 @@ router.post('/insert_categoria', (req, res, next) => {
 	});
    
 });
-
-//Actualizar los datos
 
 router.put('/update_categoria', (req, res, next) => {
 	var query = 'update categorias set Descripcion_categoria = ?';
@@ -738,10 +652,6 @@ router.put('/update_categoria', (req, res, next) => {
    
 });
 
-
-//---------------------------------MANTENIMIENTO SUBCATEGORIAS----------------------------------/
-
-//Consultar todas las subcategorias
 router.get('/get_subcategorias', (req, res, next) => {
     var query ='SELECT s.Id_subcategoria, s.Descripcion_subcategoria, c.Id_categoria, c.Descripcion_categoria FROM subcategorias s JOIN categorias c ON s.Id_categoria = c.Id_Categoria';
     con.query(query, (err, result, fileds) => {
@@ -754,7 +664,6 @@ router.get('/get_subcategorias', (req, res, next) => {
     
 });
 
-//Insertar datos
 router.post('/insert_subcategoria', (req, res, next) => {
     var query = 'insert into subcategorias (Descripcion_subcategoria, Id_categoria)';
         query = query  + 'values (?,?)';
@@ -776,7 +685,6 @@ router.post('/insert_subcategoria', (req, res, next) => {
    
 });
 
-//Actualizar los datos
 router.put('/update_subcategoria', (req, res, next) => {
     var query = 'update subcategorias set Descripcion_subcategoria = ?, Id_categoria = ?';
         query = query  + ' where Id_subcategoria = ?';
@@ -799,10 +707,6 @@ router.put('/update_subcategoria', (req, res, next) => {
    
 });
 
-/*---------------------------------MANTENIMIENTO MARCAS----------------------------------*/
-
-//Consultar todas las marcas
-
 router.get('/get_marcas', (req, res, next) => {
     var query = 'SELECT * FROM marcas;';
  con.query(query,(err,result,fields) => {
@@ -815,8 +719,6 @@ router.get('/get_marcas', (req, res, next) => {
     });
 
 });
-
-//Insertar una nueva marca
 
 router.post('/insert_marca', (req, res, next) => {
     var query = 'insert into marcas (Nombre_marca)';
@@ -835,8 +737,6 @@ router.post('/insert_marca', (req, res, next) => {
 
 });
 
-//Actualizar una marca
-
 router.put('/update_marca', (req, res, next) => {
     var query = 'update marcas set Nombre_marca = ? ';
     query= query + 'where Id_marca = ?';
@@ -854,11 +754,6 @@ router.put('/update_marca', (req, res, next) => {
 
 });
 
-
-/*---------------------------------MANTENIMIENTO MODELOS----------------------------------*/
-
-//Consultar todos los modelos
-
 router.get('/get_modelos', (req, res, next) => {
     var query = 'select a.Id_modelo, a.Descripcion_modelo, b.Id_marca, b.Nombre_marca, c.Id_subcategoria, c.Descripcion_subcategoria, d.Id_categoria, d.Descripcion_categoria from modelos a inner join marcas b on a.Id_marca = b.Id_marca inner join subcategorias c on a.Id_subcategoria = c.Id_subcategoria inner join categorias d on c.Id_categoria = d.Id_categoria';
  con.query(query,(err,result,fields) => {
@@ -866,10 +761,8 @@ router.get('/get_modelos', (req, res, next) => {
          next(err);
      }else {
          res.status(200).json(result);
-
      }
     });
-
 });
 
 router.get('/get_subcategorias', (req, res, next) => {
@@ -881,7 +774,6 @@ router.get('/get_subcategorias', (req, res, next) => {
             res.status(200).json(result);
         }
     });
-    
 });
 
 router.get('/get_marcas', (req, res, next) => {
@@ -891,22 +783,17 @@ router.get('/get_marcas', (req, res, next) => {
          next(err);
      }else {
          res.status(200).json(result);
-
      }
     });
-
 });
-
-//Insertar un nuevo modelo
 
 router.post('/insert_modelo', (req, res, next) => {
     var query = 'insert into modelos(Descripcion_modelo,Id_marca, Id_subcategoria)';
     query= query + ' values(?,?,?)';
-
     var values = [
-        req.body.Descripcion_modelo,
-        req.body.Id_marca,
-        req.body.Id_subcategoria
+        req.body.descripcion_modelo,
+        req.body.id_marca,
+        req.body.id_subcategoria
     	];
 
  con.query(query,values,(err,result,fields) => {
@@ -916,19 +803,16 @@ router.post('/insert_modelo', (req, res, next) => {
          res.status(200).json(result);
      }
     });
-
 });
-
-//Actualizar un modelo
 
 router.put('/update_modelo', (req, res, next) => {
     var query = 'update modelos set Descripcion_modelo = ?, Id_marca = ?, Id_subcategoria = ? ';
     query= query + 'where Id_modelo = ?';
 
-    var values = [req.body.Descripcion_modelo,
-        req.body.Id_marca,
-        req.body.Id_subcategoria,
-    req.body.Id_modelo];
+    var values = [req.body.descripcion_modelo,
+        req.body.id_marca,
+        req.body.id_subcategoria,
+    	req.body.id_modelo];
 
  con.query(query,values,(err,result,fields) => {
      if(err){
@@ -937,12 +821,8 @@ router.put('/update_modelo', (req, res, next) => {
          res.status(200).json(result);
      }
     });
-
 });
 
-/*---------------------------------MANTENIMIENTO EMPLEADOS----------------------------------*/
-
-//consultar todos los empleados
 router.get('/get_empleados', (req, res, next) => {
     var query = 'SELECT em.Id_empleado, em.Identidad, em.Nombre,em.Apellido,em.Telefono,em.Email,em.Direccion,em.Salario,em.LoginID,em.Contrasenia,em.Fecha_nacimiento,em.Fecha_contratacion,em.Fecha_despido,e.Id_estatus,e.Descripcion_estatus,p.Id_puesto,p.Descripcion_puesto FROM empleados em JOIN estatus e ON e.Id_estatus = em.Id_estatus JOIN puestos p ON em.Id_puesto = p.Id_puesto;';
     con.query(query, (err, result, fields) => {
@@ -954,7 +834,6 @@ router.get('/get_empleados', (req, res, next) => {
     });
 });
 
-//Insertar nuevo empleado
 router.post('/insert_empleados', (req, res, next) => {
     
     var emp = {Identidad: req.body.identidad,
@@ -990,8 +869,6 @@ router.post('/insert_empleados', (req, res, next) => {
 	});
 });
 
-
-//Actualizar Empleado
 router.put('/update_empleados', (req, res, next) => {
     var query = 'update empleados set Identidad=?, Nombre=?, Apellido=?, Telefono=?, Email=?, Direccion=?, Salario=?, LoginID=?, Contrasenia=?, Fecha_nacimiento=?, Fecha_contratacion=?, Fecha_despido=?, Id_puesto=?, Id_estatus=? ';
     	query= query + 'where Id_empleado=?';
@@ -1023,7 +900,6 @@ router.put('/update_empleados', (req, res, next) => {
     });
 });
 
-// Consultar estados.
 router.get('/get_estatus', (req, res, next) => {
     var query = 'SELECT * FROM estatus LIMIT 2;';
     con.query(query, (err, result, fields) => {
@@ -1035,7 +911,6 @@ router.get('/get_estatus', (req, res, next) => {
     });
 });
 
-// Consultar puestos.
 router.get('/get_puestos', (req, res, next) => {
     var query = 'SELECT * FROM puestos;';
     con.query(query, (err, result, fields) => {
@@ -1047,9 +922,6 @@ router.get('/get_puestos', (req, res, next) => {
     });
 });
 
-/*---------------------------------MANTENIMIENTO COMPRAS----------------------------------*/
-
-//Consultar todas compras
 router.get('/get_compras', (req, res, next) => {
 	var query = 'SELECT c.Id_compra, c.Codigo_factura, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus, (dc.Cantidad_ordenada*dc.Precio_compra)+c.Gastos_adicionales as Monto_total FROM  compras c inner join detalle_compras dc on c.Id_compra = dc.Id_compra join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus = es.Id_estatus where c.Id_estatus = 4 group by c.Id_compra';
 	con.query(query, (err, result, fields) => {
@@ -1063,7 +935,6 @@ router.get('/get_compras', (req, res, next) => {
    
 });
 
-//Consultar compras en estado pendiente de recibido
 router.get('/get_compras_pendientes', (req, res, next) => {
 	var query = 'SELECT c.Id_compra, c.Codigo_factura, c.Fecha_orden, c.Fecha_recibida, c.Gastos_adicionales, c.Id_proveedor, p.Nombre_compania, c.Id_estatus, es.Descripcion_estatus FROM  compras c inner join proveedores p on c.Id_proveedor = p.Id_proveedor inner join estatus es on c.Id_estatus = es.Id_estatus where c.Id_estatus = 3';
 	con.query(query, (err, result, fields) => {
@@ -1077,7 +948,6 @@ router.get('/get_compras_pendientes', (req, res, next) => {
    
 });
 
-/* Consultar estatus de compras */
 router.get('/get_estatus_compra', (req, res, next) => {
     var query = 'SELECT * FROM estatus where Id_estatus = 3 or Id_estatus = 4;';
     con.query(query, (err, result, fields) => {
@@ -1089,11 +959,6 @@ router.get('/get_estatus_compra', (req, res, next) => {
     });
 });
 
-
-
-//Insertar nueva compra
-
-//------------------------------------------------------HICE MODIFICACIONES AQUI-----------------------------------------------------
 router.post('/insert_compras', (req, res, next) => {
     var query = 'insert into compras (Codigo_factura, Fecha_orden, Fecha_recibida, Gastos_adicionales, Id_proveedor, Id_estatus) ';
 		query= query + 'values (?, ?, ?, ?, ?, ?)';
@@ -1101,8 +966,8 @@ router.post('/insert_compras', (req, res, next) => {
 
     var values=[
 				req.body.Codigo_factura,	
-    			FechaActual, //Inserta la fecha actual sin que sea mandada del frontend
-    			null, //FECHA RECIBIDA NULL ya que no se necesita al insertar la compra
+    			FechaActual, 
+    			null, 
     			req.body.Gastos_adicionales, 
     			req.body.Id_proveedor, 
     			req.body.Id_estatus	
@@ -1117,9 +982,6 @@ router.post('/insert_compras', (req, res, next) => {
     });
 });
 
-
-//Actualizar compra
-
 router.put('/update_compra', (req, res, next) => {
     var query = 'update compras set  Fecha_recibida=?, Id_estatus=? ';
 		query= query + 'where Id_compra=?';
@@ -1128,8 +990,8 @@ router.put('/update_compra', (req, res, next) => {
     
     var values=[ 
     			FechaActual, 
-    			req.body.Id_estatus,
-    			req.body.Id_compra
+    			req.body.id_estatus,
+    			req.body.id_compra
     ];
 
     con.query(query, values, (err, result, fields) => {
@@ -1140,11 +1002,6 @@ router.put('/update_compra', (req, res, next) => {
     	}
     });
 });
-
-
-/*---------------------------------MANTENIMIENTO DETALLE_COMPRAS----------------------------------*/
-
-//---------------------------------------------------------------COMENTE ESTA API PORQUE USAMOS UNA NUEVA---------------------------------------------------------
 
 router.post('/insert_detalle_compras',(req,res,next)=>{
 	var query='set @codigo=(select max(Id_compra)  from compras); INSERT INTO detalle_compras (Id_compra, Id_producto, Precio_compra, Cantidad_ordenada, Cantidad_recibida, Cantidad_rechazada) VALUES (@codigo,?,?,?,?,?)';
@@ -1165,18 +1022,16 @@ router.post('/insert_detalle_compras',(req,res,next)=>{
 	});
 });
 
-//Actualizar registro en detalle_compras
-
 router.put('/update_detalle_compras', (req, res, next) => {
     var query = 'update detalle_compras set Cantidad_ordenada=?, Cantidad_recibida=?, Cantidad_rechazada=?';
     	query= query + ' where Id_compra=? and Id_producto = ?';
     
     var values=[
-    			req.body.Cantidad_ordenada, 
-    			req.body.Cantidad_recibida, 
-    			req.body.Cantidad_rechazada,
-    			req.body.Id_compra,
-    			req.body.Id_producto
+    			req.body.cantidad_ordenada, 
+    			req.body.cantidad_recibida, 
+    			req.body.cantidad_rechazada,
+    			req.body.id_compra,
+    			req.body.id_producto
     ];
 
     con.query(query, values, (err, result, fields) => {
@@ -1187,9 +1042,6 @@ router.put('/update_detalle_compras', (req, res, next) => {
     	}
     });
 });
-
-
-//consultar todos los registros en detalle_compras
 
 router.get('/get_detalle_compras', (req, res, next) => {
     var query = 'SELECT * FROM detalle_compras';
@@ -1202,7 +1054,6 @@ router.get('/get_detalle_compras', (req, res, next) => {
     });
 });
 
-//Consultar los productos de una compra
 router.get('/get_productos_compra', (req, res, next) => {
 	var query = 'select dc.Id_compra, dc.Id_producto, a.Descripcion_producto, a.Talla, a.Color, a.Stock, b.Descripcion_modelo, c.Nombre_marca, d.Descripcion_subcategoria, e.Descripcion_categoria, dc.Precio_compra, dc.Cantidad_ordenada, dc.Cantidad_recibida, dc.Cantidad_rechazada from detalle_compras dc inner join productos a on dc.Id_producto=a.Id_producto inner join modelos b on a.Id_modelo = b.Id_modelo inner join marcas c on b.Id_marca = c.Id_marca inner join subcategorias d on b.Id_subcategoria = d.Id_subcategoria inner join categorias e on d.Id_categoria = e.Id_categoria where dc.Id_compra = ?';
 	var values = [req.query.Id_compra];
@@ -1218,8 +1069,6 @@ router.get('/get_productos_compra', (req, res, next) => {
    
 });
 
-//consultar un registro en detalle_compras
-
 router.get('/get_detalle_compras_buscar', (req, res, next) => {
     var query = 'SELECT * FROM detalle_compras where Id_compra = ? and Id_producto = ?';
     var values = [req.query.Id_compra,
@@ -1233,12 +1082,6 @@ router.get('/get_detalle_compras_buscar', (req, res, next) => {
     });
 
 });
-
-
-
-/*---------------------------------MANTENIMIENTO CIUDADES----------------------------------*/
-
-// Consultar todas las ciudades.
 
 router.get('/get_ciudades', (req, res, next) => {
     var query = 'SELECT	* FROM ciudades';
@@ -1280,11 +1123,6 @@ router.post('/login', (req, res, next) =>{
 	get_token(user);
 });	
 
-
-/*---------------------------------MANTENIMIENTO TIPOS DE PAGO----------------------------------*/
-
-// Consultar todos los tipos de pago.
-
 router.get('/get_tipos', (req, res, next) => {
     var query = 'select * from tipo_pago';
     con.query(query, (err, result, fields) => {
@@ -1295,10 +1133,6 @@ router.get('/get_tipos', (req, res, next) => {
         }
     });
 });
-
-/*---------------------------------MANTENIMIENTO PLAZOS DE PAGO----------------------------------*/
-
-// Consultar todos los tipos de pago.
 
 router.get('/get_plazos', (req, res, next) => {
     var query = 'select * from plazos_pago';
@@ -1311,11 +1145,9 @@ router.get('/get_plazos', (req, res, next) => {
     });
 });
 
-//CONSULTA VENTAS PENDIENTES DE ENVIO
 router.get('/get_ventas_pendientes_envio', (req, res, next) => {
 	var query = "select v.Id_venta, v.Fecha_venta, SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) as Subtotal, SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) * tc.Descuento_cliente as Descuento, ((SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta))) - (SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) * tc.Descuento_cliente)) * v.Isv as Isv, ((SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta))) -  (SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) * tc.Descuento_cliente) + (((SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta))) - (SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) * tc.Descuento_cliente)) * v.Isv)) as Total, c.Nombre_compania, dep.Nombre_departamento, ciu.Nombre_ciudad, c.Direccion ,c.Nombre_contacto, c.Apellido_contacto, c.Telefono_contacto, c.Email_contacto, es.Descripcion_estatus from ventas v join detalle_ventas dv on v.Id_venta = dv.Id_venta  join clientes c on v.Id_cliente = c.Id_cliente  join tipo_cliente tc on c.Id_tipo_cliente = tc.Id_tipo_cliente join ciudades ciu on c.Id_ciudad=ciu.Id_ciudad join departamentos dep on ciu.Id_departamento= dep.Id_departamento join estatus es on v.Id_estado_pago=es.Id_estatus where v.Id_estado_pago in (5,6) and v.Id_estado_envio = 8 group by v.Id_venta";
 
-//	var values = [req.query.Id_estatus ];
 	con.query(query, (err, result, fields) => {
 		if(err) {
 				next(err);
@@ -1327,7 +1159,6 @@ router.get('/get_ventas_pendientes_envio', (req, res, next) => {
    
 });
 
-//CONSULTA DE DOS UNICOS ESTADOS PARA LOS PENDIENTES DE ENVIO
 router.get('/get_unicos_estados', (req, res, next) => {
 	var query = "select * from estatus where Id_estatus >=8";
 	
@@ -1342,7 +1173,6 @@ router.get('/get_unicos_estados', (req, res, next) => {
    
 });
 
-//ACTUALIZAR FECHAS EN VENTAS PENDIENTES DE ENVIO
 router.put('/update_ventas_pendientes_envio', (req, res, next) => {
 	var query = 'update ventas set Id_estado_envio=?, Fecha_envio = ?, Fecha_entrega= ? ';
 	    query = query  + 'where Id_venta=?';
@@ -1364,7 +1194,6 @@ router.put('/update_ventas_pendientes_envio', (req, res, next) => {
 	});
    
 });
-//CONSULTA DE VENTAS_PAGADAS
 
 router.get('/get_ventas_pagadas', (req, res, next) => {
 	var query = "select v.Id_venta, v.Fecha_venta, v.Fecha_envio, v.Fecha_entrega , SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) as Subtotal, SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) *if(tc.Descuento_cliente is NULL, 0, tc.Descuento_cliente) as Descuento, ((SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta))) - (SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) * if(tc.Descuento_cliente is NULL, 0, tc.Descuento_cliente))) * v.Isv as Isv, ((SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta))) -  (SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) * if(tc.Descuento_cliente is NULL, 0, tc.Descuento_cliente)) + (((SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta))) - (SUM(dv.Precio_venta*(dv.Cantidad_vendida-dv.Cantidad_devuelta)) * if(tc.Descuento_cliente is NULL, 0, tc.Descuento_cliente))) * v.Isv)) as Total, v.Identidad, c.Nombre_compania, c.Nombre_contacto, c.Apellido_contacto, c.Telefono_contacto, c.Email_contacto, es.Descripcion_estatus from ventas v  join detalle_ventas dv on v.Id_venta = dv.Id_venta  left join clientes c on v.Id_cliente = c.Id_cliente  left join tipo_cliente tc on c.Id_tipo_cliente = tc.Id_tipo_cliente join estatus es on v.Id_estado_envio=es.Id_estatus where v.Id_estado_pago = 5  and v.Id_estado_envio in(9,10) group by v.Id_venta";
@@ -1378,8 +1207,6 @@ router.get('/get_ventas_pagadas', (req, res, next) => {
 	}); 
    
 });
-
-//UNA SOLA VENTA PAGADA
 
 router.get('/get_venta_pagada', (req, res, next) => {
 	var query = "select v.Id_venta, v.Cod_factura, v.Fecha_venta, v.Fecha_envio, v.Fecha_entrega, (dv.Precio_venta * dv.Cantidad_vendida) Subtotal, v.ISV, ((dv.Precio_venta*dv.Cantidad_vendida)-v.ISV) Total, v.Id_cliente, c.Nombre_compania, c.Nombre_contacto,  c.Apellido_contacto, c.Telefono_contacto, c.Email_contacto from ventas v join detalle_ventas dv on v.Id_venta=dv.Id_venta join clientes c  on v.Id_cliente=c.Id_cliente ";
@@ -1398,8 +1225,6 @@ router.get('/get_venta_pagada', (req, res, next) => {
    
 });
 
-//Obtener los estados de envio
-
 router.get('/get_estados_envio', (req, res, next) => {
 	var query = "select * from estatus where Id_estatus = 8 or Id_estatus = 10"
 	
@@ -1411,8 +1236,6 @@ router.get('/get_estados_envio', (req, res, next) => {
 		}
 	});
 });
-
-//Obtener los clientes filtrados por tipode cliente
 
 router.get('/get_clientes_filtrados', (req, res, next) => {
 	var query = 'select a.Id_cliente, a.Nombre_compania, a.Nombre_contacto, a.Apellido_contacto, a.Telefono_contacto, a.Email_contacto, c.Id_tipo_cliente, c.Descripcion_cliente, c.Descuento_cliente, a.Direccion, b.Id_ciudad, b.Nombre_ciudad, d.Id_departamento, d.Nombre_departamento from clientes a inner join ciudades b on a.Id_ciudad = b.Id_ciudad inner join tipo_cliente c on a.Id_tipo_cliente = c.Id_tipo_cliente inner join departamentos d on b.Id_departamento = d.Id_departamento where Estado_logico = 1 and a.Id_tipo_cliente = ?';
@@ -1462,8 +1285,6 @@ router.put('/agregar_producto_inventario', (req, res, next) => {
 		}
 	});
 });
-
-//Obtener las ventas pendientes de cobro
 
 router.get('/get_ventas_pendientes_cobro', (req, res, next) => {
 
@@ -1530,8 +1351,6 @@ con.query(query, (err, result, fields) => {
 });
 
 });
-
-//Obtener el estado de incobrable para ventas pendientes de cobro
 
 router.get('/get_estado_incobrable', (req, res, next) => {
 	var query = "select * from estatus where Id_estatus = 7"
@@ -1619,8 +1438,8 @@ router.get('/get_devoluciones_venta', (req, res, next) => {
 	+"WHERE v.Fecha_venta between DATE_SUB(NOW(), INTERVAL 1 MONTH) and now() " 
 	+"group by v.Id_venta";
 	
-	var values = [req.query.Id_venta,
-				  req.query.Id_producto];
+	var values = [req.query.id_venta,
+				  req.query.id_producto];
 	
 	con.query(query, values, (err, result, fields) => {
 		if(err) {
@@ -1630,7 +1449,6 @@ router.get('/get_devoluciones_venta', (req, res, next) => {
 
 		}
 	});
-   
 });
 
 
@@ -1648,18 +1466,15 @@ router.get('/get_devolucion_productos', (req, res, next) => {
 	"ON p.Id_producto= dv.Id_producto "+
 	"WHERE dv.Id_venta = ? "
 
-	var values = [req.query.Id_venta];
-
+	var values = [req.query.id_venta];
 	
 	con.query(query,values, (err, result, fields) => {
 		if(err) {
 				next(err);
 		} else {
 				res.status(200).json(result);
-
 		}
 	});
-   
 });
 
 router.put('/update_devoluciones', (req, res, next) => {
@@ -1667,8 +1482,8 @@ router.put('/update_devoluciones', (req, res, next) => {
     query= query + 'WHERE Id_venta = ? AND Id_producto = ?';
 
     var values = [req.body.Cantidad_devuelta,
-        req.body.Id_venta,
-        req.body.Id_producto];
+        req.body.id_venta,
+        req.body.id_producto];
 
  con.query(query,values,(err,result,fields) => {
      if(err){
@@ -1677,10 +1492,7 @@ router.put('/update_devoluciones', (req, res, next) => {
          res.status(200).json(result);
      }
     });
-
 });
-
-//--------------- QUERIES PARA LOS GRÁFICOS ----------------
 
 router.get('/get_top_5_productos', (req, res, next) => {
 	var query = 'SELECT p.Descripcion_producto Producto, count(dv.Id_producto) Cantidad FROM detalle_ventas dv inner join productos p on dv.Id_producto = p.Id_producto group by p.Descripcion_producto order by count(dv.Id_producto) DESC limit 5';
@@ -1694,7 +1506,6 @@ router.get('/get_top_5_productos', (req, res, next) => {
 	});
 });
 
-
 router.get('/get_ventas_normales_anuales', (req, res, next) => {
 	var query = "SELECT MONTH( a.Fecha_venta ) Mes, ROUND( SUM( ( b.Cantidad_vendida * b.Precio_venta ) + ( ( b.Cantidad_vendida * b.Precio_venta ) * a.ISV ) ), 2 ) Total FROM ventas a INNER JOIN detalle_ventas b ON a.Id_venta = b.Id_venta WHERE a.Id_plazo IS NULL AND YEAR( a.Fecha_venta ) = YEAR( NOW() ) GROUP BY MONTH( a.Fecha_venta )";
 	con.query(query, (err, result, fields) => {
@@ -1706,7 +1517,6 @@ router.get('/get_ventas_normales_anuales', (req, res, next) => {
 		}
 	});
 });
-
 
 router.get('/get_ventas_plus_anuales', (req, res, next) => {
 	var query = "SELECT MONTH( a.Fecha_venta ) Mes, ROUND( SUM( ( b.Cantidad_vendida -b.Cantidad_devuelta ) * b.Precio_venta ) - SUM( ( ( b.Cantidad_vendida - b.Cantidad_devuelta ) * b.Precio_venta ) * d.Descuento_cliente )  + ( ( SUM( ( b.Cantidad_vendida - b.Cantidad_devuelta ) * b.Precio_venta ) - SUM( ( ( b.Cantidad_vendida - b.Cantidad_devuelta ) * b.Precio_venta ) * d.Descuento_cliente ) ) * a.ISV ), 2 ) Total FROM ventas a INNER JOIN detalle_ventas b ON a.Id_venta = b.Id_venta INNER JOIN clientes c ON a.Id_cliente = c.Id_cliente INNER JOIN tipo_cliente d ON c.Id_tipo_cliente = d.Id_tipo_cliente WHERE a.Id_plazo IS NOT NULL AND YEAR( a.Fecha_venta ) = YEAR( NOW() ) GROUP BY MONTH( a.Fecha_venta )";

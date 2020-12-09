@@ -23,7 +23,7 @@
                         <label class="ml-1 mr-2 col-form-label">Categoria: </label>
                         <div class="input-group">
                             <select
-                                class = "tamaño form-control col-sm-8"
+                                class = "tamaño form-control col-sm-10"
                                 [(ngModel)] = "id_categoria"
                                 [ngModelOptions] = "{standalone:true}"
                                 (change)="get_subcategoria_filtrado(id_categoria)"
@@ -51,7 +51,7 @@
                         <label class="ml-1 mr-2 col-form-label">Subcategoria: </label>
                         <div class="input-group">
                             <select
-                                class = "tamaño form-control col-sm-8"
+                                class = "tamaño form-control col-sm-10"
                                 [(ngModel)] = "id_subcategoria"
                                 [ngModelOptions] = "{standalone:true}"
                                 required="true"
@@ -76,7 +76,7 @@
                         <label class="ml-1 mr-2 col-form-label">Marca: </label>
                         <div class="input-group">
                             <select
-                                class = "tamaño form-control col-sm-8"
+                                class = "tamaño form-control col-sm-10"
                                 [(ngModel)] = "id_marca"
                                 [ngModelOptions] = "{standalone:true}"
                                 (change)="get_modelo_filtrado()"
@@ -102,7 +102,7 @@
                         <label class="ml-1 mr-2 col-form-label">Modelo: </label>
                         <div class="input-group">
                             <select
-                                class = "tamaño form-control col-sm-8"
+                                class = "tamaño form-control col-sm-10"
                                 [(ngModel)] = "Producto.id_modelo"
                                 [ngModelOptions] = "{standalone:true}"
                                 (change)="get_modelo_filtrado()"
@@ -126,7 +126,7 @@
                         <label class="ml-1 mr-2 col-form-label">Proveedor: </label>
                         <div class="input-group">
                             <select
-                                class = "tamaño form-control col-sm-8"
+                                class = "tamaño form-control col-sm-10"
                                 [(ngModel)] = "prove.id_proveedor"
                                 [ngModelOptions] = "{standalone:true}"
                                 required="true"
@@ -250,25 +250,22 @@
                     >
                 </div>
                 <p></p>
-                <button (click)="form.checkValidity() ? insertar_producto() : null" class="btn btn-primary">Guardar Producto</button>
+                <button (click)="form.checkValidity() ? insertar_producto() : null" (click) = "form.checkValidity ? insertar_producto() : null" class="tamañoBoton btn btn-primary">Guardar Producto</button>
             </div>
         </form> 
         </div>
+
+        <div class="contenedorInformativo3">
+		    <!--  AQUI EMPIEZA EL CAMBIO -->		 
+			<form class="form-incline">
+				<div class="form-inline">
+					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
+				</div>
+		    </form>
+        </div>
     
         <div class="contenedorInformativo2">
-            <div class = "nada container-md">
-                <br>
-
-                <form class="form-incline">
-                    <div class= "form-inline">
-                        
-                        <input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
-    
-                    </div>
-                </form>
-
-                <br>
-
+            <div class = "">
                 <table class = "table-sm table-dark">
                     <thead>
                         <tr>  
@@ -302,7 +299,7 @@
                             <td>{{pro.Descripcion_categoria}}</td> 
                             <td>{{pro.Nombre_compania}}</td>
                             <td>
-                                <button class = "btn btn-primary btn-sm " 
+                                <button class = "botonTabla btn btn-primary btn-sm " 
                                 width = 74px
                                 data-toggle = "modal"
                                 data-target = "#editModal"
@@ -311,7 +308,7 @@
         
                             <td>
                                 <button (click) = "delete_producto(pro.Id_producto)"
-                                    class = "btn btn-danger btn-sm">Eliminar
+                                    class = "botonTabla btn btn-danger btn-sm">Eliminar
                                 </button>
                             </td> 
                         </tr>
@@ -602,7 +599,7 @@
 	.contenedorInformativo{
 		width: 75%;
 		max-width: 1050px;
-		height: 520px;
+		height: 530px;
 		margin-left: 295px;
 		margin-top: 30px;
 		background: #fff;
@@ -615,7 +612,7 @@
 		max-width: 1050px;
 		height: 450px;
 		margin-left: 295px;
-		margin-top: 30px;
+		margin-top: 0px;
 		background: #fff;
         overflow: scroll;
     }
@@ -638,14 +635,18 @@
         overflow: scroll;
     }
 
+    .tamaño{
+        width: 375px;
+    }
+
     .tamañoInput{
-        width: 300px;
+        width: 370px;
     }
 
 
     .separacionInfo{
-        margin-left: 440px;
-        margin-top: -422px;
+        margin-left: 480px;
+        margin-top: -432px;
         
     }
 
@@ -658,6 +659,29 @@
         width: 180px;
         height: 40px;
         margin-top: 20px;
+    }
+
+    .contenedorInformativo3{
+		width: 75%;
+		max-width: 1050px;
+		height: 80px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+
+    }
+
+    .tamañoInputBuscador{
+        width: 600px;
+        margin-top: 18px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .botonTabla{
+        height: 40px;
+	    width: 70px;
     }
 </style>
 

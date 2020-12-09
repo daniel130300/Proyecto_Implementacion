@@ -76,7 +76,7 @@
                             <td>{{vpe.Descripcion_estatus}}</td>
                             <td style="text-align:center">
                                 <!--<input type="radio" name="seleccion" (click)="pasarDatosPendientes(vpe)"> -->
-                                <button (click)="pasarDatosPendientes(vpe)" type="button" class="btn btn-primary btn-m">Seleccionar </button>
+                                <button (click)="pasarDatosPendientes(vpe)" type="button" class="botonTabla btn btn-primary btn-sm">Seleccionar </button>
 						    </td>
                         </tr>
                     </tbody>
@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+        <div class="card" style="width: 75%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
                 
 			<button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a> Reporte</button>
 		
@@ -118,7 +118,7 @@
             <div class="separacionInfo2 nada container-md">
                 
                 <div class="col-sm-1">
-                    <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="boton btn btn-primary btn-m">Finalizar </button>
+                    <button (click)="update_ventas_pendientes_envio(modifica.Id_venta)" type="button" class="tamañoBoton btn btn-primary mb-3">Finalizar </button>
                 </div>
                 
             </div>
@@ -263,7 +263,7 @@
 		max-width: 1050px;
 		height: 450px;
 		margin-left: 295px;
-		margin-top: 30px;
+		margin-top: 0px;
 		background: #fff;
         overflow: scroll;
     }
@@ -325,8 +325,13 @@
     .tamañoBoton{
         width: 180px;
         height: 40px;
-        margin-top: 20px;
+        margin-top: -18px;
     }
+
+    .botonTabla{
+        height: 40px;
+	    width: 90px;
+    }    
 </style>
 
 

@@ -19,7 +19,8 @@
             <form ngNativeValidate #form oncopy="return false" onpaste="return false">
                 
                 <div class="mov container-md">
-                    <p></p>
+                    
+                    <div class="Espacios"></div>
                     <label>Código Factura: </label>
                     <input type = "text" 
                         class = "tamañoInput form-control"
@@ -52,7 +53,7 @@
                         
                         <div class="input-group">
                             <input type = "text" 
-                            class = "tamaño form-control col-sm-8"
+                            class = "tamaño form-control col-sm-10"
                             [(ngModel)] = "Producto.Id_producto"
                             [ngModelOptions] = "{standalone:true}"
                             pattern="^$"
@@ -89,7 +90,7 @@
                 
                 </div>
 
-                <div class="separacionInfo nada container-md">
+                <div class="mover separacionInfo nada form-group col-sm-5">
                 
                     <label>Precio</label>
                     <input type = "text" 
@@ -130,7 +131,7 @@
         </div>
 
         <div class="contenedorInformativo2">
-            <div class = "c container-fluid mt-3 pl-3"> 
+            <div class = ""> 
                 <form>
                     <table class="tablaModificar table table-dark">
                         <thead>
@@ -161,7 +162,7 @@
                             <td>{{pro.Descripcion_subcategoria}}</td>
                             <td>{{pro.Descripcion_categoria}}</td> 
                             <td>
-                                <button (click)="eliminarProducto(pro.Id_producto) " class="btn btn-primary mb-3">Eliminar</button>
+                                <button (click)="eliminarProducto(pro.Id_producto) " class="botonTabla btn btn-primary mb-3">Eliminar</button>
                             </td> 
 
                         </tr>
@@ -427,8 +428,8 @@
     }
 
     .mov{
-        margin-left: 18px;
-        margin-top: 12px;
+        margin-left: 46px;
+        margin-top: 24px;
     }
 
     .nada{
@@ -446,7 +447,7 @@
     }
 
     .tamañoInput{
-        width: 312px;
+        width: 375px;
     }
 
     .separacionInfo0{
@@ -454,7 +455,7 @@
     }
 
     .separacionInfo{
-        margin-left: 400px;
+        margin-left: 503px;
         margin-top: -407px;
     }
 
@@ -467,6 +468,15 @@
         width: 180px;
         height: 40px;
         margin-top: 20px;
+    }
+
+    .Espacios{
+        margin-top: 10px;
+    }
+
+    .botonTabla{
+        height: 40px;
+        width: 70px;
     }
 
     

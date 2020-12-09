@@ -16,10 +16,12 @@
 		<div class="contenedorTitulo">
 			<h2>| Mantenimiento Clientes</h2>
         </div>
+        
+        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
 
         <div class="contenedorInformativo">
             <form ngNativeValidate #form2>
-                <div class="nada container-md">
+                <div class="mov container-md">
                     
                         <label>Nombre Cliente:</label>
                         <input type="text"
@@ -113,8 +115,12 @@
                         >
                     
                     <p></p>
-                    <button (click)="form2.checkValidity() ? insertar_cliente() : null" class="tamañoBoton btn btn-primary">Guardar Registro</button>
-                    
+                    <button (click)="form2.checkValidity() ? insertar_cliente() : null" class="mover tamañoBoton btn btn-primary">Guardar Registro</button>
+                    <style>
+                        .mover{
+                            margin-right: 1000px;
+                        }
+                    </style>
                 </div>
             </form>
         </div>
@@ -128,7 +134,7 @@
         </div>
 
         <div class="contenedorInformativo2">
-            <div class="nada container-md">
+            <div class="">
                 <table class="table table-dark">
                     
                     <thead>
@@ -156,13 +162,13 @@
                             <td>{{c.Telefono_contacto}}</td>
                             <td>{{c.Email_contacto}}</td>
                             <td>
-                            <button class="btn btn-primary btn-sm"
+                            <button class="botonTabla btn btn-primary btn-sm"
                                 data-toggle="modal"
                                 data-target="#editModal"
                                 (click)="pasarDatosCliente(c)">Editar</button>
                             </td>
                             <td>
-                                <button (click)="delete_cliente(c.Id_cliente)" class="btn btn-danger btn-sm">Eliminar
+                                <button (click)="delete_cliente(c.Id_cliente)" class="botonTabla btn btn-danger btn-sm">Eliminar
                                 </button>   
                             </td>
                         </tr>
@@ -172,7 +178,7 @@
             
         </div>
 
-        <div class="card" style="width: 70%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
+        <div class="card" style="width: 75%; max-width: 1050px; margin-left: 295px; margin-top: 30px;">
                 
 			<button (click)="generarpdf()" type="button" class="btn btn-primary btn-lg btn-block" style="font-size:27px;"> <a class="fa fa-print" style="font-size:27px;"></a> Reporte</button>
 		
@@ -437,7 +443,7 @@
 		max-width: 1050px;
 		height: 450px;
 		margin-left: 295px;
-		margin-top: 30px;
+		margin-top: 0px;
 		background: #fff;
         overflow: scroll;
     }
@@ -468,7 +474,7 @@
     }
 
     .tamañoInput{
-        width: 300px;
+        width: 375px;
     }
 
     .separacionInfo0{
@@ -476,7 +482,7 @@
     }
 
     .separacionInfo{
-        margin-left: 390px;
+        margin-left: 503px;
         margin-top: -292px;
     }
 
@@ -488,8 +494,6 @@
     .tamañoBoton{
         width: 180px;
         height: 40px;
-        margin-top: 20px;
-        margin-left: -368px;
     }
 
     .tamañoInputBuscador{
@@ -497,6 +501,16 @@
         margin-top: 18px;
         height: 40px;
         font-size: 16px;
+    }
+
+    .botonTabla{
+        height: 40px;
+        width: 70px;
+    }
+
+    .mov{
+        margin-left: 46px;
+        margin-top: 24px;
     }
 </style>
 

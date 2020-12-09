@@ -20,12 +20,12 @@
                     <div style="display: inline-block" class="grafico">
                     <h2>Ventas Anuales</h2>
                     <canvas baseChart
-                        [datasets]="barChartData"
-                        [labels]="barChartLabels"
-                        [options]="barChartOptions"
-                        [plugins]="barChartPlugins"
-                        [legend]="barChartLegend"
-                        [chartType]="barChartType">
+                        [datasets]=" barchartdata"
+                        [labels]="barchartcabels"
+                        [options]="barchartoptions"
+                        [plugins]="barchartplugins"
+                        [legend]="barchartlegend"
+                        [chartType]="barcharttype">
 					</canvas>
 					<h3>Meses</h3>
                     </div>
@@ -36,13 +36,13 @@
                 <h2>Gráfico Circular sobre Devoluciones de Venta</h2>
                 <div class="chart">
                 <canvas baseChart
-                    [data]="pieChartData"
-                    [labels]="pieChartLabels"
-                    [chartType]="pieChartType"
-                    [options]="pieChartOptions"
-                    [plugins]="pieChartPlugins"
-                    [colors]="pieChartColors"
-                    [legend]="pieChartLegend">
+                    [data]="piechartdata"
+                    [labels]="piechartlabels"
+                    [chartType]="pieCharttype"
+                    [options]="piechartoptions"
+                    [plugins]="piechartplugins"
+                    [colors]="piechartcolors"
+                    [legend]="piechartlegend">
                 </canvas>
                 </div>
             </div>
@@ -51,11 +51,11 @@
                 <div style="display: block" class="grafico3">
                     <h2>Los 5 Productos más Vendidos</h2>
                 <canvas baseChart
-                    [data]="polarAreaChartData"
-                    [labels]="polarAreaChartLabels"
-					[legend]="polarAreaLegend"
-					[colors]="polarAreaChartColors"
-                    [chartType]="polarAreaChartType">
+                    [data]="polarareachartdata"
+                    [labels]="polarareachartlabels"
+					[legend]="polararealegend"
+					[colors]="polarareachartcolors"
+                    [chartType]="polarareacharttype">
                 </canvas>
                 </div>
             </div>

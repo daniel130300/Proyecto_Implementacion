@@ -4,7 +4,6 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 const swal = require('sweetalert2');
 
-
 @Component({
     selector: 'compras_realizadas',
     templateUrl: './compras_realizadas.component.html'
@@ -29,7 +28,7 @@ export class GetComprasRealizadasComponent {
         this.service.get_compras().subscribe(
             data=>response = data,
             err => {
-                console.log("Error al consultar el servicio");
+                console.log("Error al consultar el servicio.");
             },
             ()=>{
                  this.listado_compras = response;
@@ -81,8 +80,7 @@ export class GetComprasRealizadasComponent {
         doc.text("Reporte de Pedidos Realizados", 123, 40);
         doc.setFontSize(12);
         doc.text("Fecha: " + fecha_actual, 15, 50);
-        //doc.text("Identidad: " + String(this.VentasNormal.Identidad), 15, 85);
-   
+
         var rows = [];
         
         this.listado_compras.forEach(element => {      
@@ -99,10 +97,6 @@ export class GetComprasRealizadasComponent {
             styles: {font: "Helvetica", fontsize: 12}
         });
 
-        //doc.text("¡Gracias por su compra!", 75, 280);
-
         doc.save("Reporte_Pedidos_Realizados_" + fecha_actual);
-       
     }
-
 }

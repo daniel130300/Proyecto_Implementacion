@@ -14,6 +14,10 @@
             
         </div>
         
+        <!---AQUI SE PONE EL CONTENIDO DE SUS AVANCES--->
+
+        
+        
         <div class="contenedorInformativo">
         
             <form ngNativeValidate #form>
@@ -117,15 +121,16 @@
             </form>
 
         </div>
-
         
-        <div class="contenedorInformativo3"> 
+        <div class="contenedorInformativo3">
+		    <!--  AQUI EMPIEZA EL CAMBIO -->		 
 			<form class="form-incline">
 				<div class="form-inline">
 					<input type="search" class="tamañoInputBuscador form-control-sm ml-3 w-75" name="search" placeholder=" Buscar" [(ngModel)]="term">
 				</div>
 		    </form>
         </div>
+        
         
         <div class = "contenedorInformativo2">
 
@@ -160,7 +165,7 @@
                         <td>{{p.Email_contacto}}</td> 
 
                         <td>
-                            <button type = "button" class = "btn btn-primary btn-sm " 
+                            <button type = "button" class = "botonTabla btn btn-primary btn-sm " 
                             width = 74px
                             data-toggle = "modal"
                             data-target = "#exampleModal"
@@ -169,7 +174,7 @@
             
                         <td>
                             <button (click) = "delete_proveedor(p.Id_proveedor)"
-                                    class = "btn btn-danger btn-sm">Eliminar
+                                    class = "botonTabla btn btn-danger btn-sm">Eliminar
                             </button>
                         </td>
 
@@ -461,9 +466,9 @@
     .contenedorInformativo2{
         width: 75%;
 		max-width: 1050px;
-		height: 450px;
+		height: 460px;
 		margin-left: 295px;
-		margin-top: 30px;
+		margin-top: 0px;
 		background: #fff;
         overflow: scroll;
     }
@@ -486,6 +491,29 @@
         width: 180px;
         height: 40px;
         margin-top: 20px;
+    }
+
+    .contenedorInformativo3{
+		width: 75%;
+		max-width: 1050px;
+		height: 80px;
+		margin-left: 295px;
+		margin-top: 30px;
+		background: #fff;
+        overflow: hidden;
+
+    }
+
+    .tamañoInputBuscador{
+        width: 600px;
+        margin-top: 18px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .botonTabla{
+        height: 40px;
+	    width: 70px;
     }
 
 </style>

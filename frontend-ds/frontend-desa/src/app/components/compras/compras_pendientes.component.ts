@@ -18,13 +18,13 @@ export class GetComprasPendientesComponent {
     public listado_compras_pendientes: any[];
     public listado_productos_compra: any[];
     public listado_estatus: any[];
-    public Id_Compra: any = "";
-    public Estatus: any = "";
-    public Gastos: any = "";
+    public id_Compra: any = "";
+    public estatus: any = "";
+    public gastos: any = "";
     public subtotal: number; //variable para calcular el subtotal de la compra
     public total: number; //variable para calcular el total de la compra
     public isv: number; //variable para calcular el isv de la compra
-
+    public term:any;
 
     constructor(public service:AppService){
         this.listado_compras_pendientes = [];
@@ -36,22 +36,22 @@ export class GetComprasPendientesComponent {
     /* ------------------------------------------- DECLARACION DE OBJETOS ------------------------------------------------------- */
     /* Objeto que almacena el Id_compra y el Id_estatus para actualizarlo en la base de datos */
     public Compra = {
-        Id_compra: "",
-        Id_estatus: "",
+        id_compra: "",
+        id_estatus: "",
     }
 
     public Producto = {
-        Id_producto: "", 
-        Stock: ""
+        id_producto: "", 
+        stock: ""
 
     }
 
-    public Detalle_compra = {
-        Id_compra: "",
-        Id_producto: "", 
-        Cantidad_ordenada: "", 
-        Cantidad_recibida: "",
-        Cantidad_rechazada: ""
+    public DetalleCompra = {
+        id_compra: "",
+        id_producto: "", 
+        cantidad_ordenada: "", 
+        cantidad_recibida: "",
+        cantidad_rechazada: ""
     }
 
     ngOnInit(){
@@ -100,7 +100,7 @@ export class GetComprasPendientesComponent {
             this.isv = this.subtotal * 0.15;
             this.total = this.subtotal + this.isv;
         }
-        this.total +=  parseInt( this.Gastos );
+        this.total +=  parseInt( this.gastos );
     }
 
     get_estatus_compra(){
@@ -118,53 +118,52 @@ export class GetComprasPendientesComponent {
         );
     }
 
-    pasarDatosCompra(compra)
+    pasarDatosCompra(datos_compra)
     {
 
-        this.Id_Compra = compra.Id_compra;
-        this.Estatus = compra.Id_estatus;   
-        this.Gastos = compra.Gastos_adicionales; 
-        this.get_productos_compra(compra.Id_compra); 
+        this.id_Compra = datos_compra.Id_compra;
+        this.estatus = datos_compra.Id_estatus;   
+        this.gastos = datos_compra.Gastos_adicionales; 
+        this.get_productos_compra(datos_compra.Id_compra); 
 
     }
 
-    pasarDatosDetalleCompra(detalle){
+    pasarDatosDetalleCompra(datos_detalle){
 
         
         
-        this.Detalle_compra=
+        this.DetalleCompra=
         {
-            Id_compra: detalle.Id_compra,
-            Id_producto: detalle.Id_producto, 
-            Cantidad_ordenada: detalle.Cantidad_ordenada, 
-            Cantidad_recibida: detalle.Cantidad_recibida,
-            Cantidad_rechazada: detalle.Cantidad_rechazada
+            id_compra: datos_detalle.Id_compra,
+            id_producto: datos_detalle.Id_producto, 
+            cantidad_ordenada: datos_detalle.Cantidad_ordenada, 
+            cantidad_recibida: datos_detalle.Cantidad_recibida,
+            cantidad_rechazada: datos_detalle.Cantidad_rechazada
             
         }
-        console.log(this.Detalle_compra);
+        console.log(this.DetalleCompra);
 
-        //this.update_detalle_compra();
     }
 
     update_detalle_compra()
     {
 
-        this.Detalle_compra=
+        this.DetalleCompra=
         {
-            Id_compra: this.Detalle_compra.Id_compra,
-            Id_producto: this.Detalle_compra.Id_producto, 
-            Cantidad_ordenada: this.Detalle_compra.Cantidad_ordenada, 
-            Cantidad_recibida: this.Detalle_compra.Cantidad_recibida,
-            Cantidad_rechazada: this.Detalle_compra.Cantidad_rechazada
+            id_compra: this.DetalleCompra.id_compra,
+            id_producto: this.DetalleCompra.id_producto, 
+            cantidad_ordenada: this.DetalleCompra.cantidad_ordenada, 
+            cantidad_recibida: this.DetalleCompra.cantidad_recibida,
+            cantidad_rechazada: this.DetalleCompra.cantidad_rechazada
             
         }
 
-        if(this.Detalle_compra.Cantidad_rechazada == "0")
+        if(this.DetalleCompra.cantidad_rechazada == "0")
         {
-            this.Detalle_compra.Cantidad_rechazada = "0";
+            this.DetalleCompra.cantidad_rechazada = "0";
         }
 
-        if(this.Detalle_compra.Cantidad_recibida == "" || this.Detalle_compra.Cantidad_rechazada == "")
+        if(this.DetalleCompra.cantidad_recibida == "" || this.DetalleCompra.cantidad_rechazada == "")
         {
             swal.fire({
                 title: "No ha ingresado un dato, por favor hágalo para poder guardar.",
@@ -174,7 +173,7 @@ export class GetComprasPendientesComponent {
         else
         {
 
-            if ( isNaN(parseInt(this.Detalle_compra.Cantidad_recibida)) ||  isNaN(parseInt(this.Detalle_compra.Cantidad_rechazada)) )
+            if ( isNaN(parseInt(this.DetalleCompra.cantidad_recibida)) ||  isNaN(parseInt(this.DetalleCompra.cantidad_rechazada)) )
             {
                 swal.fire({
                     title: "No puede ingresar texto.",
@@ -184,7 +183,7 @@ export class GetComprasPendientesComponent {
             else
             {
 
-                if(this.Detalle_compra.Cantidad_recibida > this.Detalle_compra.Cantidad_ordenada)
+                if(this.DetalleCompra.cantidad_recibida > this.DetalleCompra.cantidad_ordenada)
                 {
                     swal.fire({
                         title: "La cantidad recibida no puede ser mayor que la cantidad ordenada.",
@@ -193,7 +192,7 @@ export class GetComprasPendientesComponent {
                 }
                 else
                 {
-                    if(this.Detalle_compra.Cantidad_rechazada > this.Detalle_compra.Cantidad_ordenada)
+                    if(this.DetalleCompra.cantidad_rechazada > this.DetalleCompra.cantidad_ordenada)
                     {
                         swal.fire({
                             title: "La cantidad rechazada no puede ser mayor que la cantidad ordenada.",
@@ -202,7 +201,7 @@ export class GetComprasPendientesComponent {
                     }
                     else
                     {
-                        if(this.Detalle_compra.Cantidad_recibida < "0" || this.Detalle_compra.Cantidad_rechazada < "0")
+                        if(this.DetalleCompra.cantidad_recibida < "0" || this.DetalleCompra.cantidad_rechazada < "0")
                         {
                             swal.fire({
                                 title: "La cantidad no puede ser negativa.",
@@ -212,19 +211,19 @@ export class GetComprasPendientesComponent {
                         else
                         {
                             var response;
-                            this.service.update_detalle_compra(this.Detalle_compra).subscribe(
+                            this.service.update_detalle_compra(this.DetalleCompra).subscribe(
                                 data=>response = data,
                                 err => {
                                     console.log("Error al consultar servicio"); 
                                 },
                                 ()=>{
 
-                                    this.Detalle_compra = {
-                                        Id_compra: "",
-                                        Id_producto: "", 
-                                        Cantidad_ordenada: "", 
-                                        Cantidad_recibida: "",
-                                        Cantidad_rechazada: "" 
+                                    this.DetalleCompra = {
+                                        id_compra: "",
+                                        id_producto: "", 
+                                        cantidad_ordenada: "", 
+                                        cantidad_recibida: "",
+                                        cantidad_rechazada: "" 
                                     }
 
                                 }
@@ -243,7 +242,7 @@ export class GetComprasPendientesComponent {
 
     guardarCambios(){
         
-       if(this.Id_Compra=="")
+       if(this.id_Compra=="")
        {
 
             swal.fire({
@@ -253,32 +252,32 @@ export class GetComprasPendientesComponent {
        }
        else 
        {
-           //console.log(this.Estatus);
-           if(this.Estatus=="4")
+           
+           if(this.estatus=="4")
            {
                this.Compra = 
                {
-                   Id_compra: this.Id_Compra,
-                   Id_estatus: this.Estatus
+                   id_compra: this.id_Compra,
+                   id_estatus: this.estatus
                }
                
                 this.update_compra();
 
                 for(var i = 0; i < this.listado_productos_compra.length; i++) {
-                    if(this.Id_Compra == this.listado_productos_compra[i].Id_compra){
+                    if(this.id_Compra == this.listado_productos_compra[i].Id_compra){
                         this.Producto = 
                         {
-                            Id_producto: this.listado_productos_compra[i].Id_producto,  
-                            Stock: this.listado_productos_compra[i].Stock + ( (this.listado_productos_compra[i].Cantidad_recibida)-(this.listado_productos_compra[i].Cantidad_rechazada) )
+                            id_producto: this.listado_productos_compra[i].Id_producto,  
+                            stock: this.listado_productos_compra[i].Stock + ( (this.listado_productos_compra[i].Cantidad_recibida)-(this.listado_productos_compra[i].Cantidad_rechazada) )
                         }
                     }
-                    //console.log(this.Detalle_compras.Id_producto);    
+                    
                     this.update_producto_compra();
                 }
                 
-                this.Id_Compra = "";
-                this.Estatus = "";
-                this.Gastos = "";
+                this.id_Compra = "";
+                this.estatus = "";
+                this.gastos = "";
                 this.subtotal = 0.00;
                 this.total = 0.00;
                 this.isv = 0.00; 
@@ -309,8 +308,8 @@ export class GetComprasPendientesComponent {
             ()=>{
 
                 this.Compra = {
-                    Id_compra: "",
-                    Id_estatus: ""
+                    id_compra: "",
+                    id_estatus: ""
                 }
                 this.listado_compras_pendientes = [];
                 this.get_compras_pendientes();
@@ -329,8 +328,8 @@ export class GetComprasPendientesComponent {
             ()=>{
 
                 this.Producto = {
-                    Id_producto: "", 
-                    Stock: ""
+                    id_producto: "", 
+                    stock: ""
                 }
 
             }
@@ -381,7 +380,6 @@ export class GetComprasPendientesComponent {
         doc.text("Reporte de Pedidos Pendientes", 123, 40);
         doc.setFontSize(12);
         doc.text("Fecha: " + fecha_actual, 15, 50);
-        //doc.text("Identidad: " + String(this.VentasNormal.Identidad), 15, 85);
    
         var rows = [];
         
@@ -398,8 +396,6 @@ export class GetComprasPendientesComponent {
             startY: 55,
             styles: {font: "Helvetica", fontsize: 12}
         });
-
-        //doc.text("¡Gracias por su compra!", 75, 280);
 
         doc.save("Reporte_Pedidos_Realizados_" + fecha_actual);
        
