@@ -37,7 +37,6 @@ export class GetProveedoresComponent {
     limpiar_proveedor(){
 
         this.Proveedor = {
-
             id_proveedor: "",
             nombre_compania:"",
             direccion:"",
@@ -61,10 +60,8 @@ export class GetProveedoresComponent {
 
                 console.log( "Error al consultar servicio" ); 
             },
-
             () => {
-
-                    this.Proveedor = {
+                this.Proveedor = {
                     id_proveedor: "",
                     nombre_compania:"",
                     direccion:"",
@@ -94,7 +91,7 @@ export class GetProveedoresComponent {
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_proveedores = response;
+                this.listado_proveedores = response;
             }  
         );
     }
@@ -107,12 +104,12 @@ export class GetProveedoresComponent {
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_ciudades = response;
+                this.listado_ciudades = response;
             }  
         );
     }
 
-    pasarDatosProveedor(proveedor)
+    pasar_datos_proveedor(proveedor)
     {
         this.Proveedor = 
         {
@@ -174,6 +171,5 @@ export class GetProveedoresComponent {
             }
         );
     }
-
 }
 

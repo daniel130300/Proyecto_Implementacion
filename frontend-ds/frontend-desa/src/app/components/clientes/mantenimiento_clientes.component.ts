@@ -96,7 +96,6 @@ export class GetClientesComponent{
     limpiar_cliente(){
 
         this.Persona = {
-
             id_cliente:"",
             nombre_compania:"",
             id_ciudad:"",
@@ -119,9 +118,9 @@ export class GetClientesComponent{
             ()=>{
                 this.listado_tipo_cliente=response;
             }
-            
         )
     }
+
     get_ciudad(){
         var response;
         this.service.get_ciudad().subscribe(
@@ -132,7 +131,6 @@ export class GetClientesComponent{
             ()=>{
                 this.listado_ciudades=response;
             }
-            
         )
     }
     
@@ -157,23 +155,23 @@ export class GetClientesComponent{
                 console.log("Error al consultar servicio"); 
             },
             ()=>{
-                    this.Persona = {
-                        id_cliente:"",
-                        nombre_compania:"",
-                        id_ciudad:"",
-                        id_tipo_cliente:"",
-                        direccion:"",
-                        nombre_contacto:"",
-                        apellido_contacto:"",
-                        telefono_contacto:"",
-                        email_contacto:""
+                this.Persona = {
+                    id_cliente:"",
+                    nombre_compania:"",
+                    id_ciudad:"",
+                    id_tipo_cliente:"",
+                    direccion:"",
+                    nombre_contacto:"",
+                    apellido_contacto:"",
+                    telefono_contacto:"",
+                    email_contacto:""
                 }
                 this.get_clientes();
             }
         );
-
     }
-    pasarDatosCliente(clientes){
+
+    pasar_datos_cliente(clientes){
         this.Persona= {
             id_cliente:clientes.Id_cliente,
             nombre_compania:clientes.Nombre_compania,
@@ -184,14 +182,13 @@ export class GetClientesComponent{
             apellido_contacto:clientes.Apellido_contacto,
             telefono_contacto:clientes.Telefono_contacto,
             email_contacto:clientes.Email_contacto
-          
-            }
-        
+        }
     }
+
     update_cliente(){
         let regexpNumber: RegExp  = /^[+ 0-9]{8}$/;
-       let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
-       let regexpLetter1: RegExp  = /^[a-zA-Z ]{3,20}$/;
+        let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
+        let regexpLetter1: RegExp  = /^[a-zA-Z ]{3,20}$/;
         let regexpMix: RegExp  = /^[A-Za-z0-9 ]{3,15}$/;
         let regexpDic: RegExp  = /^[A-Za-z0-9.# ]{10,300}$/;
         let regexpEmail: RegExp  = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
@@ -206,8 +203,8 @@ export class GetClientesComponent{
             apellido_contacto:this.Persona.apellido_contacto,
             telefono_contacto:this.Persona.telefono_contacto,
             email_contacto:this.Persona.email_contacto
-          
         }
+
         if(this.Persona.apellido_contacto==""||this.Persona.direccion==""||this.Persona.email_contacto==""||this.Persona.id_ciudad==""||this.Persona.id_cliente==""
         ||this.Persona.id_tipo_cliente==""||this.Persona.nombre_compania==""||this.Persona.nombre_contacto==""||this.Persona.telefono_contacto==""){
             swal.fire({
@@ -274,10 +271,8 @@ export class GetClientesComponent{
                                     }
                                 );
                             }
-                        }
-                            
-                    }
-                     
+                        }     
+                    }     
                 }
             }
         }    
@@ -297,8 +292,5 @@ export class GetClientesComponent{
                 this.get_clientes();
             }
         );
-
     }
-
-
 }

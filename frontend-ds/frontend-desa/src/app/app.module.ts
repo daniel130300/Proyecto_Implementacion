@@ -59,8 +59,6 @@ import {GetMenuVentasComponent} from './components/menu/menu_ventas.component';
 
 import {GetCajasComponent} from './components/menu/cajas.component';
 
-import {GetRecuperacionContrasenia} from './components/login/recuperacion_contrasenia';
-
 import {GetDashboardComponent} from './components/dashboard/dashboard.component';
 
 import {GetManualUsuarioComponent} from './components/ayuda/mu.componet';    
@@ -98,12 +96,10 @@ import { ColorPickerModule } from 'ngx-color-picker';
     GetMenuVentasComponent,
     GetVentasIncobrablesComponent,
     GetCajasComponent,
-    GetRecuperacionContrasenia,
     GetDashboardComponent,
     GetManualUsuarioComponent
-    
   ],
-  imports: [ //Modulos
+  imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -113,7 +109,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ChartsModule,
     ColorPickerModule
   ],
-  providers: [ //Servicios
+  providers: [
     AppService,
     DatePipe
   ],

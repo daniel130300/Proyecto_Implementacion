@@ -19,7 +19,6 @@ export class GetCategoriasComponent {
     public Categorias = {
         id_categoria: "", 
         descripcion_categoria: ""
-        
     }
 
     ngOnInit(){
@@ -28,7 +27,7 @@ export class GetCategoriasComponent {
 
     volverpro(){
         this.router.navigateByUrl('/mantenimiento_productos');
-     }
+    }
 
     insertar_categorias(){
         var response;
@@ -60,12 +59,12 @@ export class GetCategoriasComponent {
         );
     }
 
-    pasarDatosCategorias(Categorias)
+    pasar_datos_categorias(categorias)
     {
         this.Categorias = 
         {
-            id_categoria: Categorias.Id_categoria,
-            descripcion_categoria: Categorias.Descripcion_categoria
+            id_categoria: categorias.Id_categoria,
+            descripcion_categoria: categorias.Descripcion_categoria
         }      
     }
 
@@ -82,22 +81,24 @@ export class GetCategoriasComponent {
                 title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
                 icon: 'error'
             });
-        }else
+        }
+        else
+        {
             if(regexpLetter.test(this.Categorias.descripcion_categoria) == false){
                 swal.fire({
                     title: "Solo puede escribir letras. Vuelva a intentarlo.",
                     icon: 'error'
                 });
-            }else
-                {
-                    var response;
-                    this.service.update_categorias(this.Categorias).subscribe(
+            }
+            else{
+                var response;
+                this.service.update_categorias(this.Categorias).subscribe(
                     data=>response = data,
                     err => {
                         console.log("Error al consultar servicio"); 
                     },
                     ()=>{
-   
+
                         this.Categorias = 
                         {
                             id_categoria: "",
@@ -106,7 +107,7 @@ export class GetCategoriasComponent {
                         this.get_categorias();
                     }
                 );
-                }
-        
+            }
+        }   
     }
 }

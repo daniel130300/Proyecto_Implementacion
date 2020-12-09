@@ -42,10 +42,10 @@ export class GetSubcategoriasComponent {
                 console.log("Error al consultar servicio"); 
             },
             ()=>{
-                    this.Subcategorias = {
-                        id_subcategoria: "",
-                        descripcion_subcategoria: "",
-                        id_categoria: ""
+                this.Subcategorias = {
+                    id_subcategoria: "",
+                    descripcion_subcategoria: "",
+                    id_categoria: ""
                 }
                 this.get_subcategorias();
             }
@@ -75,7 +75,7 @@ export class GetSubcategoriasComponent {
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_categorias = response;
+                this.listado_categorias = response;
             }  
         );
     }
@@ -105,32 +105,36 @@ export class GetSubcategoriasComponent {
                 title: "No se pueden dejar los campos vacios. Vuelva a intentarlo",
                 icon: 'error'
             });
-        }else
+        }
+        else
+        {
             if(regexpLetter.test(this.Subcategorias.descripcion_subcategoria) == false){
                 swal.fire({
                     title: "Solo puede escribir letras. Vuelva a intentarlo.",
                     icon: 'error'
                 });
-            }else
+            }
+            else
             {
                 var response;
                 this.service.update_subcategorias(this.Subcategorias).subscribe(
-                data=>response = data,
-                err => {
-                    console.log("Error al consultar servicio"); 
-                },
-                ()=>{
-   
-                    this.Subcategorias = 
-                    {
-                        id_subcategoria: "",
-                        descripcion_subcategoria: "",
-                        id_categoria: ""
+                    data=>response = data,
+                    err => {
+                        console.log("Error al consultar servicio"); 
+                    },
+                    ()=>{
+
+                        this.Subcategorias = 
+                        {
+                            id_subcategoria: "",
+                            descripcion_subcategoria: "",
+                            id_categoria: ""
+                        }
+                        this.get_subcategorias();
                     }
-                    this.get_subcategorias();
-                }
-            );
+                );
             }
+        }   
     }
 
     limpiar_subcategorias()

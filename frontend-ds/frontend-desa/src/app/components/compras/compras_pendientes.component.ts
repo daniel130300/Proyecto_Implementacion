@@ -13,17 +13,15 @@ const swal = require('sweetalert2');
 })
 
 export class GetComprasPendientesComponent {
-    
-    /* ------------------------------------- DECLARACIONES DE TIPO GLOBAL ------------------------------------------------------- */
     public listado_compras_pendientes: any[];
     public listado_productos_compra: any[];
     public listado_estatus: any[];
     public id_Compra: any = "";
     public estatus: any = "";
     public gastos: any = "";
-    public subtotal: number; //variable para calcular el subtotal de la compra
-    public total: number; //variable para calcular el total de la compra
-    public isv: number; //variable para calcular el isv de la compra
+    public subtotal: number; 
+    public total: number; 
+    public isv: number; 
     public term:any;
 
     constructor(public service:AppService){
@@ -33,8 +31,6 @@ export class GetComprasPendientesComponent {
         this.isv = 0.00;
     }
 
-    /* ------------------------------------------- DECLARACION DE OBJETOS ------------------------------------------------------- */
-    /* Objeto que almacena el Id_compra y el Id_estatus para actualizarlo en la base de datos */
     public Compra = {
         id_compra: "",
         id_estatus: "",
@@ -118,20 +114,15 @@ export class GetComprasPendientesComponent {
         );
     }
 
-    pasarDatosCompra(datos_compra)
+    pasar_datos_compra(datos_compra)
     {
-
         this.id_Compra = datos_compra.Id_compra;
         this.estatus = datos_compra.Id_estatus;   
         this.gastos = datos_compra.Gastos_adicionales; 
         this.get_productos_compra(datos_compra.Id_compra); 
-
     }
 
-    pasarDatosDetalleCompra(datos_detalle){
-
-        
-        
+    pasar_datos_detalle_compra(datos_detalle){
         this.DetalleCompra=
         {
             id_compra: datos_detalle.Id_compra,
@@ -142,12 +133,10 @@ export class GetComprasPendientesComponent {
             
         }
         console.log(this.DetalleCompra);
-
     }
 
     update_detalle_compra()
     {
-
         this.DetalleCompra=
         {
             id_compra: this.DetalleCompra.id_compra,
@@ -231,36 +220,30 @@ export class GetComprasPendientesComponent {
                         }
                     }
                 }
-
-
             }
-
-
-        }
-        
+        }      
     }
 
-    guardarCambios(){
+    guardar_cambios(){
         
-       if(this.id_Compra=="")
-       {
+        if(this.id_Compra=="")
+        {
 
             swal.fire({
                 title: "No ha seleccionado ningún pedido.",
                 icon: 'error'
             });
-       }
-       else 
-       {
-           
-           if(this.estatus=="4")
-           {
-               this.Compra = 
-               {
-                   id_compra: this.id_Compra,
-                   id_estatus: this.estatus
-               }
-               
+        }
+        else 
+        {
+            if(this.estatus=="4")
+            {
+                this.Compra = 
+                {
+                    id_compra: this.id_Compra,
+                    id_estatus: this.estatus
+                }
+                
                 this.update_compra();
 
                 for(var i = 0; i < this.listado_productos_compra.length; i++) {
@@ -286,15 +269,15 @@ export class GetComprasPendientesComponent {
                     title: "Cambios guardados exitosamente.",
                     icon: 'success'
                 });         
-           }
-           else
-           {
+            }
+            else
+            {
                 swal.fire({
                     title: "Cambie el Estado a Recibido para poder guardar el pedido recibido.",
                     icon: 'error'
                 });
-    
-           }
+
+            }
        }
     }
 
@@ -315,7 +298,6 @@ export class GetComprasPendientesComponent {
                 this.get_compras_pendientes();
             }
         );
-
     }
 
     update_producto_compra(){
@@ -331,7 +313,6 @@ export class GetComprasPendientesComponent {
                     id_producto: "", 
                     stock: ""
                 }
-
             }
         );
     }
@@ -343,24 +324,20 @@ export class GetComprasPendientesComponent {
                 showDenyButton: true,
                 confirmButtonText: `Si`,
                 denyButtonText: `No`
-            }).then((result) => 
-            {
+            }).then((result) =>{
                 if (result.isConfirmed) 
                 {
                     this.generarpdf();
                 }
-
             })
     }
 
     generarpdf()
     {
-
-        console.log(this.listado_compras_pendientes);
-
         var fecha_actual = new Date().toLocaleString()
         
         var img = new Image()
+
         img.src = 'assets/img/LogoKyD2.png'
         
         const doc = new jsPDF('l', 'mm', 'a4');
@@ -398,6 +375,5 @@ export class GetComprasPendientesComponent {
         });
 
         doc.save("Reporte_Pedidos_Realizados_" + fecha_actual);
-       
     }
 }

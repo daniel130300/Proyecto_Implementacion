@@ -95,14 +95,14 @@ export class GetModelosComponent {
         );
     }
 
-    pasarDatosModelos(modelo)
+    pasar_datos_modelos(modelo)
     {
         this.Modelo = 
         {
-            id_modelo:          modelo.Id_modelo,
+            id_modelo:modelo.Id_modelo,
             descripcion_modelo: modelo.Descripcion_modelo,
-            id_marca:           modelo.Id_marca,
-            id_subcategoria:    modelo.Id_subcategoria
+            id_marca:modelo.Id_marca,
+            id_subcategoria:modelo.Id_subcategoria
         }      
     }
 
@@ -111,10 +111,10 @@ export class GetModelosComponent {
         let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
 
         this.Modelo = {
-            id_modelo:          this.Modelo.id_modelo,
-            descripcion_modelo: this.Modelo.descripcion_modelo,
-            id_marca:           this.Modelo.id_modelo,
-            id_subcategoria:    this.Modelo.id_subcategoria
+            id_modelo:this.Modelo.id_modelo,
+            descripcion_modelo:this.Modelo.descripcion_modelo,
+            id_marca:this.Modelo.id_modelo,
+            id_subcategoria:this.Modelo.id_subcategoria
         }
         if(this.Modelo.descripcion_modelo == "" || this.Modelo.id_marca == "" || this.Modelo.id_modelo == ""){
             swal.fire({
@@ -122,22 +122,24 @@ export class GetModelosComponent {
                 icon: 'error'
             });
         }else
+        {
             if(regexpLetter.test(this.Modelo.descripcion_modelo) == false){
                 swal.fire({
                     title: "Solo puede escribir letras. Vuelva a intentarlo.",
                     icon: 'error'
                 });
-            }else
-                {
-                    var response;
-                    this.service.update_modelo(this.Modelo).subscribe (
+            }
+            else
+            {
+                var response;
+                this.service.update_modelo(this.Modelo).subscribe(
                     data => response = data,
                     err => {
                         console.log("Error al consultar servicio."); 
                     },
                     ()=>{
-   
-                      this.Modelo = 
+
+                        this.Modelo = 
                         {
                             id_modelo: "",
                             descripcion_modelo: "",
@@ -146,8 +148,9 @@ export class GetModelosComponent {
                         }
                         this.get_modelos();
                     }
-                    );
-                }
+                );
+            }
+        }    
     }
 
     delete_modelo(id_modelo_borrar)

@@ -94,7 +94,6 @@ export class GetEmpleadosComponent {
     }
 
     ngOnInit(){
-
         this.get_empleados();
         this.get_estatus();
         this.get_puestos();
@@ -103,7 +102,6 @@ export class GetEmpleadosComponent {
     limpiar_empleado(){
 
         this.Empleado = {
-
             id_empleado: "",
             identidad: "",
             nombre: "",
@@ -235,7 +233,7 @@ export class GetEmpleadosComponent {
         );
     }
 
-    pasarDatosEmpleado( empleado )
+    pasar_datos_empleado( empleado )
     {
         this.Empleado = {
 

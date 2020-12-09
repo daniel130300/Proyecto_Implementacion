@@ -22,73 +22,71 @@ export class GetMarcasComponent {
         Nombre:""
     }
 
-     ngOnInit(){
+    ngOnInit(){
          this.get_marcas();
-     }
+    }
 
-     volverpro(){
+    volverpro(){
         this.router.navigateByUrl('/mantenimiento_productos');
-     }
+    }
 
-     get_marcas(){
-         var response;
-         this.service.get_marcas().subscribe(
-             data=>response=data,
-             error =>{
-                 console.log("Error al consultar el servicio");
-             },
-             ()=>
-             {
-             this.listado_marcas = response;
-             console.log(this.listado_marcas);
-             }
-             );
-     }
+    get_marcas(){
+        var response;
+        this.service.get_marcas().subscribe(
+            data=>response=data,
+            error =>{
+                console.log("Error al consultar el servicio");
+            },
+            ()=>
+            {
+                this.listado_marcas = response;
+                console.log(this.listado_marcas);
+            }
+        );
+    }
 
-     insert_marca(){
-         var response;
-         this.service.insert_marca(this.marca).subscribe(
-             data=>response = data,
-             err=>{
-                 console.log("Error al consultar servicio");
-             },
-             ()=>{
-                 this.marca={
-                     Id_marca:"",
-                     Nombre:""
-                 }
-                 this.get_marcas();
-             }
-             
-         );
-     }
+    insert_marca(){
+        var response;
+        this.service.insert_marca(this.marca).subscribe(
+            data=>response = data,
+            err=>{
+                console.log("Error al consultar servicio");
+            },
+            ()=>{
+                this.marca={
+                    Id_marca:"",
+                    Nombre:""
+                }
+                this.get_marcas();
+            }    
+        );
+    }
 
-     eliminar_marca(Id_marca){
-         var response;
-         var load={
-             Id_marca: Id_marca
-         }
-         this.service.eliminar_marca(load).subscribe(
-             data=>response=data,
-             err=>{
-                 console.log("Error al consultar servicio");
-             },
-             ()=>{
-                  this.get_marcas();
-             }
-         );
-     }
+    eliminar_marca(id_marca){
+        var response;
+        var load={
+            Id_marca: id_marca
+        }
+        this.service.eliminar_marca(load).subscribe(
+            data=>response=data,
+            err=>{
+                console.log("Error al consultar servicio");
+            },
+            ()=>{
+                this.get_marcas();
+            }
+        );
+    }
 
-     pasarDatosMarca(marca){
-         this.marca ={
-             Id_marca:marca.Id_marca,
-             Nombre :marca.Nombre_marca
+    pasar_datos_marca(marca){
+        this.marca ={
+            Id_marca:marca.Id_marca,
+            Nombre :marca.Nombre_marca
+        }
+    }
 
-         }
-     }
-
-     update_marca(Id_marca)
-     {
+    update_marca(Id_marca)
+    {
         let regexpLetter: RegExp  = /^[a-zA-Z ]{4,20}$/;
 
         this.marca = 
@@ -102,31 +100,31 @@ export class GetMarcasComponent {
                 icon: 'error'
             });
         }else
+        {
             if(regexpLetter.test(this.marca.Nombre) == false){
                 swal.fire({
                     title: "Solo puede escribir letras. Vuelva a intentarlo.",
                     icon: 'error'
                 });
-            }else
-                {
-                    var response;
-                    this.service.update_marca(this.marca).subscribe(
+            }
+            else
+            {
+                var response;
+                this.service.update_marca(this.marca).subscribe(
                     data=>response = data,
                     err => {
                         console.log("Error al consultar servicio");
                     },
                     ()=>{
-
                         this.marca ={
                         Id_marca:"",
                         Nombre:""
-                    }
+                        }
+
                         this.get_marcas();
                     }
-            
-                    );
-                }
-         
-     }
-
+                );
+            }
+        }  
+    }
 }

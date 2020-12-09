@@ -89,7 +89,7 @@ export class GetProductosComponent {
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_categorias = response;
+                this.listado_categorias = response;
             }  
         );
     }
@@ -104,7 +104,7 @@ export class GetProductosComponent {
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_subcategorias = response;
+                this.listado_subcategorias = response;
             }  
         );
     }
@@ -119,7 +119,7 @@ export class GetProductosComponent {
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_marcas = response;
+                this.listado_marcas = response;
             }  
         );
     }
@@ -134,7 +134,7 @@ export class GetProductosComponent {
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_modelos = response;
+                this.listado_modelos = response;
             }  
         );
     }
@@ -148,7 +148,7 @@ export class GetProductosComponent {
                 console.log("Error al consultar el servicio");
             },
             ()=>{
-                 this.listado_proveedores = response;
+                this.listado_proveedores = response;
             }  
         );
     }
@@ -164,17 +164,16 @@ export class GetProductosComponent {
                     console.log("Error al consultar servicio"); 
                 },
                 ()=>{
-
                     this.Producto = {
-                            id_producto: "", 
-                            descripcion_producto: "", 
-                            talla: "", 
-                            color: "", 
-                            stock: "", 
-                            precio_referencial_venta: "", 
-                            precio_referencial_compra: "", 
-                            punto_reorden: "",
-                            id_modelo: ""
+                        id_producto: "", 
+                        descripcion_producto: "", 
+                        talla: "", 
+                        color: "", 
+                        stock: "", 
+                        precio_referencial_venta: "", 
+                        precio_referencial_compra: "", 
+                        punto_reorden: "",
+                        id_modelo: ""
                     }
                     this.get_productos();
                 }
@@ -198,7 +197,6 @@ export class GetProductosComponent {
             this.get_productos();
 
             swal.fire({
-
                 title: "¡Agregado exitosamente!",
                 icon:  'success'
             }); 
@@ -221,7 +219,6 @@ export class GetProductosComponent {
                 this.actualizar={
                     id_proveedor:"",
                     id_producto:""
-                    
                 }
                 this.get_proveedores();
             }
@@ -463,6 +460,4 @@ export class GetProductosComponent {
             }   
         )
     }
-
-
 }

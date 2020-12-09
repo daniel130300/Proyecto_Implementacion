@@ -50,8 +50,6 @@ import {GetMenuVentasComponent} from './components/menu/menu_ventas.component';
 
 import {GetCajasComponent} from './components/menu/cajas.component';
 
-import {GetRecuperacionContrasenia} from './components/login/recuperacion_contrasenia';
-
 import {GetDashboardComponent} from './components/dashboard/dashboard.component';
 
 import {GetManualUsuarioComponent} from './components/ayuda/mu.componet';
@@ -155,10 +153,6 @@ const routes: Routes = [
     {
         path: 'cajas',
         component: GetCajasComponent
-    },
-    {
-        path: 'recuperacion_contrasenia',
-        component: GetRecuperacionContrasenia
     },
     {
         path: 'dashboard',

@@ -122,7 +122,7 @@ export class GetVentasPagadasComponent {
         );
     }
 
-    datosVentas_pagadas(ventaspagadas){
+    datos_ventas_pagadas(ventaspagadas){
         this.busqueda = {
             Id_estatus: ventaspagadas.Id_estatus
         }

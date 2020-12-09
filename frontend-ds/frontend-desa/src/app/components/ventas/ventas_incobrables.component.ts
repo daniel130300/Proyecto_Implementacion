@@ -110,7 +110,6 @@ export class GetVentasIncobrablesComponent {
 
                 console.log( "Error al consultar el servicio." );
             },
-
             () => {
 
                 this.listado_ventas_incobrables = response;
@@ -118,7 +117,7 @@ export class GetVentasIncobrablesComponent {
         );
     }
 
-    datosVentas_incobrables(ventasincobrables){
+    datos_ventas_incobrables(ventasincobrables){
         this.busqueda = {
             Id_estatus: ventasincobrables.Id_estatus
         }

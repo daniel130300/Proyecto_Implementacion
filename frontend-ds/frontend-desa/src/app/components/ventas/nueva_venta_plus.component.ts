@@ -83,15 +83,13 @@ export class GetVentaPlusComponent
         cantidad_vendida: ""
     }
 
-    //PRUEBA DE VALIDACIONES
-
     formVentas = new FormGroup({
         tipoPago: new FormControl("", Validators.required),
         plazosPago: new FormControl({ value: "", disabled: true }, [Validators.required])
      });
 
 
-    HabilitarPlazosPago(valor) 
+    habilitar_plazos_pago(valor) 
     {
         console.log(valor)
 
@@ -107,7 +105,7 @@ export class GetVentaPlusComponent
 
     }
 
-    Asignar_datos_venta()
+    asignar_datos_venta()
     {
         if (this.id_plazo == "")
         {
@@ -158,14 +156,14 @@ export class GetVentaPlusComponent
                 if (result.isConfirmed) 
                 {   
                     var response;
-                    this.Asignar_datos_venta();
+                    this.asignar_datos_venta();
                     this.service.insertar_venta_plus(this.VentasPlus).subscribe(
                         data=>response = data,
                         err => {
                             console.log("Error al consultar servicio"); 
                         },
                         ()=>{
-                            this.pasarDatosDetalleVenta();
+                            this.pasar_datos_detalle_venta();
                             this.generarpdf();
                             this.LimpiarInputs();
                         }
@@ -174,18 +172,17 @@ export class GetVentaPlusComponent
                 else
                 {
                     var response;
-                    this.Asignar_datos_venta();
+                    this.asignar_datos_venta();
                     this.service.insertar_venta_plus(this.VentasPlus).subscribe(
                         data=>response = data,
                         err => {
                             console.log("Error al consultar servicio"); 
                         },
                         ()=>{
-                            this.pasarDatosDetalleVenta();
+                            this.pasar_datos_detalle_venta();
                             this.LimpiarInputs();
                         }
                     );
-
                 }
             })
         }  
@@ -203,8 +200,6 @@ export class GetVentaPlusComponent
             }
         );
     }
-
-    //TODAS LAS FUNCIONES PARA LLENAR LOS COMBOBOXES Y TABLAS DE LAS FORMAS MODALES
 
     get_estados_envio()
     {
@@ -334,9 +329,7 @@ export class GetVentaPlusComponent
         )
     }
 
-    //FUNCIONES PARA PASAR DATOS ENTRE FORMULARIOS
-
-    pasarDatosCliente(cliente)
+    pasar_datos_cliente(cliente)
     {
         this.Clientes = 
         {
@@ -347,7 +340,7 @@ export class GetVentaPlusComponent
         this.id_cliente = cliente.Id_cliente
     }
 
-    pasarDatosProducto(producto)
+    pasar_datos_producto(producto)
     {
         this.Productos = 
         {
@@ -360,7 +353,7 @@ export class GetVentaPlusComponent
         }
     }
 
-    pasarDatosDetalleVenta()
+    pasar_datos_detalle_venta()
     {
         for(var i = 0; i < this.listado_productos_agregados.length; i++) 
         {
@@ -374,9 +367,7 @@ export class GetVentaPlusComponent
         }
     }
 
-    //FUNCION PARA AGREGAR Y ELIMINAR PRODUCTOS DE LA TABLA TEMPORAL DEL DETALLE DE LA VENTA
-
-    AgregarProductoVenta()
+    agregar_producto_venta()
     {
         
         if(this.Clientes.id_cliente == "")
@@ -415,7 +406,7 @@ export class GetVentaPlusComponent
                         console.log(this.listado_productos_agregados); 
                         this.calculos();
                         this.restar_inventario();
-                        this.LimpiarInputsProductos();
+                        this.limpiar_inputs_productos();
                     }
                     else
                     {
@@ -434,7 +425,7 @@ export class GetVentaPlusComponent
         
     }
 
-    EliminarProductoVenta(id)
+    eliminar_producto_venta(id)
     {
         for(var i = this.listado_productos_agregados.length - 1; i >= 0; i--) 
         {
@@ -583,9 +574,7 @@ export class GetVentaPlusComponent
         doc.save("Factura_Plus" +"_Num_Factura_" + codigo + "_Fecha_" + fecha_actual);
     }
 
-    //FUNCIONES PARA LIMPIAR TODOS LOS INPUTS
-
-    LimpiarInputsProductos()
+    limpiar_inputs_productos()
     {
         this.Productos = 
         {
@@ -598,7 +587,7 @@ export class GetVentaPlusComponent
         }
     }
 
-    LimpiarInputsClientes()
+    limpiar_inputs_clientes()
     {
         this.Clientes = 
         {
@@ -607,7 +596,7 @@ export class GetVentaPlusComponent
         }
     }
 
-    LimpiarInputsVariablesGlobales()
+    limpiar_inputs_variables_globales()
     {
         this.fecha_venta = "";
         this.Isv = 0.15;
@@ -627,9 +616,9 @@ export class GetVentaPlusComponent
 
     LimpiarInputs()
     {
-        this.LimpiarInputsVariablesGlobales();
-        this.LimpiarInputsClientes();
-        this.LimpiarInputsProductos();
+        this.limpiar_inputs_variables_globales();
+        this.limpiar_inputs_clientes();
+        this.limpiar_inputs_productos();
     }
 }
    

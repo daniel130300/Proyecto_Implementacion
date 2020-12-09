@@ -64,7 +64,7 @@
                     <div class="Espacios"></div>
                     <label >Tipo de pago: </label>
                     <select
-                        (change)="HabilitarPlazosPago($event.target.value)"
+                        (change)="habilitar_plazos_pago($event.target.value)"
                         class="form-control tamañoInput"
                         [(ngModel)]="id_tipo_pago"
                         formControlName = "tipoPago"
@@ -158,7 +158,7 @@
                     >
 
                     <div class="Espacios"></div>
-                    <button (click) = "form.checkValidity()? AgregarProductoVenta(Productos) : null"
+                    <button (click) = "form.checkValidity()? agregar_producto_venta(Productos) : null"
                         class="tamañoBoton btn btn-primary"
                         >Agregar producto</button>
 
@@ -191,7 +191,7 @@
                                         <td>{{produc.Precio_referencial_venta}}</td>
                                         <td>{{produc.Cantidad}}</td>
                                         <td>
-                                            <button (click)="EliminarProductoVenta(produc.Id_producto)" class="botonTabla btn btn-primary mb-3">Eliminar</button>
+                                            <button (click)="eliminar_producto_venta(produc.Id_producto)" class="botonTabla btn btn-primary mb-3">Eliminar</button>
                                        </td>
 
                                     </tr>
@@ -332,7 +332,7 @@
                                 <td> 
                                     <button type = "button" class = "btn btn-primary btn-sm " 
                                     width = 74px
-                                    (click) = "pasarDatosCliente(cli)">Seleccionar</button>
+                                    (click) = "pasar_datos_cliente(cli)">Seleccionar</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -386,7 +386,7 @@
                                 <td>
                                     <button type = "button" class = "btn btn-primary btn-sm " 
                                             width = 74px
-                                            (click) = "pasarDatosProducto(produ)">Seleccionar
+                                            (click) = "pasar_datos_producto(produ)">Seleccionar
                                     </button>
                                 </td>
                             </tr>

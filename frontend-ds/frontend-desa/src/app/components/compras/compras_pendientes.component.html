@@ -49,7 +49,7 @@
                             <td>{{c.Nombre_compania}}</td>
                             <td>{{c.Descripcion_estatus}}</td>
                             <td>
-                                <Button  (click)="pasarDatosCompra(c)" class="btn btn-primary">Seleccionar</Button>
+                                <Button  (click)="pasar_datos_compra(c)" class="btn btn-primary">Seleccionar</Button>
                             </td>
                         </tr>
     
@@ -109,7 +109,7 @@
 
                         <p></p>
                         
-                        <button (click)="guardarCambios()" class="tamañoBoton btn btn-primary">Guardar Cambios</button>
+                        <button (click)="guardar_cambios()" class="tamañoBoton btn btn-primary">Guardar Cambios</button>
                     </div>
                 </form>
             </div>
@@ -231,7 +231,7 @@
                                             width = 74px
                                             data-toggle = "modal"
                                             data-target = "#exampleModal1"
-                                            (click) = "pasarDatosDetalleCompra(pro)"
+                                            (click) = "pasar_datos_detalle_compra(pro)"
                                             data-dismiss="modal">Actualizar</button>
                                     </td> 
                                 </tr>

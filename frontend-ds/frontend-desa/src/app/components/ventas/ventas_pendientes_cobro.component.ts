@@ -163,13 +163,13 @@ export class GetVentasPendientesCobroComponent {
             },
             ()=>{
                 this.get_ventas_pendientes_cobro();
-                this.LimpiarInputs();
+                this.limpiar_inputs();
             }
         );
     }
 
 
-    InsertarAbonoValidado()
+    insertar_abono_validado()
     {
         if (this.cantidad_abono <= this.cantidad_pendiente && this.cantidad_abono >0)
         {   
@@ -188,7 +188,7 @@ export class GetVentasPendientesCobroComponent {
         }
     }
 
-    LimpiarInputs()
+    limpiar_inputs()
     {
         this.id_venta = "";
         this.id_estado = "";

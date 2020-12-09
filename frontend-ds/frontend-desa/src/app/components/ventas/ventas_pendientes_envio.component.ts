@@ -153,7 +153,7 @@ export class GetVentasPendientesEnvioComponent {
             }  
         );
     }
-    pasarDatosPendientes(pendientes)
+    pasar_datos_pendientes(pendientes)
     {
         this.modifica = 
         {
@@ -221,34 +221,4 @@ export class GetVentasPendientesEnvioComponent {
             }
         );
     }
-
-    /*datosVentas_pagadas(ventaspagadas){
-        this.busqueda = {
-            Id_estatus: ventaspagadas.Id_estatus
-        }
-    }
-
-    get_venta_pagada(id_estatus) {
-
-        var response;
-
-        var load = { Id_estatus: id_estatus }
-
-        this.service.get_venta_pagada().subscribe
-        (
-            data => response = data,
-            
-            err => {
-
-                console.log( "Error al consultar el servicio." ); 
-            },
-
-            () => {
-
-                this.get_ventas_pagadas();
-            }
-        );
-    }
-*/
-    
 }

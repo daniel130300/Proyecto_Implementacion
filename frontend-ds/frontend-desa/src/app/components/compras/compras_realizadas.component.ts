@@ -55,7 +55,6 @@ export class GetComprasRealizadasComponent {
 
     generarpdf()
     {
-
         console.log(this.listado_compras);
 
         var fecha_actual = new Date().toLocaleString()

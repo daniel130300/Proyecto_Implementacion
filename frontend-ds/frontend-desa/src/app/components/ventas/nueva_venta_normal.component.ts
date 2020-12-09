@@ -76,8 +76,7 @@ export class GetVentaNormalComponent
                 showCancelButton: true,
                 confirmButtonText: `Si`,
                 cancelButtonText: `No`,
-            }).then((result) => 
-            {
+            }).then((result) =>{
                 if (result.isConfirmed) 
                 {                         
                     var response;
@@ -90,7 +89,7 @@ export class GetVentaNormalComponent
                         },
                         ()=>
                         {
-                            this.pasarDatosDetalleVenta();
+                            this.pasar_datos_detalle_venta();
                             this.generarpdf();
                             this.VentasNormal = 
                             {
@@ -116,7 +115,7 @@ export class GetVentaNormalComponent
                         },
                         ()=>
                         {
-                            this.pasarDatosDetalleVenta();
+                            this.pasar_datos_detalle_venta();
                             this.VentasNormal = 
                             {
                                 fecha_venta: "",
@@ -133,9 +132,7 @@ export class GetVentaNormalComponent
         }
     }
   
-    //************************************************************ */
-      //Funcion para insertar el detalle de venta
-      insertar_detalle_venta_normal(){
+    insertar_detalle_venta_normal(){
         var response;
         this.service.insertar_detalle_venta_normal(this.DetalleVentaNormal).subscribe(
             data=>response = data,
@@ -143,12 +140,10 @@ export class GetVentaNormalComponent
                 console.log("Error al consultar servicio"); 
             },
             ()=>{
-                this.LimpiarInputs();
+                this.limpiar_inputs();
             }
         );
     }
-
-    //-------------------------------------------------------
 
     get_productos(){
         this.listado_productos = [];
@@ -181,7 +176,7 @@ export class GetVentaNormalComponent
         );
     }
 
-    pasarDatosProducto(producto)
+    pasar_datos_producto(producto)
     {
         this.Productos = 
         {
@@ -193,9 +188,8 @@ export class GetVentaNormalComponent
             stock: producto.Stock
         }
     }
-    //Funcion para agregar producto
 
-    AgregarProductoVenta()
+    agregar_producto_venta()
     {
         if(this.Productos.id_producto == "")
         {
@@ -221,7 +215,7 @@ export class GetVentaNormalComponent
                     this.listado_productos_agregados.unshift(this.Productos);
                     this.calculos();
                     this.restar_producto_inventario_venta();
-                    this.LimpiarInputsProductos();
+                    this.limpiar_inputs_productos();
                 }
                 else
                 {
@@ -234,8 +228,7 @@ export class GetVentaNormalComponent
         }
     }
 
-    //Funcion Eliminar producto
-    EliminarProductoVenta(id)
+    eliminar_producto_venta(id)
     {
         for(var i = this.listado_productos_agregados.length - 1; i >= 0; i--) 
         {
@@ -249,8 +242,7 @@ export class GetVentaNormalComponent
         this.calculos();
     }
 
-    //Funcion Para limpiar los texbox
-    LimpiarInputsProductos()
+    limpiar_inputs_productos()
     {
         this.Productos = 
         {
@@ -263,8 +255,6 @@ export class GetVentaNormalComponent
         }
     }
 
-    
-    //Funcion para calculos
     calculos()
     {
         this.subtotal = 0;
@@ -281,10 +271,7 @@ export class GetVentaNormalComponent
         this.total = parseFloat(this.total).toFixed(2);
     }
 
-
-    //Funcion para pasar los datos a la detalle Venta
-
-    pasarDatosDetalleVenta()
+    pasar_datos_detalle_venta()
     {
         for(var i = 0; i < this.listado_productos_agregados.length; i++) 
         {
@@ -298,7 +285,6 @@ export class GetVentaNormalComponent
         }
     }
 
-    //Funcion Para Restar en el Invenatario
     restar_producto_inventario_venta()
     {
         var response;
@@ -312,7 +298,7 @@ export class GetVentaNormalComponent
             }   
         )
     }
-    //Funcion para agregar 
+
     agregar_inventario(producto)
     {
         var response;
@@ -327,18 +313,18 @@ export class GetVentaNormalComponent
         )
     }
 
-    //Funcion Para Limpiar
-    LimpiarInputsVariablesGlobales()
+    limpiar_inputs_variables_globales()
     {
         this.subtotal = "",
         this.isv = "",
         this.total = "",
         this.listado_productos_agregados = [];
     }
-    LimpiarInputs()
+
+    limpiar_inputs()
     {
-        this.LimpiarInputsVariablesGlobales();
-        this.LimpiarInputsProductos();
+        this.limpiar_inputs_variables_globales();
+        this.limpiar_inputs_productos();
     }
 
     generarpdf()
@@ -384,7 +370,6 @@ export class GetVentaNormalComponent
         doc.text("Total: " + String(this.total), 15, 260);
 
         doc.text("¡Gracias por su compra!", 75, 280);
-
 
         doc.save("Factura_Normal_" + "Num_Factura_" + codigo + "_Fecha_" + fecha_actual);
     }

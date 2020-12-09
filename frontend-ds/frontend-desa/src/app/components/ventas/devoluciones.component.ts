@@ -77,14 +77,14 @@ export class GetDevolucionesComponent
         )
     }
     
-    pasarDatosVenta(Devoluciones)
+    pasar_datos_venta(devoluciones)
     {
         this.Devoluciones = 
         {
-            fecha_venta:String(Devoluciones.fecha_venta).substring(0, 10),
-            informacion_adicional_producto: "Talla: " + Devoluciones.talla + ", Color: " + Devoluciones.color + ", Modelo: " + Devoluciones.descripcion_modelo + ", Marca: " + Devoluciones.nombre_marca + ", Subcategoria: " + Devoluciones.descripcion_subcategoria,
+            fecha_venta:String(devoluciones.Fecha_venta).substring(0, 10),
+            informacion_adicional_producto: "Talla: " + devoluciones.Talla + ", Color: " + devoluciones.Color + ", Modelo: " + devoluciones.Descripcion_modelo + ", Marca: " + devoluciones.Nombre_marca + ", Subcategoria: " + devoluciones.Descripcion_subcategoria,
         }
-        this.id_venta=Devoluciones.id_venta
+        this.id_venta=devoluciones.Id_venta
     }
     
     pasarDatosProducto(producto)

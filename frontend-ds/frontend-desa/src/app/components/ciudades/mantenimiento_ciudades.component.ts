@@ -24,7 +24,7 @@ export class GetCiudadesComponent{
     ngOnInit(){
         this.get_ciudades();
         this.get_departamentos();
-    } //Alo
+    }
 
     get_ciudades(){
         var response;
@@ -35,8 +35,7 @@ export class GetCiudadesComponent{
             },
             ()=>{
                 this.listado_ciudades=response;
-            }
-            
+            }  
         )
     }
 
@@ -56,16 +55,14 @@ export class GetCiudadesComponent{
                 this.get_ciudades();
             }
         );
-
     }
 
-    pasarDatosCiudades(ciudades){
+    pasar_datos_ciudades(ciudades){
         this.Ciudad={
             id_ciudad:ciudades.Id_ciudad,
             nombre_ciudad:ciudades.Nombre_ciudad,
             id_departamento:ciudades.Id_departamento
-        }
-        
+        } 
     }
 
     update_ciudad(){
@@ -76,21 +73,21 @@ export class GetCiudadesComponent{
                 console.log("Error al consultar servicio"); 
             },
             ()=>{
-   
                 this.Ciudad={
                     id_ciudad:"",
                     nombre_ciudad:"",
                     id_departamento:""
-            }
-            this.get_ciudades();
+                }
+
+                this.get_ciudades();
             }
         );
     }
 
-   delete_ciudad(Id_ciudad){ 
+   delete_ciudad(id_ciudad){ 
         var response;
         var load={
-            Id_ciudad:Id_ciudad
+            Id_ciudad:id_ciudad
         }
         this.service.delete_ciudad(load).subscribe(
             data=>response=data,
@@ -114,7 +111,6 @@ export class GetCiudadesComponent{
             ()=>{
                 this.listado_departamentos=response;
             }
-            
         )
     }
 }
