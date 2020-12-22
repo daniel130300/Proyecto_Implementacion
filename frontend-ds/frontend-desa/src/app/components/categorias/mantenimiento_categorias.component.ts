@@ -8,7 +8,7 @@ const swal = require('sweetalert2');
     templateUrl: './mantenimiento_categorias.component.html'
 })
 
-export class GetCategoriasComponent {
+export class GetCategoriasComponent { 
     
     public listado_categorias: any[];
 
